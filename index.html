@@ -1,0 +1,112 @@
+<!doctype html>
+
+<html lang="es" data-empresa="dev-senior">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Java Full Stack · Ana Alvarado</title><!-- EDITAR -->
+  <meta name="author" content="Ana Alvarado">
+  <meta name="description" content="Biblioteca de guías y materiales del curso.">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <link rel="stylesheet" href="portal.css">
+<link rel="stylesheet" href="curso.css">
+</head>
+
+<body>
+  <a class="skip-link" href="#guias">Saltar a las guías</a>
+
+  <!-- ============ BARRA FIJA · visible en la biblioteca y en cada guía ============ -->
+  <header class="portal-topbar" id="barraPortal">
+    <a class="portal-brand" href="./index.html" id="irInicio" aria-label="Inicio del portal">
+      <span class="portal-brand-mark" aria-hidden="true">A</span>
+      <span class="portal-brand-copy">
+        <strong>Ana Alvarado</strong>
+        <small>Dev Senior Code · Java Full Stack</small><!-- EDITAR -->
+      </span>
+    </a>
+
+    <!-- Solo visible con una guía abierta (lo llena portal.js) -->
+    <nav class="visor-nav" id="visorNav" aria-label="Navegación de la guía" hidden>
+      <a class="visor-inicio" href="./index.html" id="volverBiblioteca">
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg>
+        <span>Todas las guías</span>
+      </a>
+      <div class="visor-ubicacion" aria-live="polite">
+        <span class="visor-modulo" id="visorModulo"></span>
+        <strong class="visor-clase" id="visorClase"></strong>
+      </div>
+      <div class="visor-pasos">
+        <button class="ctrl-btn" id="guiaAnterior" type="button" aria-label="Guía anterior" title="Guía anterior">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="ctrl-btn" id="guiaSiguiente" type="button" aria-label="Guía siguiente" title="Guía siguiente">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+        <a class="ctrl-btn" id="abrirSola" href="#" target="_blank" rel="noopener" aria-label="Abrir la guía sola en otra pestaña" title="Abrir sola (para imprimir o pantalla completa)">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>
+        </a>
+      </div>
+    </nav>
+
+    <button class="ctrl-btn" id="temaBtn" type="button" aria-label="Activar tema oscuro" title="Activar tema oscuro">☾</button>
+  </header>
+
+  <!-- ============ VISOR · aquí se abre cada guía ============ -->
+  <section class="visor" id="visor" aria-label="Guía abierta" hidden>
+    <iframe class="visor-frame" id="visorFrame" title="Guía de clase" allow="fullscreen; clipboard-write"></iframe>
+  </section>
+
+  <main class="wrap" id="biblioteca">
+    <p class="eyebrow">Dev Senior Code · Martes · Java Full Stack Developer</p><!-- EDITAR -->
+    <h1>Java Full Stack</h1><!-- EDITAR -->
+    <p class="lead">De las interfaces con Angular a una aplicación completa con Spring Boot. Tu ruta de clases, guías y proyecto profesional, en un solo lugar.</p>
+
+    <section class="library-head" id="guias" aria-labelledby="tituloBiblioteca">
+      <div class="library-heading">
+        <span class="section-label">Biblioteca</span>
+        <h2 id="tituloBiblioteca">Clases por módulo</h2>
+        <p class="library-meta"><strong data-module-count>0</strong> módulos · <strong>12</strong> clases · <strong data-resource-count>0</strong> guías disponibles</p>
+      </div>
+
+      <div class="library-actions">
+        <button class="text-btn" id="mostrarBusqueda" type="button" aria-expanded="false" aria-controls="panelBusqueda" aria-label="Buscar una guía">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+          <span data-search-label>Buscar</span>
+        </button>
+        <button class="text-btn" id="expandirModulos" type="button" aria-expanded="false">Expandir</button>
+      </div>
+
+      <div class="search-panel" id="panelBusqueda" hidden>
+        <label class="search-field">
+          <span class="sr-only">Buscar por clase, tema o tecnología</span>
+          <input class="search-input" id="buscarGuia" type="search" autocomplete="off" placeholder="Escribe una clase, tema o tecnología…">
+          <button class="search-clear" id="limpiarBusqueda" type="button" aria-label="Limpiar búsqueda" title="Limpiar búsqueda" hidden>×</button>
+        </label>
+      </div>
+      <p class="sr-only" id="estadoResultados" role="status" aria-live="polite"></p>
+    </section>
+
+    <div class="modulos" id="lista-guias" aria-label="Módulos y guías">
+
+
+    </div>
+
+    <noscript>Activa JavaScript para consultar los módulos y las clases del curso.</noscript>
+    <p class="empty-state" id="sinResultados" hidden><strong>No encontramos esa guía.</strong> Prueba con otro tema, número de clase o tecnología.</p>
+
+    <details class="legal-mini">
+      <summary>© Aviso de autoría y uso del material</summary>
+      <p>Este material es de <strong>autoría exclusiva de Ana Alvarado</strong> y está destinado a las y los estudiantes del curso. No se permite su reproducción o redistribución fuera de clase sin autorización escrita.</p>
+    </details>
+  </main>
+
+  <footer id="piePortal">
+    <p>© 2026 Ana Alvarado · Educadora Tech &amp; Desarrolladora Full Stack · Todos los derechos reservados</p>
+    <p>linkedin.com/in/ana-alvarado-instructora-full-stack</p>
+  </footer>
+
+  <script src="curso.js" defer></script>
+  <script src="biblioteca.js" defer></script>
+  <script src="portal.js" defer></script>
+</body>
+</html>

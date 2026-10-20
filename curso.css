@@ -1,0 +1,12 @@
+.portal-hero { grid-template-columns: 1fr; }
+.hero-copy { max-width: 900px; }
+.portal-hero:has(.hero-continuar) { grid-template-columns: minmax(0, 1fr) minmax(280px, 380px); }
+.workshop { margin-top: 32px; padding: 26px; border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--surface); }
+.workshop h2 { margin: 8px 0; font-family: var(--font-display); }
+.workshop p { color: var(--ink-soft); }
+.workshop .clase { margin-top: 22px; }
+.clase--pendiente::after { content: 'Pendiente'; }
+.clase--pendiente .clase-info { padding-right: 0; padding-top: 18px; }
+.clase--pendiente .clase-temas { color: var(--ink-soft); }
+.modulo .mod-meta { color: var(--ink); }
+@media(max-width:880px) { .portal-hero:has(.hero-continuar) { grid-template-columns: 1fr; } }

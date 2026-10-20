@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+<html lang="es" data-tema="oscuro" data-tema-base="oscuro" data-empresa="dev-senior" data-paleta="coral">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Ana Alvarado">
+  <meta name="copyright" content="© 2026 Ana Alvarado — Todos los derechos reservados">
+  <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+  <title>M1 · C1 · Angular y componentes · Tarima · Ana Alvarado</title>
+  
+  
+  <link href="vendor/fonts.css" rel="stylesheet">
+  <link rel="stylesheet" href="vendor/prism-line-numbers.min.css">
+  <link rel="stylesheet" href="anaestilos-v12.css">
+</head>
+<body><a class="skip-link" href="#apertura">Saltar al contenido</a><div class="topline" id="topline" aria-hidden="true"></div><div class="controls" aria-label="Controles"><button class="ctrl" id="temaBtn" type="button" aria-label="Cambiar tema">☀</button><button class="ctrl" id="fullscreenBtn" type="button" aria-label="Pantalla completa">⛶</button></div><div class="shell" id="shell" data-collapsed="false"><aside class="sidebar" aria-label="Índice de la clase"><div class="sb-top"><span class="brand-mark">A</span><div class="sb-title"><b>Java Full Stack · Módulo 1</b><span>Clase 1 · Angular moderno</span></div></div><button class="sb-toggle" id="collapseBtn" type="button" aria-label="Colapsar menú">‹</button><nav class="sb-nav" id="nav" aria-label="Secciones"><a class="nav-item active" href="#portada"><span class="nav-index">00</span><span class="nav-label">Portada</span></a><span class="nav-group">Problema</span><a class="nav-item" href="#apertura"><span class="nav-index">01</span><span class="nav-label">El correo de Tarima</span></a><a class="nav-item" href="#objetivos"><span class="nav-index">02</span><span class="nav-label">Lo que lograrás hoy</span></a><span class="nav-group">Comprender</span><a class="nav-item" href="#fundamentos"><span class="nav-index">03</span><span class="nav-label">Angular y TypeScript</span></a><span class="nav-group">Construir</span><a class="nav-item" href="#entorno"><span class="nav-index">04</span><span class="nav-label">Preparar el entorno</span></a><a class="nav-item" href="#proyecto"><span class="nav-index">05</span><span class="nav-label">Crear y organizar Tarima</span></a><a class="nav-item" href="#configuracion"><span class="nav-index">06</span><span class="nav-label">Español, fechas y estilos</span></a><a class="nav-item" href="#modelo"><span class="nav-index">07</span><span class="nav-label">El contrato y los seis eventos</span></a><a class="nav-item" href="#componentes"><span class="nav-index">08</span><span class="nav-label">El encabezado y la etiqueta</span></a><a class="nav-item" href="#tarjeta"><span class="nav-index">09</span><span class="nav-label">Una tarjeta, todos los eventos</span></a><a class="nav-item" href="#ensamblaje"><span class="nav-index">10</span><span class="nav-label">La cartelera cobra vida</span></a><span class="nav-group">Probar</span><a class="nav-item" href="#verificar"><span class="nav-index">11</span><span class="nav-label">Probar las reglas de Valentina</span></a><a class="nav-item" href="#errores"><span class="nav-index">12</span><span class="nav-label">Leer y corregir errores</span></a><a class="nav-item" href="#ia"><span class="nav-index">13</span><span class="nav-label">El detector de Angular viejo</span></a><span class="nav-group">Practicar</span><a class="nav-item" href="#taller"><span class="nav-index">14</span><span class="nav-label">Huella Amiga · Fase 1</span></a><span class="nav-group">Cerrar</span><a class="nav-item" href="#cierre"><span class="nav-index">15</span><span class="nav-label">Lo que cambió y lo que sigue</span></a><span class="nav-group">Consultar</span><a class="nav-item" href="#glosario"><span class="nav-index">16</span><span class="nav-label">Glosario de la clase</span></a><a class="nav-item" href="#documentacion"><span class="nav-index">17</span><span class="nav-label">Documentación para profundizar</span></a><a class="nav-item" href="#repaso"><span class="nav-index">18</span><span class="nav-label">Repaso opcional</span></a></nav><div class="sb-prog"><div class="lbl"><span>Progreso</span><span id="progPct">0%</span></div><div class="track"><div class="fill" id="progFill"></div></div></div></aside><main class="main"><header class="hero view" id="portada" data-accent="1" data-layout="canvas" data-escena="apertura"><div class="hero-inner"><div class="hero-copy"><span class="eyebrow">Dev Senior Code · Java Full Stack Developer</span><h1 class="hero-title">Una tarjeta,<br>muchos eventos</h1><p class="hero-lead">Tarima, la cartelera cultural de Bogotá. La pantalla se calcula a partir de los datos.</p><div class="meta"><span class="pill" data-hot>Módulo 1 · Clase 1</span><span class="pill">Angular 22.2</span><span class="pill">20 oct 2026</span></div></div><figure class="hero-visual"><img src="img/componente-reutilizable.png" alt="Un molde único produce seis tarjetas de eventos: el componente se define una vez y se reutiliza."><figcaption class="hero-note">Una pieza única para todos los eventos. Ilustración original creada para la clase.</figcaption></figure></div></header><div class="content"><section class="section view" id="apertura" data-accent="1" data-layout="canvas" data-escena="apertura" hidden><div class="sec-head"><span class="sec-n">Problema</span><h2 class="sec-t">El correo de Tarima</h2></div><div class="body"><h4>Diagnóstico de nivel</h4>
+<p>Antes del correo, una encuesta rápida (Mentimeter, Forms o a mano alzada). Cada persona se califica de 1 a 3 en: HTML, CSS, JavaScript (funciones, arreglos), <button class="termino" data-glosario="typescript">TypeScript</button> y Git/GitHub.</p>
+
+
+
+<h3>1.1 · La situación</h3><h4>La situación</h4>
+<article class="correo"><div class="correo-head"><span class="correo-avatar" aria-hidden="true">V</span><div><p class="correo-remitente">Valentina Ríos · <a href="mailto:valentina.rios@tarima-cartelera.co">valentina.rios@tarima-cartelera.co</a></p><p class="correo-ruta">Para: Equipo de desarrollo</p></div><span class="correo-fecha">19 oct 2026</span></div><div class="correo-asunto">La cartelera nos está costando entradas</div><div class="correo-body"><p>Hola, equipo:</p>
+<p>Tarima publica unos 40 eventos al mes entre conciertos, teatro y stand-up. Hoy la página es un solo archivo HTML que Julián actualiza copiando y pegando el bloque de cada evento.</p>
+<p>El sábado pasó lo que temíamos: <strong>&quot;Risas sin Filtro&quot; se agotó a las 3 p. m., pero la tarjeta siguió mostrando el botón Reservar hasta la noche.</strong> Vendimos 30 entradas que no existían y tuvimos que devolver el dinero.</p>
+<p>Además, mercadeo quiere cambiar el diseño de la tarjeta para diciembre, y Julián dice que son 40 bloques para editar a mano.</p>
+<p>Necesitamos:</p>
+<ol>
+<li>Que cada evento muestre nombre, categoría, fecha, lugar y precio (o &quot;Entrada libre&quot;).</li>
+<li>Que un evento agotado se vea agotado y <strong>no se pueda reservar</strong>.</li>
+<li>Avisar cuando queden pocos cupos.</li>
+<li>Poder cambiar el diseño de la tarjeta <strong>una sola vez</strong> para todos los eventos.</li>
+</ol>
+<p>Gracias,
+Valentina Ríos · Coordinación de programación · Tarima</p>
+</div></article>
+
+
+<h3>1.2 · Leer el correo como ingenieros</h3><h4>Leer el correo como ingenieros</h4>
+<div class="micro-task"><span class="component-label">Para pensar</span><p class="micro-task-q">Hay 4 copias de la tarjeta… no, 40. Mercadeo quiere agregar un ícono. ¿Cuánto cuesta ese cambio hoy y cuánto costará cuando sean 400 eventos?</p><details class="micro-reveal"><summary>Ver respuesta</summary><div class="micro-answer"><p>el costo crece con cada copia, y cada copia es un lugar más para equivocarse. Hace falta una pieza única, un <strong>componente</strong>, que se define una vez y se usa para todos los eventos. Se cambia en un lugar y cambia en todas partes.</p>
+</div></details></div>
+
+
+
+
+<div class="micro-task"><span class="component-label">Para pensar</span><p class="micro-task-q">El evento se agotó a las 3 p. m. y el botón siguió activo. ¿El problema fue de Julián o del diseño de la página?</p><details class="micro-reveal"><summary>Ver respuesta</summary><div class="micro-answer"><p>del diseño. La página guarda el <strong>dato</strong> (cupos) y la <strong>vista</strong> (el botón) por separado, y alguien tiene que sincronizarlos a mano. Lo que falta es que la vista <strong>se calcule a partir del dato</strong>: si los cupos son 0, el botón se bloquea solo. Eso es <strong>data binding</strong>.</p>
+</div></details></div>
+
+
+
+
+
+
+
+</div></section>
+<section class="section view" id="objetivos" data-accent="1" data-layout="canvas" data-escena="objetivos" hidden><div class="sec-head"><span class="sec-n">Problema</span><h2 class="sec-t">Lo que lograrás hoy</h2></div><div class="body">
+
+<div class="estado-proyecto" role="group" aria-label="El proyecto antes y después"><div class="estado-antes"><span class="component-label">Antes de hoy</span><p>Tarima no existe; la cartelera real es un HTML copiado 40 veces.</p>
+</div><div class="estado-flecha" aria-hidden="true">→</div><div class="estado-despues"><span class="component-label">Al terminar</span><p>Tarima corre en Angular y pinta los 6 eventos desde un solo componente de tarjeta.</p>
+</div></div><ol class="objetivos"><li><div><p class="obj-texto"><strong>Explicar</strong> qué es un componente standalone y en qué carpeta va cada pieza</p><p class="obj-evidencia">dices dónde crearías un componente nuevo <code>BotonCompartir</code> y por qué ahí.</p></div></li><li><div><p class="obj-texto"><strong>Construir</strong> un componente reutilizable con <code>input()</code></p><p class="obj-evidencia">la misma <code>TarjetaEvento</code> pinta 6 eventos distintos.</p></div></li><li><div><p class="obj-texto"><strong>Verificar</strong> que la vista se calcula a partir de los datos</p><p class="obj-evidencia">cambias <code>cuposDisponibles</code> a <code>0</code> en los datos y la tarjeta aparece agotada, con el botón bloqueado, sin tocar el HTML.</p></div></li></ol>
+
+<h4>Antes de hoy</h4>
+<p>No existe nada. Es la primera clase del curso y el grupo puede venir con niveles muy distintos: algunos nunca han escrito HTML.</p>
+<h4>Al terminar hoy</h4>
+<p>Tarima corre en <code>http://localhost:4200</code> y muestra la cartelera de noviembre: 6 tarjetas de eventos con categoría, fecha, lugar, precio, etiquetas de cupos y un botón <strong>Reservar</strong> que se bloquea solo cuando el evento está agotado.</p>
+<h4>Los 3 conceptos centrales de hoy</h4>
+<ol>
+<li><strong>Componente standalone y arquitectura de carpetas:</strong> dónde vive cada pieza y por qué.</li>
+<li><strong>Componentes reutilizables con <code>input()</code>:</strong> una tarjeta, muchos eventos.</li>
+<li><strong>Data binding y control de flujo:</strong> la pantalla se calcula a partir de los datos (<code>{{ }}</code>, <code>[ ]</code>, <code>( )</code>, <code>@if</code>, <code>@for</code>).</li>
+</ol>
+
+
+
+</div></section>
+<section class="section view" id="fundamentos" data-accent="1" data-layout="canvas" data-escena="concepto" hidden><div class="sec-head"><span class="sec-n">Comprender</span><h2 class="sec-t">Angular y TypeScript</h2></div><div class="body"><h3>3.1 · ¿Por qué Angular?</h3><h4>El problema de fondo</h4>
+<p>El correo de Valentina no es raro: casi todas las empresas empiezan con HTML y JavaScript sueltos. Funciona mientras la página es pequeña. Cuando crece, cada cambio cuesta más y cada copia es un riesgo. Angular existe para que la interfaz crezca sin volverse frágil.</p>
+<h4><button class="termino" data-glosario="framework">Framework</button></h4>
+<div class="definicion"><div class="def-tecnica"><span class="component-label">Definición técnica</span><p>conjunto de herramientas y reglas que define cómo se estructura una aplicación y que llama a tu código en el momento correcto.</p>
+<p><strong>Explicación sencilla:</strong> en vez de decidir tú cómo se organiza todo, el framework ya trae la organización y tú llenas las piezas.</p>
+</div><div class="def-vida"><span class="component-label">En la vida real</span><p>una franquicia. El local ya trae cocina, recetas y procesos; tú preparas el plato.</p>
+</div></div>
+
+
+
+<h4>SPA · Single Page Application</h4>
+<div class="definicion"><div class="def-tecnica"><span class="component-label">Definición técnica</span><p>aplicación web que carga <strong>un solo</strong> documento HTML y luego cambia su contenido con JavaScript, sin recargar la página.</p>
+<p><strong>Explicación sencilla:</strong> el navegador descarga la app una vez; de ahí en adelante solo cambia lo que se ve.</p>
+</div><div class="def-vida"><span class="component-label">En la vida real</span><p>la pantalla de vuelos del aeropuerto. No cambian la pantalla cada vez que sale un vuelo: cambian los datos que muestra.</p>
+</div></div>
+
+
+
+<h4>¿Por qué un framework &quot;con opinión&quot;?</h4>
+<div class="micro-task"><span class="component-label">Para pensar</span><p class="micro-task-q">Si con JavaScript puro se puede hacer todo, ¿por qué una empresa elegiría Angular, que impone su forma de hacer las cosas?</p><details class="micro-reveal"><summary>Ver respuesta</summary><div class="micro-answer"><p>porque en un equipo la consistencia vale más que la libertad. Angular trae decididos el router, el cliente HTTP, la inyección de dependencias, las pruebas y la CLI. Un dev nuevo encuentra cualquier proyecto Angular organizado igual y es productivo desde el primer día.</p>
+</div></details></div>
+
+
+<h4>Qué trae Angular &quot;de fábrica&quot;</h4>
+<p>Las 4 clases del módulo usan, una por una, las piezas que Angular ya trae:</p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Clase</th><th>Pieza de Angular</th><th>Qué problema de Tarima resuelve</th></tr></thead><tbody><tr><td>1 · hoy</td><td>Componentes + CLI</td><td>La tarjeta copiada 40 veces</td></tr><tr><td>2</td><td>Router</td><td>Compartir el enlace de un evento</td></tr><tr><td>3</td><td>Signals + servicios</td><td>El carrito que todas las páginas ven igual</td></tr><tr><td>4</td><td><code>HttpClient</code></td><td>Los eventos llegan del backend, no del código</td></tr></tbody></table></div>
+
+
+<h3>3.2 · Leer TypeScript</h3><h4>Por qué aparece aquí</h4>
+<p>Angular se escribe en <strong>TypeScript</strong>. Sin tres ideas básicas de TypeScript, el código de hoy se lee como jeroglífico. No es un curso de TypeScript: es lo mínimo para leer lo que viene.</p>
+<h4><button class="termino" data-glosario="typescript">TypeScript</button></h4>
+<div class="definicion"><div class="def-tecnica"><span class="component-label">Definición técnica</span><p>lenguaje que extiende JavaScript con <strong>tipos</strong>; se traduce (compila) a JavaScript antes de llegar al navegador.</p>
+<p><strong>Explicación sencilla:</strong> es JavaScript con etiquetas que dicen qué clase de dato va en cada lugar, y un revisor que te avisa <strong>antes</strong> de ejecutar si te equivocaste.</p>
+</div><div class="def-vida"><span class="component-label">En la vida real</span><p>el formulario de un banco con casillas marcadas &quot;solo números&quot; o &quot;fecha&quot;. No puedes escribir tu nombre donde va el valor.</p>
+</div></div>
+
+
+
+<h4>Las tres ideas que usaremos hoy</h4>
+<p>Este fragmento <strong>no va en ningún archivo del proyecto</strong>: es para proyectar o probar en el <a href="https://www.typescriptlang.org/play">TypeScript Playground</a>. Muestra un tipo en una variable, un tipo con opciones cerradas y una interfaz.</p>
+<div class="code-block"><div class="code-head"><div><span class="code-context">Código</span></div><button class="copy-btn" type="button">Copiar</button></div><pre class="line-numbers" data-start="1"><code class="language-typescript">let cupos: number = 120;
+
+type Categoria = 'Concierto' | 'Teatro' | 'Stand-up';
+let categoria: Categoria = 'Teatro';
+
+interface Evento {
+  nombre: string;
+  cuposDisponibles: number;
+}</code></pre></div><p><strong>Línea a línea</strong></p>
+<ul>
+<li><strong>L1 · <code>let cupos: number = 120;</code></strong> → Los dos puntos dicen &quot;esta variable solo guarda números&quot;. Si después alguien escribe <code>cupos = &#39;muchos&#39;</code>, TypeScript marca el error antes de ejecutar.</li>
+<li><strong>L3 · <code>type Categoria = ...</code></strong> → Crea un tipo nuevo con <strong>tres valores permitidos</strong> y ninguno más. La barra <code>|</code> se lee &quot;o&quot;.</li>
+<li><strong>L4 · <code>let categoria: Categoria</code></strong> → Si alguien escribe <code>&#39;Concieto&#39;</code> (mal escrito), TypeScript lo detecta. En el HTML de Julián, ese error habría llegado al público.</li>
+<li><strong>L6–9 · <code>interface Evento</code></strong> → Describe la <strong>forma</strong> que debe tener un evento: qué campos y de qué tipo. No crea ningún evento; es el molde contra el que se revisan.</li>
+</ul>
+<div class="micro-task"><span class="component-label">Para pensar</span><p class="micro-task-q">Si <button class="termino" data-glosario="typescript">TypeScript</button> se convierte en JavaScript antes de llegar al navegador, ¿para qué sirven los tipos si al final desaparecen?</p><details class="micro-reveal"><summary>Ver respuesta</summary><div class="micro-answer"><p>sirven <strong>mientras se escribe</strong>: el editor y el compilador detectan errores antes de que lleguen al usuario. Es una revisión automática que ocurre en tu computador, no en el del público.</p>
+</div></details></div>
+
+
+
+
+
+
+
+</div></section>
+<section class="section view" id="entorno" data-accent="1" data-layout="canvas" data-escena="construccion" hidden><div class="sec-head"><span class="sec-n">Construir</span><h2 class="sec-t">Preparar el entorno</h2></div><div class="body"><h4>Lo que se necesita</h4>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Herramienta</th><th>Versión</th><th>Para qué</th></tr></thead><tbody><tr><td>Node.js</td><td><strong>24 LTS</strong> (24.15 o superior)</td><td>Ejecuta las herramientas de Angular en tu computador</td></tr><tr><td>npm</td><td>La que trae Node</td><td>Descarga paquetes (librerías)</td></tr><tr><td>Angular CLI</td><td><strong>22</strong></td><td>Crea, genera, compila y sirve el proyecto</td></tr><tr><td>VS Code</td><td>Actual</td><td>Editor</td></tr><tr><td>Extensión <strong>Angular Language Service</strong></td><td>Actual</td><td>Autocompleta y revisa las plantillas HTML de Angular</td></tr></tbody></table></div><div class="callout" data-tone="warning"><span class="callout-icon">!</span><div><h4>Ojo técnico</h4><p>El CLI 22.2 <strong>no arranca</strong> con Node 22.22.0 o anterior: exige 22.22.3+, 24.15+ o 26+. Lo verificamos el 20 de octubre: con una versión vieja, <code>ng new</code> se detiene con el mensaje <em>&quot;The Angular CLI requires a minimum Node.js version of v22.22.3 or v24.15.0 or v26.0.0&quot;</em>. La solución es instalar Node 24 LTS desde nodejs.org.</p>
+</div></div>
+
+
+<h3>4.1 · Verificar Node</h3><p>Se ejecuta desde <strong>cualquier carpeta</strong> en la terminal. Revisa qué versión de Node tienes.</p>
+<div class="code-block" data-tipo="terminal"><div class="code-head"><div><span class="code-context">Terminal</span></div><button class="copy-btn" type="button">Copiar</button></div><pre class="line-numbers" data-start="1"><code class="language-bash">node -v</code></pre></div><p><strong>Resultado esperado:</strong> <code>v24.x.x</code> (por ejemplo <code>v24.22.0</code>). Si sale un número menor a 24.15 o &quot;no se reconoce&quot;, instala Node 24 LTS desde nodejs.org y <strong>cierra y abre</strong> la terminal.</p>
+<h3>4.2 · Instalar Angular CLI 22</h3><p>Se ejecuta desde <strong>cualquier carpeta</strong>. Instala el CLI de forma global (para todos tus proyectos) y fija la versión 22 para que todo el grupo tenga lo mismo.</p>
+<div class="code-block" data-tipo="terminal"><div class="code-head"><div><span class="code-context">Terminal</span></div><button class="copy-btn" type="button">Copiar</button></div><pre class="line-numbers" data-start="1"><code class="language-bash">npm install -g @angular/cli@22</code></pre></div><p><strong>Resultado esperado:</strong> termina sin errores en rojo. Pueden aparecer avisos en amarillo (<code>npm warn</code>): no detienen nada.</p>
+<div class="callout" data-tone="warning"><span class="callout-icon">!</span><div><h4>Ojo técnico · Windows</h4><p>En PowerShell puede salir un mensaje diciendo que <strong>la ejecución de scripts está deshabilitada</strong>. La documentación oficial de Angular indica ejecutar una vez: <code>Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned</code>, leer el mensaje y aceptar. Después, <code>ng</code> funciona.</p>
+</div></div>
+
+
+<h3>4.3 · Comprobar el CLI</h3><p>Se ejecuta desde <strong>cualquier carpeta</strong>.</p>
+<div class="code-block" data-tipo="terminal"><div class="code-head"><div><span class="code-context">Terminal</span></div><button class="copy-btn" type="button">Copiar</button></div><pre class="line-numbers" data-start="1"><code class="language-bash">ng version</code></pre></div><p><strong>Resultado esperado:</strong> un cuadro con <code>Angular CLI: 22.x.x</code> y la versión de Node.</p>
+
+
+
+<h3>4.4 · VS Code para el nivel de IA de hoy</h3><p>Hoy la IA es <strong>tutor</strong>: se le pregunta en el chat, pero no completa el código antes de que pienses. Por eso se apagan las <strong>sugerencias en línea</strong> (el texto gris que aparece mientras escribes) y se deja el chat.</p>
+<p><strong>Opción A · interfaz:</strong> clic en el ícono de Copilot de la barra de estado (abajo a la derecha) → desmarcar las sugerencias en línea.</p>
+<p><strong>Opción B · <code>settings.json</code> (recomendada para el grupo):</strong> <code>Ctrl+Shift+P</code> → <code>Preferences: Open User Settings (JSON)</code> → agregar estas dos líneas dentro de las llaves <code>{ }</code>:</p>
+<div class="code-block"><div class="code-head"><div><span class="code-context">Código</span></div><button class="copy-btn" type="button">Copiar</button></div><pre class="line-numbers" data-start="1"><code class="language-json">&quot;github.copilot.enable&quot;: { &quot;*&quot;: false },
+&quot;github.copilot.nextEditSuggestions.enabled&quot;: false</code></pre></div><p><strong>Cómo verificarlo:</strong> en un archivo <code>.ts</code>, escribe <code>function sumar(</code> y confirma que <strong>no</strong> aparece texto gris. Abre el chat de Copilot y confirma que sí responde.</p>
+
+
+
+</div></section>
+<section class="section view" id="proyecto" data-accent="1" data-layout="canvas" data-escena="construccion" hidden><div class="sec-head"><span class="sec-n">Construir</span><h2 class="sec-t">Crear y organizar Tarima</h2></div><div class="body"><h3>5.1 · Crear el proyecto</h3><h4>Angular CLI</h4>
+<div class="definicion"><div class="def-tecnica"><span class="component-label">Definición técnica</span><p>herramienta de línea de comandos (<code>ng</code>) que crea proyectos, genera piezas con la estructura correcta, compila y levanta un servidor de desarrollo.</p>
+<p><strong>Explicación sencilla:</strong> un asistente que arma el esqueleto del proyecto y cada pieza nueva siempre igual, para que nadie las haga &quot;a su manera&quot;.</p>
+</div><div class="def-vida"><span class="component-label">En la vida real</span><p>el molde de una constructora: todas las casas del conjunto salen con los mismos cimientos.</p>
+</div></div>
+
+
+
+<h4>Paso 1 · Crear Tarima</h4>
+<p>Se ejecuta desde la carpeta donde guardas tus proyectos (por ejemplo <code>Documentos/proyectos</code>). Crea la carpeta <code>tarima-web</code> con todo el proyecto e instala sus dependencias.</p>
+<div class="code-block" data-tipo="terminal"><div class="code-head"><div><span class="code-context">Terminal</span></div><button class="copy-btn" type="button">Copiar</button></div><pre class="line-numbers" data-start="1"><code class="language-bash">ng new tarima-web --routing --style=css --ssr=false --ai-config=none</code></pre></div><p>Cada opción responde por adelantado una pregunta que el CLI haría:</p>
+<ul>
+<li><code>--routing</code> → deja listo el archivo de rutas; lo usamos en la Clase 2.</li>
+<li><code>--style=css</code> → los estilos van en CSS normal.</li>
+<li><code>--ssr=false</code> → sin renderizado en servidor; Tarima es una SPA.</li>
+<li><code>--ai-config=none</code> → no genera archivos de configuración para herramientas de IA.</li>
+</ul>
+<p><strong>Resultado esperado:</strong> una lista de <code>CREATE ...</code> y al final <em>&quot;Packages installed successfully.&quot;</em> Tarda de 1 a 3 minutos (descarga librerías).</p>
+
+
+
+<h4>Paso 2 · Abrir y levantar el proyecto</h4>
+<p>Se ejecuta <strong>desde la carpeta donde creaste el proyecto</strong>. El primer comando entra a la carpeta; el segundo abre VS Code ahí; el tercero compila y levanta el servidor de desarrollo.</p>
+<div class="code-block" data-tipo="terminal"><div class="code-head"><div><span class="code-context">Terminal</span></div><button class="copy-btn" type="button">Copiar</button></div><pre class="line-numbers" data-start="1"><code class="language-bash">cd tarima-web
+code .
+ng serve --open</code></pre></div><p><strong>Resultado esperado:</strong> la terminal dice <em>&quot;Application bundle generation complete&quot;</em> y muestra <code>Local: http://localhost:4200/</code>. El navegador abre la página de bienvenida de Angular.</p>
+<div class="callout" data-tone="info"><span class="callout-icon">i</span><div><p>Deja <code>ng serve</code> corriendo toda la clase. Cada vez que guardes un archivo, recompila y el navegador se actualiza solo. Para detenerlo: <code>Ctrl+C</code> en la terminal.</p>
+</div></div>
+
+
+<h4>Paso 3 · Recorrer lo que creó el CLI</h4>
+<p>Antes de escribir código, se entiende el camino que recorre la app al arrancar:</p>
+<div class="code-block"><div class="code-head"><div><span class="code-context">Código</span></div><button class="copy-btn" type="button">Copiar</button></div><pre class="line-numbers" data-start="1"><code class="language-plaintext">index.html  →  contiene &lt;app-root&gt;
+main.ts     →  arranca Angular con App y appConfig
+app.config.ts → configuración global (rutas, idioma, errores)
+app.ts      →  componente raíz App, con selector app-root
+app.html    →  lo que se ve dentro de &lt;app-root&gt;</code></pre></div><div class="table-wrap"><table class="data-table"><thead><tr><th>Archivo</th><th>Para qué existe</th></tr></thead><tbody><tr><td><code>src/index.html</code></td><td>La única página HTML de la SPA. Solo tiene <code>&lt;app-root&gt;&lt;/app-root&gt;</code> vacío</td></tr><tr><td><code>src/main.ts</code></td><td>El punto de arranque: le dice a Angular &quot;arranca con <code>App</code> y esta configuración&quot;</td></tr><tr><td><code>src/app/app.config.ts</code></td><td>La configuración de toda la app (proveedores)</td></tr><tr><td><code>src/app/app.ts</code></td><td>El componente raíz: el primero que se pinta</td></tr><tr><td><code>src/app/app.html</code></td><td>La plantilla del componente raíz</td></tr><tr><td><code>src/app/app.css</code></td><td>Estilos solo del componente raíz</td></tr><tr><td><code>src/app/app.routes.ts</code></td><td>Las rutas (vacío hasta la Clase 2)</td></tr><tr><td><code>src/styles.css</code></td><td>Estilos globales de toda la app</td></tr><tr><td><code>angular.json</code></td><td>Configuración del CLI: cómo compilar y servir</td></tr><tr><td><code>package.json</code></td><td>Dependencias y comandos (<code>npm start</code> = <code>ng serve</code>)</td></tr></tbody></table></div><div class="micro-task"><span class="component-label">Para pensar</span><p class="micro-task-q">Si <code>index.html</code> solo tiene <code>&lt;app-root&gt;&lt;/app-root&gt;</code> vacío, ¿de dónde sale todo lo que vemos en el navegador?</p><details class="micro-reveal"><summary>Ver respuesta</summary><div class="micro-answer"><p>de JavaScript. <code>main.ts</code> arranca Angular, Angular busca la etiqueta <code>&lt;app-root&gt;</code> y la llena con la plantilla de <code>App</code>. Eso es una SPA: un HTML vacío que la aplicación llena.</p>
+</div></details></div>
+
+
+
+
+
+
+
+<h4>Paso 4 · Borrar lo que no usaremos hoy</h4>
+<p>El CLI creó <code>src/app/app.spec.ts</code>, una prueba que busca el texto &quot;Hello, tarima-web&quot;. Como vamos a reemplazar la página de bienvenida, esa prueba ya no tiene sentido. <strong>Bórralo</strong> desde el explorador de VS Code (clic derecho → Delete). Las pruebas llegan en el Módulo 3.</p>
+<h3>5.2 · Dónde vive cada pieza</h3><h4>El problema</h4>
+<p>Si cada quien crea archivos donde quiere, el proyecto de 6 archivos se vuelve inmanejable a los 60. La estructura de carpetas es un <strong>acuerdo de equipo</strong>, no un gusto personal.</p>
+<div class="micro-task"><span class="component-label">Para pensar</span><p class="micro-task-q">Entra un dev nuevo a Tarima y le piden &quot;corrige la tarjeta del evento&quot;. ¿Cuánto tarda en encontrar el archivo?</p><details class="micro-reveal"><summary>Ver respuesta</summary><div class="micro-answer"><p>con una estructura predecible (<code>components/tarjeta-evento/</code>), segundos. Sin ella, buscando entre todos los archivos.</p>
+</div></details></div>
+
+
+<h4>El acuerdo de Tarima</h4>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Carpeta</th><th>Qué va ahí</th><th>Ejemplo en Tarima</th><th>Pregunta para decidir</th></tr></thead><tbody><tr><td><code>pages/</code></td><td>Vistas completas que tendrán URL propia</td><td><code>listado-eventos</code></td><td>¿El usuario &quot;llega&quot; a esto?</td></tr><tr><td><code>components/</code></td><td>Piezas del negocio que se reutilizan</td><td><code>tarjeta-evento</code>, <code>encabezado</code></td><td>¿Sabe qué es un evento?</td></tr><tr><td><code>shared/</code></td><td>Piezas genéricas, sin conocimiento del negocio</td><td><code>etiqueta</code></td><td>¿Serviría en otro proyecto tal cual?</td></tr><tr><td><code>services/</code></td><td>Datos y lógica, sin HTML</td><td>(Clase 3)</td><td>¿Guarda o trae datos?</td></tr><tr><td><code>models/</code></td><td>La forma de los datos (interfaces)</td><td><code>evento.ts</code></td><td>¿Describe un dato?</td></tr><tr><td><code>data/</code></td><td>Datos de prueba temporales</td><td><code>eventos.mock.ts</code></td><td>Se deja de usar en la Clase 4</td></tr><tr><td><code>app.routes.ts</code></td><td>El mapa de URLs</td><td>(Clase 2)</td><td>—</td></tr></tbody></table></div>
+
+
+<h4>Crear las carpetas</h4>
+<p>Se ejecuta en <strong>PowerShell</strong>, desde la carpeta <strong><code>tarima-web</code></strong> (la raíz del proyecto), en una <strong>segunda terminal</strong> para no detener <code>ng serve</code>. Crea las carpetas vacías <code>models</code>, <code>data</code> y <code>services</code>. Las demás las creará el CLI al generar componentes.</p>
+<div class="code-block" data-tipo="terminal"><div class="code-head"><div><span class="code-context">Terminal</span></div><button class="copy-btn" type="button">Copiar</button></div><pre class="line-numbers" data-start="1"><code class="language-powershell">New-Item -ItemType Directory -Path src/app/models, src/app/data, src/app/services</code></pre></div><p><strong>Resultado esperado:</strong> las tres carpetas aparecen dentro de <code>src/app/</code> en el explorador de VS Code.</p>
+
+
+
+</div></section>
+<section class="section view" id="configuracion" data-accent="1" data-layout="canvas" data-escena="construccion" hidden><div class="sec-head"><span class="sec-n">Construir</span><h2 class="sec-t">Español, fechas y estilos</h2></div><div class="body"><h4>Por qué antes de los componentes</h4>
+<p>Valentina pidió mostrar fecha y precio. Por defecto Angular formatea en inglés de Estados Unidos: <code>Saturday, November 7</code> y <code>$45,000.00</code>. Para Tarima debe salir <code>sábado 7 de noviembre</code> y <code>$ 45.000</code>. Eso se configura <strong>una vez</strong> para toda la app, y es justo lo que el brochure llama &quot;configuración inicial del proyecto frontend&quot;.</p>
+<h3>6.1 · app.config.ts</h3><article class="archivo"><div class="archivo-ficha"><span class="archivo-accion">Editar</span><span class="archivo-nombre">app.config.ts</span><span class="archivo-ruta">tarima-web/src/app/</span></div><div class="archivo-intro"><p>Valentina pidió fecha y precio, y en Colombia se leen distinto que en Estados Unidos. Este archivo es la configuración <strong>de toda la aplicación</strong>: lo que se registre aquí vale para cada componente. El CLI ya lo creó con dos cosas (errores globales y router); nosotros agregamos el idioma. Lo usarán los pipes <code>date</code> y <code>currency</code> de la tarjeta en la sección 11.</p>
+</div><div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h4 class="lectura-titulo">Traer lo necesario para hablar es-CO</h4><div class="lectura-proposito"><p>Primero se traen las piezas y se registran los datos del idioma colombiano.</p>
+</div></div><div class="lectura-cuerpo"><div><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 1–7</span><span class="code-file">app.config.ts</span></div></div><pre class="line-numbers" data-start="1"><code class="language-typescript">import { ApplicationConfig, LOCALE_ID, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeEsCo from '@angular/common/locales/es-CO';
+import { provideRouter } from '@angular/router';
+import { routes } from './app.routes';
+
+registerLocaleData(localeEsCo);</code></pre></div></div><ol class="notas"><li class="nota" data-lineas="1"><div class="nota-cabeza"><span class="nota-lineas">L1</span><code class="nota-codigo">import { ApplicationConfig, LOCALE_ID, ... }</code></div><p>Traemos de Angular el tipo de la configuración y <code>LOCALE_ID</code>, la &quot;llave&quot; con la que Angular pregunta en qué idioma formatear. <code>provideBrowserGlobalErrorListeners</code> ya venía del CLI.</p>
+</li><li class="nota" data-lineas="2"><div class="nota-cabeza"><span class="nota-lineas">L2</span><code class="nota-codigo">import { registerLocaleData }</code></div><p>Esta función le enseña a Angular un idioma nuevo. Sin ella, Angular solo conoce inglés de Estados Unidos.</p>
+</li><li class="nota" data-lineas="3"><div class="nota-cabeza"><span class="nota-lineas">L3</span><code class="nota-codigo">import localeEsCo from '.../es-CO'</code></div><p>Son los datos del español de Colombia: nombres de días y meses, separador de miles (punto) y formato del peso.</p>
+</li><li class="nota" data-lineas="4-5"><div class="nota-cabeza"><span class="nota-lineas">L4–5</span><code class="nota-codigo">router y rutas</code></div><p>Venían del CLI. Las rutas están vacías; las llenamos en la Clase 2.</p>
+</li><li class="nota" data-lineas="7"><div class="nota-cabeza"><span class="nota-lineas">L7</span><code class="nota-codigo">registerLocaleData(localeEsCo);</code></div><p>Aquí Angular aprende es-CO. Se ejecuta una sola vez, cuando la app arranca.</p>
+</li></ol></div></div>
+
+
+
+<div class="lectura"><div class="lectura-head"><span class="lectura-num">2</span><h4 class="lectura-titulo">La configuración de toda la app</h4><div class="lectura-proposito"><p>Ahora se arma la lista de lo que la app entera tendrá disponible.</p>
+</div></div><div class="lectura-cuerpo"><div><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 9–15</span><span class="code-file">app.config.ts</span></div></div><pre class="line-numbers" data-start="9"><code class="language-typescript">export const appConfig: ApplicationConfig = {
+  providers: [
+    provideBrowserGlobalErrorListeners(),
+    provideRouter(routes),
+    { provide: LOCALE_ID, useValue: 'es-CO' },
+  ],
+};</code></pre></div></div><ol class="notas"><li class="nota" data-lineas="9"><div class="nota-cabeza"><span class="nota-lineas">L9</span><code class="nota-codigo">export const appConfig: ApplicationConfig</code></div><p>Exportamos la configuración para que <code>main.ts</code> la use al arrancar. <em>Ya lo viste:</em> <code>bootstrapApplication(App, appConfig)</code> en el recorrido del CLI.</p>
+</li><li class="nota" data-lineas="10"><div class="nota-cabeza"><span class="nota-lineas">L10</span><code class="nota-codigo">providers: [</code></div><p>Es la lista de servicios y valores que Angular entregará a quien los pida.</p>
+</li><li class="nota" data-lineas="11-12"><div class="nota-cabeza"><span class="nota-lineas">L11–12</span><code class="nota-codigo">errores globales y router</code></div><p>Venían del CLI: capturan errores no atrapados del navegador y dejan listo el router.</p>
+</li><li class="nota" data-lineas="13"><div class="nota-cabeza"><span class="nota-lineas">L13</span><code class="nota-codigo">{ provide: LOCALE_ID, useValue: 'es-CO' }</code></div><p>&quot;Cuando alguien pregunte por el idioma, responde es-CO&quot;. Desde ahora, <code>date</code> y <code>currency</code> formatean como en Colombia.</p>
+</li></ol></div></div>
+
+
+
+<details class="code-reveal"><summary><span><span class="code-reveal-title">app.config.ts · archivo completo</span><span class="code-reveal-note">Listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Archivo completo</span><span class="code-file">app.config.ts</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers" data-start="1"><code class="language-typescript">import { ApplicationConfig, LOCALE_ID, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeEsCo from '@angular/common/locales/es-CO';
+import { provideRouter } from '@angular/router';
+import { routes } from './app.routes';
+
+registerLocaleData(localeEsCo);
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideBrowserGlobalErrorListeners(),
+    provideRouter(routes),
+    { provide: LOCALE_ID, useValue: 'es-CO' },
+  ],
+};</code></pre></div></div></details>
+
+
+
+
+
+
+
+</article>
+
+<h3>6.2 · index.html</h3><article class="archivo"><div class="archivo-ficha" data-tipo="apoyo"><span class="archivo-accion">Editar</span><span class="archivo-nombre">index.html</span><span class="archivo-ruta">tarima-web/src/</span></div><div class="archivo-intro"><p>Es la única página HTML de la SPA. Solo cambiamos dos detalles para que el navegador sepa que Tarima está en español y para que la pestaña diga su nombre.</p>
+</div><div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h4 class="lectura-titulo">Idioma y título de la pestaña</h4></div><div class="lectura-cuerpo"><div><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 2–2</span><span class="code-file">index.html</span></div></div><pre class="line-numbers" data-start="2"><code class="language-html">&lt;html lang=&quot;es&quot;&gt;</code></pre></div><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 5–5</span><span class="code-file">index.html</span></div></div><pre class="line-numbers" data-start="5"><code class="language-html">  &lt;title&gt;Tarima · Cartelera cultural&lt;/title&gt;</code></pre></div></div><ol class="notas"><li class="nota" data-lineas="2"><div class="nota-cabeza"><span class="nota-lineas">L2</span><code class="nota-codigo">lang=&quot;es&quot;</code></div><p>El CLI lo crea en <code>&quot;en&quot;</code>. Con <code>&quot;es&quot;</code>, el navegador y los lectores de pantalla saben que el contenido está en español; el traductor automático de Chrome deja de ofrecer &quot;traducir&quot;.</p>
+</li><li class="nota" data-lineas="5"><div class="nota-cabeza"><span class="nota-lineas">L5</span><code class="nota-codigo">&lt;title&gt;</code></div><p>Es el texto de la pestaña del navegador. En la Clase 2 cada ruta podrá cambiarlo.</p>
+</li></ol></div></div>
+
+
+
+<details class="code-reveal"><summary><span><span class="code-reveal-title">index.html · archivo completo</span><span class="code-reveal-note">Listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Archivo completo</span><span class="code-file">index.html</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers" data-start="1"><code class="language-html">&lt;!doctype html&gt;
+&lt;html lang=&quot;es&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;title&gt;Tarima · Cartelera cultural&lt;/title&gt;
+  &lt;base href=&quot;/&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;link rel=&quot;icon&quot; type=&quot;image/x-icon&quot; href=&quot;favicon.ico&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;app-root&gt;&lt;/app-root&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div></details>
+
+
+
+
+
+
+
+</article>
+
+<h3>6.3 · styles.css</h3><article class="archivo"><div class="archivo-ficha" data-tipo="apoyo"><span class="archivo-accion">Reemplazar todo</span><span class="archivo-nombre">styles.css</span><span class="archivo-ruta">tarima-web/src/</span></div><div class="archivo-intro"><p>El <strong>kit de estilos</strong> de Tarima viene listo: hoy no se escribe CSS. Se pega completo en <code>src/styles.css</code> (que el CLI creó casi vacío). Son estilos <strong>globales</strong>: aplican a toda la app.</p>
+</div><div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h4 class="lectura-titulo">Los colores de Tarima en un solo lugar</h4><div class="lectura-proposito"><p>Lo único que vale la pena mirar: los colores viven en variables, para cambiar la paleta en un solo sitio.</p>
+</div></div><div class="lectura-cuerpo"><div><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 2–11</span><span class="code-file">styles.css</span></div></div><pre class="line-numbers" data-start="2"><code class="language-css">:root {
+  --color-principal: #5418cc;
+  --color-vibrante: #6018f0;
+  --color-oscuro: #3c1884;
+  --color-texto: #1a1a1a;
+  --color-suave: #f5f3fb;
+  --color-alerta: #b45309;
+  --color-peligro: #b91c1c;
+  --radio: 14px;
+}</code></pre></div></div><ol class="notas"><li class="nota" data-lineas="2"><div class="nota-cabeza"><span class="nota-lineas">L2</span><code class="nota-codigo">:root</code></div><p>Es la raíz del documento: lo que se declara aquí lo ven todos los elementos.</p>
+</li><li class="nota" data-lineas="3-9"><div class="nota-cabeza"><span class="nota-lineas">L3–9</span><code class="nota-codigo">--color-...</code></div><p>Son <strong>variables de CSS</strong> (empiezan con <code>--</code>). El resto del kit las usa con <code>var(--color-principal)</code>. Si mercadeo cambia el morado, se cambia aquí y cambia en toda la app; es la misma idea del componente, aplicada a los estilos.</p>
+</li><li class="nota" data-lineas="10"><div class="nota-cabeza"><span class="nota-lineas">L10</span><code class="nota-codigo">--radio</code></div><p>El redondeo de las tarjetas, también en un solo lugar.</p>
+</li></ol></div></div>
+
+
+
+<details class="code-reveal"><summary><span><span class="code-reveal-title">styles.css · archivo completo</span><span class="code-reveal-note">Listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Archivo completo</span><span class="code-file">styles.css</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers" data-start="1"><code class="language-css">/* Kit de estilos de Tarima · viene listo: en esta clase no escribimos CSS */
+:root {
+  --color-principal: #5418cc;
+  --color-vibrante: #6018f0;
+  --color-oscuro: #3c1884;
+  --color-texto: #1a1a1a;
+  --color-suave: #f5f3fb;
+  --color-alerta: #b45309;
+  --color-peligro: #b91c1c;
+  --radio: 14px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, sans-serif;
+  color: var(--color-texto);
+  background: var(--color-suave);
+}
+
+.contenedor { max-width: 1100px; margin: 0 auto; padding: 24px 16px 48px; }
+
+/* Encabezado */
+.encabezado { background: var(--color-oscuro); color: #fff; padding: 20px 16px; text-align: center; }
+.encabezado__marca { margin: 0; font-size: 2rem; }
+.encabezado__eslogan { margin: 4px 0 0; opacity: 0.85; }
+
+/* Listado */
+.listado__titulo { margin: 0; color: var(--color-oscuro); }
+.listado__total { margin: 4px 0 20px; color: #555; }
+.listado__grilla { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+.listado__vacio { color: #555; }
+
+/* Tarjeta */
+.tarjeta { background: #fff; border-radius: var(--radio); padding: 18px; box-shadow: 0 4px 14px rgb(60 24 132 / 0.08); display: flex; flex-direction: column; gap: 6px; }
+.tarjeta--agotada { opacity: 0.6; }
+.tarjeta__etiquetas { display: flex; gap: 6px; flex-wrap: wrap; }
+.tarjeta__nombre { margin: 6px 0 2px; font-size: 1.15rem; }
+.tarjeta__dato { margin: 0; color: #444; font-size: 0.95rem; }
+.tarjeta__precio { margin: 8px 0 0; font-weight: 700; font-size: 1.1rem; color: var(--color-principal); }
+.tarjeta__descripcion { margin: 4px 0 0; color: #444; }
+.tarjeta__acciones { display: flex; gap: 8px; margin-top: auto; padding-top: 12px; }
+
+/* Etiqueta */
+.etiqueta { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 0.8rem; font-weight: 600; }
+.etiqueta--neutro { background: var(--color-suave); color: var(--color-oscuro); }
+.etiqueta--alerta { background: #fef3c7; color: var(--color-alerta); }
+.etiqueta--peligro { background: #fee2e2; color: var(--color-peligro); }
+
+/* Botones */
+.boton { flex: 1; border: none; border-radius: 10px; padding: 10px 12px; font-weight: 600; cursor: pointer; background: var(--color-principal); color: #fff; }
+.boton:hover { background: var(--color-vibrante); }
+.boton:disabled { background: #c9c4d6; cursor: not-allowed; }
+.boton--secundario { background: var(--color-suave); color: var(--color-oscuro); }
+.boton--secundario:hover { background: #e9e4f7; }</code></pre></div></div></details>
+
+
+
+
+
+
+
+</article>
+
+</div></section>
+<section class="section view" id="modelo" data-accent="1" data-layout="canvas" data-escena="construccion" hidden><div class="sec-head"><span class="sec-n">Construir</span><h2 class="sec-t">El contrato y los seis eventos</h2></div><div class="body"><h4>Por qué el modelo va primero</h4>
+<p>Antes de pintar una tarjeta hay que acordar <strong>qué datos tiene un evento</strong>. Ese acuerdo vive en <code>models/</code> y lo usarán la tarjeta, el listado y, en la Clase 4, el backend.</p>
+<h3>7.1 · evento.ts</h3><article class="archivo"><div class="archivo-ficha"><span class="archivo-accion">Crear</span><span class="archivo-nombre">evento.ts</span><span class="archivo-ruta">tarima-web/src/app/models/</span></div><div class="archivo-intro"><p>Valentina enumeró lo que debe mostrar cada evento: nombre, categoría, fecha, lugar, precio y cupos. Este archivo convierte esa lista en un <strong>contrato</strong>: todo evento de Tarima tiene exactamente estos campos y estos tipos. La tarjeta y el listado lo importarán, y en la Clase 4 coincidirá con lo que responde el backend.</p>
+<p><strong>Cómo crearlo:</strong> en el explorador de VS Code, clic derecho sobre <code>src/app/models/</code> → <strong>New File</strong> → <code>evento.ts</code>.</p>
+</div><div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h4 class="lectura-titulo">Las únicas categorías que existen</h4></div><div class="lectura-cuerpo"><div><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 1–1</span><span class="code-file">evento.ts</span></div></div><pre class="line-numbers" data-start="1"><code class="language-typescript">export type Categoria = 'Concierto' | 'Teatro' | 'Stand-up';</code></pre></div></div><ol class="notas"><li class="nota" data-lineas="1"><div class="nota-cabeza"><span class="nota-lineas">L1</span><code class="nota-codigo">export type Categoria = ...</code></div><p>Tarima solo maneja tres categorías y ninguna más. Con este tipo, si alguien escribe <code>&#39;Concieto&#39;</code> en los datos, TypeScript lo marca antes de que llegue al público. Las escribimos con mayúscula inicial porque se muestran tal cual en la etiqueta. <em>Ya lo viste:</em> es el tipo con opciones cerradas del puente de TypeScript.</p>
+</li></ol></div></div>
+
+
+
+<div class="lectura"><div class="lectura-head"><span class="lectura-num">2</span><h4 class="lectura-titulo">Qué es un evento para Tarima</h4></div><div class="lectura-cuerpo"><div><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 3–12</span><span class="code-file">evento.ts</span></div></div><pre class="line-numbers" data-start="3"><code class="language-typescript">export interface Evento {
+  id: number;
+  nombre: string;
+  categoria: Categoria;
+  fecha: string;
+  lugar: string;
+  precio: number;
+  cuposDisponibles: number;
+  descripcion: string;
+}</code></pre></div></div><ol class="notas"><li class="nota" data-lineas="3"><div class="nota-cabeza"><span class="nota-lineas">L3</span><code class="nota-codigo">export interface Evento</code></div><p>Declaramos la forma de un evento y la exportamos para que otros archivos la usen.</p>
+</li><li class="nota" data-lineas="4"><div class="nota-cabeza"><span class="nota-lineas">L4</span><code class="nota-codigo">id: number</code></div><p>Identifica cada evento sin ambigüedad. <em>Lo usarás:</em> en <code>@for</code> (<code>track evento.id</code>) y en la Clase 2 para la URL <code>/eventos/3</code>.</p>
+</li><li class="nota" data-lineas="5"><div class="nota-cabeza"><span class="nota-lineas">L5</span><code class="nota-codigo">nombre: string</code></div><p>El texto que se muestra como título de la tarjeta.</p>
+</li><li class="nota" data-lineas="6"><div class="nota-cabeza"><span class="nota-lineas">L6</span><code class="nota-codigo">categoria: Categoria</code></div><p>Usa el tipo de la línea 1: solo acepta las tres categorías.</p>
+</li><li class="nota" data-lineas="7"><div class="nota-cabeza"><span class="nota-lineas">L7</span><code class="nota-codigo">fecha: string</code></div><p>Guarda la fecha en formato ISO (<code>&#39;2026-11-07T20:00:00&#39;</code>), que es el formato estándar que también enviará un backend. El pipe <code>date</code> lo convertirá en &quot;sábado 7 de noviembre&quot;.</p>
+</li><li class="nota" data-lineas="8-9"><div class="nota-cabeza"><span class="nota-lineas">L8–9</span><code class="nota-codigo">lugar` y `precio</code></div><p>El precio es un número en pesos, sin puntos ni signo: el formato visual lo pone el pipe <code>currency</code>. <code>0</code> significa entrada libre.</p>
+</li><li class="nota" data-lineas="10"><div class="nota-cabeza"><span class="nota-lineas">L10</span><code class="nota-codigo">cuposDisponibles: number</code></div><p>El dato que faltaba en el HTML de Julián: de él salen &quot;Agotado&quot; y &quot;Últimos cupos&quot;.</p>
+</li><li class="nota" data-lineas="11"><div class="nota-cabeza"><span class="nota-lineas">L11</span><code class="nota-codigo">descripcion: string</code></div><p>El texto que se muestra al pulsar &quot;Ver detalles&quot;.</p>
+</li></ol></div></div>
+
+
+
+<details class="code-reveal"><summary><span><span class="code-reveal-title">evento.ts · archivo completo</span><span class="code-reveal-note">Listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Archivo completo</span><span class="code-file">evento.ts</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers" data-start="1"><code class="language-typescript">export type Categoria = 'Concierto' | 'Teatro' | 'Stand-up';
+
+export interface Evento {
+  id: number;
+  nombre: string;
+  categoria: Categoria;
+  fecha: string;
+  lugar: string;
+  precio: number;
+  cuposDisponibles: number;
+  descripcion: string;
+}</code></pre></div></div></details>
+
+
+
+
+
+
+
+</article>
+
+<h3>7.2 · eventos.mock.ts</h3><article class="archivo"><div class="archivo-ficha" data-tipo="apoyo"><span class="archivo-accion">Crear</span><span class="archivo-nombre">eventos.mock.ts</span><span class="archivo-ruta">tarima-web/src/app/data/</span></div><div class="archivo-intro"><p>Mientras no exista backend, la cartelera necesita datos. Este archivo tiene <strong>6 eventos de prueba</strong> que cubren todos los casos que pidió Valentina: con cupos, con pocos cupos, agotado y con entrada libre. En la Clase 4 lo reemplaza la API.</p>
+<p><strong>Cómo crearlo:</strong> clic derecho sobre <code>src/app/data/</code> → <strong>New File</strong> → <code>eventos.mock.ts</code>, y pegar el archivo completo.</p>
+</div><div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h4 class="lectura-titulo">Una lista de eventos que cumple el contrato</h4></div><div class="lectura-cuerpo"><div><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 1–13</span><span class="code-file">eventos.mock.ts</span></div></div><pre class="line-numbers" data-start="1"><code class="language-typescript">import { Evento } from '../models/evento';
+
+export const EVENTOS: Evento[] = [
+  {
+    id: 1,
+    nombre: 'Noche de Salsa Brava',
+    categoria: 'Concierto',
+    fecha: '2026-11-07T20:00:00',
+    lugar: 'Teatro del Parque',
+    precio: 45000,
+    cuposDisponibles: 120,
+    descripcion: 'Orquesta en vivo y pista de baile abierta toda la noche.',
+  },</code></pre></div></div><ol class="notas"><li class="nota" data-lineas="1"><div class="nota-cabeza"><span class="nota-lineas">L1</span><code class="nota-codigo">import { Evento }</code></div><p>Traemos el contrato para que <button class="termino" data-glosario="typescript">TypeScript</button> revise cada evento de la lista.</p>
+</li><li class="nota" data-lineas="3"><div class="nota-cabeza"><span class="nota-lineas">L3</span><code class="nota-codigo">export const EVENTOS: Evento[]</code></div><p>Una lista (<code>[]</code>) donde cada elemento <strong>debe</strong> ser un <code>Evento</code>. El nombre en mayúsculas es la convención para constantes que no cambian.</p>
+</li><li class="nota" data-lineas="4-13"><div class="nota-cabeza"><span class="nota-lineas">L4–13</span><code class="nota-codigo">el primer evento</code></div><p>Un objeto con los 8 campos del contrato. Si falta uno o el tipo no coincide, VS Code lo subraya en rojo.</p>
+</li></ol></div></div>
+
+<h4>Los casos que cubren los 6 eventos</h4>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>id</th><th>Evento</th><th>Cupos</th><th>Precio</th><th>Qué demuestra</th></tr></thead><tbody><tr><td>1</td><td>Noche de Salsa Brava</td><td>120</td><td>45000</td><td>Caso normal</td></tr><tr><td>2</td><td>La Casa de las Voces</td><td>6</td><td>38000</td><td>&quot;Últimos 6 cupos&quot;</td></tr><tr><td>3</td><td>Risas sin Filtro</td><td>0</td><td>30000</td><td><strong>Agotado</strong> (el incidente del correo)</td></tr><tr><td>4</td><td>Jazz en la Terraza</td><td>80</td><td>0</td><td>&quot;Entrada libre&quot;</td></tr><tr><td>5</td><td>Monólogos de Oficina</td><td>10</td><td>25000</td><td>Límite exacto: 10 <strong>sí</strong> muestra &quot;Últimos 10 cupos&quot;</td></tr><tr><td>6</td><td>Romeo y Julieta en Bogotá</td><td>45</td><td>52000</td><td>Caso normal</td></tr></tbody></table></div><details class="code-reveal"><summary><span><span class="code-reveal-title">eventos.mock.ts · archivo completo</span><span class="code-reveal-note">Listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Archivo completo</span><span class="code-file">eventos.mock.ts</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers" data-start="1"><code class="language-typescript">import { Evento } from '../models/evento';
+
+export const EVENTOS: Evento[] = [
+  {
+    id: 1,
+    nombre: 'Noche de Salsa Brava',
+    categoria: 'Concierto',
+    fecha: '2026-11-07T20:00:00',
+    lugar: 'Teatro del Parque',
+    precio: 45000,
+    cuposDisponibles: 120,
+    descripcion: 'Orquesta en vivo y pista de baile abierta toda la noche.',
+  },
+  {
+    id: 2,
+    nombre: 'La Casa de las Voces',
+    categoria: 'Teatro',
+    fecha: '2026-11-08T19:30:00',
+    lugar: 'Sala Chapinero',
+    precio: 38000,
+    cuposDisponibles: 6,
+    descripcion: 'Obra de teatro contemporáneo sobre tres generaciones de una familia bogotana.',
+  },
+  {
+    id: 3,
+    nombre: 'Risas sin Filtro',
+    categoria: 'Stand-up',
+    fecha: '2026-11-12T21:00:00',
+    lugar: 'Bodega Cultural del Centro',
+    precio: 30000,
+    cuposDisponibles: 0,
+    descripcion: 'Cuatro comediantes, cuatro historias y cero filtros.',
+  },
+  {
+    id: 4,
+    nombre: 'Jazz en la Terraza',
+    categoria: 'Concierto',
+    fecha: '2026-11-14T18:00:00',
+    lugar: 'Terraza Usaquén',
+    precio: 0,
+    cuposDisponibles: 80,
+    descripcion: 'Atardecer con cuarteto de jazz. Entrada libre con inscripción.',
+  },
+  {
+    id: 5,
+    nombre: 'Monólogos de Oficina',
+    categoria: 'Stand-up',
+    fecha: '2026-11-19T20:30:00',
+    lugar: 'Sala Chapinero',
+    precio: 25000,
+    cuposDisponibles: 10,
+    descripcion: 'Humor sobre reuniones que pudieron ser un correo.',
+  },
+  {
+    id: 6,
+    nombre: 'Romeo y Julieta en Bogotá',
+    categoria: 'Teatro',
+    fecha: '2026-11-21T19:00:00',
+    lugar: 'Teatro del Parque',
+    precio: 52000,
+    cuposDisponibles: 45,
+    descripcion: 'El clásico de Shakespeare contado en la Bogotá de hoy.',
+  },
+];</code></pre></div></div></details>
+
+
+
+
+
+
+
+</article>
+
+</div></section>
+<section class="section view" id="componentes" data-accent="1" data-layout="canvas" data-escena="construccion" hidden><div class="sec-head"><span class="sec-n">Construir</span><h2 class="sec-t">El encabezado y la etiqueta</h2></div><div class="body"><h3>8.1 · Primer componente: el encabezado</h3><h4><button class="termino" data-glosario="componente">Componente</button></h4>
+<div class="definicion"><div class="def-tecnica"><span class="component-label">Definición técnica</span><p>clase de TypeScript decorada con <code>@Component</code>, que une una <strong>plantilla</strong> HTML, unos <strong>estilos</strong> y un <strong>selector</strong> (la etiqueta con la que se usa: <code>&lt;app-encabezado&gt;</code>).</p>
+<p><strong>Explicación sencilla:</strong> una pieza de pantalla con su propio HTML, CSS y lógica, que se usa como si fuera una etiqueta HTML nueva.</p>
+</div><div class="def-vida"><span class="component-label">En la vida real</span><p>un molde de galletas. Se diseña una vez y se usa cuantas veces se quiera.</p>
+</div></div>
+
+
+
+<h4><button class="termino" data-glosario="standalone">Standalone</button></h4>
+<div class="definicion"><div class="def-tecnica"><span class="component-label">Definición técnica</span><p>componente que declara en su propio <code>imports</code> todo lo que su plantilla usa, sin depender de un <code>NgModule</code>. Es el modo por defecto desde Angular 19.</p>
+</div><div class="def-vida"><span class="component-label">En la vida real</span><p>un electrodoméstico que trae su propio enchufe: lo conectas donde quieras sin instalar nada aparte.</p>
+</div></div>
+
+
+
+<h4>Generar el componente con el CLI</h4>
+<p>Se ejecuta desde la carpeta <strong><code>tarima-web</code></strong>. Crea la carpeta <code>src/app/components/encabezado/</code> con sus archivos. <code>--skip-tests</code> evita el archivo de prueba, porque las pruebas llegan en el Módulo 3.</p>
+<div class="code-block" data-tipo="terminal"><div class="code-head"><div><span class="code-context">Terminal</span></div><button class="copy-btn" type="button">Copiar</button></div><pre class="line-numbers" data-start="1"><code class="language-bash">ng generate component components/encabezado --skip-tests</code></pre></div><p><strong>Resultado esperado:</strong> tres líneas <code>CREATE</code>: <code>encabezado.css</code>, <code>encabezado.ts</code> y <code>encabezado.html</code>.</p>
+<div class="callout" data-tone="info"><span class="callout-icon">i</span><div><p><code>ng g c</code> es lo mismo que <code>ng generate component</code>.</p>
+</div></div>
+
+
+
+
+<article class="archivo"><div class="archivo-ficha"><span class="archivo-accion">Reemplazar el generado</span><span class="archivo-nombre">encabezado.ts</span><span class="archivo-ruta">tarima-web/src/app/components/encabezado/</span></div><div class="archivo-intro"><p>Es el primer componente de Tarima y el más simple: no recibe nada, solo muestra la marca. Sirve para ver la anatomía de <strong>todo</strong> componente Angular antes de hacer uno con lógica. <code>App</code> lo usará en la sección 12.</p>
+</div><div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h4 class="lectura-titulo">Así se declara un componente</h4></div><div class="lectura-cuerpo"><div><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 1–7</span><span class="code-file">encabezado.ts</span></div></div><pre class="line-numbers" data-start="1"><code class="language-typescript">import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-encabezado',
+  styleUrl: './encabezado.css',
+  templateUrl: './encabezado.html',
+})</code></pre></div></div><ol class="notas"><li class="nota" data-lineas="1"><div class="nota-cabeza"><span class="nota-lineas">L1</span><code class="nota-codigo">import { Component }</code></div><p>Traemos el decorador que convierte una clase normal en un componente de Angular.</p>
+</li><li class="nota" data-lineas="3"><div class="nota-cabeza"><span class="nota-lineas">L3</span><code class="nota-codigo">@Component({</code></div><p>El <code>@</code> marca un <strong>decorador</strong>: le agrega a la clase de abajo la información que Angular necesita para usarla como componente.</p>
+</li><li class="nota" data-lineas="4"><div class="nota-cabeza"><span class="nota-lineas">L4</span><code class="nota-codigo">selector: 'app-encabezado'</code></div><p>Es el nombre de la etiqueta con la que se usará: <code>&lt;app-encabezado /&gt;</code>. El prefijo <code>app-</code> evita choques con etiquetas reales de HTML.</p>
+</li><li class="nota" data-lineas="5"><div class="nota-cabeza"><span class="nota-lineas">L5</span><code class="nota-codigo">styleUrl</code></div><p>Dónde están los estilos propios del componente (vacío, porque usamos el kit global).</p>
+</li><li class="nota" data-lineas="6"><div class="nota-cabeza"><span class="nota-lineas">L6</span><code class="nota-codigo">templateUrl</code></div><p>Dónde está su HTML. <em>Lo usarás:</em> en la siguiente lectura.</p>
+</li></ol></div></div>
+
+
+
+<div class="lectura"><div class="lectura-head"><span class="lectura-num">2</span><h4 class="lectura-titulo">Los datos que muestra</h4></div><div class="lectura-cuerpo"><div><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 8–11</span><span class="code-file">encabezado.ts</span></div></div><pre class="line-numbers" data-start="8"><code class="language-typescript">export class Encabezado {
+  nombreApp = 'Tarima';
+  eslogan = 'La cartelera cultural de Bogotá';
+}</code></pre></div></div><ol class="notas"><li class="nota" data-lineas="8"><div class="nota-cabeza"><span class="nota-lineas">L8</span><code class="nota-codigo">export class Encabezado</code></div><p>La clase del componente. Se exporta para que <code>App</code> pueda importarla. Se llama <code>Encabezado</code> a secas, sin la palabra <code>Component</code>: así lo genera Angular 22.</p>
+</li><li class="nota" data-lineas="9-10"><div class="nota-cabeza"><span class="nota-lineas">L9–10</span><code class="nota-codigo">nombreApp` y `eslogan</code></div><p>Son <strong>propiedades</strong> de la clase. Todo lo que la clase tiene, su plantilla lo puede mostrar con <code>{{ }}</code>.</p>
+</li></ol></div></div>
+
+
+
+<details class="code-reveal"><summary><span><span class="code-reveal-title">encabezado.ts · archivo completo</span><span class="code-reveal-note">Listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Archivo completo</span><span class="code-file">encabezado.ts</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers" data-start="1"><code class="language-typescript">import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-encabezado',
+  styleUrl: './encabezado.css',
+  templateUrl: './encabezado.html',
+})
+export class Encabezado {
+  nombreApp = 'Tarima';
+  eslogan = 'La cartelera cultural de Bogotá';
+}</code></pre></div></div></details>
+
+
+
+
+<div class="callout" data-tone="info"><span class="callout-icon">i</span><div><p>El CLI generó <code>imports: [],</code> vacío dentro de <code>@Component</code>. Lo quitamos porque este componente no usa ningún otro. Si se deja, no pasa nada.</p>
+</div></div>
+
+
+
+
+
+
+
+</article>
+
+
+
+<article class="archivo"><div class="archivo-ficha"><span class="archivo-accion">Reemplazar el generado</span><span class="archivo-nombre">encabezado.html</span><span class="archivo-ruta">tarima-web/src/app/components/encabezado/</span></div><div class="archivo-intro"><p>Es la plantilla del encabezado. Aquí aparece la primera forma de data binding: la <strong>interpolación</strong>, que pone en pantalla el valor de una propiedad de la clase.</p>
+</div><div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h4 class="lectura-titulo">Mostrar las propiedades de la clase</h4></div><div class="lectura-cuerpo"><div><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 1–4</span><span class="code-file">encabezado.html</span></div></div><pre class="line-numbers" data-start="1"><code class="language-html">&lt;header class=&quot;encabezado&quot;&gt;
+  &lt;h1 class=&quot;encabezado__marca&quot;&gt;🎭 {{ nombreApp }}&lt;/h1&gt;
+  &lt;p class=&quot;encabezado__eslogan&quot;&gt;{{ eslogan }}&lt;/p&gt;
+&lt;/header&gt;</code></pre></div></div><ol class="notas"><li class="nota" data-lineas="1"><div class="nota-cabeza"><span class="nota-lineas">L1</span><code class="nota-codigo">&lt;header class=&quot;encabezado&quot;&gt;</code></div><p>HTML normal. La clase <code>encabezado</code> viene del kit de estilos.</p>
+</li><li class="nota" data-lineas="2"><div class="nota-cabeza"><span class="nota-lineas">L2</span><code class="nota-codigo">{{ nombreApp }}</code></div><p>Las dobles llaves le dicen a Angular &quot;aquí va el valor de <code>nombreApp</code>&quot;. En pantalla sale <code>🎭 Tarima</code>.</p>
+</li><li class="nota" data-lineas="3"><div class="nota-cabeza"><span class="nota-lineas">L3</span><code class="nota-codigo">{{ eslogan }}</code></div><p>Lo mismo con el eslogan. Si mañana cambia el eslogan en la clase, cambia en pantalla sin tocar el HTML.</p>
+</li></ol></div></div>
+
+
+
+<details class="code-reveal"><summary><span><span class="code-reveal-title">encabezado.html · archivo completo</span><span class="code-reveal-note">Listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Archivo completo</span><span class="code-file">encabezado.html</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers" data-start="1"><code class="language-html">&lt;header class=&quot;encabezado&quot;&gt;
+  &lt;h1 class=&quot;encabezado__marca&quot;&gt;🎭 {{ nombreApp }}&lt;/h1&gt;
+  &lt;p class=&quot;encabezado__eslogan&quot;&gt;{{ eslogan }}&lt;/p&gt;
+&lt;/header&gt;</code></pre></div></div></details>
+
+
+
+
+
+
+
+
+
+
+
+
+<h4>Todavía no se ve</h4>
+<p>El componente existe, pero nadie lo usa. En la sección 12 lo pondremos dentro de <code>App</code>. Eso pasa con todo componente: <strong>crearlo no lo muestra; usarlo en una plantilla sí</strong>.</p>
+</article>
+
+<h3>8.2 · Una pieza genérica: la etiqueta</h3><h4>El problema</h4>
+<p>La tarjeta necesita tres etiquetas: la categoría (&quot;Teatro&quot;), &quot;Agotado&quot; y &quot;Últimos 6 cupos&quot;. Las tres son la misma forma (una pastilla de color) con distinto texto y color. Si se hace tres veces, volvemos al problema de Julián.</p>
+<h4><code>input()</code></h4>
+<div class="definicion"><div class="def-tecnica"><span class="component-label">Definición técnica</span><p>función de Angular que declara una <strong>entrada</strong> del componente: un valor que el componente padre le entrega desde su plantilla. Devuelve una <em>signal</em> de solo lectura que se lee con paréntesis: <code>texto()</code>.</p>
+<p><strong>Explicación sencilla:</strong> es como el parámetro de una función, pero para un componente: el que lo usa decide qué valor le pasa.</p>
+</div><div class="def-vida"><span class="component-label">En la vida real</span><p>los ingredientes que le pasas a la licuadora. La licuadora es la misma; lo que sale depende de lo que le pongas.</p>
+</div></div>
+
+
+
+
+
+<div class="micro-task"><span class="component-label">Para pensar</span><p class="micro-task-q">¿La etiqueta debería saber qué es un evento agotado?</p><details class="micro-reveal"><summary>Ver respuesta</summary><div class="micro-answer"><p>no. Si la etiqueta supiera de eventos, solo serviría en Tarima. Ella solo sabe mostrar un <strong>texto</strong> con un <strong>tono</strong>; quien la usa (la tarjeta) decide qué texto y qué tono. Por eso vive en <code>shared/</code> y no en <code>components/</code>.</p>
+</div></details></div>
+
+
+<h4>Generar el componente</h4>
+<p>Se ejecuta desde la carpeta <strong><code>tarima-web</code></strong>.</p>
+<div class="code-block" data-tipo="terminal"><div class="code-head"><div><span class="code-context">Terminal</span></div><button class="copy-btn" type="button">Copiar</button></div><pre class="line-numbers" data-start="1"><code class="language-bash">ng g c shared/etiqueta --skip-tests</code></pre></div><p><strong>Resultado esperado:</strong> <code>CREATE</code> de <code>etiqueta.css</code>, <code>etiqueta.ts</code> y <code>etiqueta.html</code> dentro de <code>src/app/shared/etiqueta/</code>.</p>
+<article class="archivo"><div class="archivo-ficha"><span class="archivo-accion">Reemplazar el generado</span><span class="archivo-nombre">etiqueta.ts</span><span class="archivo-ruta">tarima-web/src/app/shared/etiqueta/</span></div><div class="archivo-intro"><p>La tarjeta necesita mostrar &quot;Teatro&quot;, &quot;Agotado&quot; y &quot;Últimos 6 cupos&quot; con la misma forma y distinto color. En vez de tres piezas, hacemos <strong>una</strong> que recibe el texto y el tono desde afuera. Es el primer uso de <code>input()</code>, el segundo concepto central de hoy. La tarjeta la usará tres veces en la sección 11.</p>
+</div><div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h4 class="lectura-titulo">Una pieza genérica que recibe datos</h4></div><div class="lectura-cuerpo"><div><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 1–11</span><span class="code-file">etiqueta.ts</span></div></div><pre class="line-numbers" data-start="1"><code class="language-typescript">import { Component, input } from '@angular/core';
+
+@Component({
+  selector: 'app-etiqueta',
+  styleUrl: './etiqueta.css',
+  templateUrl: './etiqueta.html',
+})
+export class Etiqueta {
+  texto = input.required&lt;string&gt;();
+  tono = input&lt;'neutro' | 'alerta' | 'peligro'&gt;('neutro');
+}</code></pre></div></div><ol class="notas"><li class="nota" data-lineas="1"><div class="nota-cabeza"><span class="nota-lineas">L1</span><code class="nota-codigo">import { Component, input }</code></div><p>Además del decorador, traemos <code>input</code>, la función para declarar entradas.</p>
+</li><li class="nota" data-lineas="3-7"><div class="nota-cabeza"><span class="nota-lineas">L3–7</span><code class="nota-codigo">@Component</code></div><p>Igual que en <code>Encabezado</code>, con el selector <code>app-etiqueta</code>.</p>
+</li><li class="nota" data-lineas="9"><div class="nota-cabeza"><span class="nota-lineas">L9</span><code class="nota-codigo">texto = input.required&lt;string&gt;()</code></div><p>La etiqueta <strong>exige</strong> un texto: sin él no tiene sentido. Si alguien escribe <code>&lt;app-etiqueta /&gt;</code> sin <code>texto</code>, Angular no compila (<code>NG8008</code>).</p>
+</li><li class="nota" data-lineas="10"><div class="nota-cabeza"><span class="nota-lineas">L10</span><code class="nota-codigo">tono = input&lt;...&gt;('neutro')</code></div><p>El tono es <strong>opcional</strong>: si no se lo pasan, vale <code>&#39;neutro&#39;</code>. Solo acepta tres valores, que coinciden con las clases del kit (<code>etiqueta--neutro</code>, <code>--alerta</code>, <code>--peligro</code>).</p>
+</li></ol></div></div>
+
+
+
+<details class="code-reveal"><summary><span><span class="code-reveal-title">etiqueta.ts · archivo completo</span><span class="code-reveal-note">Listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Archivo completo</span><span class="code-file">etiqueta.ts</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers" data-start="1"><code class="language-typescript">import { Component, input } from '@angular/core';
+
+@Component({
+  selector: 'app-etiqueta',
+  styleUrl: './etiqueta.css',
+  templateUrl: './etiqueta.html',
+})
+export class Etiqueta {
+  texto = input.required&lt;string&gt;();
+  tono = input&lt;'neutro' | 'alerta' | 'peligro'&gt;('neutro');
+}</code></pre></div></div></details>
+
+
+
+
+
+
+
+</article>
+
+
+
+<article class="archivo"><div class="archivo-ficha"><span class="archivo-accion">Reemplazar el generado</span><span class="archivo-nombre">etiqueta.html</span><span class="archivo-ruta">tarima-web/src/app/shared/etiqueta/</span></div><div class="archivo-intro"><p>Una sola línea que combina dos formas de binding: el texto con interpolación y la clase de color con property binding.</p>
+</div><div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h4 class="lectura-titulo">Texto y color salen de los inputs</h4></div><div class="lectura-cuerpo"><div><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 1–1</span><span class="code-file">etiqueta.html</span></div></div><pre class="line-numbers" data-start="1"><code class="language-html">&lt;span class=&quot;etiqueta&quot; [class]=&quot;'etiqueta--' + tono()&quot;&gt;{{ texto() }}&lt;/span&gt;</code></pre></div></div><ol class="notas"><li class="nota" data-lineas="1"><div class="nota-cabeza"><span class="nota-lineas">L1</span><code class="nota-codigo">class=&quot;etiqueta&quot;</code></div><p>La clase base, siempre presente: la forma de pastilla.</p>
+</li><li class="nota" data-lineas="1"><div class="nota-cabeza"><span class="nota-lineas">L1</span><code class="nota-codigo">[class]=&quot;'etiqueta--' + tono()&quot;</code></div><p>Los corchetes indican <strong>property binding</strong>: el valor no es un texto fijo, es una expresión. Con <code>tono()</code> en <code>&#39;peligro&#39;</code>, se agrega la clase <code>etiqueta--peligro</code> (rojo). Angular combina esta clase con la estática <code>etiqueta</code>.</p>
+</li><li class="nota" data-lineas="1"><div class="nota-cabeza"><span class="nota-lineas">L1</span><code class="nota-codigo">{{ texto() }}</code></div><p>Muestra el texto que llegó del padre. Con paréntesis, porque es un input.</p>
+</li></ol></div></div>
+
+
+
+<details class="code-reveal"><summary><span><span class="code-reveal-title">etiqueta.html · archivo completo</span><span class="code-reveal-note">Listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Archivo completo</span><span class="code-file">etiqueta.html</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers" data-start="1"><code class="language-html">&lt;span class=&quot;etiqueta&quot; [class]=&quot;'etiqueta--' + tono()&quot;&gt;{{ texto() }}&lt;/span&gt;</code></pre></div></div></details>
+
+
+
+
+
+
+
+</article>
+
+</div></section>
+<section class="section view" id="tarjeta" data-accent="1" data-layout="canvas" data-escena="construccion" hidden><div class="sec-head"><span class="sec-n">Construir</span><h2 class="sec-t">Una tarjeta, todos los eventos</h2></div><div class="body"><figure class="figura"><div class="figura-stage"><img src="img/datos-y-reserva.png" alt="Un dispensador con entradas permite pasar; otro sin entradas mantiene cerrada la reserva." loading="lazy"></div><figcaption>La pantalla se calcula a partir de los datos.<span class="figura-credito">Ilustración original creada para la clase.</span></figcaption></figure><div class="mision"><div class="mision-head"><span class="mision-titulo">Misión del bloque</span></div><div class="mision-grid"><div class="mision-item"><span class="component-label">Para Valentina</span><p>una sola tarjeta para todos los eventos, que se vea agotada y no deje reservar cuando no hay cupos, y que avise cuando quedan pocos.</p>
+</div><div class="mision-item"><span class="component-label">Lo que hacemos</span><p><code>TarjetaEvento</code> recibe un evento con <code>input()</code> y calcula todo lo que muestra a partir de sus datos.</p>
+</div><div class="mision-item" data-resultado><span class="component-label">Cómo sabemos que quedó</span><p>&quot;Risas sin Filtro&quot; (0 cupos) aparece con la etiqueta &quot;Agotado&quot; y el botón Reservar bloqueado, sin que nadie lo haya marcado a mano.</p>
+</div></div></div>
+
+
+<h4><button class="termino" data-glosario="data-binding">Data binding</button></h4>
+<p><strong>Definición técnica:</strong> mecanismo con el que la plantilla declara una relación entre los datos del componente y la vista, y Angular la mantiene sincronizada. Tiene tres formas básicas:</p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Sintaxis</th><th>Dirección</th><th>Ejemplo de hoy</th></tr></thead><tbody><tr><td><code>{{ expresión }}</code> · interpolación</td><td>Dato → texto en pantalla</td><td><code>{{ evento().nombre }}</code></td></tr><tr><td><code>[propiedad]=&quot;expresión&quot;</code> · property binding</td><td>Dato → propiedad de un elemento</td><td><code>[disabled]=&quot;estaAgotado()&quot;</code></td></tr><tr><td><code>(evento)=&quot;método()&quot;</code> · event binding</td><td>Pantalla → código</td><td><code>(click)=&quot;alternarDescripcion()&quot;</code></td></tr></tbody></table></div><p><strong>Explicación sencilla:</strong> en vez de buscar el botón y bloquearlo a mano, escribes &quot;este botón está bloqueado cuando el evento está agotado&quot;, y Angular se encarga.</p>
+<p><strong>En la vida real:</strong> el marcador del estadio conectado al juego. Nadie cambia los números a mano: cambian cuando cambia el partido.</p>
+<div class="micro-task"><span class="component-label">Para pensar</span><p class="micro-task-q">Si un evento pasa a tener 0 cupos en los datos, ¿quién debería bloquear el botón: tú, buscándolo con <code>document.querySelector</code>, o el framework?</p><details class="micro-reveal"><summary>Ver respuesta</summary><div class="micro-answer"><p>el framework. Con <code>[disabled]=&quot;estaAgotado()&quot;</code> declaras la regla una vez; tu código cambia <strong>datos</strong>, nunca toca el DOM a mano. Así se evita exactamente el incidente del sábado.</p>
+</div></details></div>
+
+
+<h4>Control de flujo: <code>@if</code> y <code>@for</code></h4>
+<div class="definicion"><div class="def-tecnica"><span class="component-label">Definición técnica</span><p>bloques de la plantilla que deciden <strong>qué</strong> se pinta: <code>@if</code> muestra contenido según una condición (con <code>@else if</code> y <code>@else</code>); <code>@for</code> repite contenido por cada elemento de una lista y exige <code>track</code> para identificar cada uno.</p>
+</div><div class="def-vida"><span class="component-label">En la vida real</span><p><code>@if</code> es el letrero &quot;Agotado&quot; que el taquillero cuelga solo si no hay boletas; <code>@for</code> es la fila de asientos: el mismo asiento, repetido por cada puesto.</p>
+</div></div>
+
+
+
+<h3>9.1 · Generar el componente</h3><p>Se ejecuta desde la carpeta <strong><code>tarima-web</code></strong>.</p>
+<div class="code-block" data-tipo="terminal"><div class="code-head"><div><span class="code-context">Terminal</span></div><button class="copy-btn" type="button">Copiar</button></div><pre class="line-numbers" data-start="1"><code class="language-bash">ng g c components/tarjeta-evento --skip-tests</code></pre></div><p><strong>Resultado esperado:</strong> <code>CREATE</code> de <code>tarjeta-evento.css</code>, <code>tarjeta-evento.ts</code> y <code>tarjeta-evento.html</code> dentro de <code>src/app/components/tarjeta-evento/</code>.</p>
+<h3>9.2 · tarjeta-evento.ts</h3><article class="archivo"><div class="archivo-ficha"><span class="archivo-accion">Reemplazar el generado</span><span class="archivo-nombre">tarjeta-evento.ts</span><span class="archivo-ruta">tarima-web/src/app/components/tarjeta-evento/</span></div><div class="archivo-intro"><p>Es la pieza que resuelve el correo: <strong>una</strong> tarjeta para todos los eventos. Recibe un <code>Evento</code> con <code>input()</code> (como la etiqueta recibe su texto) y calcula a partir de él si está agotado o si quedan pocos cupos. Usa la <code>Etiqueta</code> de la sección anterior, y en la Clase 3 su botón &quot;Reservar&quot; llenará el carrito.</p>
+</div><div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h4 class="lectura-titulo">Lo que la tarjeta necesita para pintarse</h4></div><div class="lectura-cuerpo"><div><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 1–11</span><span class="code-file">tarjeta-evento.ts</span></div></div><pre class="line-numbers" data-start="1"><code class="language-typescript">import { Component, input } from '@angular/core';
+import { CurrencyPipe, DatePipe } from '@angular/common';
+import { Evento } from '../../models/evento';
+import { Etiqueta } from '../../shared/etiqueta/etiqueta';
+
+@Component({
+  imports: [Etiqueta, CurrencyPipe, DatePipe],
+  selector: 'app-tarjeta-evento',
+  styleUrl: './tarjeta-evento.css',
+  templateUrl: './tarjeta-evento.html',
+})</code></pre></div></div><ol class="notas"><li class="nota" data-lineas="1"><div class="nota-cabeza"><span class="nota-lineas">L1</span><code class="nota-codigo">import { Component, input }</code></div><p>Igual que en <code>Etiqueta</code>.</p>
+</li><li class="nota" data-lineas="2"><div class="nota-cabeza"><span class="nota-lineas">L2</span><code class="nota-codigo">import { CurrencyPipe, DatePipe }</code></div><p>Traemos los dos <strong>pipes</strong> que formatean precio y fecha en es-CO. <em>Ya lo viste:</em> el idioma lo configuramos en <code>app.config.ts</code>.</p>
+</li><li class="nota" data-lineas="3"><div class="nota-cabeza"><span class="nota-lineas">L3</span><code class="nota-codigo">import { Evento }</code></div><p>El contrato del modelo: la tarjeta sabe qué campos trae un evento.</p>
+</li><li class="nota" data-lineas="4"><div class="nota-cabeza"><span class="nota-lineas">L4</span><code class="nota-codigo">import { Etiqueta }</code></div><p>La pieza genérica que vamos a usar en la plantilla.</p>
+</li><li class="nota" data-lineas="7"><div class="nota-cabeza"><span class="nota-lineas">L7</span><code class="nota-codigo">imports: [Etiqueta, CurrencyPipe, DatePipe]</code></div><p>Así declara un componente standalone lo que usa su plantilla. Sin <code>Etiqueta</code> aquí, <code>&lt;app-etiqueta&gt;</code> daría <code>NG8001</code>; sin <code>DatePipe</code>, <code>| date</code> daría <code>NG8004</code>.</p>
+</li><li class="nota" data-lineas="8-10"><div class="nota-cabeza"><span class="nota-lineas">L8–10</span><code class="nota-codigo">selector y archivos</code></div><p>La tarjeta se usará como <code>&lt;app-tarjeta-evento&gt;</code>.</p>
+</li></ol></div></div>
+
+
+
+<div class="lectura"><div class="lectura-head"><span class="lectura-num">2</span><h4 class="lectura-titulo">Recibir el evento y recordar si se ve la descripción</h4></div><div class="lectura-cuerpo"><div><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 12–14</span><span class="code-file">tarjeta-evento.ts</span></div></div><pre class="line-numbers" data-start="12"><code class="language-typescript">export class TarjetaEvento {
+  evento = input.required&lt;Evento&gt;();
+  mostrarDescripcion = false;</code></pre></div></div><ol class="notas"><li class="nota" data-lineas="13"><div class="nota-cabeza"><span class="nota-lineas">L13</span><code class="nota-codigo">evento = input.required&lt;Evento&gt;()</code></div><p>La tarjeta <strong>exige</strong> un evento completo. Es lo que la hace reutilizable: la misma tarjeta, distinto evento cada vez.</p>
+</li><li class="nota" data-lineas="14"><div class="nota-cabeza"><span class="nota-lineas">L14</span><code class="nota-codigo">mostrarDescripcion = false</code></div><p>Estado propio de cada tarjeta: si su descripción está abierta. Empieza cerrada. Cada una de las 6 tarjetas tiene el suyo.</p>
+</li></ol></div></div>
+
+
+
+<div class="lectura"><div class="lectura-head"><span class="lectura-num">3</span><h4 class="lectura-titulo">Las reglas de Valentina, escritas una sola vez</h4></div><div class="lectura-cuerpo"><div><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 16–23</span><span class="code-file">tarjeta-evento.ts</span></div></div><pre class="line-numbers" data-start="16"><code class="language-typescript">  estaAgotado(): boolean {
+    return this.evento().cuposDisponibles === 0;
+  }
+
+  quedanPocosCupos(): boolean {
+    const cupos = this.evento().cuposDisponibles;
+    return cupos &gt; 0 &amp;&amp; cupos &lt;= 10;
+  }</code></pre></div></div><ol class="notas"><li class="nota" data-lineas="16-18"><div class="nota-cabeza"><span class="nota-lineas">L16–18</span><code class="nota-codigo">estaAgotado()</code></div><p>Responde <code>true</code> cuando los cupos son exactamente <code>0</code>. Es la regla del incidente del sábado: de aquí saldrán la etiqueta &quot;Agotado&quot;, el botón bloqueado y la tarjeta atenuada.</p>
+</li><li class="nota" data-lineas="20"><div class="nota-cabeza"><span class="nota-lineas">L20</span><code class="nota-codigo">quedanPocosCupos(): boolean</code></div><p>La segunda regla: avisar cuando quedan pocos.</p>
+</li><li class="nota" data-lineas="21"><div class="nota-cabeza"><span class="nota-lineas">L21</span><code class="nota-codigo">const cupos = ...</code></div><p>Guardamos los cupos en una variable para no repetir <code>this.evento().cuposDisponibles</code> dos veces en la línea siguiente.</p>
+</li><li class="nota" data-lineas="22"><div class="nota-cabeza"><span class="nota-lineas">L22</span><code class="nota-codigo">cupos &gt; 0 &amp;&amp; cupos &lt;= 10</code></div><p>&quot;Hay cupos, pero 10 o menos&quot;. El <code>&gt; 0</code> evita que un evento agotado muestre también &quot;Últimos 0 cupos&quot;.</p>
+</li></ol></div></div>
+
+
+
+<div class="lectura"><div class="lectura-head"><span class="lectura-num">4</span><h4 class="lectura-titulo">Abrir y cerrar la descripción</h4></div><div class="lectura-cuerpo"><div><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 25–28</span><span class="code-file">tarjeta-evento.ts</span></div></div><pre class="line-numbers" data-start="25"><code class="language-typescript">  alternarDescripcion(): void {
+    this.mostrarDescripcion = !this.mostrarDescripcion;
+  }
+}</code></pre></div></div><ol class="notas"><li class="nota" data-lineas="25-27"><div class="nota-cabeza"><span class="nota-lineas">L25–27</span><code class="nota-codigo">alternarDescripcion()</code></div><p>Cambia <code>mostrarDescripcion</code> a su contrario: si estaba cerrada, la abre; si estaba abierta, la cierra. Lo llamará el botón &quot;Ver detalles&quot; con <code>(click)</code>.</p>
+</li></ol></div></div>
+
+
+
+<details class="code-reveal"><summary><span><span class="code-reveal-title">tarjeta-evento.ts · archivo completo</span><span class="code-reveal-note">Listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Archivo completo</span><span class="code-file">tarjeta-evento.ts</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers" data-start="1"><code class="language-typescript">import { Component, input } from '@angular/core';
+import { CurrencyPipe, DatePipe } from '@angular/common';
+import { Evento } from '../../models/evento';
+import { Etiqueta } from '../../shared/etiqueta/etiqueta';
+
+@Component({
+  imports: [Etiqueta, CurrencyPipe, DatePipe],
+  selector: 'app-tarjeta-evento',
+  styleUrl: './tarjeta-evento.css',
+  templateUrl: './tarjeta-evento.html',
+})
+export class TarjetaEvento {
+  evento = input.required&lt;Evento&gt;();
+  mostrarDescripcion = false;
+
+  estaAgotado(): boolean {
+    return this.evento().cuposDisponibles === 0;
+  }
+
+  quedanPocosCupos(): boolean {
+    const cupos = this.evento().cuposDisponibles;
+    return cupos &gt; 0 &amp;&amp; cupos &lt;= 10;
+  }
+
+  alternarDescripcion(): void {
+    this.mostrarDescripcion = !this.mostrarDescripcion;
+  }
+}</code></pre></div></div></details>
+
+
+
+
+
+
+
+
+
+<div class="sin-ia"><span class="sin-ia-icono" aria-hidden="true"></span><div><h4>Sin IA aquí</h4><p>Las reglas &quot;agotado&quot; y &quot;pocos cupos&quot; son reglas de negocio de Valentina: se razonan y se escriben a mano. Es justo lo que no se delega.</p>
+</div></div>
+
+
+</article>
+
+<h3>9.3 · tarjeta-evento.html</h3><article class="archivo"><div class="archivo-ficha"><span class="archivo-accion">Reemplazar el generado</span><span class="archivo-nombre">tarjeta-evento.html</span><span class="archivo-ruta">tarima-web/src/app/components/tarjeta-evento/</span></div><div class="archivo-intro"><p>Aquí se ven juntas las tres formas de data binding y el control de flujo. Cada línea responde un punto del correo de Valentina: qué mostrar, cuándo marcar agotado, cuándo avisar pocos cupos.</p>
+</div><div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h4 class="lectura-titulo">La tarjeta se atenúa y se etiqueta según los cupos</h4></div><div class="lectura-cuerpo"><div><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 1–9</span><span class="code-file">tarjeta-evento.html</span></div></div><pre class="line-numbers" data-start="1"><code class="language-html">&lt;article class=&quot;tarjeta&quot; [class.tarjeta--agotada]=&quot;estaAgotado()&quot;&gt;
+  &lt;div class=&quot;tarjeta__etiquetas&quot;&gt;
+    &lt;app-etiqueta [texto]=&quot;evento().categoria&quot; /&gt;
+    @if (estaAgotado()) {
+      &lt;app-etiqueta texto=&quot;Agotado&quot; tono=&quot;peligro&quot; /&gt;
+    } @else if (quedanPocosCupos()) {
+      &lt;app-etiqueta [texto]=&quot;'Últimos ' + evento().cuposDisponibles + ' cupos'&quot; tono=&quot;alerta&quot; /&gt;
+    }
+  &lt;/div&gt;</code></pre></div></div><ol class="notas"><li class="nota" data-lineas="1"><div class="nota-cabeza"><span class="nota-lineas">L1</span><code class="nota-codigo">[class.tarjeta--agotada]=&quot;estaAgotado()&quot;</code></div><p>Agrega la clase <code>tarjeta--agotada</code> (que atenúa la tarjeta) <strong>solo</strong> cuando el evento está agotado. Nadie la pone a mano.</p>
+</li><li class="nota" data-lineas="3"><div class="nota-cabeza"><span class="nota-lineas">L3</span><code class="nota-codigo">&lt;app-etiqueta [texto]=&quot;evento().categoria&quot; /&gt;</code></div><p>Usamos la etiqueta y le pasamos la categoría del evento. Los corchetes indican que <code>evento().categoria</code> es una expresión, no el texto literal &quot;evento().categoria&quot;.</p>
+</li><li class="nota" data-lineas="4-5"><div class="nota-cabeza"><span class="nota-lineas">L4–5</span><code class="nota-codigo">@if (estaAgotado())</code></div><p>Si no hay cupos, se pinta una etiqueta &quot;Agotado&quot; en tono <code>peligro</code>. Aquí <code>texto=&quot;Agotado&quot;</code> va <strong>sin</strong> corchetes porque es un texto fijo.</p>
+</li><li class="nota" data-lineas="6-7"><div class="nota-cabeza"><span class="nota-lineas">L6–7</span><code class="nota-codigo">@else if (quedanPocosCupos())</code></div><p>Si no está agotado pero quedan 10 o menos, se pinta &quot;Últimos N cupos&quot; en tono <code>alerta</code>. El texto se arma uniendo palabras con el número real.</p>
+</li><li class="nota" data-lineas="8"><div class="nota-cabeza"><span class="nota-lineas">L8</span><code class="nota-codigo">}</code></div><p>Si no se cumple ninguna, no se pinta nada más: solo la categoría.</p>
+</li></ol></div></div>
+
+
+
+<div class="lectura"><div class="lectura-head"><span class="lectura-num">2</span><h4 class="lectura-titulo">Nombre, fecha y lugar en formato colombiano</h4></div><div class="lectura-cuerpo"><div><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 11–13</span><span class="code-file">tarjeta-evento.html</span></div></div><pre class="line-numbers" data-start="11"><code class="language-html">  &lt;h3 class=&quot;tarjeta__nombre&quot;&gt;{{ evento().nombre }}&lt;/h3&gt;
+  &lt;p class=&quot;tarjeta__dato&quot;&gt;📅 {{ evento().fecha | date: &quot;EEEE d 'de' MMMM · h:mm a&quot; }}&lt;/p&gt;
+  &lt;p class=&quot;tarjeta__dato&quot;&gt;📍 {{ evento().lugar }}&lt;/p&gt;</code></pre></div></div><ol class="notas"><li class="nota" data-lineas="11"><div class="nota-cabeza"><span class="nota-lineas">L11</span><code class="nota-codigo">{{ evento().nombre }}</code></div><p>Interpolación del nombre. <em>Ya lo viste:</em> igual que <code>{{ nombreApp }}</code> en el encabezado, pero leyendo un input con paréntesis.</p>
+</li><li class="nota" data-lineas="12"><div class="nota-cabeza"><span class="nota-lineas">L12</span><code class="nota-codigo">| date: &quot;EEEE d 'de' MMMM · h:mm a&quot;</code></div><p>El pipe <code>date</code> convierte <code>&#39;2026-11-07T20:00:00&#39;</code> en <code>sábado 7 de noviembre · 8:00 p. m.</code>. <code>EEEE</code> es el día de la semana completo, <code>d</code> el día, <code>MMMM</code> el mes completo, <code>h:mm a</code> la hora con a. m./p. m.; <code>&#39;de&#39;</code> va entre comillas para que se escriba tal cual.</p>
+</li><li class="nota" data-lineas="13"><div class="nota-cabeza"><span class="nota-lineas">L13</span><code class="nota-codigo">{{ evento().lugar }}</code></div><p>El lugar, sin transformación.</p>
+</li></ol></div></div>
+
+
+
+<div class="lectura"><div class="lectura-head"><span class="lectura-num">3</span><h4 class="lectura-titulo">Precio o &quot;Entrada libre&quot;, y la descripción opcional</h4></div><div class="lectura-cuerpo"><div><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 15–25</span><span class="code-file">tarjeta-evento.html</span></div></div><pre class="line-numbers" data-start="15"><code class="language-html">  &lt;p class=&quot;tarjeta__precio&quot;&gt;
+    @if (evento().precio === 0) {
+      Entrada libre
+    } @else {
+      {{ evento().precio | currency: 'COP' : 'symbol-narrow' : '1.0-0' }}
+    }
+  &lt;/p&gt;
+
+  @if (mostrarDescripcion) {
+    &lt;p class=&quot;tarjeta__descripcion&quot;&gt;{{ evento().descripcion }}&lt;/p&gt;
+  }</code></pre></div></div><ol class="notas"><li class="nota" data-lineas="16-17"><div class="nota-cabeza"><span class="nota-lineas">L16–17</span><code class="nota-codigo">@if (evento().precio === 0)</code></div><p>El punto 1 del correo: si el precio es 0, se escribe &quot;Entrada libre&quot; en lugar de &quot;$ 0&quot;.</p>
+</li><li class="nota" data-lineas="18-19"><div class="nota-cabeza"><span class="nota-lineas">L18–19</span><code class="nota-codigo">@else` con `| currency: 'COP' : 'symbol-narrow' : '1.0-0'</code></div><p>Si cuesta, el pipe lo formatea como pesos colombianos: <code>$ 45.000</code>. <code>&#39;COP&#39;</code> es el código de la moneda, <code>&#39;symbol-narrow&#39;</code> usa <code>$</code> y no <code>COL$</code>, y <code>&#39;1.0-0&#39;</code> significa sin decimales.</p>
+</li><li class="nota" data-lineas="23-25"><div class="nota-cabeza"><span class="nota-lineas">L23–25</span><code class="nota-codigo">@if (mostrarDescripcion)</code></div><p>La descripción solo existe en pantalla cuando la tarjeta la tiene abierta. Aquí no hay paréntesis porque <code>mostrarDescripcion</code> es una propiedad normal, no un input.</p>
+</li></ol></div></div>
+
+
+
+<div class="lectura"><div class="lectura-head"><span class="lectura-num">4</span><h4 class="lectura-titulo">Los botones: uno escucha, el otro obedece a los datos</h4></div><div class="lectura-cuerpo"><div><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 27–33</span><span class="code-file">tarjeta-evento.html</span></div></div><pre class="line-numbers" data-start="27"><code class="language-html">  &lt;div class=&quot;tarjeta__acciones&quot;&gt;
+    &lt;button type=&quot;button&quot; class=&quot;boton boton--secundario&quot; (click)=&quot;alternarDescripcion()&quot;&gt;
+      {{ mostrarDescripcion ? 'Ocultar detalles' : 'Ver detalles' }}
+    &lt;/button&gt;
+    &lt;button type=&quot;button&quot; class=&quot;boton&quot; [disabled]=&quot;estaAgotado()&quot;&gt;Reservar&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/article&gt;</code></pre></div></div><ol class="notas"><li class="nota" data-lineas="28"><div class="nota-cabeza"><span class="nota-lineas">L28</span><code class="nota-codigo">(click)=&quot;alternarDescripcion()&quot;</code></div><p><strong>Event binding</strong>: los paréntesis escuchan un evento de la pantalla. Al hacer clic, se ejecuta el método de la clase. Es la dirección contraria a <code>{{ }}</code>: de la pantalla al código.</p>
+</li><li class="nota" data-lineas="29"><div class="nota-cabeza"><span class="nota-lineas">L29</span><code class="nota-codigo">{{ mostrarDescripcion ? 'Ocultar detalles' : 'Ver detalles' }}</code></div><p>El texto del botón depende del estado: si está abierta dice &quot;Ocultar detalles&quot;; si no, &quot;Ver detalles&quot;.</p>
+</li><li class="nota" data-lineas="31"><div class="nota-cabeza"><span class="nota-lineas">L31</span><code class="nota-codigo">[disabled]=&quot;estaAgotado()&quot;</code></div><p><strong>El incidente del sábado, resuelto en una línea:</strong> el botón se bloquea solo cuando no hay cupos. En la Clase 3 este botón llenará el carrito de entradas.</p>
+</li></ol></div></div>
+
+
+
+<details class="code-reveal"><summary><span><span class="code-reveal-title">tarjeta-evento.html · archivo completo</span><span class="code-reveal-note">Listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Archivo completo</span><span class="code-file">tarjeta-evento.html</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers" data-start="1"><code class="language-html">&lt;article class=&quot;tarjeta&quot; [class.tarjeta--agotada]=&quot;estaAgotado()&quot;&gt;
+  &lt;div class=&quot;tarjeta__etiquetas&quot;&gt;
+    &lt;app-etiqueta [texto]=&quot;evento().categoria&quot; /&gt;
+    @if (estaAgotado()) {
+      &lt;app-etiqueta texto=&quot;Agotado&quot; tono=&quot;peligro&quot; /&gt;
+    } @else if (quedanPocosCupos()) {
+      &lt;app-etiqueta [texto]=&quot;'Últimos ' + evento().cuposDisponibles + ' cupos'&quot; tono=&quot;alerta&quot; /&gt;
+    }
+  &lt;/div&gt;
+
+  &lt;h3 class=&quot;tarjeta__nombre&quot;&gt;{{ evento().nombre }}&lt;/h3&gt;
+  &lt;p class=&quot;tarjeta__dato&quot;&gt;📅 {{ evento().fecha | date: &quot;EEEE d 'de' MMMM · h:mm a&quot; }}&lt;/p&gt;
+  &lt;p class=&quot;tarjeta__dato&quot;&gt;📍 {{ evento().lugar }}&lt;/p&gt;
+
+  &lt;p class=&quot;tarjeta__precio&quot;&gt;
+    @if (evento().precio === 0) {
+      Entrada libre
+    } @else {
+      {{ evento().precio | currency: 'COP' : 'symbol-narrow' : '1.0-0' }}
+    }
+  &lt;/p&gt;
+
+  @if (mostrarDescripcion) {
+    &lt;p class=&quot;tarjeta__descripcion&quot;&gt;{{ evento().descripcion }}&lt;/p&gt;
+  }
+
+  &lt;div class=&quot;tarjeta__acciones&quot;&gt;
+    &lt;button type=&quot;button&quot; class=&quot;boton boton--secundario&quot; (click)=&quot;alternarDescripcion()&quot;&gt;
+      {{ mostrarDescripcion ? 'Ocultar detalles' : 'Ver detalles' }}
+    &lt;/button&gt;
+    &lt;button type=&quot;button&quot; class=&quot;boton&quot; [disabled]=&quot;estaAgotado()&quot;&gt;Reservar&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/article&gt;</code></pre></div></div></details>
+
+
+
+
+
+
+
+</article>
+
+</div></section>
+<section class="section view" id="ensamblaje" data-accent="1" data-layout="canvas" data-escena="construccion" hidden><div class="sec-head"><span class="sec-n">Construir</span><h2 class="sec-t">La cartelera cobra vida</h2></div><div class="body"><h4>La página</h4>
+<p><code>ListadoEventos</code> es una <strong>página</strong>: la vista completa de la cartelera. Tendrá su propia URL en la Clase 2 (<code>/eventos</code>). Su trabajo es tomar la lista de eventos y pintar una tarjeta por cada uno.</p>
+<h3>10.1 · Generar la página</h3><p>Se ejecuta desde la carpeta <strong><code>tarima-web</code></strong>.</p>
+<div class="code-block" data-tipo="terminal"><div class="code-head"><div><span class="code-context">Terminal</span></div><button class="copy-btn" type="button">Copiar</button></div><pre class="line-numbers" data-start="1"><code class="language-bash">ng g c pages/listado-eventos --skip-tests</code></pre></div><p><strong>Resultado esperado:</strong> <code>CREATE</code> de <code>listado-eventos.css</code>, <code>listado-eventos.ts</code> y <code>listado-eventos.html</code> dentro de <code>src/app/pages/listado-eventos/</code>.</p>
+<h3>10.2 · listado-eventos.ts</h3><article class="archivo"><div class="archivo-ficha"><span class="archivo-accion">Reemplazar el generado</span><span class="archivo-nombre">listado-eventos.ts</span><span class="archivo-ruta">tarima-web/src/app/pages/listado-eventos/</span></div><div class="archivo-intro"><p>La página toma los 6 eventos de prueba y se los entrega a su plantilla. No sabe cómo se pinta un evento: eso es trabajo de la tarjeta. Así cada pieza tiene una sola responsabilidad.</p>
+</div><div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h4 class="lectura-titulo">La página conoce los datos y la tarjeta</h4></div><div class="lectura-cuerpo"><div><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 1–13</span><span class="code-file">listado-eventos.ts</span></div></div><pre class="line-numbers" data-start="1"><code class="language-typescript">import { Component } from '@angular/core';
+import { EVENTOS } from '../../data/eventos.mock';
+import { TarjetaEvento } from '../../components/tarjeta-evento/tarjeta-evento';
+
+@Component({
+  imports: [TarjetaEvento],
+  selector: 'app-listado-eventos',
+  styleUrl: './listado-eventos.css',
+  templateUrl: './listado-eventos.html',
+})
+export class ListadoEventos {
+  eventos = EVENTOS;
+}</code></pre></div></div><ol class="notas"><li class="nota" data-lineas="2"><div class="nota-cabeza"><span class="nota-lineas">L2</span><code class="nota-codigo">import { EVENTOS }</code></div><p>Traemos la lista de prueba. En la Clase 4 esta línea desaparece y los eventos llegarán del backend.</p>
+</li><li class="nota" data-lineas="3"><div class="nota-cabeza"><span class="nota-lineas">L3</span><code class="nota-codigo">import { TarjetaEvento }</code></div><p>Traemos la tarjeta para usarla en la plantilla.</p>
+</li><li class="nota" data-lineas="6"><div class="nota-cabeza"><span class="nota-lineas">L6</span><code class="nota-codigo">imports: [TarjetaEvento]</code></div><p>Autoriza a la plantilla a usar <code>&lt;app-tarjeta-evento&gt;</code>.</p>
+</li><li class="nota" data-lineas="7"><div class="nota-cabeza"><span class="nota-lineas">L7</span><code class="nota-codigo">selector: 'app-listado-eventos'</code></div><p><code>App</code> la usará con esta etiqueta.</p>
+</li><li class="nota" data-lineas="12"><div class="nota-cabeza"><span class="nota-lineas">L12</span><code class="nota-codigo">eventos = EVENTOS</code></div><p>La página expone la lista como propiedad, para que su plantilla la recorra.</p>
+</li></ol></div></div>
+
+
+
+<details class="code-reveal"><summary><span><span class="code-reveal-title">listado-eventos.ts · archivo completo</span><span class="code-reveal-note">Listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Archivo completo</span><span class="code-file">listado-eventos.ts</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers" data-start="1"><code class="language-typescript">import { Component } from '@angular/core';
+import { EVENTOS } from '../../data/eventos.mock';
+import { TarjetaEvento } from '../../components/tarjeta-evento/tarjeta-evento';
+
+@Component({
+  imports: [TarjetaEvento],
+  selector: 'app-listado-eventos',
+  styleUrl: './listado-eventos.css',
+  templateUrl: './listado-eventos.html',
+})
+export class ListadoEventos {
+  eventos = EVENTOS;
+}</code></pre></div></div></details>
+
+
+
+
+
+
+
+</article>
+
+<h3>10.3 · listado-eventos.html</h3><article class="archivo"><div class="archivo-ficha"><span class="archivo-accion">Reemplazar el generado</span><span class="archivo-nombre">listado-eventos.html</span><span class="archivo-ruta">tarima-web/src/app/pages/listado-eventos/</span></div><div class="archivo-intro"><p>Aquí se cumple el punto 4 del correo: <strong>una</strong> tarjeta, repetida por cada evento con <code>@for</code>. Si mercadeo cambia la tarjeta, cambia en los 6 eventos (o en los 400).</p>
+</div><div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h4 class="lectura-titulo">El título y el total</h4></div><div class="lectura-cuerpo"><div><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 1–3</span><span class="code-file">listado-eventos.html</span></div></div><pre class="line-numbers" data-start="1"><code class="language-html">&lt;section class=&quot;listado&quot;&gt;
+  &lt;h2 class=&quot;listado__titulo&quot;&gt;Cartelera de noviembre&lt;/h2&gt;
+  &lt;p class=&quot;listado__total&quot;&gt;{{ eventos.length }} eventos en cartelera&lt;/p&gt;</code></pre></div></div><ol class="notas"><li class="nota" data-lineas="2"><div class="nota-cabeza"><span class="nota-lineas">L2</span><code class="nota-codigo">el título</code></div><p>Texto fijo de la cartelera.</p>
+</li><li class="nota" data-lineas="3"><div class="nota-cabeza"><span class="nota-lineas">L3</span><code class="nota-codigo">{{ eventos.length }}</code></div><p><code>length</code> es la cantidad de elementos de la lista: hoy dice <code>6 eventos en cartelera</code>. Sin paréntesis, porque <code>eventos</code> es una propiedad normal, no un input.</p>
+</li></ol></div></div>
+
+
+
+<div class="lectura"><div class="lectura-head"><span class="lectura-num">2</span><h4 class="lectura-titulo">Una tarjeta por evento, o un mensaje si no hay</h4></div><div class="lectura-cuerpo"><div><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 5–12</span><span class="code-file">listado-eventos.html</span></div></div><pre class="line-numbers" data-start="5"><code class="language-html">  &lt;div class=&quot;listado__grilla&quot;&gt;
+    @for (evento of eventos; track evento.id) {
+      &lt;app-tarjeta-evento [evento]=&quot;evento&quot; /&gt;
+    } @empty {
+      &lt;p class=&quot;listado__vacio&quot;&gt;No hay eventos en cartelera por ahora.&lt;/p&gt;
+    }
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre></div></div><ol class="notas"><li class="nota" data-lineas="6"><div class="nota-cabeza"><span class="nota-lineas">L6</span><code class="nota-codigo">@for (evento of eventos; track evento.id)</code></div><p>Recorre la lista y, por cada elemento, pinta lo que está entre llaves. <code>evento</code> es el nombre que le damos a cada elemento en cada vuelta. <code>track evento.id</code> le dice a Angular cómo reconocer cada evento; es <strong>obligatorio</strong> (sin él sale <code>NG5002</code>).</p>
+</li><li class="nota" data-lineas="7"><div class="nota-cabeza"><span class="nota-lineas">L7</span><code class="nota-codigo">&lt;app-tarjeta-evento [evento]=&quot;evento&quot; /&gt;</code></div><p>Crea una tarjeta y le entrega el evento de esta vuelta por su input. A la izquierda, <code>[evento]</code> es el nombre del input de la tarjeta; a la derecha, <code>evento</code> es la variable del <code>@for</code>.</p>
+</li><li class="nota" data-lineas="8-9"><div class="nota-cabeza"><span class="nota-lineas">L8–9</span><code class="nota-codigo">@empty</code></div><p>Si la lista está vacía, en lugar de un espacio en blanco aparece &quot;No hay eventos en cartelera por ahora.&quot;</p>
+</li></ol></div></div>
+
+
+
+<details class="code-reveal"><summary><span><span class="code-reveal-title">listado-eventos.html · archivo completo</span><span class="code-reveal-note">Listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Archivo completo</span><span class="code-file">listado-eventos.html</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers" data-start="1"><code class="language-html">&lt;section class=&quot;listado&quot;&gt;
+  &lt;h2 class=&quot;listado__titulo&quot;&gt;Cartelera de noviembre&lt;/h2&gt;
+  &lt;p class=&quot;listado__total&quot;&gt;{{ eventos.length }} eventos en cartelera&lt;/p&gt;
+
+  &lt;div class=&quot;listado__grilla&quot;&gt;
+    @for (evento of eventos; track evento.id) {
+      &lt;app-tarjeta-evento [evento]=&quot;evento&quot; /&gt;
+    } @empty {
+      &lt;p class=&quot;listado__vacio&quot;&gt;No hay eventos en cartelera por ahora.&lt;/p&gt;
+    }
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre></div></div></details>
+
+
+
+
+<div class="micro-task"><span class="component-label">Para pensar</span><p class="micro-task-q">¿Para qué necesita Angular el <code>track evento.id</code>, si igual va a pintar todos los eventos?</p><details class="micro-reveal"><summary>Ver respuesta</summary><div class="micro-answer"><p>para reconocer cada evento cuando la lista cambia. Si mañana se agrega uno o se reordenan, Angular sabe cuáles tarjetas ya existían y solo crea o mueve las necesarias, en lugar de borrar y volver a pintar todas (y perder, por ejemplo, la descripción que tenías abierta).</p>
+</div></details></div>
+
+
+
+
+
+
+
+</article>
+
+<h3>10.4 · Montar todo en `App`</h3><p>Hasta ahora ningún componente se ve: nadie los usa. <code>App</code> es el componente raíz; si él usa el encabezado y la página, aparecen en pantalla. Al mismo tiempo, borramos la página de bienvenida de Angular.</p>
+<h3>10.5 · app.ts</h3><article class="archivo"><div class="archivo-ficha"><span class="archivo-accion">Reemplazar todo</span><span class="archivo-nombre">app.ts</span><span class="archivo-ruta">tarima-web/src/app/</span></div><div class="archivo-intro"><p><code>App</code> es el componente raíz: lo que él pinta es lo que se ve. Hasta ahora creamos piezas que nadie usaba; aquí se montan. También quitamos lo que traía el CLI (el título de ejemplo y el <code>RouterOutlet</code>, que vuelve en la Clase 2).</p>
+</div><div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h4 class="lectura-titulo">La raíz usa el encabezado y la cartelera</h4></div><div class="lectura-cuerpo"><div><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 1–11</span><span class="code-file">app.ts</span></div></div><pre class="line-numbers" data-start="1"><code class="language-typescript">import { Component } from '@angular/core';
+import { Encabezado } from './components/encabezado/encabezado';
+import { ListadoEventos } from './pages/listado-eventos/listado-eventos';
+
+@Component({
+  imports: [Encabezado, ListadoEventos],
+  selector: 'app-root',
+  styleUrl: './app.css',
+  templateUrl: './app.html',
+})
+export class App {}</code></pre></div></div><ol class="notas"><li class="nota" data-lineas="2-3"><div class="nota-cabeza"><span class="nota-lineas">L2–3</span><code class="nota-codigo">los imports</code></div><p>Traemos las dos piezas que la raíz va a mostrar.</p>
+</li><li class="nota" data-lineas="6"><div class="nota-cabeza"><span class="nota-lineas">L6</span><code class="nota-codigo">imports: [Encabezado, ListadoEventos]</code></div><p>Autoriza a <code>app.html</code> a usar <code>&lt;app-encabezado&gt;</code> y <code>&lt;app-listado-eventos&gt;</code>.</p>
+</li><li class="nota" data-lineas="7"><div class="nota-cabeza"><span class="nota-lineas">L7</span><code class="nota-codigo">selector: 'app-root'</code></div><p>Es la etiqueta que está en <code>index.html</code>. <em>Ya lo viste:</em> Angular la llena al arrancar.</p>
+</li><li class="nota" data-lineas="11"><div class="nota-cabeza"><span class="nota-lineas">L11</span><code class="nota-codigo">export class App {}</code></div><p>La raíz no necesita datos propios: solo organiza.</p>
+</li></ol></div></div>
+
+
+
+<details class="code-reveal"><summary><span><span class="code-reveal-title">app.ts · archivo completo</span><span class="code-reveal-note">Listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Archivo completo</span><span class="code-file">app.ts</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers" data-start="1"><code class="language-typescript">import { Component } from '@angular/core';
+import { Encabezado } from './components/encabezado/encabezado';
+import { ListadoEventos } from './pages/listado-eventos/listado-eventos';
+
+@Component({
+  imports: [Encabezado, ListadoEventos],
+  selector: 'app-root',
+  styleUrl: './app.css',
+  templateUrl: './app.html',
+})
+export class App {}</code></pre></div></div></details>
+
+
+
+
+
+
+
+</article>
+
+<h3>10.6 · app.html</h3><article class="archivo"><div class="archivo-ficha"><span class="archivo-accion">Reemplazar todo</span><span class="archivo-nombre">app.html</span><span class="archivo-ruta">tarima-web/src/app/</span></div><div class="archivo-intro"><p>El CLI dejó aquí una página de bienvenida de más de 300 líneas. Se borra <strong>todo</strong> y se reemplaza por estas cinco: el encabezado arriba y la cartelera dentro del contenedor principal.</p>
+</div><div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h4 class="lectura-titulo">La estructura de la página</h4></div><div class="lectura-cuerpo"><div><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 1–5</span><span class="code-file">app.html</span></div></div><pre class="line-numbers" data-start="1"><code class="language-html">&lt;app-encabezado /&gt;
+
+&lt;main class=&quot;contenedor&quot;&gt;
+  &lt;app-listado-eventos /&gt;
+&lt;/main&gt;</code></pre></div></div><ol class="notas"><li class="nota" data-lineas="1"><div class="nota-cabeza"><span class="nota-lineas">L1</span><code class="nota-codigo">&lt;app-encabezado /&gt;</code></div><p>Aquí aparece la marca de Tarima. <em>Ya lo viste:</em> es el selector de <code>Encabezado</code>.</p>
+</li><li class="nota" data-lineas="3"><div class="nota-cabeza"><span class="nota-lineas">L3</span><code class="nota-codigo">&lt;main class=&quot;contenedor&quot;&gt;</code></div><p>El contenido principal, centrado y con márgenes por el kit.</p>
+</li><li class="nota" data-lineas="4"><div class="nota-cabeza"><span class="nota-lineas">L4</span><code class="nota-codigo">&lt;app-listado-eventos /&gt;</code></div><p>Aquí aparece la cartelera completa. En la Clase 2 esta línea se reemplaza por <code>&lt;router-outlet /&gt;</code>, para que la URL decida qué página va aquí.</p>
+</li></ol></div></div>
+
+
+
+<details class="code-reveal"><summary><span><span class="code-reveal-title">app.html · archivo completo</span><span class="code-reveal-note">Listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Archivo completo</span><span class="code-file">app.html</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers" data-start="1"><code class="language-html">&lt;app-encabezado /&gt;
+
+&lt;main class=&quot;contenedor&quot;&gt;
+  &lt;app-listado-eventos /&gt;
+&lt;/main&gt;</code></pre></div></div></details>
+
+
+
+
+
+
+
+</article>
+
+</div></section>
+<section class="section view" id="verificar" data-accent="1" data-layout="canvas" data-escena="prueba" hidden><div class="sec-head"><span class="sec-n">Probar</span><h2 class="sec-t">Probar las reglas de Valentina</h2></div><div class="body"><figure class="figura"><div class="figura-stage"><img src="img/cartelera-tarima.png" alt="Las seis tarjetas de Tarima: Risas sin Filtro agotado, avisos de últimos 6 y 10 cupos y Jazz con entrada libre." loading="lazy"></div><figcaption>Agotado y Reservar bloqueado; últimos 6 y 10 cupos; Entrada libre en Jazz en la Terraza.<span class="figura-credito">Vista de referencia construida con los datos y las reglas de la guía.</span></figcaption></figure><h4>En el navegador (<code>http://localhost:4200</code>)</h4>
+<p>Con <code>ng serve</code> corriendo, la página muestra exactamente esto:</p>
+<div class="code-block"><div class="code-head"><div><span class="code-context">Código</span></div><button class="copy-btn" type="button">Copiar</button></div><pre class="line-numbers" data-start="1"><code class="language-plaintext">🎭 Tarima
+La cartelera cultural de Bogotá
+
+Cartelera de noviembre
+6 eventos en cartelera
+
+[Concierto]                        Noche de Salsa Brava
+📅 sábado 7 de noviembre · 8:00 p. m.   📍 Teatro del Parque   $ 45.000
+[Teatro] [Últimos 6 cupos]          La Casa de las Voces
+📅 domingo 8 de noviembre · 7:30 p. m.  📍 Sala Chapinero      $ 38.000
+[Stand-up] [Agotado]                Risas sin Filtro         (tarjeta atenuada, Reservar bloqueado)
+📅 jueves 12 de noviembre · 9:00 p. m.  📍 Bodega Cultural del Centro  $ 30.000
+[Concierto]                        Jazz en la Terraza
+📅 sábado 14 de noviembre · 6:00 p. m.  📍 Terraza Usaquén     Entrada libre
+[Stand-up] [Últimos 10 cupos]       Monólogos de Oficina
+📅 jueves 19 de noviembre · 8:30 p. m.  📍 Sala Chapinero      $ 25.000
+[Teatro]                           Romeo y Julieta en Bogotá
+📅 sábado 21 de noviembre · 7:00 p. m.  📍 Teatro del Parque   $ 52.000</code></pre></div><!-- Visual de la guía: representado con la captura local de Tarima. -->
+
+
+<h3>11.1 · Tres pruebas en vivo</h3><div class="table-wrap"><table class="data-table"><thead><tr><th>#</th><th>Acción</th><th>Resultado esperado</th></tr></thead><tbody><tr><td>1</td><td>Clic en <strong>Ver detalles</strong> de &quot;Noche de Salsa Brava&quot;</td><td>Aparece &quot;Orquesta en vivo y pista de baile abierta toda la noche.&quot; y el botón cambia a <strong>Ocultar detalles</strong></td></tr><tr><td>2</td><td>En <code>eventos.mock.ts</code>, cambiar <code>cuposDisponibles: 120</code> del evento 1 a <code>0</code> y guardar</td><td>Sin tocar HTML, &quot;Noche de Salsa Brava&quot; aparece con <strong>Agotado</strong>, atenuada y con Reservar bloqueado</td></tr><tr><td>3</td><td>Cambiar ese mismo valor a <code>3</code> y guardar</td><td>Aparece <strong>Últimos 3 cupos</strong> y Reservar se habilita</td></tr></tbody></table></div><p>Al terminar, devolver el valor a <code>120</code>.</p>
+<div class="micro-task"><span class="component-label">Para pensar</span><p class="micro-task-q">¿qué va a pasar en pantalla?</p></div>
+
+
+<h3>11.2 · Traza: qué pasa desde que abres la página</h3><div class="code-block"><div class="code-head"><div><span class="code-context">Código</span></div><button class="copy-btn" type="button">Copiar</button></div><pre class="line-numbers" data-start="1"><code class="language-plaintext">Navegador pide http://localhost:4200
+↓
+Recibe index.html con &lt;app-root&gt;&lt;/app-root&gt; vacío
+↓
+main.ts → bootstrapApplication(App, appConfig)
+↓
+appConfig registra: errores globales, router (sin rutas), idioma es-CO
+↓
+Angular crea App y pinta app.html dentro de &lt;app-root&gt;
+↓
+app.html usa &lt;app-encabezado&gt; → Angular crea Encabezado → pinta &quot;🎭 Tarima&quot;
+↓
+app.html usa &lt;app-listado-eventos&gt; → crea ListadoEventos → eventos = EVENTOS (6)
+↓
+@for recorre los 6 eventos; track evento.id identifica cada uno
+↓
+Por cada evento: crea TarjetaEvento con [evento]=&quot;evento&quot;
+↓
+Tarjeta del evento 3: evento().cuposDisponibles = 0
+   estaAgotado() → true → etiqueta &quot;Agotado&quot; + [disabled]=true + clase tarjeta--agotada
+↓
+Clic en &quot;Ver detalles&quot;: (click) → alternarDescripcion() → mostrarDescripcion = true
+↓
+Angular vuelve a pintar esa tarjeta → aparece la descripción</code></pre></div></div></section>
+<section class="section view" id="errores" data-accent="1" data-layout="canvas" data-escena="prueba" hidden><div class="sec-head"><span class="sec-n">Probar</span><h2 class="sec-t">Leer y corregir errores</h2></div><div class="body"><h3>12.1 · Componentes e inputs</h3><p>Todos los errores de compilación salen en <strong>la terminal de <code>ng serve</code></strong> y en el navegador, en rojo, con un código. El código (<code>NG8001</code>, <code>TS2339</code>…) es lo primero que se lee: dice qué tipo de error es. Después viene el archivo y la línea.</p>
+<h4><code>NG8001: &#39;app-tarjeta-evento&#39; is not a known element</code></h4>
+<ul>
+<li><strong>Cómo se lee:</strong> &quot;Angular no conoce la etiqueta <code>app-tarjeta-evento</code> en esta plantilla&quot;.</li>
+<li><strong>Causa:</strong> se usó el componente en una plantilla, pero no se agregó al <code>imports</code> del componente que lo usa.</li>
+<li><strong>Corrección:</strong> en <code>listado-eventos.ts</code>, agregar <code>TarjetaEvento</code> al arreglo <code>imports</code> (y su <code>import</code> arriba).</li>
+</ul>
+<h4><code>NG8002: Can&#39;t bind to &#39;evento&#39; since it isn&#39;t a known property of &#39;app-tarjeta-evento&#39;</code></h4>
+<ul>
+<li><strong>Cómo se lee:</strong> &quot;le estás pasando <code>[evento]</code> a algo que no tiene esa entrada&quot;.</li>
+<li><strong>Causa:</strong> falta el <code>imports</code>, o la entrada se llama distinto (por ejemplo <code>eventos</code> en vez de <code>evento</code>).</li>
+<li><strong>Corrección:</strong> revisar el <code>imports</code> y que el nombre en <code>[ ]</code> sea exactamente el de <code>input</code>.</li>
+</ul>
+<h4><code>NG8008: Required input &#39;evento&#39; from component TarjetaEvento must be specified</code></h4>
+<ul>
+<li><strong>Cómo se lee:</strong> &quot;la tarjeta exige un evento y no se lo diste&quot;.</li>
+<li><strong>Causa:</strong> se escribió <code>&lt;app-tarjeta-evento /&gt;</code> sin <code>[evento]=&quot;...&quot;</code>. Es <code>input.required</code> haciendo su trabajo.</li>
+<li><strong>Corrección:</strong> pasar el evento: <code>&lt;app-tarjeta-evento [evento]=&quot;evento&quot; /&gt;</code>.</li>
+</ul>
+<h3>12.2 · Datos, pipes y control de flujo</h3><h4><code>TS2339: Property &#39;nombre&#39; does not exist on type &#39;InputSignal&lt;Evento&gt;&#39;</code></h4>
+<ul>
+<li><strong>Cómo se lee:</strong> &quot;estás buscando <code>nombre</code> dentro de la caja, no dentro del evento&quot;.</li>
+<li><strong>Causa:</strong> se escribió <code>evento.nombre</code> sin paréntesis. Un <code>input()</code> se lee llamándolo.</li>
+<li><strong>Corrección:</strong> <code>evento().nombre</code>.</li>
+</ul>
+<h4><code>NG8004: No pipe found with name &#39;date&#39;</code></h4>
+<ul>
+<li><strong>Causa:</strong> se usó <code>| date</code> en la plantilla sin importar <code>DatePipe</code> en el componente.</li>
+<li><strong>Corrección:</strong> agregar <code>DatePipe</code> al <code>imports</code> de <code>tarjeta-evento.ts</code> (igual con <code>CurrencyPipe</code> y <code>| currency</code>).</li>
+</ul>
+<h4><code>NG5002: @for loop must have a &quot;track&quot; expression</code></h4>
+<ul>
+<li><strong>Causa:</strong> se escribió <code>@for (evento of eventos)</code> sin <code>track</code>.</li>
+<li><strong>Corrección:</strong> <code>@for (evento of eventos; track evento.id)</code>.</li>
+</ul>
+<h4><code>NG0701: Missing locale data for the locale &quot;es-CO&quot;</code> (en la consola del navegador)</h4>
+<ul>
+<li><strong>Causa:</strong> se configuró <code>LOCALE_ID</code> con <code>&#39;es-CO&#39;</code> pero se olvidó <code>registerLocaleData(localeEsCo)</code>.</li>
+<li><strong>Corrección:</strong> revisar las líneas 3 y 7 de <code>app.config.ts</code>.</li>
+</ul>
+<h3>12.3 · Resolver el entorno</h3><h4>Errores de entorno</h4>
+<ul>
+<li><strong>&quot;The Angular CLI requires a minimum Node.js version…&quot;</strong> → actualizar a Node 24 LTS.</li>
+<li><strong><code>ng</code> no se reconoce como comando</strong> → el CLI no quedó instalado o la terminal se abrió antes de instalarlo: cerrarla, abrirla y repetir <code>npm install -g @angular/cli@22</code>.</li>
+<li><strong>&quot;Port 4200 is already in use&quot;</strong> → hay otro <code>ng serve</code> abierto: cerrarlo con <code>Ctrl+C</code>, o usar <code>ng serve --port 4300</code>.</li>
+</ul>
+
+
+
+</div></section>
+<section class="section view" id="ia" data-accent="1" data-layout="canvas" data-escena="prueba" hidden><div class="sec-head"><span class="sec-n">Probar</span><h2 class="sec-t">El detector de Angular viejo</h2></div><div class="body"><div class="momento-ia"><div class="momento-ia-head"><span class="momento-ia-titulo">Momento IA</span><span class="ia-nivel">Nivel 0–1</span><span class="ia-herramienta">Chat navegador o Copilot Chat</span></div><div class="momento-ia-body"><p class="ia-porque">la IA y muchos tutoriales todavía generan Angular de hace 3 a 5 años. Hoy el grupo ya sabe cómo se ve el Angular 22: es el momento justo para aprender a desconfiar.</p><div class="ia-grid"><div><span class="component-label">Primero razonas tú</span><p>con la tabla de abajo a la vista, predice: &quot;¿qué señales de Angular viejo creo que va a traer?&quot;.</p>
+</div><div class="ia-no-delega"><span class="component-label">No se delega</span><p>decidir si el código está vigente; eso lo decide el estudiante con la tabla y la documentación oficial (angular.dev).</p>
+</div></div><div class="code-block" data-tipo="prompt"><div class="code-head"><div><span class="code-context">Prompt sugerido</span></div><button class="copy-btn" type="button">Copiar</button></div><pre class="line-numbers" data-start="1"><code class="language-plaintext">&quot;Crea un componente de Angular que muestre una lista de productos con nombre y precio, y que oculte el botón Comprar si no hay stock. Dame el código completo.&quot;</code></pre></div><span class="component-label">Cómo validar la respuesta</span><p>recorrer la tabla y contar las señales. No se copia nada al proyecto.</p>
+</div></div>
+
+
+<h4>La tabla del detector</h4>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Si la IA te da…</th><th>En Angular 22 se usa…</th></tr></thead><tbody><tr><td><code>NgModule</code>, <code>AppModule</code>, <code>declarations</code></td><td>Componentes standalone + <code>app.config.ts</code></td></tr><tr><td><code>*ngIf</code>, <code>*ngFor</code></td><td><code>@if</code>, <code>@for (...; track ...)</code></td></tr><tr><td><code>@Input()</code></td><td><code>input()</code> (y <code>@Output()</code> → <code>output()</code>, Clase 3)</td></tr><tr><td><code>x.component.ts</code>, clase <code>XComponent</code></td><td><code>x.ts</code>, clase <code>X</code></td></tr><tr><td><code>constructor(private servicio: ...)</code></td><td><code>inject(...)</code> (Clase 3)</td></tr><tr><td><code>@Injectable({ providedIn: &#39;root&#39; })</code></td><td><code>@Service()</code> (Clase 3)</td></tr><tr><td><code>HttpClientModule</code></td><td>Nada: <code>HttpClient</code> ya viene listo (Clase 4)</td></tr><tr><td><code>zone.js</code></td><td>Angular 22 es zoneless por defecto</td></tr></tbody></table></div><div class="micro-task"><span class="component-label">Para pensar</span><p class="micro-task-q">La IA me dio este código y funciona. ¿Ya está bien?</p><details class="micro-reveal"><summary>Ver respuesta</summary><div class="micro-answer"><p>funcionar es el mínimo, no la meta. El código con <code>*ngFor</code> y <code>@Input()</code> todavía compila, pero es la forma antigua: un equipo que trabaja con Angular 22 lo va a rechazar en la revisión, y mezclar estilos hace el proyecto más difícil de mantener. &quot;Funciona&quot; no es lo mismo que &quot;está vigente&quot; ni que &quot;lo entiendo&quot;.</p>
+</div></details></div>
+
+
+
+
+
+
+
+</div></section>
+<section class="section view" id="taller" data-accent="1" data-layout="canvas" data-escena="construccion" hidden><div class="sec-head"><span class="sec-n">Practicar</span><h2 class="sec-t">Huella Amiga · Fase 1</h2></div><div class="body"><h3>14.1 · Transferir lo aprendido</h3><h4>El espejo</h4>
+<p>Lo que hicimos con Tarima, cada estudiante lo hace en <strong>otro dominio</strong>: <strong>Huella Amiga</strong>, una fundación de adopción de perros y gatos. El concepto es idéntico; los datos y las reglas cambian. Así se aprende a transferir, no a copiar.</p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Tarima (hoy en clase)</th><th>Huella Amiga (taller)</th></tr></thead><tbody><tr><td><code>Evento</code> + <code>EVENTOS</code></td><td><code>Mascota</code> + <code>MASCOTAS</code></td></tr><tr><td><code>Etiqueta</code> (categoría, &quot;Agotado&quot;)</td><td><code>Etiqueta</code> (especie, &quot;Adoptada&quot;)</td></tr><tr><td><code>TarjetaEvento</code> + regla de precio</td><td><code>TarjetaMascota</code> + regla de edad</td></tr><tr><td><code>ListadoEventos</code> con <code>@for</code> y <code>@empty</code></td><td><code>ListadoMascotas</code> con <code>@for</code> y <code>@empty</code></td></tr></tbody></table></div><h4>Cómo funciona la entrega</h4>
+<ul>
+<li>Cada estudiante hace <strong>fork</strong> del repo del taller, trabaja en su copia y abre <strong>un solo Pull Request</strong>.</li>
+<li>Cada <code>git push</code> corre los tests y actualiza su nota en el PR, sola.</li>
+<li>El enunciado completo, con los nombres exactos de archivos y <code>data-testid</code>, está en la plataforma y en el <code>README.md</code> del repo.</li>
+<li><strong>Checkpoint de la Fase 1:</strong> lunes 26 de octubre, 11:59 p. m.</li>
+</ul>
+
+
+
+<h3>14.2 · Mapa final de archivos</h3><div class="table-wrap"><table class="data-table"><thead><tr><th>Archivo</th><th>Ruta</th><th>Acción</th><th>Estado final</th></tr></thead><tbody><tr><td><code>app.spec.ts</code></td><td><code>src/app/</code></td><td>Borrar</td><td>—</td></tr><tr><td><code>app.config.ts</code></td><td><code>src/app/</code></td><td>Editar</td><td>Completo en la guía</td></tr><tr><td><code>index.html</code></td><td><code>src/</code></td><td>Editar</td><td>Completo en la guía</td></tr><tr><td><code>styles.css</code></td><td><code>src/</code></td><td>Reemplazar</td><td>Completo en la guía (kit)</td></tr><tr><td><code>evento.ts</code></td><td><code>src/app/models/</code></td><td>Crear</td><td>Completo</td></tr><tr><td><code>eventos.mock.ts</code></td><td><code>src/app/data/</code></td><td>Crear</td><td>Completo</td></tr><tr><td><code>encabezado.ts</code> · <code>.html</code></td><td><code>src/app/components/encabezado/</code></td><td>Generar con CLI y reemplazar</td><td>Completos</td></tr><tr><td><code>encabezado.css</code></td><td><code>src/app/components/encabezado/</code></td><td>Generado</td><td>Vacío</td></tr><tr><td><code>etiqueta.ts</code> · <code>.html</code></td><td><code>src/app/shared/etiqueta/</code></td><td>Generar con CLI y reemplazar</td><td>Completos</td></tr><tr><td><code>etiqueta.css</code></td><td><code>src/app/shared/etiqueta/</code></td><td>Generado</td><td>Vacío</td></tr><tr><td><code>tarjeta-evento.ts</code> · <code>.html</code></td><td><code>src/app/components/tarjeta-evento/</code></td><td>Generar con CLI y reemplazar</td><td>Completos</td></tr><tr><td><code>tarjeta-evento.css</code></td><td><code>src/app/components/tarjeta-evento/</code></td><td>Generado</td><td>Vacío</td></tr><tr><td><code>listado-eventos.ts</code> · <code>.html</code></td><td><code>src/app/pages/listado-eventos/</code></td><td>Generar con CLI y reemplazar</td><td>Completos</td></tr><tr><td><code>listado-eventos.css</code></td><td><code>src/app/pages/listado-eventos/</code></td><td>Generado</td><td>Vacío</td></tr><tr><td><code>app.ts</code> · <code>app.html</code></td><td><code>src/app/</code></td><td>Reemplazar</td><td>Completos</td></tr><tr><td><code>settings.json</code> de VS Code</td><td>Configuración de usuario</td><td>Editar</td><td>Dos líneas de Copilot</td></tr><tr><td><code>services/</code></td><td><code>src/app/</code></td><td>Crear carpeta</td><td>Vacía hasta la Clase 3</td></tr></tbody></table></div>
+
+
+</div></section>
+<section class="section view" id="cierre" data-accent="1" data-layout="canvas" data-escena="cierre" hidden><div class="sec-head"><span class="sec-n">Cerrar</span><h2 class="sec-t">Lo que cambió y lo que sigue</h2></div><div class="body"><h3>15.1 · Responder a Valentina</h3><h4>Volver al correo</h4>
+<p>Los 4 puntos del tablero, tachados uno por uno:</p>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Valentina pidió…</th><th>Lo resolvió…</th></tr></thead><tbody><tr><td>1. Nombre, categoría, fecha, lugar y precio (o &quot;Entrada libre&quot;)</td><td>Interpolación + pipes <code>date</code> y <code>currency</code> + <code>@if</code> del precio en <code>tarjeta-evento.html</code></td></tr><tr><td>2. Agotado visible y sin poder reservar</td><td><code>estaAgotado()</code> + <code>[disabled]</code> + <code>[class.tarjeta--agotada]</code></td></tr><tr><td>3. Avisar pocos cupos</td><td><code>quedanPocosCupos()</code> + <code>@else if</code> + <code>Etiqueta</code> con tono <code>alerta</code></td></tr><tr><td>4. Cambiar el diseño una sola vez</td><td><strong>Un</strong> componente <code>TarjetaEvento</code> usado por <code>@for</code> para todos</td></tr></tbody></table></div><article class="correo"><div class="correo-head"><span class="correo-avatar" aria-hidden="true">E</span><div><p class="correo-remitente">Equipo de desarrollo</p><p class="correo-ruta">Para: Valentina Ríos · <a href="mailto:valentina.rios@tarima-cartelera.co">valentina.rios@tarima-cartelera.co</a></p></div></div><div class="correo-asunto">RE: La cartelera nos está costando entradas</div><div class="correo-body"><p>Hola, Valentina:</p>
+<p>La nueva cartelera ya está corriendo en desarrollo. Cada tarjeta se calcula a partir de los datos del evento: cuando los cupos llegan a 0, aparece &quot;Agotado&quot; y el botón de reserva se bloquea solo. Con 10 cupos o menos, avisa &quot;Últimos N cupos&quot;.</p>
+<p>El diseño de la tarjeta vive en un solo lugar: el cambio de diciembre se hace una vez y aplica a los 40 eventos.</p>
+<p>Próximo paso: que cada evento tenga su propio enlace para compartirlo en redes.</p>
+<p>Saludos,
+Equipo de desarrollo</p>
+</div></article>
+
+
+<h3>15.2 · Comprobar lo aprendido</h3><h4>Las 3 ideas que se quedan</h4>
+<ol class="ideas">
+<li>Un <strong>componente</strong> es una pieza con su HTML, su CSS y su lógica; en Angular 22 es standalone y declara en <code>imports</code> lo que usa.</li>
+<li>Con <strong><code>input()</code></strong> la misma pieza sirve para muchos datos; quien la usa decide qué le pasa.</li>
+<li>Con <strong>data binding</strong> la pantalla se calcula a partir de los datos: el código cambia datos, no el DOM.</li>
+</ol>
+<h4>La decisión técnica del día</h4>
+<p><code>Etiqueta</code> vive en <code>shared/</code> porque no sabe nada de eventos. <code>TarjetaEvento</code> vive en <code>components/</code> porque sí. Esa diferencia decide qué se puede reutilizar mañana en otro proyecto.</p>
+<h4>¿Ya puedo…?</h4>
+<div class="autoevaluacion"><span class="component-label">¿Ya puedo…?</span><ul><li><label><input type="checkbox"><span>Explicar qué es un componente standalone y decir en qué carpeta crearía <code>BotonCompartir</code> y por qué.</span></label></li><li><label><input type="checkbox"><span>Construir un componente reutilizable con <code>input()</code> que pinte datos distintos.</span></label></li><li><label><input type="checkbox"><span>Verificar que, al cambiar <code>cuposDisponibles</code> a <code>0</code> en los datos, la tarjeta aparece agotada sin tocar el HTML.</span></label></li></ul></div>
+<h3>15.3 · El próximo enlace</h3><h4>Lo que queda abierto → Clase 2</h4>
+<p>Valentina quiere compartir <strong>&quot;Risas sin Filtro&quot;</strong> por WhatsApp. Hoy Tarima tiene una sola vista, sin direcciones: el enlace siempre lleva a la cartelera completa. En la Clase 2, el <strong>router</strong> le da a cada evento su propia URL (<code>/eventos/3</code>), y la cartelera dejará de estar fija en <code>App</code>.</p>
+</div></section>
+<section class="section view" id="glosario" data-accent="1" data-layout="canvas" data-escena="consulta" hidden><div class="sec-head"><span class="sec-n">Consultar</span><h2 class="sec-t">Glosario de la clase</h2></div><div class="body"><dl class="glosario"><div class="glos-item" data-termino="spa-single-page-application"><dt class="glos-termino">SPA (Single Page Application)</dt><dd class="glos-tecnica">aplicación que carga un solo HTML y cambia su contenido con JavaScript, sin recargar la página.</dd><dd class="glos-vida">la pantalla de vuelos del aeropuerto: cambian los datos, no la pantalla.</dd><dd class="glos-donde">2 · ¿Por qué Angular?</dd></div><div class="glos-item" data-termino="framework"><dt class="glos-termino">Framework</dt><dd class="glos-tecnica">conjunto de herramientas y reglas que define la estructura de la app y llama a tu código.</dd><dd class="glos-vida">una franquicia: la cocina y las recetas ya vienen; tú preparas.</dd><dd class="glos-donde">2 · ¿Por qué Angular?</dd></div><div class="glos-item" data-termino="typescript"><dt class="glos-termino">TypeScript</dt><dd class="glos-tecnica">JavaScript con tipos; se compila a JavaScript antes de llegar al navegador.</dd><dd class="glos-vida">un formulario con casillas &quot;solo números&quot;.</dd><dd class="glos-donde">3 · Puente de TypeScript</dd></div><div class="glos-item" data-termino="interfaz-interface"><dt class="glos-termino">Interfaz (<code>interface</code>)</dt><dd class="glos-tecnica">declaración de la forma de un objeto: qué campos tiene y de qué tipo. No existe al ejecutar.</dd><dd class="glos-vida">el molde contra el que se revisa cada pieza.</dd><dd class="glos-donde">8 · <code>evento.ts</code></dd></div><div class="glos-item" data-termino="angular-cli"><dt class="glos-termino">Angular CLI</dt><dd class="glos-tecnica">herramienta de comandos (<code>ng</code>) que crea, genera, compila y sirve proyectos Angular.</dd><dd class="glos-vida">el molde de la constructora: todas las casas salen con los mismos cimientos.</dd><dd class="glos-donde">5 · Crear el proyecto</dd></div><div class="glos-item" data-termino="componente"><dt class="glos-termino">Componente</dt><dd class="glos-tecnica">clase con <code>@Component</code> que une plantilla, estilos y un selector.</dd><dd class="glos-vida">un molde de galletas: se diseña una vez y se usa muchas.</dd><dd class="glos-donde">9 · Encabezado</dd></div><div class="glos-item" data-termino="standalone"><dt class="glos-termino">Standalone</dt><dd class="glos-tecnica">componente que declara en su <code>imports</code> lo que usa, sin <code>NgModule</code>.</dd><dd class="glos-vida">un electrodoméstico con su propio enchufe.</dd><dd class="glos-donde">9 · Encabezado</dd></div><div class="glos-item" data-termino="selector"><dt class="glos-termino">Selector</dt><dd class="glos-tecnica">nombre de la etiqueta con la que se usa un componente en una plantilla (<code>app-encabezado</code>).</dd><dd class="glos-vida">el nombre del producto en la vitrina: con él lo pides.</dd><dd class="glos-donde">9 · Encabezado</dd></div><div class="glos-item" data-termino="input"><dt class="glos-termino"><code>input()</code></dt><dd class="glos-tecnica">entrada de un componente; el padre la llena desde la plantilla y el hijo la lee con <code>()</code>.</dd><dd class="glos-vida">los ingredientes de la licuadora.</dd><dd class="glos-donde">10 · Etiqueta y 11 · Tarjeta</dd></div><div class="glos-item" data-termino="data-binding"><dt class="glos-termino">Data binding</dt><dd class="glos-tecnica">relación declarada entre datos y vista que Angular mantiene sincronizada: <code>{{ }}</code>, <code>[ ]</code>, <code>( )</code>.</dd><dd class="glos-vida">el marcador del estadio conectado al juego.</dd><dd class="glos-donde">11 · Tarjeta</dd></div><div class="glos-item" data-termino="control-de-flujo-if-for"><dt class="glos-termino">Control de flujo (<code>@if</code>, <code>@for</code>)</dt><dd class="glos-tecnica">bloques de plantilla que deciden qué se pinta según una condición o por cada elemento de una lista.</dd><dd class="glos-vida">el letrero &quot;Agotado&quot; que solo se cuelga si no hay boletas.</dd><dd class="glos-donde">11 · Tarjeta y 12 · Página</dd></div><div class="glos-item" data-termino="pipe"><dt class="glos-termino">Pipe</dt><dd class="glos-tecnica">función que transforma un valor <strong>al mostrarlo</strong> en la plantilla (<code>| date</code>, <code>| currency</code>), sin cambiar el dato.</dd><dd class="glos-vida">el traductor simultáneo: el discurso es el mismo; cambia cómo lo oyes.</dd><dd class="glos-donde">11 · Tarjeta</dd></div><div class="glos-item" data-termino="locale-locale-id"><dt class="glos-termino">Locale (<code>LOCALE_ID</code>)</dt><dd class="glos-tecnica">configuración regional que decide idioma y formato de fechas, números y moneda.</dd><dd class="glos-vida">el formato de fecha de tu cédula: día, mes y año, no mes, día y año.</dd><dd class="glos-donde">7 · Configuración</dd></div></dl></div></section>
+<section class="section view" id="documentacion" data-accent="1" data-layout="canvas" data-escena="consulta" hidden><div class="sec-head"><span class="sec-n">Consultar</span><h2 class="sec-t">Documentación para profundizar</h2></div><div class="body"><ul class="docs"><li><div class="doc-meta"><span class="doc-fuente">Angular · Documentación oficial (angular.dev)</span><span class="doc-idioma">Inglés</span></div><a class="doc-titulo" href="https://angular.dev/tools/cli/setup-local" target="_blank" rel="noopener">Local set-up</a><p class="doc-que-leer">instalación del CLI, <code>ng new</code> y <code>ng serve</code>; incluye la nota de PowerShell para Windows.</p></li><li><div class="doc-meta"><span class="doc-fuente">Angular · Documentación oficial</span><span class="doc-idioma">Inglés</span></div><a class="doc-titulo" href="https://angular.dev/guide/components/inputs" target="_blank" rel="noopener">Accepting data with input properties</a><p class="doc-que-leer"><code>input()</code> e <code>input.required</code>; es lo que usamos en <code>Etiqueta</code> y <code>TarjetaEvento</code>.</p></li><li><div class="doc-meta"><span class="doc-fuente">Angular · Documentación oficial</span><span class="doc-idioma">Inglés</span></div><a class="doc-titulo" href="https://angular.dev/guide/templates/binding" target="_blank" rel="noopener">Binding dynamic text, properties and attributes</a><p class="doc-que-leer">interpolación, property binding y el binding de clases (<code>[class]</code> y <code>[class.nombre]</code>).</p></li><li><div class="doc-meta"><span class="doc-fuente">Angular · Documentación oficial</span><span class="doc-idioma">Inglés</span></div><a class="doc-titulo" href="https://angular.dev/guide/templates/control-flow" target="_blank" rel="noopener">Control flow</a><p class="doc-que-leer"><code>@if</code>, <code>@else if</code>, <code>@for</code> con <code>track</code> y <code>@empty</code>.</p></li><li><div class="doc-meta"><span class="doc-fuente">traducción de la comunidad, enlazada desde angular.dev</span><span class="doc-idioma">Español</span></div><a class="doc-titulo" href="https://docs.angular.lat" target="_blank" rel="noopener">Documentación de Angular en español (comunidad)</a><p class="doc-que-leer">las mismas páginas en español si el inglés se hace pesado. Si algo no coincide, manda la versión oficial en inglés.</p></li></ul></div></section>
+<section class="section view" id="repaso" data-accent="1" data-layout="canvas" data-escena="consulta" hidden><div class="sec-head"><span class="sec-n">Consultar</span><h2 class="sec-t">Repaso opcional</h2></div><div class="body"><div class="callout" data-tone="info"><span class="callout-icon">i</span><div><h4>Opcional · fuera de clase</h4></div></div><article class="reto"><div class="reto-head"><h3 class="reto-titulo">Reto 1 · Replica · ≈ 25 min</h3></div><div class="reto-body"><p><strong>Contexto:</strong> Valentina quiere mostrar, debajo de la cartelera, a los artistas de la temporada. Es el mismo patrón de hoy (modelo → datos → tarjeta con <code>input()</code> → <code>@for</code>) en otro tipo de dato.</p>
+<p><strong>Qué construir:</strong></p>
+<ul>
+<li>La interfaz <code>Artista</code> (<code>id</code>, <code>nombre</code>, <code>genero</code>, <code>seguidores</code>) en <code>src/app/models/artista.ts</code>.</li>
+<li>3 artistas de prueba en <code>src/app/data/artistas.mock.ts</code>.</li>
+<li>El componente <code>TarjetaArtista</code> en <code>src/app/components/tarjeta-artista/</code> (<code>ng g c components/tarjeta-artista --skip-tests</code>), que reutiliza <code>Etiqueta</code> para el género y muestra la etiqueta &quot;Popular&quot; (tono <code>alerta</code>) cuando el artista tiene <strong>10.000 seguidores o más</strong>.</li>
+<li>La sección &quot;Artistas de la temporada&quot; en <code>ListadoEventos</code>, debajo de los eventos.</li>
+</ul>
+<p><strong>Criterios de aceptación:</strong></p>
+<ul>
+<li>Con los datos de la solución, aparecen 3 tarjetas de artista.</li>
+<li>&quot;Orquesta La Brava&quot; (25000) y &quot;Cuarteto Usaquén&quot; (10000, el límite exacto) muestran &quot;Popular&quot;.</li>
+<li>&quot;Las Voces del Sur&quot; (4200) no la muestra.</li>
+</ul>
+<details class="micro-reveal"><summary>Ver pistas</summary><div class="micro-answer"><ul>
+<li>La regla va en un método de la tarjeta, igual que <code>estaAgotado()</code>.</li>
+<li>No olvides agregar <code>TarjetaArtista</code> al <code>imports</code> de la página.</li>
+</ul>
+</div></details><p><strong>IA permitida:</strong> Nivel 0 · Tutor. Pídele que te explique un error, no que te escriba la tarjeta.</p>
+<details class="code-reveal" data-reference="true"><summary><span><span class="code-reveal-title">Solución de referencia</span><span class="code-reveal-note">Listo para copiar</span></span></summary><div class="code-reveal-body"><p><code>src/app/models/artista.ts</code> · Crear</p>
+<div class="code-block"><div class="code-head"><div><span class="code-context">Código</span></div><button class="copy-btn" type="button">Copiar</button></div><pre class="line-numbers" data-start="1"><code class="language-typescript">export interface Artista {
+  id: number;
+  nombre: string;
+  genero: string;
+  seguidores: number;
+}</code></pre></div><p><code>src/app/data/artistas.mock.ts</code> · Crear</p>
+<div class="code-block"><div class="code-head"><div><span class="code-context">Código</span></div><button class="copy-btn" type="button">Copiar</button></div><pre class="line-numbers" data-start="1"><code class="language-typescript">import { Artista } from '../models/artista';
+
+export const ARTISTAS: Artista[] = [
+  { id: 1, nombre: 'Orquesta La Brava', genero: 'Salsa', seguidores: 25000 },
+  { id: 2, nombre: 'Cuarteto Usaquén', genero: 'Jazz', seguidores: 10000 },
+  { id: 3, nombre: 'Las Voces del Sur', genero: 'Folclor', seguidores: 4200 },
+];</code></pre></div><p><code>src/app/components/tarjeta-artista/tarjeta-artista.ts</code> · Reemplazar el generado</p>
+<div class="code-block"><div class="code-head"><div><span class="code-context">Código</span></div><button class="copy-btn" type="button">Copiar</button></div><pre class="line-numbers" data-start="1"><code class="language-typescript">import { Component, input } from '@angular/core';
+import { Artista } from '../../models/artista';
+import { Etiqueta } from '../../shared/etiqueta/etiqueta';
+
+@Component({
+  imports: [Etiqueta],
+  selector: 'app-tarjeta-artista',
+  styleUrl: './tarjeta-artista.css',
+  templateUrl: './tarjeta-artista.html',
+})
+export class TarjetaArtista {
+  artista = input.required&lt;Artista&gt;();
+
+  esPopular(): boolean {
+    return this.artista().seguidores &gt;= 10000;
+  }
+}</code></pre></div><p><code>src/app/components/tarjeta-artista/tarjeta-artista.html</code> · Reemplazar el generado</p>
+<div class="code-block"><div class="code-head"><div><span class="code-context">Código</span></div><button class="copy-btn" type="button">Copiar</button></div><pre class="line-numbers" data-start="1"><code class="language-html">&lt;article class=&quot;tarjeta&quot;&gt;
+  &lt;div class=&quot;tarjeta__etiquetas&quot;&gt;
+    &lt;app-etiqueta [texto]=&quot;artista().genero&quot; /&gt;
+    @if (esPopular()) {
+      &lt;app-etiqueta texto=&quot;Popular&quot; tono=&quot;alerta&quot; /&gt;
+    }
+  &lt;/div&gt;
+  &lt;h3 class=&quot;tarjeta__nombre&quot;&gt;{{ artista().nombre }}&lt;/h3&gt;
+  &lt;p class=&quot;tarjeta__dato&quot;&gt;{{ artista().seguidores }} seguidores&lt;/p&gt;
+&lt;/article&gt;</code></pre></div><p><code>src/app/pages/listado-eventos/listado-eventos.ts</code> · Reemplazar</p>
+<div class="code-block"><div class="code-head"><div><span class="code-context">Código</span></div><button class="copy-btn" type="button">Copiar</button></div><pre class="line-numbers" data-start="1"><code class="language-typescript">import { Component } from '@angular/core';
+import { EVENTOS } from '../../data/eventos.mock';
+import { ARTISTAS } from '../../data/artistas.mock';
+import { TarjetaEvento } from '../../components/tarjeta-evento/tarjeta-evento';
+import { TarjetaArtista } from '../../components/tarjeta-artista/tarjeta-artista';
+
+@Component({
+  imports: [TarjetaEvento, TarjetaArtista],
+  selector: 'app-listado-eventos',
+  styleUrl: './listado-eventos.css',
+  templateUrl: './listado-eventos.html',
+})
+export class ListadoEventos {
+  eventos = EVENTOS;
+  artistas = ARTISTAS;
+}</code></pre></div><p><code>src/app/pages/listado-eventos/listado-eventos.html</code> · Reemplazar</p>
+<div class="code-block"><div class="code-head"><div><span class="code-context">Código</span></div><button class="copy-btn" type="button">Copiar</button></div><pre class="line-numbers" data-start="1"><code class="language-html">&lt;section class=&quot;listado&quot;&gt;
+  &lt;h2 class=&quot;listado__titulo&quot;&gt;Cartelera de noviembre&lt;/h2&gt;
+  &lt;p class=&quot;listado__total&quot;&gt;{{ eventos.length }} eventos en cartelera&lt;/p&gt;
+
+  &lt;div class=&quot;listado__grilla&quot;&gt;
+    @for (evento of eventos; track evento.id) {
+      &lt;app-tarjeta-evento [evento]=&quot;evento&quot; /&gt;
+    } @empty {
+      &lt;p class=&quot;listado__vacio&quot;&gt;No hay eventos en cartelera por ahora.&lt;/p&gt;
+    }
+  &lt;/div&gt;
+
+  &lt;h2 class=&quot;listado__titulo&quot;&gt;Artistas de la temporada&lt;/h2&gt;
+  &lt;div class=&quot;listado__grilla&quot;&gt;
+    @for (artista of artistas; track artista.id) {
+      &lt;app-tarjeta-artista [artista]=&quot;artista&quot; /&gt;
+    }
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre></div></div></details></div></article><article class="reto"><div class="reto-head"><h3 class="reto-titulo">Reto 2 · Extiende · ≈ 15 min</h3></div><div class="reto-body"><p><strong>Contexto:</strong> Valentina quiere ver de un vistazo cuántos eventos están agotados.</p>
+<p><strong>Qué construir:</strong> sobre la solución del Reto 1, un método <code>contarAgotados()</code> en <code>ListadoEventos</code> y el texto del total con singular o plural.</p>
+<p><strong>Criterios de aceptación:</strong></p>
+<ul>
+<li>Con los 6 eventos de prueba, el total dice exactamente: <code>6 eventos en cartelera · 1 agotado</code>.</li>
+<li>Si cambias <code>cuposDisponibles</code> del evento 1 a <code>0</code>, dice: <code>6 eventos en cartelera · 2 agotados</code>.</li>
+</ul>
+<details class="micro-reveal"><summary>Ver pistas</summary><div class="micro-answer"><ul>
+<li><code>filter</code> devuelve una lista nueva solo con los elementos que cumplen la condición; <code>.length</code> la cuenta.</li>
+<li>El singular o plural se resuelve con un ternario, como el texto del botón &quot;Ver detalles&quot;.</li>
+</ul>
+</div></details><p><strong>IA permitida:</strong> Nivel 1 · Revisor. Escribe tu método primero y luego pídele a la IA que lo revise.</p>
+<details class="code-reveal" data-reference="true"><summary><span><span class="code-reveal-title">Solución de referencia</span><span class="code-reveal-note">Listo para copiar</span></span></summary><div class="code-reveal-body"><p><code>src/app/pages/listado-eventos/listado-eventos.ts</code> · Reemplazar</p>
+<div class="code-block"><div class="code-head"><div><span class="code-context">Código</span></div><button class="copy-btn" type="button">Copiar</button></div><pre class="line-numbers" data-start="1"><code class="language-typescript">import { Component } from '@angular/core';
+import { EVENTOS } from '../../data/eventos.mock';
+import { ARTISTAS } from '../../data/artistas.mock';
+import { TarjetaEvento } from '../../components/tarjeta-evento/tarjeta-evento';
+import { TarjetaArtista } from '../../components/tarjeta-artista/tarjeta-artista';
+
+@Component({
+  imports: [TarjetaEvento, TarjetaArtista],
+  selector: 'app-listado-eventos',
+  styleUrl: './listado-eventos.css',
+  templateUrl: './listado-eventos.html',
+})
+export class ListadoEventos {
+  eventos = EVENTOS;
+  artistas = ARTISTAS;
+
+  contarAgotados(): number {
+    return this.eventos.filter((evento) =&gt; evento.cuposDisponibles === 0).length;
+  }
+}</code></pre></div><p><code>src/app/pages/listado-eventos/listado-eventos.html</code> · Reemplazar</p>
+<div class="code-block"><div class="code-head"><div><span class="code-context">Código</span></div><button class="copy-btn" type="button">Copiar</button></div><pre class="line-numbers" data-start="1"><code class="language-html">&lt;section class=&quot;listado&quot;&gt;
+  &lt;h2 class=&quot;listado__titulo&quot;&gt;Cartelera de noviembre&lt;/h2&gt;
+  &lt;p class=&quot;listado__total&quot;&gt;
+    {{ eventos.length }} eventos en cartelera · {{ contarAgotados() }}
+    {{ contarAgotados() === 1 ? 'agotado' : 'agotados' }}
+  &lt;/p&gt;
+
+  &lt;div class=&quot;listado__grilla&quot;&gt;
+    @for (evento of eventos; track evento.id) {
+      &lt;app-tarjeta-evento [evento]=&quot;evento&quot; /&gt;
+    } @empty {
+      &lt;p class=&quot;listado__vacio&quot;&gt;No hay eventos en cartelera por ahora.&lt;/p&gt;
+    }
+  &lt;/div&gt;
+
+  &lt;h2 class=&quot;listado__titulo&quot;&gt;Artistas de la temporada&lt;/h2&gt;
+  &lt;div class=&quot;listado__grilla&quot;&gt;
+    @for (artista of artistas; track artista.id) {
+      &lt;app-tarjeta-artista [artista]=&quot;artista&quot; /&gt;
+    }
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre></div></div></details></div></article><article class="reto"><div class="reto-head"><h3 class="reto-titulo">Reto 3 · Reto · ≈ 20 min</h3></div><div class="reto-body"><p><strong>Contexto:</strong> mercadeo quiere que &quot;Entrada libre&quot; se vea como una etiqueta verde, no como texto morado.</p>
+<p><strong>Qué construir:</strong> un cuarto tono <code>exito</code> en <code>Etiqueta</code>, su estilo en el kit y su uso en la tarjeta.</p>
+<p><strong>Criterios de aceptación:</strong></p>
+<ul>
+<li>&quot;Jazz en la Terraza&quot; muestra &quot;Entrada libre&quot; como pastilla verde.</li>
+<li><code>Etiqueta</code> sigue aceptando solo tonos válidos: <code>tono=&quot;verde&quot;</code> debe dar error de compilación.</li>
+<li>Los demás eventos no cambian.</li>
+</ul>
+<details class="micro-reveal"><summary>Ver pistas</summary><div class="micro-answer"><ul>
+<li>Hay que tocar tres archivos: el tipo del input, el CSS del kit y la plantilla de la tarjeta.</li>
+</ul>
+</div></details><p><strong>IA permitida:</strong> Nivel 1 · Revisor.</p>
+<details class="code-reveal" data-reference="true"><summary><span><span class="code-reveal-title">Solución de referencia</span><span class="code-reveal-note">Listo para copiar</span></span></summary><div class="code-reveal-body"><p><code>src/app/shared/etiqueta/etiqueta.ts</code> · Reemplazar</p>
+<div class="code-block"><div class="code-head"><div><span class="code-context">Código</span></div><button class="copy-btn" type="button">Copiar</button></div><pre class="line-numbers" data-start="1"><code class="language-typescript">import { Component, input } from '@angular/core';
+
+@Component({
+  selector: 'app-etiqueta',
+  styleUrl: './etiqueta.css',
+  templateUrl: './etiqueta.html',
+})
+export class Etiqueta {
+  texto = input.required&lt;string&gt;();
+  tono = input&lt;'neutro' | 'alerta' | 'peligro' | 'exito'&gt;('neutro');
+}</code></pre></div><p><code>src/styles.css</code> · Agregar al final</p>
+<div class="code-block"><div class="code-head"><div><span class="code-context">Código</span></div><button class="copy-btn" type="button">Copiar</button></div><pre class="line-numbers" data-start="1"><code class="language-css">.etiqueta--exito { background: #dcfce7; color: #166534; }</code></pre></div><p><code>src/app/components/tarjeta-evento/tarjeta-evento.html</code> · Reemplazar solo las líneas 15–21 (el bloque del precio)</p>
+<div class="code-block"><div class="code-head"><div><span class="code-context">Código</span></div><button class="copy-btn" type="button">Copiar</button></div><pre class="line-numbers" data-start="1"><code class="language-html">  &lt;p class=&quot;tarjeta__precio&quot;&gt;
+    @if (evento().precio === 0) {
+      &lt;app-etiqueta texto=&quot;Entrada libre&quot; tono=&quot;exito&quot; /&gt;
+    } @else {
+      {{ evento().precio | currency: 'COP' : 'symbol-narrow' : '1.0-0' }}
+    }
+  &lt;/p&gt;</code></pre></div>
+
+
+</div></details></div></article><p class="doc-foot">© 2026 Ana Alvarado · Educadora Tech &amp; Desarrolladora Full Stack · Todos los derechos reservados · linkedin.com/in/ana-alvarado-instructora-full-stack</p></div></section></div></main></div><script src="vendor/prism-core.min.js"></script><script src="vendor/prism-clike.min.js"></script><script src="vendor/prism-markup.min.js"></script><script src="vendor/prism-css.min.js"></script><script src="vendor/prism-javascript.min.js"></script><script src="vendor/prism-typescript.min.js"></script><script src="vendor/prism-bash.min.js"></script><script src="vendor/prism-powershell.min.js"></script><script src="vendor/prism-json.min.js"></script><script src="vendor/prism-line-numbers.min.js"></script><script src="anaclase-v12.js"></script></body></html>
