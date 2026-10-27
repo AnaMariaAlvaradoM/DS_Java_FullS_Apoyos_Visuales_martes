@@ -5,6 +5,12 @@ window.CURSO = {
       "titulo": "Angular moderno – Interfaces Dinámicas para Aplicaciones Full Stack",
       "clases": [
         {
+          "numero": 0,
+          "titulo": "De HTML a Angular: por qué existe un framework",
+          "carpeta": "guias/modulo-01-angular-moderno/clase-00",
+          "guia": "guias/modulo-01-angular-moderno/clase-00/index.html"
+        },
+        {
           "titulo": "Introducción a Angular, CLI, Componentes y Arquitectura Moderna",
           "carpeta": "guias/modulo-01-angular-moderno/clase-01",
           "guia": "guias/modulo-01-angular-moderno/clase-01/index.html"

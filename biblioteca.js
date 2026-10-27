@@ -26,7 +26,8 @@
     const published = module.clases.filter(c => c.guia).length;
     summary.append(el('span', 'mod-punto', String(index + 1).padStart(2, '0')), info, el('span', 'mod-count', '4 clases · 12 h'), el('span', 'mod-badge' + (published ? ' activo' : ''), published ? published + ' guías' : 'Por publicar'), el('span', 'mod-chevron', '▶'));
     const grid = el('div', 'clases');
-    module.clases.forEach((lesson, i) => grid.append(card(lesson, String(i + 1).padStart(2, '0'))));
+    const base = module.clases[0] && module.clases[0].numero === 0 ? 0 : 1;
+    module.clases.forEach((lesson, i) => grid.append(card(lesson, String(i + base).padStart(2, '0'))));
     details.append(summary, grid); list.append(details);
   });
   const workshop = el('section', 'workshop');

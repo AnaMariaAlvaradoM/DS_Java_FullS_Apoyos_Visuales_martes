@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="es" data-tema="oscuro" data-tema-base="oscuro" data-empresa="dev-senior" data-paleta="ambar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Ana Alvarado">
+  <meta name="copyright" content="© 2026 Ana Alvarado — Todos los derechos reservados">
+  <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+  <title>Clase 0 · De HTML a Angular · Ana Alvarado</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&amp;family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+  <link rel="stylesheet" href="anaestilos-v12.css">
+</head>
+<body>
+  <a class="skip-link" href="#apertura">Saltar al contenido</a>
+  <div class="topline" id="topline" aria-hidden="true"></div>
+  <div class="controls" aria-label="Controles">
+    <button class="ctrl" id="temaBtn" type="button" aria-label="Cambiar tema">☀</button>
+    <button class="ctrl" id="fullscreenBtn" type="button" aria-label="Pantalla completa">⛶</button>
+  </div>
+
+  <div class="shell" id="shell" data-collapsed="false">
+    <aside class="sidebar" aria-label="Índice de la clase">
+      <div class="sb-top">
+        <span class="brand-mark">A</span>
+        <div class="sb-title"><b>Java Full Stack · M1</b><span>Clase 0 · De HTML a Angular</span></div>
+      </div>
+      <button class="sb-toggle" id="collapseBtn" type="button" aria-label="Colapsar menú">‹</button>
+      <nav class="sb-nav" id="nav" aria-label="Secciones">
+        <a class="nav-item active" href="#portada"><span class="nav-index">00</span><span class="nav-label">Portada</span></a>
+        <span class="nav-group">Problema</span>
+        <a class="nav-item" href="#apertura"><span class="nav-index">01</span><span class="nav-label">Julián, un año antes</span></a>
+        <a class="nav-item" href="#objetivos"><span class="nav-index">02</span><span class="nav-label">Lo que lograrás</span></a>
+        <span class="nav-group">Comprender</span>
+        <a class="nav-item" href="#viaje"><span class="nav-index">03</span><span class="nav-label">Cómo llega una página</span></a>
+        <a class="nav-item" href="#html"><span class="nav-index">04</span><span class="nav-label">HTML: estructura</span></a>
+        <a class="nav-item" href="#html-construir"><span class="nav-index">05</span><span class="nav-label">Primera cartelera</span></a>
+        <a class="nav-item" href="#css"><span class="nav-index">06</span><span class="nav-label">CSS: presentación</span></a>
+        <a class="nav-item" href="#css-construir"><span class="nav-index">07</span><span class="nav-label">Vestir la cartelera</span></a>
+        <span class="nav-group">Construir</span>
+        <a class="nav-item" href="#javascript"><span class="nav-index">08</span><span class="nav-label">JavaScript y el DOM</span></a>
+        <a class="nav-item" href="#datos-molde"><span class="nav-index">09</span><span class="nav-label">Datos y molde</span></a>
+        <a class="nav-item" href="#reglas"><span class="nav-index">10</span><span class="nav-label">Reglas de Tarima</span></a>
+        <a class="nav-item" href="#vista-dato"><span class="nav-index">11</span><span class="nav-label">La vista sigue al dato</span></a>
+        <a class="nav-item" href="#reservar"><span class="nav-index">12</span><span class="nav-label">Reservar y volver a pintar</span></a>
+        <span class="nav-group">Detectar</span>
+        <a class="nav-item" href="#typescript"><span class="nav-index">13</span><span class="nav-label">El error silencioso</span></a>
+        <a class="nav-item" href="#typescript-construir"><span class="nav-index">14</span><span class="nav-label">TypeScript revisa</span></a>
+        <span class="nav-group">Conectar</span>
+        <a class="nav-item" href="#angular"><span class="nav-index">15</span><span class="nav-label">Por qué Angular</span></a>
+        <span class="nav-group">Cerrar</span>
+        <a class="nav-item" href="#cierre"><span class="nav-index">16</span><span class="nav-label">Lo que se queda</span></a>
+        <span class="nav-group">Consultar</span>
+        <a class="nav-item" href="#glosario"><span class="nav-index">17</span><span class="nav-label">Glosario</span></a>
+        <a class="nav-item" href="#documentacion"><span class="nav-index">18</span><span class="nav-label">Documentación</span></a>
+      </nav>
+      <div class="sb-prog">
+        <div class="lbl"><span>Progreso</span><span id="progPct">0%</span></div>
+        <div class="track"><div class="fill" id="progFill"></div></div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="hero view" id="portada" data-accent="1">
+        <div class="hero-inner">
+          <div class="hero-copy">
+            <span class="eyebrow">Dev Senior Code · Angular moderno · Clase 0</span>
+            <h1 class="hero-title">De copiar tarjetas a calcular la vista</h1>
+            <p class="hero-lead">Construye a mano la cartelera de Tarima y descubre qué parte del trabajo te quita Angular.</p>
+            <div class="meta">
+              <span class="pill" data-hot>Tarima · cartelera cultural</span>
+              <span class="pill">HTML · CSS · JavaScript</span>
+              <span class="pill">TypeScript · Angular</span>
+            </div>
+          </div>
+          <figure class="hero-visual">
+            <img src="img/tarima-copias-vista-datos.png" alt="Una desarrolladora compara una pila de tarjetas culturales copiadas a mano con una colección ordenada que mantiene sus estados sincronizados.">
+            <figcaption class="hero-note">Una sola fuente de datos puede gobernar muchas tarjetas sin que el estado de la pantalla se quede atrás.</figcaption>
+          </figure>
+        </div>
+      </header>
+
+      <div class="content">
+        <section class="section view" id="apertura" data-accent="1" data-layout="canvas" data-escena="apertura" hidden>
+          <div class="sec-head">
+            <span class="sec-n">El problema</span>
+            <h2 class="sec-t">Cuatro eventos hoy; cuarenta mañana</h2>
+            <p class="sec-s">Hoy eres Julián: vas a construir la primera página de Tarima y a descubrir por qué terminó fallando.</p>
+          </div>
+          <div class="body">
+            <article class="chat">
+              <div class="chat-head"><span class="chat-canal">WhatsApp · Tarima</span><span class="chat-contexto">octubre de 2025</span></div>
+              <ol class="chat-mensajes">
+                <li class="chat-msg"><span class="chat-avatar">V</span><span class="chat-autor">Valentina <time>10:02 a. m.</time></span><p class="chat-texto">Julián, buenos días. La gente nos pregunta todo el tiempo por la cartelera y solo la tenemos en Instagram. ¿Nos ayudas a montar una página web sencilla?</p></li>
+                <li class="chat-msg" data-lado="equipo"><span class="chat-avatar">J</span><span class="chat-autor">Julián <time>10:15 a. m.</time></span><p class="chat-texto">Hola, Vale. Nunca he hecho una página, pero aprendo. ¿Qué debe tener?</p></li>
+                <li class="chat-msg"><span class="chat-avatar">V</span><span class="chat-autor">Valentina <time>10:17 a. m.</time></span><p class="chat-texto">Lo básico: nombre del evento, categoría, fecha, lugar y precio. Y que se note cuando algo se agota, para que nadie reserve lo que no hay.</p></li>
+                <li class="chat-msg" data-lado="equipo"><span class="chat-avatar">J</span><span class="chat-autor">Julián <time>10:18 a. m.</time></span><p class="chat-texto">Listo. ¿Cuántos eventos son?</p></li>
+                <li class="chat-msg"><span class="chat-avatar">V</span><span class="chat-autor">Valentina <time>10:20 a. m.</time></span><p class="chat-texto">Este mes, 4. Pero vamos a crecer 🙌</p></li>
+              </ol>
+            </article>
+            <p>Un año después, Tarima publica 40 eventos al mes y llega el correo que leíste la semana pasada.</p>
+            <div class="micro-task">
+              <span class="component-label">Recuerda</span>
+              <p class="micro-task-q">En el correo de Valentina, ¿qué pasó con "Risas sin Filtro"?</p>
+              <details class="micro-reveal"><summary>Comprobar</summary><p class="micro-answer">Se agotó a las 3 p. m., pero la tarjeta siguió mostrando el botón Reservar hasta la noche, y se vendieron 30 entradas que no existían. El problema no fue el descuido de Julián: la página guardaba el <strong>dato</strong> (los cupos) y la <strong>vista</strong> (el botón) por separado, y alguien tenía que sincronizarlos a mano.</p></details>
+            </div>
+          </div>
+        </section>
+
+        <section class="section view" id="objetivos" data-accent="1" data-layout="canvas" data-escena="objetivos" hidden>
+          <div class="sec-head"><span class="sec-n">Ruta de hoy</span><h2 class="sec-t">Lo que lograrás en esta sesión</h2></div>
+          <div class="body">
+            <div class="estado-proyecto" role="group" aria-label="El proyecto antes y después de la clase">
+              <div class="estado-antes"><span class="component-label">Antes de hoy</span><p>Usaste Angular sin saber sobre qué está construido.</p></div>
+              <div class="estado-flecha" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
+              <div class="estado-despues"><span class="component-label">Al terminar</span><p>Construiste a mano la cartelera de Tarima y sabes qué parte del trabajo te quita Angular.</p></div>
+            </div>
+            <ol class="objetivos">
+              <li><div><p class="obj-texto"><strong>Explicar</strong> qué hace HTML, qué hace CSS y qué hace JavaScript en una página.</p><p class="obj-evidencia">señalas en tu cartelera una línea de estructura, una de presentación y una de comportamiento.</p></div></li>
+              <li><div><p class="obj-texto"><strong>Construir</strong> una cartelera que se pinta a partir de datos.</p><p class="obj-evidencia">cambias <code>cuposDisponibles</code> a <code>0</code> en los datos y la tarjeta aparece agotada, con el botón bloqueado, sin tocar el HTML.</p></div></li>
+              <li><div><p class="obj-texto"><strong>Detectar</strong> con TypeScript un error que JavaScript deja pasar.</p><p class="obj-evidencia">escribes mal el nombre de una propiedad y VS Code lo subraya antes de abrir el navegador.</p></div></li>
+            </ol>
+          </div>
+        </section>
+
+        <section class="section view" id="viaje" data-accent="1" data-layout="canvas" data-escena="concepto" hidden>
+          <div class="sec-head"><span class="sec-n">Comprender</span><h2 class="sec-t">Cómo llega una página a tu pantalla</h2><p class="sec-s">Cuando escribes una dirección en el navegador pasan cuatro cosas, siempre en este orden.</p></div>
+          <div class="body">
+            <div class="pipeline" role="group" aria-label="El viaje de una página">
+              <div class="pipe-step"><span class="component-label">1</span><h3>Petición</h3><p>El <strong>navegador</strong> envía una petición a la dirección que escribiste.</p></div>
+              <div class="pipe-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
+              <div class="pipe-step" data-emphasis><span class="component-label">2 y 3</span><h3>Respuesta</h3><p>Un <strong>servidor</strong> recibe la petición y responde con archivos de texto: HTML, CSS y JavaScript.</p></div>
+              <div class="pipe-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
+              <div class="pipe-step"><span class="component-label">4</span><h3>Página</h3><p>El navegador lee esos archivos y <strong>construye</strong> lo que ves.</p></div>
+            </div>
+            <div class="cards">
+              <div class="card"><b>Navegador</b><p>Programa que pide archivos a un servidor, los interpreta y los dibuja en pantalla.</p></div>
+              <div class="card"><b>Servidor</b><p>Programa que espera peticiones y responde con archivos o datos.</p></div>
+              <div class="card"><b>URL</b><p>La dirección de lo que se pide: <code>https://tarima-cartelera.co/cartelera</code>.</p></div>
+            </div>
+            <div class="definicion">
+              <div class="def-tecnica"><span class="component-label">Frontend y backend</span><p class="def-termino">Dos mitades del sistema</p><p>Lo que corre <strong>en el navegador</strong> se llama <strong>frontend</strong>: es lo que la persona ve y toca. Lo que corre <strong>en el servidor</strong> se llama <strong>backend</strong>: guarda los datos y aplica las reglas.</p></div>
+              <div class="def-vida"><span class="component-label">En la vida real</span><p>Es como pedir un domicilio. Tú (el navegador) haces el pedido con una dirección (la URL); la cocina (el servidor) prepara y envía los ingredientes (los archivos); y en tu mesa se arma el plato (la página que ves).</p></div>
+            </div>
+            <p>Este curso se llama <em>Full Stack</em> porque haces las dos mitades: el frontend con Angular (este módulo) y el backend con Java y Spring Boot (Módulo 2).</p>
+            <figure class="figura">
+              <div class="figura-stage"><img src="img/tres-capas-pagina.png" alt="Un edificio pasa de su estructura desnuda a sus acabados y, por último, a un sistema eléctrico que reacciona a un interruptor."></div>
+              <figcaption>HTML define la estructura, CSS la presentación y JavaScript el comportamiento.<span class="figura-credito">Ilustración original creada para esta clase.</span></figcaption>
+            </figure>
+            <div class="table-wrap"><table class="data-table"><caption>Las tres capas de una página</caption><thead><tr><th>Lenguaje</th><th>Su trabajo</th><th>En una casa</th></tr></thead><tbody>
+              <tr><td><strong>HTML</strong></td><td>Dice <strong>qué es</strong> cada cosa: un título, un párrafo, un botón</td><td>La obra negra: dónde va la cocina, el baño, la puerta</td></tr>
+              <tr><td><strong>CSS</strong></td><td>Dice <strong>cómo se ve</strong>: colores, tamaños, posiciones</td><td>Los acabados: pintura, pisos, lámparas</td></tr>
+              <tr><td><strong>JavaScript</strong></td><td>Dice <strong>qué hace</strong>: reaccionar a un clic, calcular, cambiar lo que se ve</td><td>Las instalaciones eléctricas: el interruptor que prende la luz</td></tr>
+            </tbody></table></div>
+            <p>Separar los trabajos permite cambiar uno sin romper los otros: pintar la casa no mueve las paredes.</p>
+            <div class="panel"><h3>Míralo en una página real</h3><p>Abre cualquier página (por ejemplo, <code>devseniorcode.com</code>) y presiona <strong>F12</strong> (en Mac, <code>Cmd + Opción + I</code>). Se abren las <strong>DevTools</strong>, las herramientas de desarrollo que trae todo navegador.</p><ul class="checklist"><li>En la pestaña <strong>Elements</strong> (Elementos) ves el HTML de la página.</li><li>Al hacer clic en una línea, a la derecha aparece su CSS (<strong>Styles</strong>).</li><li>En la pestaña <strong>Console</strong> (Consola) se ejecuta JavaScript.</li></ul><p>Haz doble clic sobre cualquier texto en <strong>Elements</strong> y cámbialo. La página muestra tu texto.</p></div>
+            <div class="table-wrap"><table class="data-table"><caption>Quién dice que va así</caption><thead><tr><th>Etiqueta</th><th>Quién lo dice</th><th>¿Se puede cambiar?</th><th>Dónde se verifica</th></tr></thead><tbody>
+              <tr><td>🟨 Lenguaje</td><td>La sintaxis de HTML, CSS, JavaScript o TypeScript</td><td>No</td><td>MDN Web Docs · documentación de TypeScript</td></tr>
+              <tr><td>🟩 Plataforma</td><td>El navegador, que lee y ejecuta los archivos</td><td>No, salvo por configuración</td><td>MDN Web Docs</td></tr>
+              <tr><td>🟧 Framework o librería</td><td>El contrato de Angular (solo al final)</td><td>No: si no se respeta, no funciona</td><td>angular.dev</td></tr>
+              <tr><td>⬜ Convención</td><td>La comunidad o el equipo lo hace así</td><td>Sí, aunque conviene respetarla</td><td>Guías de estilo, costumbre del equipo</td></tr>
+              <tr><td>🟪 Decisión del proyecto</td><td>Nosotros, por el negocio o el diseño</td><td>Sí, si cambia el negocio</td><td>El chat de Valentina</td></tr>
+            </tbody></table></div>
+          </div>
+        </section>
+
+        <section class="section view" id="html" data-accent="1" data-layout="canvas" data-escena="concepto" hidden>
+          <div class="sec-head"><span class="sec-n">HTML · estructura</span><h2 class="sec-t">Primero, el navegador necesita saber qué es cada dato</h2><p class="sec-s">Valentina pidió nombre, categoría, fecha, lugar y precio. Antes de pensar en colores, el navegador necesita distinguir el título, los párrafos y el botón.</p></div>
+          <div class="body">
+            <div class="definicion">
+              <div class="def-tecnica"><span class="component-label">Definición técnica</span><p class="def-termino">HTML</p><p><strong>HTML</strong> (<em>HyperText Markup Language</em>) es el lenguaje de marcado que describe la <strong>estructura</strong> de una página. No es un lenguaje de programación: no calcula ni decide; <strong>etiqueta</strong> el contenido.</p></div>
+              <div class="def-vida"><span class="component-label">Explicación sencilla</span><p>Escribes el contenido y lo envuelves en <strong>etiquetas</strong> que dicen qué es. <code>&lt;h3&gt;Noche de Salsa Brava&lt;/h3&gt;</code> le dice al navegador: "esto es un título de tercer nivel".</p></div>
+            </div>
+            <div class="cards">
+              <div class="card"><b>Etiqueta</b><p>El nombre entre <code>&lt; &gt;</code>. Casi siempre va en pareja: <code>&lt;p&gt;</code> abre y <code>&lt;/p&gt;</code> cierra.</p></div>
+              <div class="card"><b>Elemento</b><p>La etiqueta de apertura, su contenido y la de cierre: <code>&lt;p&gt;Teatro del Parque&lt;/p&gt;</code>.</p></div>
+              <div class="card"><b>Atributo</b><p>Información extra dentro de la etiqueta de apertura: en <code>&lt;html lang="es"&gt;</code>, <code>lang</code> es el atributo y <code>"es"</code> su valor.</p></div>
+            </div>
+            <p>Los elementos se <strong>anidan</strong>: uno vive dentro de otro, como cajas dentro de cajas. La sangría (los espacios a la izquierda) sirve para ver qué caja está dentro de cuál.</p>
+            <div class="panel"><h3>Preparar la carpeta del proyecto</h3><ol><li>Crea una carpeta llamada <code>tarima-clase0</code> en tu Escritorio (o donde guardas tus proyectos). <strong>No</strong> la crees dentro de <code>tarima-web</code>.</li><li>En VS Code: <strong>File → Open Folder</strong> (Archivo → Abrir carpeta) y elige <code>tarima-clase0</code>.</li><li>En el panel izquierdo (<strong>Explorer</strong>), clic en el ícono de <strong>New File</strong> (archivo nuevo) y escribe <code>index.html</code>.</li></ol></div>
+            <div class="sin-ia"><span class="sin-ia-icono" aria-hidden="true"></span><div><h3>Sin IA aquí</h3><p>La primera tarjeta la escribes tú, etiqueta por etiqueta. Si la IA la escribe, no aprendes a leer la estructura que vas a usar toda la noche.</p></div></div>
+          </div>
+        </section>
+
+        <section class="section view" id="html-construir" data-accent="1" data-layout="canvas" data-escena="construccion" hidden>
+          <div class="sec-head"><span class="sec-n">Construir · index.html</span><h2 class="sec-t">La primera cartelera, escrita a mano</h2><p class="sec-s">Este archivo es la página: lo primero que el navegador lee. Ahora tendrá la estructura de la cartelera con dos eventos escritos a mano, exactamente como la armó Julián.</p></div>
+          <div class="body">
+            <h3>5.1 · Mostrar Tarima</h3>
+            <article class="archivo">
+              <div class="archivo-ficha"><span class="archivo-accion">Crear</span><span class="archivo-nombre">index.html</span><span class="archivo-ruta">tarima-clase0/</span></div>
+              <p class="archivo-intro"><strong>Necesidad:</strong> Valentina quiere una página. Lo mínimo es un archivo que el navegador abra y en el que se vea el nombre de la marca. <strong>Dónde va:</strong> en <code>index.html</code>, que está vacío. Escríbelo completo.</p>
+              <div class="lectura">
+                <div class="lectura-head"><span class="lectura-num">1</span><h3 class="lectura-titulo">Que el navegador muestre "Tarima"</h3><p class="lectura-proposito">El documento declara el HTML actual, prepara la pestaña y construye la zona visible de la marca.</p></div>
+                <div class="lectura-cuerpo">
+                  <div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 1–14</span><span class="code-file">index.html</span></div></div><pre class="line-numbers" data-start="1"><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+    &lt;title&gt;Tarima · Cartelera cultural&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;header&gt;
+      &lt;h1&gt;Tarima&lt;/h1&gt;
+      &lt;p&gt;La cartelera cultural de Bogotá&lt;/p&gt;
+    &lt;/header&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre></div>
+                  <ol class="notas">
+                    <li class="nota" data-lineas="1"><div class="nota-cabeza"><span class="nota-lineas">L1</span><code class="nota-codigo">&lt;!DOCTYPE html&gt;</code></div><p>🟨 HTML · Le dice al navegador que este archivo usa el HTML actual (HTML5). Va siempre en la primera línea y no tiene etiqueta de cierre.</p></li>
+                    <li class="nota" data-lineas="2"><div class="nota-cabeza"><span class="nota-lineas">L2</span><code class="nota-codigo">&lt;html lang="es"&gt;</code></div><p>🟨 HTML · <code>&lt;html&gt;</code> es la caja que contiene toda la página. 🟪 El atributo <code>lang="es"</code> dice que el contenido está en español: lo usan los lectores de pantalla para pronunciar bien y el navegador para ofrecer traducción.</p></li>
+                    <li class="nota" data-lineas="3"><div class="nota-cabeza"><span class="nota-lineas">L3</span><code class="nota-codigo">&lt;head&gt;</code></div><p>🟨 HTML · La cabeza guarda información <strong>sobre</strong> la página que no se dibuja dentro de ella: el idioma de los caracteres, el título de la pestaña y, más tarde, los archivos de estilos y de JavaScript.</p></li>
+                    <li class="nota" data-lineas="4"><div class="nota-cabeza"><span class="nota-lineas">L4</span><code class="nota-codigo">&lt;meta charset="UTF-8" /&gt;</code></div><p>🟨 HTML · Dice que el texto usa UTF-8, la codificación que soporta tildes, eñes y emojis. Así "Bogotá" se ve bien y no como símbolos raros.</p></li>
+                    <li class="nota" data-lineas="5"><div class="nota-cabeza"><span class="nota-lineas">L5</span><code class="nota-codigo">&lt;meta name="viewport" ... /&gt;</code></div><p>🟨 HTML · Le pide al celular que use el ancho real de su pantalla. Sin ella, el celular dibuja la página como si fuera de escritorio y la encoge.</p></li>
+                    <li class="nota" data-lineas="6"><div class="nota-cabeza"><span class="nota-lineas">L6</span><code class="nota-codigo">&lt;title&gt;</code></div><p>🟨 HTML · El texto de la pestaña del navegador y el que aparece en Google. 🟪 El texto lo decidimos nosotros.</p></li>
+                    <li class="nota" data-lineas="7"><div class="nota-cabeza"><span class="nota-lineas">L7</span><code class="nota-codigo">&lt;/head&gt;</code></div><p>🟨 HTML · Cierra la cabeza.</p></li>
+                    <li class="nota" data-lineas="8"><div class="nota-cabeza"><span class="nota-lineas">L8</span><code class="nota-codigo">&lt;body&gt;</code></div><p>🟨 HTML · El cuerpo: todo lo que va aquí dentro se ve en pantalla.</p></li>
+                    <li class="nota" data-lineas="9"><div class="nota-cabeza"><span class="nota-lineas">L9</span><code class="nota-codigo">&lt;header&gt;</code></div><p>🟨 HTML · El encabezado de la página: la zona de la marca. Es una etiqueta <strong>semántica</strong>: su nombre dice para qué sirve.</p></li>
+                    <li class="nota" data-lineas="10"><div class="nota-cabeza"><span class="nota-lineas">L10</span><code class="nota-codigo">&lt;h1&gt;Tarima&lt;/h1&gt;</code></div><p>🟨 HTML · El título principal. Existen seis niveles de título, de <code>&lt;h1&gt;</code> (el más importante) a <code>&lt;h6&gt;</code>; una página tiene un solo <code>&lt;h1&gt;</code>.</p></li>
+                    <li class="nota" data-lineas="11"><div class="nota-cabeza"><span class="nota-lineas">L11</span><code class="nota-codigo">&lt;p&gt;</code></div><p>🟨 HTML · Un párrafo: aquí, el eslogan de la marca.</p></li>
+                    <li class="nota" data-lineas="12-14"><div class="nota-cabeza"><span class="nota-lineas">L12–14</span><code class="nota-codigo">cierres</code></div><p>🟨 HTML · Cierran el encabezado, el cuerpo y la página, en orden inverso a como se abrieron.</p></li>
+                  </ol>
+                </div>
+              </div>
+              <div class="active-build"><div class="build-step"><span class="build-step-index">▶</span><div class="build-step-copy"><h3 class="build-step-title">Pruébalo</h3><div class="consola"><div class="consola-head">Doble clic sobre index.html</div><ol><li class="out">Pestaña del navegador: Tarima · Cartelera cultural</li><li class="out">En la página, en letra grande: Tarima</li><li class="out">Debajo, en letra normal: La cartelera cultural de Bogotá</li></ol></div></div></div><div class="checkpoint"><span class="component-label">Checkpoint</span><h3>El navegador abre el documento.</h3><p>Se ve la marca y el eslogan; todavía no existe la cartelera.</p></div></div>
+            </article>
+
+            <h3>5.2 · Crear la primera tarjeta</h3>
+            <div class="lectura">
+              <div class="lectura-head"><span class="lectura-num">2</span><h3 class="lectura-titulo">La primera tarjeta de evento</h3><p class="lectura-proposito"><strong>Necesidad:</strong> ya está la marca, pero falta la cartelera. Valentina pidió cinco datos por evento: nombre, categoría, fecha, lugar y precio. Y un botón para reservar. <strong>Dónde va:</strong> debajo de <code>&lt;/header&gt;</code>, antes de <code>&lt;/body&gt;</code>.</p></div>
+              <div class="lectura-cuerpo">
+                <div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 14–26</span><span class="code-file">index.html</span></div></div><pre class="line-numbers" data-start="14"><code class="language-html">    &lt;main&gt;
+      &lt;h2&gt;Cartelera de noviembre&lt;/h2&gt;
+      &lt;section&gt;
+        &lt;article&gt;
+          &lt;span&gt;Concierto&lt;/span&gt;
+          &lt;h3&gt;Noche de Salsa Brava&lt;/h3&gt;
+          &lt;p&gt;Sábado 7 de noviembre · 8:00 p. m.&lt;/p&gt;
+          &lt;p&gt;Teatro del Parque&lt;/p&gt;
+          &lt;p&gt;$ 45.000&lt;/p&gt;
+          &lt;button&gt;Reservar&lt;/button&gt;
+        &lt;/article&gt;
+      &lt;/section&gt;
+    &lt;/main&gt;</code></pre></div>
+                <ol class="notas">
+                  <li class="nota" data-lineas="14"><div class="nota-cabeza"><span class="nota-lineas">L14</span><code class="nota-codigo">&lt;main&gt;</code></div><p>🟨 HTML · El contenido principal de la página, el que justifica que exista. Solo hay uno por página.</p></li>
+                  <li class="nota" data-lineas="15"><div class="nota-cabeza"><span class="nota-lineas">L15</span><code class="nota-codigo">&lt;h2&gt;</code></div><p>🟨 HTML · Título de segundo nivel: el título de la sección de la cartelera. Va debajo del <code>&lt;h1&gt;</code> en importancia.</p></li>
+                  <li class="nota" data-lineas="16"><div class="nota-cabeza"><span class="nota-lineas">L16</span><code class="nota-codigo">&lt;section&gt;</code></div><p>🟨 HTML · Agrupa contenido que trata de un mismo tema: aquí, todas las tarjetas de eventos.</p></li>
+                  <li class="nota" data-lineas="17"><div class="nota-cabeza"><span class="nota-lineas">L17</span><code class="nota-codigo">&lt;article&gt;</code></div><p>🟨 HTML · Un contenido que tiene sentido por sí solo, como una noticia o una tarjeta. 🟪 Cada evento es un <code>article</code>: la decisión es nuestra y la etiqueta lo dice.</p></li>
+                  <li class="nota" data-lineas="18"><div class="nota-cabeza"><span class="nota-lineas">L18</span><code class="nota-codigo">&lt;span&gt;Concierto&lt;/span&gt;</code></div><p>🟨 HTML · <code>span</code> envuelve un texto corto dentro de una línea, sin darle significado especial. Lo usamos para la categoría porque más adelante le daremos color.</p></li>
+                  <li class="nota" data-lineas="19"><div class="nota-cabeza"><span class="nota-lineas">L19</span><code class="nota-codigo">&lt;h3&gt;</code></div><p>🟨 HTML · El nombre del evento es el título de la tarjeta: tercer nivel, porque vive dentro de la sección del <code>&lt;h2&gt;</code>.</p></li>
+                  <li class="nota" data-lineas="20-22"><div class="nota-cabeza"><span class="nota-lineas">L20–22</span><code class="nota-codigo">tres &lt;p&gt;</code></div><p>🟨 HTML · La fecha, el lugar y el precio, cada uno en su párrafo. 🟪 El precio lo escribimos a mano con su formato (<code>$ 45.000</code>): Julián lo copia tal cual.</p></li>
+                  <li class="nota" data-lineas="23"><div class="nota-cabeza"><span class="nota-lineas">L23</span><code class="nota-codigo">&lt;button&gt;Reservar&lt;/button&gt;</code></div><p>🟨 HTML · Un botón que la persona puede pulsar. Por ahora no hace nada: HTML no sabe qué hacer con un clic. Eso será trabajo de JavaScript.</p></li>
+                  <li class="nota" data-lineas="24-26"><div class="nota-cabeza"><span class="nota-lineas">L24–26</span><code class="nota-codigo">cierres</code></div><p>🟨 HTML · Cierran la tarjeta, la sección y el contenido principal.</p></li>
+                </ol>
+              </div>
+            </div>
+            <div class="active-build"><div class="build-step"><span class="build-step-index">▶</span><div class="build-step-copy"><h3 class="build-step-title">Pruébalo</h3><div class="consola"><div class="consola-head">Guarda y recarga</div><ol><li class="out">Cartelera de noviembre</li><li class="out">Concierto · Noche de Salsa Brava</li><li class="out">Sábado 7 de noviembre · 8:00 p. m. · Teatro del Parque</li><li class="out">$ 45.000 · [Reservar]</li></ol></div></div></div><div class="checkpoint"><span class="component-label">Checkpoint</span><h3>La tarjeta aparece sin estilos.</h3><p>La página es fea: letra de máquina de escribir, todo pegado a la izquierda. Es lo correcto: HTML solo dice <strong>qué es</strong> cada cosa, no cómo se ve.</p></div></div>
+            <div class="micro-task"><span class="component-label">Para pensar</span><p class="micro-task-q">El nombre del evento es lo más importante de la tarjeta. ¿Por qué lo escribiste con <code>&lt;h3&gt;</code> y no con <code>&lt;h1&gt;</code>, que se ve más grande?</p><details class="micro-reveal"><summary>Comprobar</summary><p class="micro-answer">Porque la etiqueta se elige por la <strong>jerarquía</strong>, no por el tamaño. <code>&lt;h1&gt;</code> es la página (Tarima), <code>&lt;h2&gt;</code> la sección (la cartelera) y <code>&lt;h3&gt;</code> cada evento dentro de ella. El tamaño se cambia después con CSS; la jerarquía la usan los buscadores y los lectores de pantalla para entender la página.</p></details></div>
+
+            <h3>5.3 · Copiar el segundo evento</h3>
+            <div class="lectura">
+              <div class="lectura-head"><span class="lectura-num">3</span><h3 class="lectura-titulo">El segundo evento, copiado a mano</h3><p class="lectura-proposito"><strong>Necesidad:</strong> este mes son 4 eventos. Julián hace lo natural: copia la tarjeta y cambia los datos. "Risas sin Filtro" ya no tiene cupos, así que además escribe "Agotado" y bloquea el botón. <strong>Dónde va:</strong> debajo de la primera tarjeta, después de <code>&lt;/article&gt;</code>.</p></div>
+              <div class="lectura-cuerpo">
+                <div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 26–34</span><span class="code-file">index.html</span></div></div><pre class="line-numbers" data-start="26"><code class="language-html">        &lt;article&gt;
+          &lt;span&gt;Stand-up&lt;/span&gt;
+          &lt;h3&gt;Risas sin Filtro&lt;/h3&gt;
+          &lt;p&gt;Jueves 12 de noviembre · 9:00 p. m.&lt;/p&gt;
+          &lt;p&gt;Bodega Cultural del Centro&lt;/p&gt;
+          &lt;p&gt;$ 30.000&lt;/p&gt;
+          &lt;p&gt;Agotado&lt;/p&gt;
+          &lt;button disabled&gt;Reservar&lt;/button&gt;
+        &lt;/article&gt;</code></pre></div>
+                <ol class="notas">
+                  <li class="nota" data-lineas="26-31"><div class="nota-cabeza"><span class="nota-lineas">L26–31</span><code class="nota-codigo">la tarjeta copiada</code></div><p>🟪 Es la misma estructura de la línea 17 a la 22 con otros datos. Esta copia es la semilla del problema: con 40 eventos, son 40 copias.</p></li>
+                  <li class="nota" data-lineas="32"><div class="nota-cabeza"><span class="nota-lineas">L32</span><code class="nota-codigo">&lt;p&gt;Agotado&lt;/p&gt;</code></div><p>🟪 Julián escribe a mano que el evento se agotó. La página no lo sabe; lo sabe Julián.</p></li>
+                  <li class="nota" data-lineas="33"><div class="nota-cabeza"><span class="nota-lineas">L33</span><code class="nota-codigo">&lt;button disabled&gt;</code></div><p>🟨 HTML · <code>disabled</code> es un atributo <strong>sin valor</strong>: con solo escribirlo, el botón queda bloqueado y no responde al clic. 🟪 También lo puso Julián a mano.</p></li>
+                </ol>
+              </div>
+            </div>
+            <div class="active-build"><div class="build-step"><span class="build-step-index">▶</span><div class="build-step-copy"><h3 class="build-step-title">Pruébalo</h3><div class="consola"><div class="consola-head">Guarda y recarga</div><ol><li class="out">Stand-up · Risas sin Filtro</li><li class="out">Jueves 12 de noviembre · 9:00 p. m. · Bodega Cultural del Centro</li><li class="out">$ 30.000 · Agotado</li><li class="out">[Reservar] en gris; al hacer clic no pasa nada</li></ol></div></div></div><div class="checkpoint"><span class="component-label">Checkpoint</span><h3>Dos tarjetas viven en dos copias de HTML.</h3><p>El agotado y el botón bloqueado también dependen de cambios manuales.</p></div></div>
+            <details class="code-reveal" data-archivo="index.html">
+              <summary><span><span class="code-reveal-title">index.html · como queda al terminar este momento</span><span class="code-reveal-note">38 líneas · listo para copiar</span></span></summary>
+              <div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Crear</span><span class="code-file">index.html</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+    &lt;title&gt;Tarima · Cartelera cultural&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;header&gt;
+      &lt;h1&gt;Tarima&lt;/h1&gt;
+      &lt;p&gt;La cartelera cultural de Bogotá&lt;/p&gt;
+    &lt;/header&gt;
+
+    &lt;main&gt;
+      &lt;h2&gt;Cartelera de noviembre&lt;/h2&gt;
+      &lt;section&gt;
+        &lt;article&gt;
+          &lt;span&gt;Concierto&lt;/span&gt;
+          &lt;h3&gt;Noche de Salsa Brava&lt;/h3&gt;
+          &lt;p&gt;Sábado 7 de noviembre · 8:00 p. m.&lt;/p&gt;
+          &lt;p&gt;Teatro del Parque&lt;/p&gt;
+          &lt;p&gt;$ 45.000&lt;/p&gt;
+          &lt;button&gt;Reservar&lt;/button&gt;
+        &lt;/article&gt;
+
+        &lt;article&gt;
+          &lt;span&gt;Stand-up&lt;/span&gt;
+          &lt;h3&gt;Risas sin Filtro&lt;/h3&gt;
+          &lt;p&gt;Jueves 12 de noviembre · 9:00 p. m.&lt;/p&gt;
+          &lt;p&gt;Bodega Cultural del Centro&lt;/p&gt;
+          &lt;p&gt;$ 30.000&lt;/p&gt;
+          &lt;p&gt;Agotado&lt;/p&gt;
+          &lt;button disabled&gt;Reservar&lt;/button&gt;
+        &lt;/article&gt;
+      &lt;/section&gt;
+    &lt;/main&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+            </details>
+          </div>
+        </section>
+
+        <section class="section view" id="css" data-accent="1" data-layout="canvas" data-escena="concepto" hidden>
+          <div class="sec-head"><span class="sec-n">CSS · presentación</span><h2 class="sec-t">Una regla pinta muchas piezas</h2><p class="sec-s">La cartelera funciona, pero se ve como un documento de 1995. Mercadeo quiere los colores de la marca, tarjetas blancas y que un evento agotado se note de lejos.</p></div>
+          <div class="body">
+            <div class="definicion">
+              <div class="def-tecnica"><span class="component-label">Definición técnica</span><p class="def-termino">CSS</p><p><strong>CSS</strong> (<em>Cascading Style Sheets</em>) es el lenguaje que define la <strong>presentación</strong> de los elementos HTML: colores, tamaños, espacios y posiciones. Se escribe en <strong>reglas</strong>.</p></div>
+              <div class="def-vida"><span class="component-label">En la vida real</span><p>Es la paleta y el manual de acabados de la obra: "todas las puertas, color madera; todos los baños, baldosa blanca". El arquitecto no pinta cada puerta: define la regla una vez.</p></div>
+            </div>
+            <div class="code-block"><div class="code-head"><div><span class="code-context">Anatomía de una regla</span><span class="code-file">CSS</span></div></div><pre><code class="language-css">.tarjeta {
+  background-color: white;
+}</code></pre></div>
+            <div class="cards">
+              <div class="card"><b>Selector</b><p><code>.tarjeta</code>: <strong>a quién</strong> se aplica. Un punto delante significa "los elementos que tengan la clase <code>tarjeta</code>".</p></div>
+              <div class="card"><b>Declaración</b><p><code>background-color: white;</code>: <strong>qué</strong> cambia. Tiene una <strong>propiedad</strong>, dos puntos, un <strong>valor</strong> y punto y coma.</p></div>
+              <div class="card"><b>Clase</b><p>Para poder señalar "las tarjetas", primero hay que <strong>ponerles nombre</strong> en el HTML: eso es una clase.</p></div>
+            </div>
+            <p>CSS es una lista de instrucciones del tipo "a todas las tarjetas, ponles fondo blanco".</p>
+          </div>
+        </section>
+
+        <section class="section view" id="css-construir" data-accent="1" data-layout="canvas" data-escena="construccion" hidden>
+          <div class="sec-head"><span class="sec-n">Construir · estilos.css</span><h2 class="sec-t">Vestir la cartelera sin tocar su estructura</h2><p class="sec-s">Este archivo guarda toda la presentación. El HTML solo se conecta con él y le pone nombre a las piezas que se van a pintar.</p></div>
+          <div class="body">
+            <h3>7.1 · Conectar y nombrar</h3>
+            <article class="archivo">
+              <div class="archivo-ficha"><span class="archivo-accion">Crear</span><span class="archivo-nombre">estilos.css</span><span class="archivo-ruta">tarima-clase0/</span></div>
+              <p class="archivo-intro"><strong>Cómo crearlo:</strong> en el Explorer de VS Code, clic en <strong>New File</strong> y escribe <code>estilos.css</code>, al lado de <code>index.html</code>.</p>
+              <div class="lectura">
+                <div class="lectura-head"><span class="lectura-num">1A</span><h3 class="lectura-titulo">El HTML conecta la hoja de estilos</h3><p class="lectura-proposito"><strong>Necesidad:</strong> el navegador no busca archivos de estilos por su cuenta. El HTML tiene que decirle dónde están. <strong>Dónde va:</strong> dentro del <code>head</code>, debajo de <code>&lt;title&gt;</code>.</p></div>
+                <div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Línea 7</span><span class="code-file">index.html</span></div></div><pre class="line-numbers" data-start="7"><code class="language-html">    &lt;link rel="stylesheet" href="estilos.css" /&gt;</code></pre></div><ol class="notas"><li class="nota" data-lineas="7"><div class="nota-cabeza"><span class="nota-lineas">L7</span><code class="nota-codigo">&lt;link rel="stylesheet" href="estilos.css" /&gt;</code></div><p>🟨 HTML · <code>link</code> conecta la página con otro archivo. <code>rel="stylesheet"</code> dice qué <strong>relación</strong> tiene ese archivo con la página: es su hoja de estilos. <code>href</code> dice <strong>dónde</strong> está: en la misma carpeta, con ese nombre exacto. 🟪 El nombre <code>estilos.css</code> es nuestro.</p></li></ol></div>
+              </div>
+              <div class="lectura">
+                <div class="lectura-head"><span class="lectura-num">1B</span><h3 class="lectura-titulo">La primera regla demuestra la conexión</h3><p class="lectura-proposito"><strong>Dónde va:</strong> en <code>estilos.css</code>, que está vacío.</p></div>
+                <div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 1–6</span><span class="code-file">estilos.css</span></div></div><pre class="line-numbers" data-start="1"><code class="language-css">body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background-color: #f5f3fb;
+  color: #1a1a1a;
+}</code></pre></div><ol class="notas">
+                  <li class="nota" data-lineas="1"><div class="nota-cabeza"><span class="nota-lineas">L1</span><code class="nota-codigo">body {</code></div><p>🟨 CSS · Un selector con solo un nombre de etiqueta se aplica a <strong>todos</strong> los elementos de esa etiqueta. Aquí, al cuerpo de la página. La llave abre el bloque de declaraciones.</p></li>
+                  <li class="nota" data-lineas="2"><div class="nota-cabeza"><span class="nota-lineas">L2</span><code class="nota-codigo">margin: 0;</code></div><p>🟨 CSS · El navegador le pone por defecto un margen de 8 píxeles al cuerpo. Lo quitamos para que el encabezado de color llegue hasta los bordes.</p></li>
+                  <li class="nota" data-lineas="3"><div class="nota-cabeza"><span class="nota-lineas">L3</span><code class="nota-codigo">font-family: system-ui, sans-serif;</code></div><p>🟨 CSS · La letra. <code>system-ui</code> usa la letra del sistema operativo (Segoe UI en Windows, San Francisco en Mac). Si no existe, usa cualquier letra sin remates (<code>sans-serif</code>).</p></li>
+                  <li class="nota" data-lineas="4"><div class="nota-cabeza"><span class="nota-lineas">L4</span><code class="nota-codigo">background-color: #f5f3fb;</code></div><p>🟨 CSS · Color de fondo. <code>#f5f3fb</code> es un color en hexadecimal: tres pares de cifras para rojo, verde y azul. 🟪 Es el lila suave de la marca.</p></li>
+                  <li class="nota" data-lineas="5"><div class="nota-cabeza"><span class="nota-lineas">L5</span><code class="nota-codigo">color: #1a1a1a;</code></div><p>🟨 CSS · Color del texto: casi negro, más suave a la vista que el negro puro. 🟪 De la paleta de la marca.</p></li>
+                  <li class="nota" data-lineas="6"><div class="nota-cabeza"><span class="nota-lineas">L6</span><code class="nota-codigo">}</code></div><p>🟨 CSS · Cierra la regla.</p></li>
+                </ol></div>
+              </div>
+              <div class="active-build"><div class="build-step"><span class="build-step-index">▶</span><div class="build-step-copy"><h3 class="build-step-title">Pruébalo</h3><div class="consola"><div class="consola-head">Guarda los dos archivos y recarga</div><ol><li class="out">El fondo de toda la página pasa de blanco a lila muy suave.</li><li class="out">La letra deja de tener remates.</li><li class="out">La página ya no tiene espacio en blanco en los bordes.</li></ol></div></div></div><div class="checkpoint"><span class="component-label">Checkpoint</span><h3>El CSS está conectado.</h3><p>La primera regla ya cambia el documento sin alterar su estructura.</p></div></div>
+              <div class="callout" data-tone="warning"><span class="callout-icon">!</span><div><h3>Quítala y mira</h3><p>En <code>index.html</code>, borra <code>rel="stylesheet"</code> de la línea 7, guarda y recarga. La página vuelve a verse sin estilos y la consola no muestra ningún error: el navegador encontró el archivo, pero nadie le dijo que era una hoja de estilos. Vuelve a escribirlo.</p></div></div>
+            </article>
+
+            <div class="lectura">
+              <div class="lectura-head"><span class="lectura-num">2</span><h3 class="lectura-titulo">Ponerle nombre a las piezas</h3><p class="lectura-proposito"><strong>Necesidad:</strong> quieres pintar "las tarjetas", "las categorías" y "los precios". CSS necesita una forma de señalarlos. Esa forma es el atributo <code>class</code>. <strong>Dónde va:</strong> en <code>index.html</code>, agrega el atributo <code>class</code> en las etiquetas que se indican. Las demás líneas no cambian.</p></div>
+              <div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 10–35</span><span class="code-file">index.html</span></div></div><pre class="line-numbers" data-start="10"><code class="language-html">    &lt;header class="encabezado"&gt;
+      &lt;h1&gt;Tarima&lt;/h1&gt;
+      &lt;p&gt;La cartelera cultural de Bogotá&lt;/p&gt;
+    &lt;/header&gt;
+
+    &lt;main class="contenedor"&gt;
+      &lt;h2&gt;Cartelera de noviembre&lt;/h2&gt;
+      &lt;section class="cartelera"&gt;
+        &lt;article class="tarjeta"&gt;
+          &lt;span class="categoria"&gt;Concierto&lt;/span&gt;
+          &lt;h3&gt;Noche de Salsa Brava&lt;/h3&gt;
+          &lt;p&gt;Sábado 7 de noviembre · 8:00 p. m.&lt;/p&gt;
+          &lt;p&gt;Teatro del Parque&lt;/p&gt;
+          &lt;p class="precio"&gt;$ 45.000&lt;/p&gt;
+          &lt;button&gt;Reservar&lt;/button&gt;
+        &lt;/article&gt;
+
+        &lt;article class="tarjeta agotada"&gt;
+          &lt;span class="categoria"&gt;Stand-up&lt;/span&gt;
+          &lt;h3&gt;Risas sin Filtro&lt;/h3&gt;
+          &lt;p&gt;Jueves 12 de noviembre · 9:00 p. m.&lt;/p&gt;
+          &lt;p&gt;Bodega Cultural del Centro&lt;/p&gt;
+          &lt;p class="precio"&gt;$ 30.000&lt;/p&gt;
+          &lt;p&gt;Agotado&lt;/p&gt;
+          &lt;button disabled&gt;Reservar&lt;/button&gt;
+        &lt;/article&gt;</code></pre></div><ol class="notas">
+                <li class="nota" data-lineas="10"><div class="nota-cabeza"><span class="nota-lineas">L10</span><code class="nota-codigo">class="encabezado"</code></div><p>🟨 HTML · <code>class</code> es un atributo que acepta cualquier nombre. 🟪 <code>encabezado</code> es el nombre que elegimos; CSS lo usará como <code>.encabezado</code>.</p></li>
+                <li class="nota" data-lineas="15"><div class="nota-cabeza"><span class="nota-lineas">L15</span><code class="nota-codigo">class="contenedor"</code></div><p>🟪 <code>contenedor</code> va a limitar el ancho del contenido para que no se estire en pantallas grandes.</p></li>
+                <li class="nota" data-lineas="17"><div class="nota-cabeza"><span class="nota-lineas">L17</span><code class="nota-codigo">class="cartelera"</code></div><p>🟪 <code>cartelera</code> va a acomodar las tarjetas en columnas.</p></li>
+                <li class="nota" data-lineas="18"><div class="nota-cabeza"><span class="nota-lineas">L18</span><code class="nota-codigo">class="tarjeta"</code></div><p>🟪 El molde visual de cada evento.</p></li>
+                <li class="nota" data-lineas="19,28"><div class="nota-cabeza"><span class="nota-lineas">L19, 28</span><code class="nota-codigo">class="categoria"</code></div><p>🟪 La categoría tendrá el color de la marca.</p></li>
+                <li class="nota" data-lineas="23,32"><div class="nota-cabeza"><span class="nota-lineas">L23, 32</span><code class="nota-codigo">class="precio"</code></div><p>🟪 El precio irá más grande y en negrilla.</p></li>
+                <li class="nota" data-lineas="27"><div class="nota-cabeza"><span class="nota-lineas">L27</span><code class="nota-codigo">class="tarjeta agotada"</code></div><p>🟨 HTML · Un elemento puede tener <strong>varias</strong> clases separadas por espacio. Esta tarjeta es una <code>tarjeta</code> y además está <code>agotada</code>. 🟪 Julián tuvo que escribir <code>agotada</code> a mano: es el tercer lugar que cambia cuando un evento se agota.</p></li>
+              </ol></div>
+            </div>
+            <div class="checkpoint"><span class="component-label">Checkpoint</span><h3>La página se ve exactamente igual.</h3><p>Es lo correcto: una clase es solo un nombre. Hasta que una regla de CSS la use, no cambia nada.</p></div>
+
+            <h3>7.2 · Marca y distribución</h3>
+            <div class="lectura">
+              <div class="lectura-head"><span class="lectura-num">3</span><h3 class="lectura-titulo">El encabezado y el ancho del contenido</h3><p class="lectura-proposito"><strong>Necesidad:</strong> la marca debe verse como marca: franja de color con texto blanco. Y en una pantalla grande el contenido no debe estirarse de borde a borde. <strong>Dónde va:</strong> debajo de la regla <code>body</code>.</p></div>
+              <div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 8–19</span><span class="code-file">estilos.css</span></div></div><pre class="line-numbers" data-start="8"><code class="language-css">.encabezado {
+  background-color: #3c1884;
+  color: white;
+  text-align: center;
+  padding: 16px;
+}
+
+.contenedor {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 16px;
+}</code></pre></div><ol class="notas">
+                <li class="nota" data-lineas="8"><div class="nota-cabeza"><span class="nota-lineas">L8</span><code class="nota-codigo">.encabezado {</code></div><p>🟨 CSS · El punto significa "elementos con la clase <code>encabezado</code>". Es el <code>header</code> de la línea 10 del HTML.</p></li>
+                <li class="nota" data-lineas="9-10"><div class="nota-cabeza"><span class="nota-lineas">L9–10</span><code class="nota-codigo">fondo y color</code></div><p>🟨 CSS · Fondo morado oscuro y texto blanco. <code>white</code> es uno de los nombres de color que CSS reconoce. 🟪 <code>#3c1884</code> es el morado oscuro de la marca.</p></li>
+                <li class="nota" data-lineas="11"><div class="nota-cabeza"><span class="nota-lineas">L11</span><code class="nota-codigo">text-align: center;</code></div><p>🟨 CSS · Centra el texto dentro de la caja.</p></li>
+                <li class="nota" data-lineas="12"><div class="nota-cabeza"><span class="nota-lineas">L12</span><code class="nota-codigo">padding: 16px;</code></div><p>🟨 CSS · Relleno: espacio <strong>dentro</strong> de la caja, entre el borde y el contenido. <code>px</code> son píxeles.</p></li>
+                <li class="nota" data-lineas="15"><div class="nota-cabeza"><span class="nota-lineas">L15</span><code class="nota-codigo">.contenedor {</code></div><p>🟨 CSS · Aplica al <code>main</code>.</p></li>
+                <li class="nota" data-lineas="16"><div class="nota-cabeza"><span class="nota-lineas">L16</span><code class="nota-codigo">max-width: 1000px;</code></div><p>🟨 CSS · El contenido nunca supera 1000 píxeles de ancho. En un celular ocupa todo el ancho disponible; en un monitor grande se detiene en 1000.</p></li>
+                <li class="nota" data-lineas="17"><div class="nota-cabeza"><span class="nota-lineas">L17</span><code class="nota-codigo">margin: 0 auto;</code></div><p>🟨 CSS · Margen: espacio <strong>fuera</strong> de la caja. El primer valor (<code>0</code>) es para arriba y abajo; el segundo (<code>auto</code>) para los lados. <code>auto</code> reparte el espacio sobrante por igual a ambos lados: así se centra la caja.</p></li>
+                <li class="nota" data-lineas="18"><div class="nota-cabeza"><span class="nota-lineas">L18</span><code class="nota-codigo">padding: 16px;</code></div><p>🟨 CSS · Que el texto no toque los bordes de la pantalla en el celular.</p></li>
+              </ol></div>
+            </div>
+            <div class="checkpoint"><span class="component-label">Checkpoint</span><h3>La marca y el contenido ya tienen forma.</h3><p>Franja morada arriba con el texto centrado, y la cartelera contenida en pantallas anchas.</p></div>
+
+            <div class="lectura">
+              <div class="lectura-head"><span class="lectura-num">4</span><h3 class="lectura-titulo">Las tarjetas en cuadrícula</h3><p class="lectura-proposito"><strong>Necesidad:</strong> las tarjetas están una debajo de la otra y no se distinguen del fondo. Valentina quiere ver varios eventos de un vistazo. <strong>Dónde va:</strong> debajo de <code>.contenedor</code>.</p></div>
+              <div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 21–31</span><span class="code-file">estilos.css</span></div></div><pre class="line-numbers" data-start="21"><code class="language-css">.cartelera {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.tarjeta {
+  background-color: white;
+  border-radius: 12px;
+  padding: 16px;
+}</code></pre></div><ol class="notas">
+                <li class="nota" data-lineas="22"><div class="nota-cabeza"><span class="nota-lineas">L22</span><code class="nota-codigo">display: grid;</code></div><p>🟨 CSS · Convierte la sección en una <strong>cuadrícula</strong>: sus hijos directos (las tarjetas) se acomodan en filas y columnas.</p></li>
+                <li class="nota" data-lineas="23"><div class="nota-cabeza"><span class="nota-lineas">L23</span><code class="nota-codigo">grid-template-columns</code></div><p>🟨 CSS · Dice cuántas columnas hay: "crea tantas columnas como quepan (<code>auto-fill</code>), cada una de mínimo 240 píxeles y máximo una parte igual del espacio (<code>1fr</code>)". En el celular cabe una; en el portátil, tres. Sin escribir una regla para cada pantalla.</p></li>
+                <li class="nota" data-lineas="24"><div class="nota-cabeza"><span class="nota-lineas">L24</span><code class="nota-codigo">gap: 16px;</code></div><p>🟨 CSS · Espacio entre tarjetas, en horizontal y en vertical.</p></li>
+                <li class="nota" data-lineas="27-30"><div class="nota-cabeza"><span class="nota-lineas">L27–30</span><code class="nota-codigo">.tarjeta</code></div><p>🟨 CSS · Fondo blanco, esquinas redondeadas (<code>border-radius</code>) y relleno interno. Cada tarjeta se separa del fondo lila.</p></li>
+              </ol></div>
+            </div>
+            <div class="checkpoint"><span class="component-label">Checkpoint</span><h3>La cuadrícula responde al ancho.</h3><p>Las dos tarjetas aparecen lado a lado, blancas y con esquinas redondeadas. Si haces la ventana angosta, pasan a estar una debajo de la otra.</p></div>
+
+            <h3>7.3 · Destacar y bloquear</h3>
+            <div class="lectura">
+              <div class="lectura-head"><span class="lectura-num">5</span><h3 class="lectura-titulo">Lo que tiene que destacar</h3><p class="lectura-proposito"><strong>Necesidad:</strong> en una tarjeta hay datos más importantes que otros. Y un evento agotado tiene que notarse de lejos. <strong>Dónde va:</strong> debajo de <code>.tarjeta</code>.</p></div>
+              <div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 33–45</span><span class="code-file">estilos.css</span></div></div><pre class="line-numbers" data-start="33"><code class="language-css">.categoria {
+  color: #5418cc;
+  font-weight: bold;
+}
+
+.precio {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.agotada {
+  opacity: 0.5;
+}</code></pre></div><ol class="notas">
+                <li class="nota" data-lineas="33-36"><div class="nota-cabeza"><span class="nota-lineas">L33–36</span><code class="nota-codigo">.categoria</code></div><p>🟨 CSS · Color morado de la marca (🟪 <code>#5418cc</code>) y <code>font-weight: bold</code>, que pone el texto en negrilla.</p></li>
+                <li class="nota" data-lineas="38-41"><div class="nota-cabeza"><span class="nota-lineas">L38–41</span><code class="nota-codigo">.precio</code></div><p>🟨 CSS · <code>font-size: 1.25rem</code> hace la letra 1,25 veces el tamaño base de la página. <code>rem</code> es una unidad relativa: si la persona agranda la letra de su navegador, el precio crece en proporción.</p></li>
+                <li class="nota" data-lineas="43-45"><div class="nota-cabeza"><span class="nota-lineas">L43–45</span><code class="nota-codigo">.agotada</code></div><p>🟨 CSS · <code>opacity: 0.5</code> deja la tarjeta medio transparente: se ve apagada. 🟪 Es la forma que elegimos de decir "agotado" con diseño.</p></li>
+              </ol></div>
+            </div>
+            <div class="checkpoint"><span class="component-label">Checkpoint</span><h3>El estado se reconoce de lejos.</h3><p>Las categorías quedan en morado, los precios ganan jerarquía y "Risas sin Filtro" se ve apagada.</p></div>
+
+            <div class="lectura">
+              <div class="lectura-head"><span class="lectura-num">6</span><h3 class="lectura-titulo">El botón y su estado bloqueado</h3><p class="lectura-proposito"><strong>Necesidad:</strong> el botón gris de sistema no parece de Tarima, y un botón bloqueado debe verse distinto de uno activo. <strong>Dónde va:</strong> debajo de <code>.agotada</code>.</p></div>
+              <div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 47–59</span><span class="code-file">estilos.css</span></div></div><pre class="line-numbers" data-start="47"><code class="language-css">button {
+  background-color: #5418cc;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: #999999;
+  cursor: not-allowed;
+}</code></pre></div><ol class="notas">
+                <li class="nota" data-lineas="47"><div class="nota-cabeza"><span class="nota-lineas">L47</span><code class="nota-codigo">button {</code></div><p>🟨 CSS · Selector de etiqueta: aplica a <strong>todos</strong> los botones de la página, sin necesidad de clase.</p></li>
+                <li class="nota" data-lineas="48-49"><div class="nota-cabeza"><span class="nota-lineas">L48–49</span><code class="nota-codigo">fondo y texto</code></div><p>🟨 CSS · Morado de la marca con texto blanco.</p></li>
+                <li class="nota" data-lineas="50"><div class="nota-cabeza"><span class="nota-lineas">L50</span><code class="nota-codigo">border: none;</code></div><p>🟨 CSS · Quita el borde que el navegador pone por defecto a los botones.</p></li>
+                <li class="nota" data-lineas="51-52"><div class="nota-cabeza"><span class="nota-lineas">L51–52</span><code class="nota-codigo">esquinas y relleno</code></div><p>🟨 CSS · <code>padding: 8px 16px</code> usa dos valores: 8 píxeles arriba y abajo, 16 a los lados.</p></li>
+                <li class="nota" data-lineas="53"><div class="nota-cabeza"><span class="nota-lineas">L53</span><code class="nota-codigo">cursor: pointer;</code></div><p>🟨 CSS · Al pasar el mouse, aparece la manito: le dice a la persona que se puede hacer clic.</p></li>
+                <li class="nota" data-lineas="56"><div class="nota-cabeza"><span class="nota-lineas">L56</span><code class="nota-codigo">button:disabled {</code></div><p>🟨 CSS · <code>:disabled</code> es una <strong>pseudoclase</strong>: selecciona los botones que <strong>en este momento</strong> tienen el atributo <code>disabled</code>. No hay que ponerles una clase extra: CSS lee el estado.</p></li>
+                <li class="nota" data-lineas="57-58"><div class="nota-cabeza"><span class="nota-lineas">L57–58</span><code class="nota-codigo">gris y cursor prohibido</code></div><p>🟨 CSS · Fondo gris y el cursor de "no permitido" al pasar el mouse.</p></li>
+              </ol></div>
+            </div>
+            <div class="checkpoint"><span class="component-label">Checkpoint</span><h3>Activo y bloqueado ya se distinguen.</h3><p>"Reservar" de Noche de Salsa Brava es morado; "Reservar" de Risas sin Filtro es gris y muestra el cursor de prohibido.</p></div>
+
+            <details class="code-reveal" data-archivo="index.html"><summary><span><span class="code-reveal-title">index.html · como queda al terminar este momento</span><span class="code-reveal-note">39 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Editar</span><span class="code-file">index.html</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+    &lt;title&gt;Tarima · Cartelera cultural&lt;/title&gt;
+    &lt;link rel="stylesheet" href="estilos.css" /&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;header class="encabezado"&gt;
+      &lt;h1&gt;Tarima&lt;/h1&gt;
+      &lt;p&gt;La cartelera cultural de Bogotá&lt;/p&gt;
+    &lt;/header&gt;
+
+    &lt;main class="contenedor"&gt;
+      &lt;h2&gt;Cartelera de noviembre&lt;/h2&gt;
+      &lt;section class="cartelera"&gt;
+        &lt;article class="tarjeta"&gt;
+          &lt;span class="categoria"&gt;Concierto&lt;/span&gt;
+          &lt;h3&gt;Noche de Salsa Brava&lt;/h3&gt;
+          &lt;p&gt;Sábado 7 de noviembre · 8:00 p. m.&lt;/p&gt;
+          &lt;p&gt;Teatro del Parque&lt;/p&gt;
+          &lt;p class="precio"&gt;$ 45.000&lt;/p&gt;
+          &lt;button&gt;Reservar&lt;/button&gt;
+        &lt;/article&gt;
+
+        &lt;article class="tarjeta agotada"&gt;
+          &lt;span class="categoria"&gt;Stand-up&lt;/span&gt;
+          &lt;h3&gt;Risas sin Filtro&lt;/h3&gt;
+          &lt;p&gt;Jueves 12 de noviembre · 9:00 p. m.&lt;/p&gt;
+          &lt;p&gt;Bodega Cultural del Centro&lt;/p&gt;
+          &lt;p class="precio"&gt;$ 30.000&lt;/p&gt;
+          &lt;p&gt;Agotado&lt;/p&gt;
+          &lt;button disabled&gt;Reservar&lt;/button&gt;
+        &lt;/article&gt;
+      &lt;/section&gt;
+    &lt;/main&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div></details>
+            <details class="code-reveal" data-archivo="estilos.css"><summary><span><span class="code-reveal-title">estilos.css · archivo completo</span><span class="code-reveal-note">59 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Crear</span><span class="code-file">estilos.css</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-css">body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background-color: #f5f3fb;
+  color: #1a1a1a;
+}
+
+.encabezado {
+  background-color: #3c1884;
+  color: white;
+  text-align: center;
+  padding: 16px;
+}
+
+.contenedor {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.cartelera {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.tarjeta {
+  background-color: white;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.categoria {
+  color: #5418cc;
+  font-weight: bold;
+}
+
+.precio {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.agotada {
+  opacity: 0.5;
+}
+
+button {
+  background-color: #5418cc;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: #999999;
+  cursor: not-allowed;
+}</code></pre></div></div></details>
+          </div>
+        </section>
+
+        <section class="section view" id="javascript" data-accent="1" data-layout="canvas" data-escena="concepto" hidden>
+          <div class="sec-head"><span class="sec-n">JavaScript · comportamiento</span><h2 class="sec-t">La información deja de vivir mezclada con el HTML</h2><p class="sec-s">Cada evento es una copia del HTML y agotar uno exige cambios manuales. Los dos dolores tienen la misma raíz.</p></div>
+          <div class="body">
+            <div class="callout" data-tone="info"><span class="callout-icon">i</span><div><h3>La idea que lo cambia todo</h3><p>¿Y si la información de cada evento viviera en <strong>un solo lugar</strong>, como datos, y el HTML de las tarjetas se <strong>calculara</strong> a partir de esos datos? Un evento agotado sería solo un número: <code>cuposDisponibles: 0</code>. Y la tarjeta se vería agotada sola.</p></div></div>
+            <p>Para calcular hace falta un lenguaje que haga cálculos. HTML y CSS no pueden: describen, no deciden.</p>
+            <div class="definicion">
+              <div class="def-tecnica"><span class="component-label">Definición técnica</span><p class="def-termino">JavaScript</p><p><strong>JavaScript</strong> es el lenguaje de programación que ejecuta el navegador. Puede guardar datos, tomar decisiones, reaccionar a lo que hace la persona (clics, teclas) y <strong>modificar la página mientras está abierta</strong>.</p></div>
+              <div class="def-vida"><span class="component-label">El DOM en la vida real</span><p>El DOM es la maqueta de la casa armada con piezas de Lego. El HTML es el plano. JavaScript puede quitar y poner piezas en la maqueta sin tocar el plano.</p></div>
+            </div>
+            <div class="papel"><span class="component-label">El DOM</span><p>Cuando el navegador lee el HTML, construye en memoria un árbol de objetos: uno por cada etiqueta. Ese árbol se llama <strong>DOM</strong> (<em>Document Object Model</em>). Lo que ves en pantalla es el DOM dibujado.</p><p>JavaScript no edita el archivo <code>index.html</code>: edita el <strong>DOM</strong>. Por eso, al recargar, la página vuelve a construirse desde el archivo.</p></div>
+          </div>
+        </section>
+
+        <section class="section view" id="datos-molde" data-accent="1" data-layout="canvas" data-escena="construccion" hidden>
+          <div class="sec-head"><span class="sec-n">Construir · datos y molde</span><h2 class="sec-t">Un evento deja de ser una copia</h2><p class="sec-s">El HTML prepara el lugar. JavaScript guarda la lista, calcula cada tarjeta y la pone en la sección vacía.</p></div>
+          <div class="body">
+            <h3>9.1 · Preparar la página</h3>
+            <article class="archivo">
+              <div class="archivo-ficha"><span class="archivo-accion">Editar</span><span class="archivo-nombre">index.html</span><span class="archivo-ruta">tarima-clase0/</span></div>
+              <p class="archivo-intro">Las tarjetas ya no se van a escribir a mano: las va a crear JavaScript. El HTML solo deja preparado el lugar donde irán y carga el archivo de JavaScript.</p>
+              <div class="lectura">
+                <div class="lectura-head"><span class="lectura-num">1A</span><h3 class="lectura-titulo">Cargar JavaScript después del documento</h3><p class="lectura-proposito"><strong>Necesidad:</strong> JavaScript necesita ejecutarse después de que exista la sección. <strong>Antes de empezar:</strong> crea el archivo <code>app.js</code> vacío al lado de <code>index.html</code>. <strong>Dónde va:</strong> debajo de la línea del <code>&lt;link&gt;</code>.</p></div>
+                <div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Línea 8</span><span class="code-file">index.html</span></div></div><pre class="line-numbers" data-start="8"><code class="language-html">    &lt;script src="app.js" defer&gt;&lt;/script&gt;</code></pre></div><ol class="notas"><li class="nota" data-lineas="8"><div class="nota-cabeza"><span class="nota-lineas">L8</span><code class="nota-codigo">&lt;script src="app.js" defer&gt;&lt;/script&gt;</code></div><p>🟨 HTML · <code>script</code> carga un archivo de JavaScript; <code>src</code> dice dónde está. Aunque no tenga contenido, la etiqueta de cierre es obligatoria. 🟩 Navegador · <code>defer</code> le pide al navegador que ejecute el archivo <strong>después</strong> de haber construido toda la página. Sin él, JavaScript correría antes de que exista la sección y no la encontraría.</p></li></ol></div>
+              </div>
+              <div class="lectura">
+                <div class="lectura-head"><span class="lectura-num">1B</span><h3 class="lectura-titulo">Dejar la cartelera vacía y localizable</h3><p class="lectura-proposito"><strong>Necesidad:</strong> si las tarjetas siguen escritas en el HTML, seguirán siendo copias. <strong>Dónde va:</strong> reemplaza las dos tarjetas por esta sola línea.</p></div>
+                <div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Línea 18</span><span class="code-file">index.html</span></div></div><pre class="line-numbers" data-start="18"><code class="language-html">      &lt;section id="cartelera" class="cartelera"&gt;&lt;/section&gt;</code></pre></div><ol class="notas">
+                  <li class="nota" data-lineas="18"><div class="nota-cabeza"><span class="nota-lineas">L18</span><code class="nota-codigo">id="cartelera"</code></div><p>🟨 HTML · <code>id</code> es un nombre <strong>único</strong> en toda la página: solo un elemento puede tenerlo. 🟪 Lo usamos para que JavaScript encuentre esta sección sin confundirla con otra. La clase <code>cartelera</code> se queda: es la que le da la cuadrícula de CSS.</p></li>
+                  <li class="nota" data-lineas="18"><div class="nota-cabeza"><span class="nota-lineas">L18</span><code class="nota-codigo">&lt;section ...&gt;&lt;/section&gt;</code></div><p>🟪 La sección queda sin tarjetas. Se abre y se cierra en la misma línea porque, por ahora, no tiene nada dentro.</p></li>
+                </ol></div>
+              </div>
+              <div class="active-build"><div class="build-step"><span class="build-step-index">▶</span><div class="build-step-copy"><h3 class="build-step-title">Pruébalo</h3><div class="consola"><div class="consola-head">Guarda y recarga</div><ol><li class="out">Se ven el encabezado morado y el título "Cartelera de noviembre".</li><li class="out">Las dos tarjetas desaparecieron.</li><li class="out">En DevTools → Console: sin mensajes en rojo.</li></ol></div></div></div><div class="checkpoint"><span class="component-label">Checkpoint</span><h3>La página espera a JavaScript.</h3><p>La sección existe, pero todavía no tiene tarjetas.</p></div></div>
+              <details class="code-reveal" data-archivo="index.html"><summary><span><span class="code-reveal-title">index.html · versión final</span><span class="code-reveal-note">21 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Editar</span><span class="code-file">index.html</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+    &lt;title&gt;Tarima · Cartelera cultural&lt;/title&gt;
+    &lt;link rel="stylesheet" href="estilos.css" /&gt;
+    &lt;script src="app.js" defer&gt;&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;header class="encabezado"&gt;
+      &lt;h1&gt;Tarima&lt;/h1&gt;
+      &lt;p&gt;La cartelera cultural de Bogotá&lt;/p&gt;
+    &lt;/header&gt;
+
+    &lt;main class="contenedor"&gt;
+      &lt;h2&gt;Cartelera de noviembre&lt;/h2&gt;
+      &lt;section id="cartelera" class="cartelera"&gt;&lt;/section&gt;
+    &lt;/main&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div></details>
+            </article>
+
+            <h3>9.2 · Convertir eventos en datos</h3>
+            <article class="archivo">
+              <div class="archivo-ficha"><span class="archivo-accion">Crear</span><span class="archivo-nombre">app.js</span><span class="archivo-ruta">tarima-clase0/</span></div>
+              <p class="archivo-intro">Este archivo le da a Tarima lo que HTML y CSS no tienen: <strong>datos y decisiones</strong>. Guarda la lista de eventos, calcula cómo se ve cada tarjeta y la pone en la sección vacía.</p>
+              <div class="lectura">
+                <div class="lectura-head"><span class="lectura-num">1</span><h3 class="lectura-titulo">Los eventos son datos</h3><p class="lectura-proposito"><strong>Necesidad:</strong> la información de los eventos tiene que vivir en un solo lugar, separada del HTML. Cada evento es un conjunto de datos con nombre. <strong>Dónde va:</strong> en <code>app.js</code>, que está vacío. <strong>Copia este bloque</strong> desde la guía; no se escribe a mano.</p></div>
+                <div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 1–38</span><span class="code-file">app.js</span></div></div><pre class="line-numbers" data-start="1"><code class="language-javascript">const eventos = [
+  {
+    id: 1,
+    nombre: 'Noche de Salsa Brava',
+    categoria: 'Concierto',
+    fecha: 'Sábado 7 de noviembre · 8:00 p. m.',
+    lugar: 'Teatro del Parque',
+    precio: 45000,
+    cuposDisponibles: 120,
+  },
+  {
+    id: 2,
+    nombre: 'La Casa de las Voces',
+    categoria: 'Teatro',
+    fecha: 'Domingo 8 de noviembre · 7:30 p. m.',
+    lugar: 'Sala Chapinero',
+    precio: 38000,
+    cuposDisponibles: 6,
+  },
+  {
+    id: 3,
+    nombre: 'Risas sin Filtro',
+    categoria: 'Stand-up',
+    fecha: 'Jueves 12 de noviembre · 9:00 p. m.',
+    lugar: 'Bodega Cultural del Centro',
+    precio: 30000,
+    cuposDisponibles: 0,
+  },
+  {
+    id: 4,
+    nombre: 'Jazz en la Terraza',
+    categoria: 'Concierto',
+    fecha: 'Sábado 14 de noviembre · 6:00 p. m.',
+    lugar: 'Terraza Usaquén',
+    precio: 0,
+    cuposDisponibles: 80,
+  },
+];</code></pre></div><ol class="notas">
+                  <li class="nota" data-lineas="1"><div class="nota-cabeza"><span class="nota-lineas">L1</span><code class="nota-codigo">const eventos = [</code></div><p>🟨 JavaScript · <code>const</code> crea una <strong>variable</strong>: un nombre que guarda un valor. 🟪 <code>eventos</code> es el nombre que elegimos. Los corchetes <code>[ ]</code> crean un <strong>arreglo</strong>: una lista ordenada de valores.</p></li>
+                  <li class="nota" data-lineas="2"><div class="nota-cabeza"><span class="nota-lineas">L2</span><code class="nota-codigo">{</code></div><p>🟨 JavaScript · Las llaves crean un <strong>objeto</strong>: un conjunto de pares <code>nombre: valor</code>. Cada objeto de la lista es un evento.</p></li>
+                  <li class="nota" data-lineas="3"><div class="nota-cabeza"><span class="nota-lineas">L3</span><code class="nota-codigo">id: 1,</code></div><p>🟨 JavaScript · Una <strong>propiedad</strong>: el nombre (<code>id</code>), dos puntos y el valor (<code>1</code>). La coma la separa de la siguiente. 🟪 El <code>id</code> es un número único por evento: así podremos saber, más adelante, qué evento se reservó.</p></li>
+                  <li class="nota" data-lineas="4-7"><div class="nota-cabeza"><span class="nota-lineas">L4–7</span><code class="nota-codigo">textos entre comillas</code></div><p>🟨 JavaScript · Un <strong>texto</strong> (string) va entre comillas simples. 🟪 La fecha va como texto ya escrito para leer: hoy no la calculamos.</p></li>
+                  <li class="nota" data-lineas="8"><div class="nota-cabeza"><span class="nota-lineas">L8</span><code class="nota-codigo">precio: 45000,</code></div><p>🟨 JavaScript · Un <strong>número</strong> va sin comillas y sin puntos de miles: <code>45.000</code> significaría cuarenta y cinco con decimales. El formato con <code>$</code> y puntos lo pondremos después.</p></li>
+                  <li class="nota" data-lineas="9"><div class="nota-cabeza"><span class="nota-lineas">L9</span><code class="nota-codigo">cuposDisponibles: 120,</code></div><p>🟪 El dato que a Julián le faltaba. Ya no hay que escribir "Agotado": basta con que este número sea <code>0</code>. ⬜ El nombre usa <em>camelCase</em> (cada palabra nueva empieza en mayúscula), la costumbre en JavaScript.</p></li>
+                  <li class="nota" data-lineas="10-37"><div class="nota-cabeza"><span class="nota-lineas">L10–37</span><code class="nota-codigo">los otros tres eventos</code></div><p>🟪 Cada uno prueba un caso: "La Casa de las Voces" tiene <strong>pocos cupos</strong> (6), "Risas sin Filtro" está <strong>agotado</strong> (0) y "Jazz en la Terraza" es <strong>gratis</strong> (precio 0).</p></li>
+                  <li class="nota" data-lineas="38"><div class="nota-cabeza"><span class="nota-lineas">L38</span><code class="nota-codigo">];</code></div><p>🟨 JavaScript · Cierra la lista. El punto y coma termina la instrucción.</p></li>
+                </ol></div>
+              </div>
+              <div class="active-build"><div class="build-step"><span class="build-step-index">▶</span><div class="build-step-copy"><h3 class="build-step-title">Pruébalo</h3><div class="consola"><div class="consola-head">Console de DevTools</div><ol><li class="in">eventos.length</li><li class="out">4</li><li class="in">eventos[2].nombre</li><li class="out">'Risas sin Filtro'</li></ol></div></div></div><div class="checkpoint"><span class="component-label">Checkpoint</span><h3>Los datos existen, pero nadie los dibuja.</h3><p>Las listas empiezan a contar desde <code>0</code>, así que el tercer evento está en la posición 2.</p></div></div>
+            </article>
+
+            <h3>9.3 · Reutilizar un solo molde</h3>
+            <div class="lectura">
+              <div class="lectura-head"><span class="lectura-num">2</span><h3 class="lectura-titulo">Un molde para todas las tarjetas</h3><p class="lectura-proposito"><strong>Necesidad:</strong> hay que convertir cada evento en el HTML de una tarjeta y ponerlo en la sección vacía. En vez de copiar la tarjeta, escribimos <strong>una función</strong>. <strong>Dónde va:</strong> debajo de <code>];</code>.</p></div>
+              <div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 40–59</span><span class="code-file">app.js</span></div></div><pre class="line-numbers" data-start="40"><code class="language-javascript">const cartelera = document.querySelector('#cartelera');
+
+function crearTarjeta(evento) {
+  return `
+    &lt;article class="tarjeta"&gt;
+      &lt;span class="categoria"&gt;${evento.categoria}&lt;/span&gt;
+      &lt;h3&gt;${evento.nombre}&lt;/h3&gt;
+      &lt;p&gt;${evento.fecha}&lt;/p&gt;
+      &lt;p&gt;${evento.lugar}&lt;/p&gt;
+      &lt;p class="precio"&gt;${evento.precio}&lt;/p&gt;
+      &lt;button&gt;Reservar&lt;/button&gt;
+    &lt;/article&gt;
+  `;
+}
+
+function pintar() {
+  cartelera.innerHTML = eventos.map(crearTarjeta).join('');
+}
+
+pintar();</code></pre></div><ol class="notas">
+                <li class="nota" data-lineas="40"><div class="nota-cabeza"><span class="nota-lineas">L40</span><code class="nota-codigo">document.querySelector('#cartelera')</code></div><p>🟩 Navegador · <code>document</code> es la página entera, ya convertida en DOM. <code>querySelector</code> busca el primer elemento que coincide con un selector <strong>de CSS</strong>: <code>#cartelera</code> significa "el elemento con <code>id="cartelera"</code>". Guardamos la sección en una variable para usarla después.</p></li>
+                <li class="nota" data-lineas="42"><div class="nota-cabeza"><span class="nota-lineas">L42</span><code class="nota-codigo">function crearTarjeta(evento) {</code></div><p>🟨 JavaScript · <code>function</code> declara una <strong>función</strong>: un bloque de código con nombre que se ejecuta cada vez que se llama. <code>evento</code>, entre paréntesis, es su <strong>parámetro</strong>: el dato que recibe. 🟪 El nombre <code>crearTarjeta</code> dice lo que hace.</p></li>
+                <li class="nota" data-lineas="43"><div class="nota-cabeza"><span class="nota-lineas">L43</span><code class="nota-codigo">return `</code></div><p>🟨 JavaScript · <code>return</code> entrega el resultado de la función. Lo que entrega es un texto escrito entre <strong>comillas invertidas</strong>: una <strong>plantilla de texto</strong>, que puede ocupar varias líneas y llevar datos dentro.</p></li>
+                <li class="nota" data-lineas="44"><div class="nota-cabeza"><span class="nota-lineas">L44</span><code class="nota-codigo">&lt;article class="tarjeta"&gt;</code></div><p>🟪 Es el mismo HTML que escribió Julián, pero ahora vive <strong>una sola vez</strong>, en el molde.</p></li>
+                <li class="nota" data-lineas="45"><div class="nota-cabeza"><span class="nota-lineas">L45</span><code class="nota-codigo">${evento.categoria}</code></div><p>🟨 JavaScript · Dentro de una plantilla, <code>${ }</code> inserta el valor de lo que esté adentro. <code>evento.categoria</code> lee la propiedad <code>categoria</code> del evento que recibió la función: el punto significa "de".</p></li>
+                <li class="nota" data-lineas="46-49"><div class="nota-cabeza"><span class="nota-lineas">L46–49</span><code class="nota-codigo">nombre, fecha, lugar y precio</code></div><p>🟨 JavaScript · El mismo mecanismo para los demás datos.</p></li>
+                <li class="nota" data-lineas="50"><div class="nota-cabeza"><span class="nota-lineas">L50</span><code class="nota-codigo">&lt;button&gt;Reservar&lt;/button&gt;</code></div><p>🟪 Por ahora, el mismo botón para todos.</p></li>
+                <li class="nota" data-lineas="52-53"><div class="nota-cabeza"><span class="nota-lineas">L52–53</span><code class="nota-codigo">`; y }</code></div><p>🟨 JavaScript · Cierran la plantilla, la instrucción <code>return</code> y la función.</p></li>
+                <li class="nota" data-lineas="55"><div class="nota-cabeza"><span class="nota-lineas">L55</span><code class="nota-codigo">function pintar() {</code></div><p>🟨 JavaScript · Una función sin parámetros. 🟪 Su trabajo es dibujar toda la cartelera.</p></li>
+                <li class="nota" data-lineas="56"><div class="nota-cabeza"><span class="nota-lineas">L56</span><code class="nota-codigo">eventos.map(crearTarjeta).join('')</code></div><p>Se lee de adentro hacia afuera. 🟨 JavaScript · <code>eventos.map(crearTarjeta)</code> pasa <strong>cada</strong> evento por el molde y devuelve una lista nueva con 4 textos de HTML. <code>.join('')</code> une esos 4 textos en uno solo, sin nada entre ellos. 🟩 Navegador · <code>innerHTML</code> reemplaza todo el contenido de la sección por ese HTML; el navegador lo convierte en elementos del DOM y los dibuja.</p></li>
+                <li class="nota" data-lineas="59"><div class="nota-cabeza"><span class="nota-lineas">L59</span><code class="nota-codigo">pintar();</code></div><p>🟨 JavaScript · Declarar una función no la ejecuta. Esta línea la <strong>llama</strong>: los paréntesis vacíos significan "ejecútala ahora".</p></li>
+              </ol></div>
+            </div>
+            <div class="active-build"><div class="build-step"><span class="build-step-index">▶</span><div class="build-step-copy"><h3 class="build-step-title">Pruébalo</h3><div class="consola"><div class="consola-head">Guarda y recarga</div><ol><li class="out">Noche de Salsa Brava · 45000 · [Reservar] activo</li><li class="out">La Casa de las Voces · 38000 · [Reservar] activo</li><li class="out">Risas sin Filtro · 30000 · [Reservar] activo</li><li class="out">Jazz en la Terraza · 0 · [Reservar] activo</li></ol></div></div></div><div class="checkpoint"><span class="component-label">Checkpoint</span><h3>Un molde, cuatro tarjetas.</h3><p>El primer dolor de Julián desapareció. Pero "Risas sin Filtro" tiene 0 cupos y todavía deja reservar: al molde le faltan las reglas.</p></div></div>
+            <div class="callout" data-tone="warning"><span class="callout-icon">!</span><div><h3>Quítala y mira</h3><p>En <code>index.html</code>, borra la palabra <code>defer</code>, guarda y recarga. Las tarjetas no aparecen y la Console muestra en rojo <code>Uncaught TypeError: Cannot set properties of null (setting 'innerHTML')</code>. JavaScript se ejecutó antes de que el navegador construyera la sección. Vuelve a escribir <code>defer</code>.</p></div></div>
+          </div>
+        </section>
+
+        <section class="section view" id="reglas" data-accent="1" data-layout="canvas" data-escena="construccion" hidden>
+          <div class="sec-head"><span class="sec-n">Construir · reglas de negocio</span><h2 class="sec-t">El precio y los cupos se calculan</h2><p class="sec-s">Las decisiones de Valentina viven en funciones separadas del molde: se pueden leer y probar una por una.</p></div>
+          <div class="body">
+            <h3>10.1 · Dar formato al precio</h3>
+            <article class="archivo">
+              <div class="archivo-ficha"><span class="archivo-accion">Editar</span><span class="archivo-nombre">app.js</span><span class="archivo-ruta">tarima-clase0/</span></div>
+              <p class="archivo-intro">El precio sale como <code>45000</code> y el de Jazz como <code>0</code>. Valentina pidió pesos con formato y, cuando es gratis, "Entrada libre".</p>
+              <div class="lectura">
+                <div class="lectura-head"><span class="lectura-num">3</span><h3 class="lectura-titulo">La regla del precio</h3><p class="lectura-proposito"><strong>Necesidad:</strong> es una regla de negocio: merece su propia función. <strong>Dónde va:</strong> debajo de <code>const cartelera = ...</code>, dejando una línea en blanco antes y después.</p></div>
+                <div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 42–47</span><span class="code-file">app.js</span></div></div><pre class="line-numbers" data-start="42"><code class="language-javascript">function textoDelPrecio(precio) {
+  if (precio === 0) {
+    return 'Entrada libre';
+  }
+  return `$ ${precio.toLocaleString('es-CO')}`;
+}</code></pre></div><ol class="notas">
+                  <li class="nota" data-lineas="42"><div class="nota-cabeza"><span class="nota-lineas">L42</span><code class="nota-codigo">function textoDelPrecio(precio) {</code></div><p>🟪 Una función que recibe un número y devuelve el texto que se debe mostrar. Separada del molde, se puede probar sola.</p></li>
+                  <li class="nota" data-lineas="43"><div class="nota-cabeza"><span class="nota-lineas">L43</span><code class="nota-codigo">if (precio === 0) {</code></div><p>🟨 JavaScript · <code>if</code> ejecuta el bloque entre llaves <strong>solo si</strong> la condición entre paréntesis es verdadera. <code>===</code> compara si dos valores son exactamente iguales (mismo valor y mismo tipo).</p></li>
+                  <li class="nota" data-lineas="44"><div class="nota-cabeza"><span class="nota-lineas">L44</span><code class="nota-codigo">return 'Entrada libre';</code></div><p>🟨 JavaScript · Si el precio es <code>0</code>, la función entrega este texto y <strong>termina ahí</strong>: no sigue a la línea 46.</p></li>
+                  <li class="nota" data-lineas="46"><div class="nota-cabeza"><span class="nota-lineas">L46</span><code class="nota-codigo">precio.toLocaleString('es-CO')</code></div><p>🟩 Navegador · <code>toLocaleString('es-CO')</code> escribe el número con el formato de Colombia: punto para los miles. 🟪 Le ponemos <code>$ </code> delante con una plantilla de texto.</p></li>
+                </ol></div>
+              </div>
+              <div class="active-build"><div class="build-step"><span class="build-step-index">▶</span><div class="build-step-copy"><h3 class="build-step-title">Pruébalo</h3><div class="consola"><div class="consola-head">Console de DevTools</div><ol><li class="in">textoDelPrecio(0)</li><li class="out">'Entrada libre'</li><li class="in">textoDelPrecio(45000)</li><li class="out">'$ 45.000'</li></ol></div></div></div><div class="checkpoint"><span class="component-label">Checkpoint</span><h3>La regla existe, pero el molde no la usa.</h3><p>La página todavía muestra <code>45000</code>.</p></div></div>
+            </article>
+
+            <div class="lectura">
+              <div class="lectura-head"><span class="lectura-num">4</span><h3 class="lectura-titulo">El molde usa la regla del precio</h3><p class="lectura-proposito"><strong>Necesidad:</strong> la tarjeta debe mostrar lo que calcula <code>textoDelPrecio</code>, no el número crudo. <strong>Dónde va:</strong> cambia la línea del precio dentro de <code>crearTarjeta</code>.</p></div>
+              <div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Línea 56</span><span class="code-file">app.js</span></div></div><pre class="line-numbers" data-start="56"><code class="language-javascript">      &lt;p class="precio"&gt;${textoDelPrecio(evento.precio)}&lt;/p&gt;</code></pre></div><ol class="notas"><li class="nota" data-lineas="56"><div class="nota-cabeza"><span class="nota-lineas">L56</span><code class="nota-codigo">${textoDelPrecio(evento.precio)}</code></div><p>🟨 JavaScript · Dentro de <code>${ }</code> puede ir cualquier cálculo, incluida la llamada a una función. Le pasamos el precio del evento y se inserta lo que ella devuelve.</p></li></ol></div>
+            </div>
+            <div class="checkpoint"><span class="component-label">Checkpoint</span><h3>Los cuatro precios ya hablan como Tarima.</h3><p>Noche de Salsa Brava muestra <code>$ 45.000</code>, La Casa de las Voces <code>$ 38.000</code>, Risas sin Filtro <code>$ 30.000</code> y Jazz en la Terraza <code>Entrada libre</code>.</p></div>
+
+            <h3>10.2 · Expresar el estado de los cupos</h3>
+            <div class="lectura">
+              <div class="lectura-head"><span class="lectura-num">5</span><h3 class="lectura-titulo">La regla de los cupos</h3><p class="lectura-proposito"><strong>Necesidad:</strong> Valentina pidió avisar cuando quedan pocos cupos y que se note cuando se agota. De nuevo, una regla de negocio en su propia función. <strong>Dónde va:</strong> debajo de <code>textoDelPrecio</code>.</p></div>
+              <div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 49–60</span><span class="code-file">app.js</span></div></div><pre class="line-numbers" data-start="49"><code class="language-javascript">function textoDeCupos(cupos) {
+  if (cupos === 0) {
+    return 'Agotado';
+  }
+  if (cupos === 1) {
+    return 'Último cupo';
+  }
+  if (cupos &lt;= 10) {
+    return `Últimos ${cupos} cupos`;
+  }
+  return `${cupos} cupos disponibles`;
+}</code></pre></div><ol class="notas">
+                <li class="nota" data-lineas="49"><div class="nota-cabeza"><span class="nota-lineas">L49</span><code class="nota-codigo">function textoDeCupos(cupos) {</code></div><p>🟪 Recibe la cantidad de cupos y devuelve el texto que la tarjeta debe mostrar.</p></li>
+                <li class="nota" data-lineas="50-52"><div class="nota-cabeza"><span class="nota-lineas">L50–52</span><code class="nota-codigo">if (cupos === 0)</code></div><p>🟨 JavaScript · Primera pregunta: ¿no quedan? Entonces "Agotado", y la función termina.</p></li>
+                <li class="nota" data-lineas="53-55"><div class="nota-cabeza"><span class="nota-lineas">L53–55</span><code class="nota-codigo">if (cupos === 1)</code></div><p>🟪 Sin esta regla, con un solo cupo diría "Últimos 1 cupos". El caso del uno existe porque el español lo exige.</p></li>
+                <li class="nota" data-lineas="56-58"><div class="nota-cabeza"><span class="nota-lineas">L56–58</span><code class="nota-codigo">if (cupos &lt;= 10)</code></div><p>🟨 JavaScript · <code>&lt;=</code> significa "menor o igual que". 🟪 Desde 10 cupos hacia abajo, avisamos. <code>`Últimos ${cupos} cupos`</code> arma el texto con el número real.</p></li>
+                <li class="nota" data-lineas="59"><div class="nota-cabeza"><span class="nota-lineas">L59</span><code class="nota-codigo">return `${cupos} cupos disponibles`;</code></div><p>🟨 JavaScript · Si ninguna condición anterior se cumplió, se llega aquí: hay más de 10 cupos.</p></li>
+              </ol></div>
+            </div>
+            <div class="active-build"><div class="build-step"><span class="build-step-index">▶</span><div class="build-step-copy"><h3 class="build-step-title">Pruébalo</h3><div class="consola"><div class="consola-head">Console de DevTools</div><ol><li class="in">textoDeCupos(0)</li><li class="out">'Agotado'</li><li class="in">textoDeCupos(1)</li><li class="out">'Último cupo'</li><li class="in">textoDeCupos(6)</li><li class="out">'Últimos 6 cupos'</li><li class="in">textoDeCupos(120)</li><li class="out">'120 cupos disponibles'</li></ol></div></div></div><div class="checkpoint"><span class="component-label">Checkpoint</span><h3>Los casos de negocio tienen una salida observable.</h3><p>La función responde distinto para 0, 1, pocos y muchos cupos.</p></div></div>
+            <div class="micro-task"><span class="component-label">Para pensar</span><p class="micro-task-q">¿Qué devuelve <code>textoDeCupos(10)</code>? ¿Y <code>textoDeCupos(11)</code>? Responde antes de probarlo en la consola.</p><details class="micro-reveal"><summary>Comprobar</summary><p class="micro-answer"><code>textoDeCupos(10)</code> devuelve <code>'Últimos 10 cupos'</code>, porque <code>10 &lt;= 10</code> es verdadero. <code>textoDeCupos(11)</code> devuelve <code>'11 cupos disponibles'</code>. Los límites de una regla (el 10 exacto) son los primeros casos que se prueban.</p></details></div>
+          </div>
+        </section>
+
+        <section class="section view" id="vista-dato" data-accent="1" data-layout="canvas" data-escena="construccion" hidden>
+          <div class="sec-head"><span class="sec-n">Construir · estado derivado</span><h2 class="sec-t">La tarjeta se calcula a partir del dato</h2><p class="sec-s">La tarjeta se atenúa, dice "Agotado" y bloquea el botón cuando los cupos son 0, sin que nadie lo escriba a mano.</p></div>
+          <div class="body">
+            <article class="archivo">
+              <div class="archivo-ficha"><span class="archivo-accion">Editar</span><span class="archivo-nombre">app.js</span><span class="archivo-ruta">tarima-clase0/</span></div>
+              <p class="archivo-intro"><strong>Dónde va:</strong> dentro de <code>crearTarjeta</code>. Agrega el cálculo de <code>agotado</code>, cambia el <code>article</code>, agrega los cupos y cambia el botón.</p>
+              <div class="lectura">
+                <div class="lectura-head"><span class="lectura-num">6</span><h3 class="lectura-titulo">La vista se deriva de <code>cuposDisponibles</code></h3><p class="lectura-proposito">Un solo booleano gobierna la clase visual y el bloqueo del botón; el texto de cupos sale de la función ya probada.</p></div>
+                <div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 62–75</span><span class="code-file">app.js</span></div></div><pre class="line-numbers" data-start="62"><code class="language-javascript">function crearTarjeta(evento) {
+  const agotado = evento.cuposDisponibles === 0;
+  return `
+    &lt;article class="tarjeta ${agotado ? 'agotada' : ''}"&gt;
+      &lt;span class="categoria"&gt;${evento.categoria}&lt;/span&gt;
+      &lt;h3&gt;${evento.nombre}&lt;/h3&gt;
+      &lt;p&gt;${evento.fecha}&lt;/p&gt;
+      &lt;p&gt;${evento.lugar}&lt;/p&gt;
+      &lt;p class="precio"&gt;${textoDelPrecio(evento.precio)}&lt;/p&gt;
+      &lt;p&gt;${textoDeCupos(evento.cuposDisponibles)}&lt;/p&gt;
+      &lt;button ${agotado ? 'disabled' : ''}&gt;Reservar&lt;/button&gt;
+    &lt;/article&gt;
+  `;
+}</code></pre></div><ol class="notas">
+                  <li class="nota" data-lineas="63"><div class="nota-cabeza"><span class="nota-lineas">L63</span><code class="nota-codigo">const agotado = evento.cuposDisponibles === 0;</code></div><p>🟨 JavaScript · La comparación <code>===</code> da como resultado <code>true</code> (verdadero) o <code>false</code> (falso), y lo guardamos con un nombre. 🟪 Lo calculamos una sola vez porque lo usamos en dos lugares (líneas 65 y 72).</p></li>
+                  <li class="nota" data-lineas="65"><div class="nota-cabeza"><span class="nota-lineas">L65</span><code class="nota-codigo">class="tarjeta ${agotado ? 'agotada' : ''}"</code></div><p>🟨 JavaScript · El <strong>operador ternario</strong> <code>condición ? siVerdadero : siFalso</code> es un <code>if</code> corto que devuelve un valor. Si <code>agotado</code> es verdadero, inserta <code>agotada</code>; si no, inserta un texto vacío. 🟪 La clase de CSS que Julián ponía a mano, ahora la decide el dato.</p></li>
+                  <li class="nota" data-lineas="71"><div class="nota-cabeza"><span class="nota-lineas">L71</span><code class="nota-codigo">textoDeCupos(evento.cuposDisponibles)</code></div><p>🟪 El aviso de cupos, calculado por la regla anterior.</p></li>
+                  <li class="nota" data-lineas="72"><div class="nota-cabeza"><span class="nota-lineas">L72</span><code class="nota-codigo">&lt;button ${agotado ? 'disabled' : ''}&gt;</code></div><p>🟨 JavaScript · El mismo ternario: si está agotado, escribe el atributo <code>disabled</code>; si no, nada. 🟪 El botón se bloquea solo.</p></li>
+                </ol></div>
+              </div>
+              <div class="active-build"><div class="build-step"><span class="build-step-index">▶</span><div class="build-step-copy"><h3 class="build-step-title">Pruébalo</h3><div class="consola"><div class="consola-head">Guarda y recarga</div><ol><li class="out">Noche de Salsa Brava · $ 45.000 · 120 cupos disponibles · [Reservar] activo</li><li class="out">La Casa de las Voces · $ 38.000 · Últimos 6 cupos · [Reservar] activo</li><li class="out">Risas sin Filtro · $ 30.000 · Agotado · [Reservar] gris; tarjeta apagada</li><li class="out">Jazz en la Terraza · Entrada libre · 80 cupos disponibles · [Reservar] activo</li></ol></div></div></div><div class="checkpoint"><span class="component-label">Checkpoint</span><h3>Cambiar el dato recalcula la tarjeta.</h3><p>Cambia <code>cuposDisponibles: 120</code> de Noche de Salsa Brava a <code>0</code>, guarda y recarga. La tarjeta aparece apagada, con "Agotado" y el botón gris. No tocaste el HTML. Devuelve el valor a <code>120</code>.</p></div></div>
+              <details class="code-reveal" data-archivo="app.js"><summary><span><span class="code-reveal-title">app.js · como queda al terminar este momento</span><span class="code-reveal-note">81 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Crear</span><span class="code-file">app.js</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-javascript">const eventos = [
+  {
+    id: 1,
+    nombre: 'Noche de Salsa Brava',
+    categoria: 'Concierto',
+    fecha: 'Sábado 7 de noviembre · 8:00 p. m.',
+    lugar: 'Teatro del Parque',
+    precio: 45000,
+    cuposDisponibles: 120,
+  },
+  {
+    id: 2,
+    nombre: 'La Casa de las Voces',
+    categoria: 'Teatro',
+    fecha: 'Domingo 8 de noviembre · 7:30 p. m.',
+    lugar: 'Sala Chapinero',
+    precio: 38000,
+    cuposDisponibles: 6,
+  },
+  {
+    id: 3,
+    nombre: 'Risas sin Filtro',
+    categoria: 'Stand-up',
+    fecha: 'Jueves 12 de noviembre · 9:00 p. m.',
+    lugar: 'Bodega Cultural del Centro',
+    precio: 30000,
+    cuposDisponibles: 0,
+  },
+  {
+    id: 4,
+    nombre: 'Jazz en la Terraza',
+    categoria: 'Concierto',
+    fecha: 'Sábado 14 de noviembre · 6:00 p. m.',
+    lugar: 'Terraza Usaquén',
+    precio: 0,
+    cuposDisponibles: 80,
+  },
+];
+
+const cartelera = document.querySelector('#cartelera');
+
+function textoDelPrecio(precio) {
+  if (precio === 0) {
+    return 'Entrada libre';
+  }
+  return `$ ${precio.toLocaleString('es-CO')}`;
+}
+
+function textoDeCupos(cupos) {
+  if (cupos === 0) {
+    return 'Agotado';
+  }
+  if (cupos === 1) {
+    return 'Último cupo';
+  }
+  if (cupos &lt;= 10) {
+    return `Últimos ${cupos} cupos`;
+  }
+  return `${cupos} cupos disponibles`;
+}
+
+function crearTarjeta(evento) {
+  const agotado = evento.cuposDisponibles === 0;
+  return `
+    &lt;article class="tarjeta ${agotado ? 'agotada' : ''}"&gt;
+      &lt;span class="categoria"&gt;${evento.categoria}&lt;/span&gt;
+      &lt;h3&gt;${evento.nombre}&lt;/h3&gt;
+      &lt;p&gt;${evento.fecha}&lt;/p&gt;
+      &lt;p&gt;${evento.lugar}&lt;/p&gt;
+      &lt;p class="precio"&gt;${textoDelPrecio(evento.precio)}&lt;/p&gt;
+      &lt;p&gt;${textoDeCupos(evento.cuposDisponibles)}&lt;/p&gt;
+      &lt;button ${agotado ? 'disabled' : ''}&gt;Reservar&lt;/button&gt;
+    &lt;/article&gt;
+  `;
+}
+
+function pintar() {
+  cartelera.innerHTML = eventos.map(crearTarjeta).join('');
+}
+
+pintar();</code></pre></div></div></details>
+            </article>
+          </div>
+        </section>
+
+        <section class="section view" id="reservar" data-accent="1" data-layout="canvas" data-escena="construccion" hidden>
+          <div class="sec-head"><span class="sec-n">Construir · reservar</span><h2 class="sec-t">El dato cambia, ¿y la pantalla?</h2><p class="sec-s">Cada reserva debe descontar un cupo y, cuando llegue a 0, el evento debe agotarse solo.</p></div>
+          <div class="body">
+            <div class="definicion"><div class="def-tecnica"><span class="component-label">Definición técnica</span><p class="def-termino">Evento del navegador</p><p>Es algo que ocurre en la página: un clic, una tecla, el fin de la carga. JavaScript puede <strong>escucharlo</strong> y ejecutar una función cada vez que pasa.</p></div><div class="def-vida"><span class="component-label">En la vida real</span><p>Es el timbre de la casa: el timbre no abre la puerta; avisa que alguien llegó, y quien está adentro decide qué hacer.</p></div></div>
+
+            <h3>12.1 · Identificar el evento elegido</h3>
+            <article class="archivo">
+              <div class="archivo-ficha"><span class="archivo-accion">Editar</span><span class="archivo-nombre">app.js</span><span class="archivo-ruta">tarima-clase0/</span></div>
+              <p class="archivo-intro">El botón Reservar de los eventos con cupos todavía no hace nada. El código necesita saber qué evento se reservó.</p>
+              <div class="lectura">
+                <div class="lectura-head"><span class="lectura-num">7</span><h3 class="lectura-titulo">Cada botón dice de qué evento es</h3><p class="lectura-proposito"><strong>Necesidad:</strong> cuando alguien haga clic en un botón, el código tiene que saber <strong>qué evento</strong> se reservó. <strong>Dónde va:</strong> cambia la línea del botón dentro de <code>crearTarjeta</code>.</p></div>
+                <div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Línea 72</span><span class="code-file">app.js</span></div></div><pre class="line-numbers" data-start="72"><code class="language-javascript">      &lt;button data-id="${evento.id}" ${agotado ? 'disabled' : ''}&gt;Reservar&lt;/button&gt;</code></pre></div><ol class="notas"><li class="nota" data-lineas="72"><div class="nota-cabeza"><span class="nota-lineas">L72</span><code class="nota-codigo">data-id="${evento.id}"</code></div><p>🟨 HTML · Los atributos que empiezan por <code>data-</code> son atributos <strong>propios</strong>: HTML permite inventarlos para guardar datos en un elemento. 🟪 <code>data-id</code> guarda el <code>id</code> del evento en su botón.</p></li></ol></div>
+              </div>
+              <div class="active-build"><div class="build-step"><span class="build-step-index">▶</span><div class="build-step-copy"><h3 class="build-step-title">Pruébalo</h3><div class="consola"><div class="consola-head">DevTools → Elements</div><ol><li class="out">Despliega la tarjeta de "Risas sin Filtro".</li><li class="out">&lt;button data-id="3" disabled=""&gt;Reservar&lt;/button&gt;</li></ol></div></div></div><div class="checkpoint"><span class="component-label">Checkpoint</span><h3>El botón transporta el id.</h3><p>El <code>disabled=""</code> es como DevTools muestra un atributo sin valor: es el mismo <code>disabled</code> de siempre.</p></div></div>
+            </article>
+
+            <h3>12.2 · Escuchar, cambiar y pintar</h3>
+            <div class="lectura">
+              <div class="lectura-head"><span class="lectura-num">8</span><h3 class="lectura-titulo">Escuchar el clic y descontar un cupo</h3><p class="lectura-proposito"><strong>Necesidad:</strong> al pulsar Reservar, hay que encontrar el evento por su <code>id</code>, restarle un cupo y volver a dibujar la cartelera. <strong>Dónde va:</strong> entre el final de <code>pintar</code> y la última llamada a <code>pintar();</code>.</p></div>
+              <div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 81–89</span><span class="code-file">app.js</span></div></div><pre class="line-numbers" data-start="81"><code class="language-javascript">cartelera.addEventListener('click', (clic) =&gt; {
+  const id = Number(clic.target.dataset.id);
+  const elegido = eventos.find((evento) =&gt; evento.id === id);
+  if (!elegido || elegido.cuposDisponibles === 0) {
+    return;
+  }
+  elegido.cuposDisponibles = elegido.cuposDisponibles - 1;
+  pintar();
+});</code></pre></div><ol class="notas">
+                <li class="nota" data-lineas="81"><div class="nota-cabeza"><span class="nota-lineas">L81</span><code class="nota-codigo">addEventListener('click', (clic) =&gt; {</code></div><p>🟩 Navegador · <code>addEventListener</code> pone a la sección a <strong>escuchar</strong> un tipo de evento: <code>'click'</code>. El segundo dato es la función que se ejecuta en cada clic. 🟨 JavaScript · <code>(clic) =&gt; { }</code> es una <strong>función flecha</strong>: una forma corta de escribir una función sin nombre. <code>clic</code> recibe la información del clic. 🟪 Escuchamos en la sección, no en cada botón, porque los botones se borran y se crean de nuevo cada vez que pintamos; la sección siempre es la misma.</p></li>
+                <li class="nota" data-lineas="82"><div class="nota-cabeza"><span class="nota-lineas">L82</span><code class="nota-codigo">Number(clic.target.dataset.id)</code></div><p>🟩 Navegador · <code>clic.target</code> es el elemento exacto donde se hizo clic. <code>dataset.id</code> lee su atributo <code>data-id</code>. Llega como texto (<code>'2'</code>), y 🟨 <code>Number()</code> lo convierte en número (<code>2</code>) para compararlo con los <code>id</code> de los datos. Si el clic fue en un texto de la tarjeta, no hay <code>data-id</code> y el resultado no es un número válido.</p></li>
+                <li class="nota" data-lineas="83"><div class="nota-cabeza"><span class="nota-lineas">L83</span><code class="nota-codigo">eventos.find((evento) =&gt; evento.id === id)</code></div><p>🟨 JavaScript · <code>find</code> recorre la lista y devuelve el <strong>primer</strong> evento que cumple la condición: que su <code>id</code> sea igual al del botón. Si ninguno la cumple, devuelve <code>undefined</code> (nada).</p></li>
+                <li class="nota" data-lineas="84-86"><div class="nota-cabeza"><span class="nota-lineas">L84–86</span><code class="nota-codigo">if (!elegido || elegido.cuposDisponibles === 0)</code></div><p>🟨 JavaScript · <code>!</code> significa "no" y <code>||</code> significa "o". Se lee: "si no hay evento elegido, <strong>o</strong> si ya no tiene cupos, sal de la función sin hacer nada". 🟪 La primera parte ignora los clics fuera de un botón; la segunda protege la regla de negocio aunque alguien manipule la pantalla.</p></li>
+                <li class="nota" data-lineas="87"><div class="nota-cabeza"><span class="nota-lineas">L87</span><code class="nota-codigo">elegido.cuposDisponibles = elegido.cuposDisponibles - 1;</code></div><p>🟨 JavaScript · El <code>=</code> asigna: el nuevo valor de los cupos es el valor actual menos uno. 🟪 Cambiamos el <strong>dato</strong>, no el HTML.</p></li>
+                <li class="nota" data-lineas="88"><div class="nota-cabeza"><span class="nota-lineas">L88</span><code class="nota-codigo">pintar();</code></div><p>🟪 Volvemos a dibujar toda la cartelera desde los datos, que ya cambiaron.</p></li>
+                <li class="nota" data-lineas="89"><div class="nota-cabeza"><span class="nota-lineas">L89</span><code class="nota-codigo">});</code></div><p>🟨 JavaScript · Cierra la función flecha (<code>}</code>) y la llamada a <code>addEventListener</code> (<code>)</code>).</p></li>
+              </ol></div>
+            </div>
+            <div class="active-build"><div class="build-step"><span class="build-step-index">▶</span><div class="build-step-copy"><h3 class="build-step-title">Pruébalo</h3><div class="consola"><div class="consola-head">Haz clic en Reservar de "La Casa de las Voces"</div><ol><li class="out">Clic 1: Últimos 5 cupos</li><li class="out">Clic 2: Últimos 4 cupos</li><li class="out">Clic 3: Últimos 3 cupos</li><li class="out">Clic 4: Últimos 2 cupos</li><li class="out">Clic 5: Último cupo</li><li class="out">Clic 6: Agotado · tarjeta apagada · [Reservar] gris</li></ol></div></div></div><div class="checkpoint"><span class="component-label">Checkpoint</span><h3>El evento se agota solo.</h3><p>En el mismo instante en que el dato llega a 0, la vista muestra el estado nuevo.</p></div></div>
+
+            <h3>12.3 · Ver la desincronización</h3>
+            <div class="callout" data-tone="warning"><span class="callout-icon">!</span><div><h3>Quítala y mira</h3><p>Borra la línea 88 (<code>pintar();</code> dentro del clic), guarda, recarga y haz clic 3 veces en Reservar de "La Casa de las Voces". La pantalla sigue diciendo "Últimos 6 cupos". En la Console, <code>eventos[1].cuposDisponibles</code> responde <code>3</code>. El dato cambió y la pantalla no se enteró. Vuelve a escribir la línea.</p></div></div>
+            <div class="callout" data-tone="danger"><span class="callout-icon">!</span><div><h3>La regla no puede vivir solo en la pantalla</h3><p>En la línea 84, borra <code>|| elegido.cuposDisponibles === 0</code>, guarda y recarga. En DevTools → Elements, busca el botón de "Risas sin Filtro" y borra <code>disabled</code>. Al hacer clic, la tarjeta dice "Últimos -1 cupos". Cualquier persona puede quitar un <code>disabled</code> desde su navegador. Vuelve a escribir la condición y comprueba que el clic no cambia nada.</p></div></div>
+            <details class="code-reveal" data-archivo="app.js"><summary><span><span class="code-reveal-title">app.js · versión final</span><span class="code-reveal-note">91 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Editar</span><span class="code-file">app.js</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-javascript">const eventos = [
+  {
+    id: 1,
+    nombre: 'Noche de Salsa Brava',
+    categoria: 'Concierto',
+    fecha: 'Sábado 7 de noviembre · 8:00 p. m.',
+    lugar: 'Teatro del Parque',
+    precio: 45000,
+    cuposDisponibles: 120,
+  },
+  {
+    id: 2,
+    nombre: 'La Casa de las Voces',
+    categoria: 'Teatro',
+    fecha: 'Domingo 8 de noviembre · 7:30 p. m.',
+    lugar: 'Sala Chapinero',
+    precio: 38000,
+    cuposDisponibles: 6,
+  },
+  {
+    id: 3,
+    nombre: 'Risas sin Filtro',
+    categoria: 'Stand-up',
+    fecha: 'Jueves 12 de noviembre · 9:00 p. m.',
+    lugar: 'Bodega Cultural del Centro',
+    precio: 30000,
+    cuposDisponibles: 0,
+  },
+  {
+    id: 4,
+    nombre: 'Jazz en la Terraza',
+    categoria: 'Concierto',
+    fecha: 'Sábado 14 de noviembre · 6:00 p. m.',
+    lugar: 'Terraza Usaquén',
+    precio: 0,
+    cuposDisponibles: 80,
+  },
+];
+
+const cartelera = document.querySelector('#cartelera');
+
+function textoDelPrecio(precio) {
+  if (precio === 0) {
+    return 'Entrada libre';
+  }
+  return `$ ${precio.toLocaleString('es-CO')}`;
+}
+
+function textoDeCupos(cupos) {
+  if (cupos === 0) {
+    return 'Agotado';
+  }
+  if (cupos === 1) {
+    return 'Último cupo';
+  }
+  if (cupos &lt;= 10) {
+    return `Últimos ${cupos} cupos`;
+  }
+  return `${cupos} cupos disponibles`;
+}
+
+function crearTarjeta(evento) {
+  const agotado = evento.cuposDisponibles === 0;
+  return `
+    &lt;article class="tarjeta ${agotado ? 'agotada' : ''}"&gt;
+      &lt;span class="categoria"&gt;${evento.categoria}&lt;/span&gt;
+      &lt;h3&gt;${evento.nombre}&lt;/h3&gt;
+      &lt;p&gt;${evento.fecha}&lt;/p&gt;
+      &lt;p&gt;${evento.lugar}&lt;/p&gt;
+      &lt;p class="precio"&gt;${textoDelPrecio(evento.precio)}&lt;/p&gt;
+      &lt;p&gt;${textoDeCupos(evento.cuposDisponibles)}&lt;/p&gt;
+      &lt;button data-id="${evento.id}" ${agotado ? 'disabled' : ''}&gt;Reservar&lt;/button&gt;
+    &lt;/article&gt;
+  `;
+}
+
+function pintar() {
+  cartelera.innerHTML = eventos.map(crearTarjeta).join('');
+}
+
+cartelera.addEventListener('click', (clic) =&gt; {
+  const id = Number(clic.target.dataset.id);
+  const elegido = eventos.find((evento) =&gt; evento.id === id);
+  if (!elegido || elegido.cuposDisponibles === 0) {
+    return;
+  }
+  elegido.cuposDisponibles = elegido.cuposDisponibles - 1;
+  pintar();
+});
+
+pintar();</code></pre></div></div></details>
+          </div>
+        </section>
+
+        <section class="section view" id="typescript" data-accent="1" data-layout="canvas" data-escena="prueba" hidden>
+          <div class="sec-head"><span class="sec-n">Detectar</span><h2 class="sec-t">El error que JavaScript no ve</h2><p class="sec-s">Julián ya calcula la vista desde los datos. Pero un viernes en la noche, apurado, escribe mal una letra.</p></div>
+          <div class="body">
+            <div class="active-build"><div class="build-step"><span class="build-step-index">1</span><div class="build-step-copy"><h3 class="build-step-title">Provoca el error silencioso</h3><p class="build-step-purpose">En <code>app.js</code>, línea 63, borra la última <code>s</code> de <code>cuposDisponibles</code>: queda <code>evento.cuposDisponible</code>. Guarda y recarga.</p><div class="code-block"><div class="code-head"><div><span class="code-context">Cambio intencional</span><span class="code-file">app.js</span></div></div><pre><code class="language-javascript">const agotado = evento.cuposDisponible === 0;</code></pre></div></div></div><div class="checkpoint"><span class="component-label">Salida esperada</span><h3>La pantalla se contradice sin mostrar error.</h3><p>"Risas sin Filtro" dice "Agotado", pero la tarjeta no está apagada y Reservar está activo. La Console no muestra ningún mensaje en rojo.</p></div></div>
+            <div class="callout" data-tone="danger"><span class="callout-icon">!</span><div><h3>Una propiedad inexistente se vuelve <code>undefined</code></h3><p><code>evento.cuposDisponible</code> no existe. JavaScript no avisa: devuelve <code>undefined</code>, y <code>undefined === 0</code> es <code>false</code>, así que el código concluye que el evento <strong>no</strong> está agotado. El texto sí dice "Agotado" porque la otra línea tiene el nombre bien escrito. Una sola letra recreó el incidente del sábado, y nada lo advirtió. JavaScript solo descubre los errores <strong>mientras se ejecuta</strong>, y algunos ni siquiera los descubre.</p></div></div>
+            <p>Corrige la línea: vuelve a escribir <code>cuposDisponibles</code>, guarda y recarga.</p>
+            <div class="definicion">
+              <div class="def-tecnica"><span class="component-label">Definición técnica</span><p class="def-termino">TypeScript</p><p><strong>TypeScript</strong> es JavaScript con <strong>tipos</strong>: le dices de antemano qué forma tienen tus datos, y una herramienta revisa el código <strong>antes de ejecutarlo</strong> y marca todo lo que no coincide. El navegador no entiende TypeScript: antes de usarlo, se <strong>compila</strong> (se traduce) a JavaScript, y en esa traducción los tipos se borran.</p></div>
+              <div class="def-vida"><span class="component-label">En la vida real</span><p>Es el formulario de una EPS con campos obligatorios: no te deja radicar la solicitud si falta la cédula o si en "edad" escribiste letras. El error se detecta al llenarlo, no cuando la solicitud llega rechazada un mes después.</p></div>
+            </div>
+            <div class="papel"><span class="component-label">Explicación sencilla</span><p>Es un corrector ortográfico para tu código, que conoce el "diccionario" de tus datos. Si el diccionario dice que un evento tiene <code>cuposDisponibles</code>, cualquier <code>cuposDisponible</code> sale subrayado en rojo mientras escribes.</p></div>
+            <p>Si ya programaste en Java, esto lo conoces: en Java toda variable tiene un tipo y el compilador no te deja usar un método que no existe. TypeScript le da eso mismo a JavaScript. Si no has visto Java, no importa: hoy lo vas a ver funcionar.</p>
+          </div>
+        </section>
+
+        <section class="section view" id="typescript-construir" data-accent="1" data-layout="canvas" data-escena="construccion" hidden>
+          <div class="sec-head"><span class="sec-n">Construir · evento.ts</span><h2 class="sec-t">Un contrato que revisa antes de ejecutar</h2><p class="sec-s">Este archivo no forma parte de la página: sirve para ver a TypeScript trabajar.</p></div>
+          <div class="body">
+            <p>VS Code ya trae TypeScript incorporado, así que no hay que instalar nada: con solo crear un archivo <code>.ts</code>, revisa el código mientras escribes. En el Explorer: <strong>New File</strong> → <code>evento.ts</code>, al lado de <code>app.js</code>.</p>
+
+            <h3>14.1 · Escribir el contrato</h3>
+            <article class="archivo">
+              <div class="archivo-ficha"><span class="archivo-accion">Crear</span><span class="archivo-nombre">evento.ts</span><span class="archivo-ruta">tarima-clase0/</span></div>
+              <p class="archivo-intro">Para que alguien revise que los datos estén bien, primero hay que escribir cómo debe ser un evento: qué propiedades tiene y de qué tipo es cada una.</p>
+              <div class="lectura">
+                <div class="lectura-head"><span class="lectura-num">1</span><h3 class="lectura-titulo">El contrato de un evento</h3><p class="lectura-proposito"><strong>Dónde va:</strong> en <code>evento.ts</code>, que está vacío.</p></div>
+                <div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 1–9</span><span class="code-file">evento.ts</span></div></div><pre class="line-numbers" data-start="1"><code class="language-typescript">interface Evento {
+  id: number;
+  nombre: string;
+  categoria: string;
+  fecha: string;
+  lugar: string;
+  precio: number;
+  cuposDisponibles: number;
+}</code></pre></div><ol class="notas">
+                  <li class="nota" data-lineas="1"><div class="nota-cabeza"><span class="nota-lineas">L1</span><code class="nota-codigo">interface Evento {</code></div><p>🟨 TypeScript · <code>interface</code> define la <strong>forma</strong> que debe tener un objeto: un contrato. No crea ningún evento; describe cómo son todos. ⬜ El nombre empieza en mayúscula, como las clases en Java.</p></li>
+                  <li class="nota" data-lineas="2"><div class="nota-cabeza"><span class="nota-lineas">L2</span><code class="nota-codigo">id: number;</code></div><p>🟨 TypeScript · Cada línea es <code>propiedad: tipo;</code>. <code>number</code> es el tipo de los números, enteros o con decimales.</p></li>
+                  <li class="nota" data-lineas="3-6"><div class="nota-cabeza"><span class="nota-lineas">L3–6</span><code class="nota-codigo">string</code></div><p>🟨 TypeScript · <code>string</code> es el tipo de los textos. Nombre, categoría, fecha y lugar son textos.</p></li>
+                  <li class="nota" data-lineas="7-8"><div class="nota-cabeza"><span class="nota-lineas">L7–8</span><code class="nota-codigo">precio y cuposDisponibles</code></div><p>🟪 Son números porque con ellos se calcula: se comparan con 0 y se les resta.</p></li>
+                  <li class="nota" data-lineas="9"><div class="nota-cabeza"><span class="nota-lineas">L9</span><code class="nota-codigo">}</code></div><p>🟨 TypeScript · Cierra el contrato.</p></li>
+                </ol></div>
+              </div>
+              <div class="checkpoint"><span class="component-label">Checkpoint</span><h3>Nada aparece en rojo.</h3><p>El contrato existe, pero todavía nadie lo usa.</p></div>
+            </article>
+
+            <h3>14.2 · Hacer que los datos lo cumplan</h3>
+            <div class="lectura">
+              <div class="lectura-head"><span class="lectura-num">2</span><h3 class="lectura-titulo">Un evento que cumple el contrato</h3><p class="lectura-proposito"><strong>Necesidad:</strong> un contrato sirve si los datos lo cumplen. Creamos "Risas sin Filtro" y le decimos a TypeScript que <strong>es</strong> un <code>Evento</code>. <strong>Dónde va:</strong> debajo de la interfaz.</p></div>
+              <div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 11–19</span><span class="code-file">evento.ts</span></div></div><pre class="line-numbers" data-start="11"><code class="language-typescript">const risas: Evento = {
+  id: 3,
+  nombre: 'Risas sin Filtro',
+  categoria: 'Stand-up',
+  fecha: 'Jueves 12 de noviembre · 9:00 p. m.',
+  lugar: 'Bodega Cultural del Centro',
+  precio: 30000,
+  cuposDisponibles: 0,
+};</code></pre></div><ol class="notas">
+                <li class="nota" data-lineas="11"><div class="nota-cabeza"><span class="nota-lineas">L11</span><code class="nota-codigo">const risas: Evento = {</code></div><p>🟨 TypeScript · Los dos puntos después del nombre de una variable le ponen <strong>tipo</strong>: <code>risas</code> tiene que ser un <code>Evento</code>. Desde ahora TypeScript compara este objeto con el contrato.</p></li>
+                <li class="nota" data-lineas="12-18"><div class="nota-cabeza"><span class="nota-lineas">L12–18</span><code class="nota-codigo">las propiedades</code></div><p>🟨 JavaScript · Es el mismo objeto que escribiste en <code>app.js</code>. Nada nuevo: TypeScript es JavaScript con tipos encima.</p></li>
+                <li class="nota" data-lineas="19"><div class="nota-cabeza"><span class="nota-lineas">L19</span><code class="nota-codigo">};</code></div><p>🟨 JavaScript · Cierra el objeto y la instrucción.</p></li>
+              </ol></div>
+            </div>
+            <div class="active-build"><div class="build-step"><span class="build-step-index">▶</span><div class="build-step-copy"><h3 class="build-step-title">Pruébalo: dos errores, uno a la vez</h3><div class="consola"><div class="consola-head">Borra la línea 16 (lugar) y guarda</div><ol><li class="out">"risas" subrayado en rojo</li><li class="out">Property 'lugar' is missing in type '{ ... }' but required in type 'Evento'.</li><li class="out">La propiedad "lugar" falta en el tipo "{ ... }", pero es obligatoria en el tipo "Evento".</li></ol></div><div class="consola"><div class="consola-head">Deshazlo; cambia precio por '30000' y guarda</div><ol><li class="out">"precio" subrayado en rojo</li><li class="out">Type 'string' is not assignable to type 'number'.</li><li class="out">El tipo 'string' no se puede asignar al tipo 'number'.</li></ol></div></div></div><div class="checkpoint"><span class="component-label">Checkpoint</span><h3>El contrato detecta ausencia y tipo incorrecto.</h3><p>En JavaScript, <code>'30000'</code> entre comillas habría pasado sin aviso.</p></div></div>
+
+            <h3>14.3 · Repetir el error de la letra</h3>
+            <div class="lectura">
+              <div class="lectura-head"><span class="lectura-num">3</span><h3 class="lectura-titulo">La regla, revisada antes de ejecutarse</h3><p class="lectura-proposito"><strong>Necesidad:</strong> la regla de "agotado" es la que falló en silencio. La escribimos con tipos y repetimos el error. <strong>Dónde va:</strong> debajo del objeto.</p></div>
+              <div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 21–25</span><span class="code-file">evento.ts</span></div></div><pre class="line-numbers" data-start="21"><code class="language-typescript">function estaAgotado(evento: Evento): boolean {
+  return evento.cuposDisponibles === 0;
+}
+
+console.log(estaAgotado(risas));</code></pre></div><ol class="notas">
+                <li class="nota" data-lineas="21"><div class="nota-cabeza"><span class="nota-lineas">L21</span><code class="nota-codigo">function estaAgotado(evento: Evento): boolean {</code></div><p>🟨 TypeScript · El parámetro lleva tipo (<code>evento: Evento</code>): la función solo acepta eventos. Los dos puntos después del paréntesis dicen qué <strong>devuelve</strong>: <code>boolean</code>, el tipo de <code>true</code> y <code>false</code>.</p></li>
+                <li class="nota" data-lineas="22"><div class="nota-cabeza"><span class="nota-lineas">L22</span><code class="nota-codigo">return evento.cuposDisponibles === 0;</code></div><p>🟨 JavaScript · La misma comparación de <code>app.js</code>. Ahora TypeScript sabe qué propiedades tiene <code>evento</code> y puede revisarla.</p></li>
+                <li class="nota" data-lineas="25"><div class="nota-cabeza"><span class="nota-lineas">L25</span><code class="nota-codigo">console.log(estaAgotado(risas));</code></div><p>🟩 Navegador · <code>console.log</code> escribe un valor en la consola. 🟪 Nos permite ver el resultado cuando lo ejecutemos.</p></li>
+              </ol></div>
+            </div>
+            <div class="active-build"><div class="build-step"><span class="build-step-index">▶</span><div class="build-step-copy"><h3 class="build-step-title">Pruébalo</h3><p class="build-step-purpose">En la línea 22, borra la última <code>s</code> de <code>cuposDisponibles</code> y guarda.</p><div class="consola"><div class="consola-head">VS Code</div><ol><li class="out">"cuposDisponible" subrayado en rojo</li><li class="out">Property 'cuposDisponible' does not exist on type 'Evento'. Did you mean 'cuposDisponibles'?</li><li class="out">La propiedad "cuposDisponible" no existe en el tipo "Evento". ¿Quería decir "cuposDisponibles"?</li></ol></div></div></div><div class="checkpoint"><span class="component-label">Checkpoint</span><h3>El mismo error aparece antes de ejecutar.</h3><p>Además, TypeScript sugiere la corrección. Corrígelo.</p></div></div>
+
+            <h3>14.4 · Ver la traducción</h3>
+            <div class="panel"><h3>TypeScript Playground</h3><p>Abre <code>typescriptlang.org/play</code>, borra el ejemplo que trae y pega todo <code>evento.ts</code>.</p><ul class="checklist"><li>Panel derecho, pestaña <code>.JS</code>: el mismo código <strong>sin</strong> <code>interface Evento</code> y sin <code>: Evento</code> ni <code>: boolean</code>.</li><li>Botón <strong>Run</strong> → pestaña <strong>Logs</strong>: <code>true</code>.</li></ul><p>Eso es lo que llega al navegador. Los tipos solo existen mientras escribes: sirven para que el error salga en tu pantalla y no en la de Valentina.</p></div>
+
+            <div class="momento-ia">
+              <div class="momento-ia-head"><span class="momento-ia-titulo">Momento IA</span><span class="ia-nivel">Nivel 0 · Tutor</span><span class="ia-herramienta">Chat navegador</span></div>
+              <div class="momento-ia-body">
+                <div class="ia-grid"><div><span class="component-label">Primero razonas tú</span><p>Escribe en una frase qué hace TypeScript con la línea <code>precio: '30000'</code>.</p></div><div class="ia-no-delega"><span class="component-label">No se delega</span><p>Decidir qué tipo tiene cada propiedad del contrato. Eso sale del negocio (¿el precio se calcula o solo se muestra?), no de la IA.</p></div></div>
+                <div class="code-block" data-tipo="prompt"><div class="code-head"><div><span class="code-context">Prompt sugerido</span><span class="code-file">Chat navegador</span></div><button class="copy-btn" type="button">Copiar</button></div><pre><code class="language-plaintext">Estoy aprendiendo desde cero. Tengo esta interfaz de TypeScript: [pega las líneas 1 a 9 de evento.ts]. Sin escribir código nuevo, explícame con un ejemplo de la vida real qué pasaría si alguien escribe `evento.precio = 'gratis'` en JavaScript y qué pasa en TypeScript. Máximo 6 líneas.</code></pre></div>
+                <div><span class="component-label">Cómo validar la respuesta</span><ul class="checklist"><li>Escribe en VS Code, debajo de la línea 19, <code>risas.precio = 'gratis';</code>.</li><li>Si la IA dijo que TypeScript lo marca, debe aparecer subrayado en rojo.</li><li>Después borra la línea.</li></ul></div>
+              </div>
+            </div>
+
+            <details class="code-reveal" data-archivo="evento.ts"><summary><span><span class="code-reveal-title">evento.ts · archivo completo</span><span class="code-reveal-note">25 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Crear</span><span class="code-file">evento.ts</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-typescript">interface Evento {
+  id: number;
+  nombre: string;
+  categoria: string;
+  fecha: string;
+  lugar: string;
+  precio: number;
+  cuposDisponibles: number;
+}
+
+const risas: Evento = {
+  id: 3,
+  nombre: 'Risas sin Filtro',
+  categoria: 'Stand-up',
+  fecha: 'Jueves 12 de noviembre · 9:00 p. m.',
+  lugar: 'Bodega Cultural del Centro',
+  precio: 30000,
+  cuposDisponibles: 0,
+};
+
+function estaAgotado(evento: Evento): boolean {
+  return evento.cuposDisponibles === 0;
+}
+
+console.log(estaAgotado(risas));</code></pre></div></div></details>
+          </div>
+        </section>
+
+        <section class="section view" id="angular" data-accent="1" data-layout="canvas" data-escena="concepto" hidden>
+          <div class="sec-head"><span class="sec-n">Conectar</span><h2 class="sec-t">Cada dolor manual tiene una pieza de Angular</h2><p class="sec-s">Esta noche resolviste algunos dolores a mano y dejaste otros abiertos.</p></div>
+          <div class="body">
+            <div class="table-wrap"><table class="data-table"><caption>El tablero de Julián</caption><thead><tr><th>Dolor de Julián</th><th>Hoy, a mano</th><th>En Angular</th><th>Clase</th></tr></thead><tbody>
+              <tr><td>1. Cada evento es una copia del HTML</td><td>Una función molde (<code>crearTarjeta</code>)</td><td>Un <strong>componente</strong> (<code>TarjetaEvento</code>) usado con <code>@for</code></td><td>1</td></tr>
+              <tr><td>2. Agotar exige cambiar 3 cosas a mano</td><td>Ternarios dentro de la plantilla</td><td><strong>Data binding</strong>: <code>[disabled]</code>, <code>[class.…]</code>, <code>@if</code></td><td>1</td></tr>
+              <tr><td>3. Si olvido volver a pintar, la pantalla miente</td><td><code>pintar()</code> después de cada cambio</td><td>Angular redibuja solo lo que cambió</td><td>1 y 3</td></tr>
+              <tr><td>4. Un error de una letra pasa en silencio</td><td><code>evento.ts</code> aparte, solo para revisar</td><td><strong>TypeScript</strong> en todo el proyecto</td><td>1</td></tr>
+              <tr><td>5. Todo vive en un <code>app.js</code> que crece sin orden</td><td>Un solo archivo</td><td>Carpetas <code>components/</code>, <code>pages/</code>, <code>services/</code></td><td>1</td></tr>
+              <tr><td>6. Una sola página, sin dirección por evento</td><td>No se resolvió</td><td><strong>Router</strong>: <code>/eventos/3</code></td><td>2</td></tr>
+              <tr><td>7. Los cupos se reinician al recargar</td><td>No se resolvió</td><td><strong>HttpClient</strong> contra un backend</td><td>4</td></tr>
+            </tbody></table></div>
+            <div class="table-wrap"><table class="data-table"><caption>Lo mismo, dicho de dos formas</caption><thead><tr><th>Hoy, en JavaScript</th><th>La semana pasada, en Angular</th></tr></thead><tbody>
+              <tr><td><code>function crearTarjeta(evento) { ... }</code></td><td>El componente <code>TarjetaEvento</code>, con <code>evento = input.required&lt;Evento&gt;()</code></td></tr>
+              <tr><td><code>eventos.map(crearTarjeta).join('')</code></td><td><code>@for (evento of eventos; track evento.id) { &lt;app-tarjeta-evento [evento]="evento" /&gt; }</code></td></tr>
+              <tr><td><code>${evento.nombre}</code></td><td><code>{{ evento().nombre }}</code></td></tr>
+              <tr><td><code>${agotado ? 'disabled' : ''}</code></td><td><code>[disabled]="estaAgotado()"</code></td></tr>
+              <tr><td><code>class="tarjeta ${agotado ? 'agotada' : ''}"</code></td><td><code>[class.tarjeta--agotada]="estaAgotado()"</code></td></tr>
+              <tr><td><code>pintar();</code> después de cada cambio</td><td>Nada: Angular se encarga</td></tr>
+              <tr><td><code>interface Evento</code> en un archivo suelto</td><td><code>export interface Evento</code> en <code>models/evento.ts</code></td></tr>
+            </tbody></table></div>
+            <div class="panel"><h3>Abre lo que hiciste la semana pasada</h3><p>En una terminal de VS Code, desde la carpeta <code>tarima-web</code>:</p><div class="code-block" data-tipo="terminal"><div class="code-head"><div><span class="code-context">Terminal · desde tarima-web</span></div><button class="copy-btn" type="button">Copiar</button></div><pre><code class="language-bash">ng serve</code></pre></div><p><strong>Qué hace:</strong> compila el proyecto (traduce TypeScript a JavaScript, igual que el Playground) y lo sirve en tu computador. <strong>Resultado esperado:</strong> la terminal muestra <code>Local: http://localhost:4200/</code>. Abre esa dirección.</p></div>
+            <div class="active-build"><div class="build-step"><span class="build-step-index">▶</span><div class="build-step-copy"><h3 class="build-step-title">Mira el resultado real</h3><p class="build-step-purpose">Presiona <strong>F12</strong>, abre <strong>Elements</strong> y busca una tarjeta.</p><div class="consola"><div class="consola-head">Salida esperada resumida</div><ol><li class="out">&lt;app-tarjeta-evento&gt;</li><li class="out">&nbsp;&nbsp;&lt;article class="tarjeta ..."&gt;</li><li class="out">&nbsp;&nbsp;&nbsp;&nbsp;...</li><li class="out">&nbsp;&nbsp;&nbsp;&nbsp;&lt;button ...&gt;Reservar&lt;/button&gt;</li><li class="out">&nbsp;&nbsp;&lt;/article&gt;</li><li class="out">&lt;/app-tarjeta-evento&gt;</li></ol></div></div></div><div class="checkpoint"><span class="component-label">Checkpoint</span><h3>Angular no reemplazó HTML.</h3><p>Lo <strong>genera</strong>. Lo que llega al navegador siguen siendo HTML, CSS y JavaScript, los mismos tres de esta noche.</p></div></div>
+          </div>
+        </section>
+
+        <section class="section view" id="cierre" data-accent="1" data-layout="canvas" data-escena="cierre" hidden>
+          <div class="sec-head"><span class="sec-n">Cierre</span><h2 class="sec-t">La pantalla se calcula a partir de los datos</h2><p class="sec-s">El incidente ya tiene una explicación técnica y una salida.</p></div>
+          <div class="body">
+            <article class="chat">
+              <div class="chat-head"><span class="chat-canal">WhatsApp · Tarima</span><span class="chat-contexto">octubre de 2026</span></div>
+              <ol class="chat-mensajes">
+                <li class="chat-msg" data-lado="equipo"><span class="chat-avatar">J</span><span class="chat-autor">Julián <time>9:48 p. m.</time></span><p class="chat-texto">Vale, ya entiendo por qué falló la cartelera el sábado. La página guardaba el dato y la pantalla por separado, y dependía de mí para que coincidieran.</p></li>
+                <li class="chat-msg"><span class="chat-avatar">V</span><span class="chat-autor">Valentina <time>9:52 p. m.</time></span><p class="chat-texto">¿Y eso tiene arreglo?</p></li>
+                <li class="chat-msg" data-lado="equipo"><span class="chat-avatar">J</span><span class="chat-autor">Julián <time>9:53 p. m.</time></span><p class="chat-texto">Sí. El equipo ya está montando la nueva en Angular: la pantalla se calcula sola a partir de los datos. La semana que viene cada evento va a tener su propio enlace.</p></li>
+                <li class="chat-msg"><span class="chat-avatar">V</span><span class="chat-autor">Valentina <time>9:54 p. m.</time></span><p class="chat-texto">🙌</p></li>
+              </ol>
+            </article>
+            <ol class="ideas">
+              <li><span><strong>Tres capas, tres trabajos:</strong> HTML dice qué es cada cosa, CSS cómo se ve y JavaScript qué hace.</span></li>
+              <li><span><strong>La vista se calcula a partir del dato:</strong> cambias un número y la tarjeta se recalcula. Si la pantalla y el dato se pueden separar, tarde o temprano se separan.</span></li>
+              <li><span><strong>Los tipos atrapan el error antes de ejecutar:</strong> TypeScript convierte un error silencioso en una línea roja.</span></li>
+            </ol>
+            <div class="callout" data-tone="success"><span class="callout-icon">✓</span><div><h3>La decisión técnica del día</h3><p>Las reglas de negocio (<code>textoDelPrecio</code>, <code>textoDeCupos</code>) viven en funciones separadas del molde, y la regla de "no reservar sin cupos" se protege en los <strong>datos</strong>, no solo en la pantalla. Cualquiera puede quitar un <code>disabled</code> desde su navegador.</p></div></div>
+            <div class="table-wrap"><table class="data-table"><caption>Mapa final de archivos</caption><thead><tr><th>Archivo</th><th>Ruta</th><th>Acción</th><th>Estado final</th></tr></thead><tbody>
+              <tr><td><code>index.html</code></td><td><code>tarima-clase0/</code></td><td>Crear y editar 2 veces</td><td>Versión final completa en JavaScript</td></tr>
+              <tr><td><code>estilos.css</code></td><td><code>tarima-clase0/</code></td><td>Crear</td><td>Completo en CSS</td></tr>
+              <tr><td><code>app.js</code></td><td><code>tarima-clase0/</code></td><td>Crear y editar</td><td>Versión final completa en Reservar</td></tr>
+              <tr><td><code>evento.ts</code></td><td><code>tarima-clase0/</code></td><td>Crear</td><td>Completo en TypeScript; no lo carga la página</td></tr>
+            </tbody></table></div>
+            <div class="code-block"><div class="code-head"><div><span class="code-context">Árbol final</span><span class="code-file">tarima-clase0/</span></div></div><pre><code class="language-plaintext">tarima-clase0/
+├── index.html
+├── estilos.css
+├── app.js
+└── evento.ts</code></pre></div>
+            <div class="autoevaluacion"><span class="component-label">¿Ya puedo…?</span><ul>
+              <li><label><input type="checkbox"><span><strong>Explicar</strong> qué hace HTML, qué hace CSS y qué hace JavaScript, señalando una línea de cada uno en mi cartelera.</span></label></li>
+              <li><label><input type="checkbox"><span><strong>Construir</strong> una cartelera que se pinta desde datos: cambio <code>cuposDisponibles</code> a <code>0</code> y la tarjeta aparece agotada, con el botón bloqueado, sin tocar el HTML.</span></label></li>
+              <li><label><input type="checkbox"><span><strong>Detectar</strong> con TypeScript un error que JavaScript deja pasar: escribo mal una propiedad y VS Code lo subraya antes de abrir el navegador.</span></label></li>
+            </ul></div>
+            <div class="panel"><h3>Lo que sigue</h3><ul class="checklist"><li><strong>Taller (Fase 1 de Huella Amiga):</strong> el checkpoint se movió al <strong>lunes 2 de noviembre, 11:59 p. m.</strong> Vuelve a mirar tu <code>TarjetaMascota</code>: ahora sabes qué es cada etiqueta y por qué la edad se calcula desde un dato.</li><li><strong>Tutoría de esta semana:</strong> dudas de la Fase 1 y repaso de lo de hoy.</li><li><strong>Clase 2 · martes 3 de noviembre:</strong> Valentina quiere compartir "Risas sin Filtro" por WhatsApp, y hoy la cartelera es una sola página sin direcciones. El <strong>router</strong> de Angular le da a cada evento su propia URL.</li></ul></div>
+          </div>
+        </section>
+
+        <section class="section view" id="glosario" data-accent="1" data-layout="canvas" data-escena="consulta" hidden>
+          <div class="sec-head"><span class="sec-n">Consultar</span><h2 class="sec-t">Glosario de la clase</h2><p class="sec-s">Los términos de hoy en un solo lugar. También puedes abrirlos con el botón de glosario o la tecla G.</p></div>
+          <div class="body">
+            <dl class="glosario">
+              <div class="glos-item" data-termino="navegador"><dt class="glos-termino">Navegador</dt><dd class="glos-tecnica">Programa que pide archivos a un servidor, los interpreta y dibuja la página.</dd><dd class="glos-vida">La mesa donde se arma el plato que llegó a domicilio.</dd><dd class="glos-donde">Cómo llega una página a tu pantalla</dd></div>
+              <div class="glos-item" data-termino="servidor"><dt class="glos-termino">Servidor</dt><dd class="glos-tecnica">Programa que espera peticiones y responde con archivos o datos.</dd><dd class="glos-vida">La cocina del restaurante: recibe el pedido y lo despacha.</dd><dd class="glos-donde">Cómo llega una página a tu pantalla</dd></div>
+              <div class="glos-item" data-termino="frontend-backend"><dt class="glos-termino">Frontend y backend</dt><dd class="glos-tecnica">El frontend corre en el navegador y es lo que la persona ve y toca; el backend corre en el servidor, guarda los datos y aplica las reglas.</dd><dd class="glos-vida">El salón del restaurante y la cocina.</dd><dd class="glos-donde">Cómo llega una página a tu pantalla</dd></div>
+              <div class="glos-item" data-termino="html"><dt class="glos-termino">HTML</dt><dd class="glos-tecnica">Lenguaje de marcado que describe la estructura de una página con etiquetas.</dd><dd class="glos-vida">La obra negra de una casa: dónde va cada espacio.</dd><dd class="glos-donde">HTML: la estructura</dd></div>
+              <div class="glos-item" data-termino="etiqueta-atributo"><dt class="glos-termino">Etiqueta y atributo</dt><dd class="glos-tecnica">La etiqueta (<code>&lt;p&gt;</code>) dice qué es un contenido; el atributo (<code>lang="es"</code>) le agrega información.</dd><dd class="glos-vida">La etiqueta de una caja de trasteo ("cocina") y la nota adicional ("frágil").</dd><dd class="glos-donde">HTML: la estructura</dd></div>
+              <div class="glos-item" data-termino="css"><dt class="glos-termino">CSS</dt><dd class="glos-tecnica">Lenguaje que define la presentación de los elementos HTML mediante reglas.</dd><dd class="glos-vida">El manual de acabados de la obra.</dd><dd class="glos-donde">CSS: la presentación</dd></div>
+              <div class="glos-item" data-termino="selector-clase"><dt class="glos-termino">Selector y clase</dt><dd class="glos-tecnica">El selector dice a qué elementos se aplica una regla; la clase es un nombre que se le pone a un elemento en HTML para poder seleccionarlo (<code>.tarjeta</code>).</dd><dd class="glos-vida">"Todas las puertas del segundo piso": un grupo con nombre al que se le da una instrucción.</dd><dd class="glos-donde">CSS: la presentación</dd></div>
+              <div class="glos-item" data-termino="javascript"><dt class="glos-termino">JavaScript</dt><dd class="glos-tecnica">Lenguaje de programación que ejecuta el navegador; guarda datos, toma decisiones y modifica la página abierta.</dd><dd class="glos-vida">Las instalaciones eléctricas: el interruptor que hace que algo pase.</dd><dd class="glos-donde">JavaScript: los datos mandan</dd></div>
+              <div class="glos-item" data-termino="dom"><dt class="glos-termino">DOM</dt><dd class="glos-tecnica">Árbol de objetos que el navegador construye a partir del HTML; lo que se ve es el DOM dibujado, y JavaScript lo modifica.</dd><dd class="glos-vida">La maqueta de Lego armada a partir del plano.</dd><dd class="glos-donde">JavaScript: los datos mandan</dd></div>
+              <div class="glos-item" data-termino="funcion"><dt class="glos-termino">Función</dt><dd class="glos-tecnica">Bloque de código con nombre que recibe datos (parámetros) y devuelve un resultado cada vez que se llama.</dd><dd class="glos-vida">Un molde de galletas: misma forma, distinta masa.</dd><dd class="glos-donde">JavaScript: los datos mandan</dd></div>
+              <div class="glos-item" data-termino="evento-navegador"><dt class="glos-termino">Evento del navegador</dt><dd class="glos-tecnica">Algo que ocurre en la página (un clic, una tecla) y que JavaScript puede escuchar con <code>addEventListener</code>.</dd><dd class="glos-vida">El timbre: avisa que alguien llegó; quien está adentro decide qué hacer.</dd><dd class="glos-donde">Reservar</dd></div>
+              <div class="glos-item" data-termino="typescript"><dt class="glos-termino">TypeScript</dt><dd class="glos-tecnica">JavaScript con tipos; revisa el código antes de ejecutarlo y se compila a JavaScript.</dd><dd class="glos-vida">El formulario con campos obligatorios que no te deja enviar si falta un dato.</dd><dd class="glos-donde">El error que nadie ve</dd></div>
+              <div class="glos-item" data-termino="interfaz-typescript"><dt class="glos-termino">Interfaz (TypeScript)</dt><dd class="glos-tecnica">Contrato que describe la forma de un objeto: qué propiedades tiene y de qué tipo es cada una.</dd><dd class="glos-vida">La plantilla de una hoja de vida: dice qué casillas debe tener.</dd><dd class="glos-donde">El error que nadie ve</dd></div>
+              <div class="glos-item" data-termino="compilar"><dt class="glos-termino">Compilar</dt><dd class="glos-tecnica">Traducir código de un lenguaje a otro antes de ejecutarlo; TypeScript se compila a JavaScript y los tipos se borran.</dd><dd class="glos-vida">Traducir un documento al idioma de quien lo va a leer.</dd><dd class="glos-donde">El error que nadie ve</dd></div>
+              <div class="glos-item" data-termino="framework"><dt class="glos-termino">Framework</dt><dd class="glos-tecnica">Conjunto de herramientas y reglas que organiza una aplicación y se encarga de trabajos repetitivos, como mantener la vista sincronizada con los datos.</dd><dd class="glos-vida">Una franquicia: la cocina, las recetas y los procesos ya vienen resueltos.</dd><dd class="glos-donde">¿Por qué Angular?</dd></div>
+            </dl>
+          </div>
+        </section>
+
+        <section class="section view" id="documentacion" data-accent="1" data-layout="canvas" data-escena="consulta" hidden>
+          <div class="sec-head"><span class="sec-n">Consultar</span><h2 class="sec-t">Documentación para el estudiante</h2><p class="sec-s">Fuentes oficiales. Cada una dice qué leer para no perderte en la página completa.</p></div>
+          <div class="body">
+            <ul class="docs">
+              <li><div class="doc-meta"><span class="doc-fuente">MDN Web Docs · Mozilla</span><span class="doc-tipo">Primeros pasos en la Web</span><span class="doc-idioma">Español</span></div><a class="doc-titulo" href="https://developer.mozilla.org/es/docs/Learn_web_development/Getting_started/Your_first_website" target="_blank" rel="noopener">Tu primer sitio web</a><p class="doc-que-leer">Los tutoriales "Crear el contenido" (HTML), "Dar estilo al contenido" (CSS) y "Añadir interactividad" (JavaScript). Es el mismo recorrido de esta clase, en otro proyecto.</p></li>
+              <li><div class="doc-meta"><span class="doc-fuente">Documentación oficial de TypeScript</span><span class="doc-tipo">TypeScript for the New Programmer</span><span class="doc-idioma">Inglés</span></div><a class="doc-titulo" href="https://www.typescriptlang.org/docs/handbook/typescript-from-scratch.html" target="_blank" rel="noopener">TypeScript for the New Programmer</a><p class="doc-que-leer">Las secciones sobre JavaScript y sobre TypeScript como verificador de tipos. Su ejemplo de una propiedad mal escrita es el mismo error que provocaste con <code>cuposDisponible</code>.</p></li>
+              <li><div class="doc-meta"><span class="doc-fuente">angular.dev</span><span class="doc-tipo">Documentación oficial de Angular</span><span class="doc-idioma">Inglés</span></div><a class="doc-titulo" href="https://angular.dev/overview" target="_blank" rel="noopener">What is Angular?</a><p class="doc-que-leer">La introducción. Después de esta clase vas a reconocer qué problemas resuelve cada herramienta que menciona.</p></li>
+            </ul>
+            <p class="doc-foot">© 2026 Ana Alvarado · Educadora Tech &amp; Desarrolladora Full Stack · Todos los derechos reservados · linkedin.com/in/ana-alvarado-instructora-full-stack</p>
+          </div>
+        </section>
+      </div>
+
+      <nav class="view-controls" id="viewControls" aria-label="Navegación entre secciones">
+        <button class="view-btn" id="prevView" type="button" aria-label="Sección anterior">←</button>
+        <span class="view-position" id="viewPosition" aria-live="polite">Portada</span>
+        <button class="view-btn" id="nextView" type="button" aria-label="Sección siguiente">→</button>
+      </nav>
+    </main>
+  </div>
+
+  <div class="watermark" aria-hidden="true">© 2026 ANA ALVARADO</div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+  <script src="anaclase-v12.js"></script>
+</body>
+</html>
