@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="es" data-tema="oscuro" data-tema-base="oscuro" data-empresa="dev-senior" data-paleta="cian">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Ana Alvarado">
+  <meta name="copyright" content="© 2026 Ana Alvarado — Todos los derechos reservados">
+  <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+  <title>Clase 2 · Routing profesional en Angular · Ana Alvarado</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&amp;family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+  <link rel="stylesheet" href="anaestilos-v12.css">
+</head>
+<body>
+  <a class="skip-link" href="#s1">Saltar al contenido</a>
+  <div class="topline" id="topline" aria-hidden="true"></div>
+  <div class="controls" aria-label="Controles">
+    <button class="ctrl" id="temaBtn" type="button" aria-label="Cambiar tema">☀</button>
+    <button class="ctrl" id="fullscreenBtn" type="button" aria-label="Pantalla completa">⛶</button>
+  </div>
+
+  <div class="shell" id="shell" data-collapsed="false">
+    <aside class="sidebar" aria-label="Índice de la clase">
+      <div class="sb-top">
+        <span class="brand-mark">A</span>
+        <div class="sb-title"><b>Java Full Stack · Módulo 1</b><span>Clase 2 · Angular moderno</span></div>
+      </div>
+      <button class="sb-toggle" id="collapseBtn" type="button" aria-label="Colapsar menú">‹</button>
+      <nav class="sb-nav" id="nav" aria-label="Secciones">
+        <a class="nav-item active" href="#portada"><span class="nav-index">00</span><span class="nav-label">Portada</span></a>
+        <span class="nav-group">Problema</span>
+        <a class="nav-item" href="#s1"><span class="nav-index">01</span><span class="nav-label">La pregunta de Hernán</span></a>
+        <a class="nav-item" href="#s2"><span class="nav-index">02</span><span class="nav-label">Lo que lograrás</span></a>
+        <span class="nav-group">Comprender</span>
+        <a class="nav-item" href="#s3"><span class="nav-index">03</span><span class="nav-label">La cartelera que faltaba</span></a>
+        <a class="nav-item" href="#s4"><span class="nav-index">04</span><span class="nav-label">Lo que hace Angular</span></a>
+        <a class="nav-item" href="#s5"><span class="nav-index">05</span><span class="nav-label">Lo que hace TypeScript</span></a>
+        <a class="nav-item" href="#s6"><span class="nav-index">06</span><span class="nav-label">Por qué un router</span></a>
+        <span class="nav-group">Construir</span>
+        <a class="nav-item" href="#s7"><span class="nav-index">07</span><span class="nav-label">El mapa de direcciones</span></a>
+        <a class="nav-item" href="#s8"><span class="nav-index">08</span><span class="nav-label">Navegar sin recargar</span></a>
+        <a class="nav-item" href="#s9"><span class="nav-index">09</span><span class="nav-label">Una página por evento</span></a>
+        <a class="nav-item" href="#s10"><span class="nav-index">10</span><span class="nav-label">Enlaces al detalle</span></a>
+        <span class="nav-group">Verificar</span>
+        <a class="nav-item" href="#s11"><span class="nav-index">11</span><span class="nav-label">Direcciones que no existen</span></a>
+        <a class="nav-item" href="#s12"><span class="nav-index">12</span><span class="nav-label">Lazy loading</span></a>
+        <a class="nav-item" href="#s13"><span class="nav-index">13</span><span class="nav-label">Detector de rutas viejas</span></a>
+        <a class="nav-item" href="#s14"><span class="nav-index">14</span><span class="nav-label">Taller · Fase 2</span></a>
+        <span class="nav-group">Cerrar</span>
+        <a class="nav-item" href="#s15"><span class="nav-index">15</span><span class="nav-label">Cierre y puente</span></a>
+        <span class="nav-group">Consultar</span>
+        <a class="nav-item" href="#glosario"><span class="nav-index">16</span><span class="nav-label">Glosario</span></a>
+        <a class="nav-item" href="#documentacion"><span class="nav-index">17</span><span class="nav-label">Documentación</span></a>
+      </nav>
+      <div class="sb-prog"><div class="lbl"><span>Progreso</span><span id="progPct">0%</span></div><div class="track"><div class="fill" id="progFill"></div></div></div>
+    </aside>
+
+    <main class="main">
+      <header class="hero view" id="portada" data-accent="1">
+        <div class="hero-inner">
+          <div class="hero-copy">
+            <span class="eyebrow">Dev Senior · Java Full Stack</span>
+            <h1 class="hero-title">Cada evento, su propia dirección</h1>
+            <p class="hero-lead">Convierte Tarima en una SPA navegable: inicio, cartelera, detalle por URL y una 404, mientras compruebas qué aportan Angular y TypeScript.</p>
+            <div class="meta">
+              <span class="pill" data-hot>Módulo 1 · Clase 2</span>
+              <span class="pill">Angular 22.2</span>
+              <span class="pill">TypeScript 6</span>
+            </div>
+          </div>
+          <figure class="hero-visual">
+            <img src="img/routing-enlace-directo-tarima.png" alt="Una organizadora comparte un enlace que conduce directamente desde una cartelera de muchos eventos hasta un único show.">
+            <figcaption class="hero-note">Una dirección precisa lleva a la persona al evento correcto, sin obligarla a recorrer toda la cartelera.</figcaption>
+          </figure>
+        </div>
+      </header>
+
+      <div class="content">
+        <section class="section view" id="s1" data-accent="1" data-layout="canvas" data-escena="apertura" hidden>
+          <div class="sec-head">
+            <span class="sec-n">El problema</span>
+            <h2 class="sec-t">¿Qué estamos pagando exactamente?</h2>
+            <p class="sec-s">Hoy vas a responder con pruebas provocadas en los dos proyectos, no con frases de folleto.</p>
+          </div>
+          <div class="body">
+            <article class="chat">
+              <div class="chat-head"><span class="chat-canal">WhatsApp · Equipo Tarima</span><span class="chat-contexto">lunes 2 de noviembre de 2026</span></div>
+              <ol class="chat-mensajes">
+                <li class="chat-msg"><span class="chat-avatar">V</span><span class="chat-autor">Valentina <time>6:41 p. m.</time></span><p class="chat-texto">Equipo, les reenvío lo que me escribió Hernán, de finanzas.</p></li>
+                <li class="chat-msg"><span class="chat-avatar">H</span><span class="chat-autor">Hernán <time>reenviado</time></span><p class="chat-texto">Vale, revisando gastos veo tres semanas de desarrollo en “migración a Angular”. Pero la página de Julián ya mostraba los eventos. ¿Qué estamos pagando exactamente? Necesito una respuesta corta para la junta del jueves.</p></li>
+                <li class="chat-msg"><span class="chat-avatar">V</span><span class="chat-autor">Valentina <time>6:43 p. m.</time></span><p class="chat-texto">Yo sé que la página vieja nos costó las 30 entradas de “Risas sin Filtro”, pero no sé explicarlo en términos técnicos. ¿Me ayudan con tres líneas?</p></li>
+                <li class="chat-msg" data-lado="equipo"><span class="chat-avatar">J</span><span class="chat-autor">Julián <time>6:50 p. m.</time></span><p class="chat-texto">Mañana se las mandamos, con pruebas.</p></li>
+              </ol>
+            </article>
+            <div class="micro-task">
+              <span class="component-label">Recuerda</span>
+              <p class="micro-task-q">En la Clase 0, ¿por qué “Risas sin Filtro” siguió vendiendo entradas después de agotarse?</p>
+              <details class="micro-reveal"><summary>Comprobar</summary><p class="micro-answer">Porque la página guardaba el <strong>dato</strong> (los cupos) y la <strong>vista</strong> (el botón) por separado, y dependía de una persona para que coincidieran. Bastaba olvidar <code>pintar()</code> o escribir mal una letra (<code>cuposDisponible</code>) para que la pantalla mintiera, sin ningún aviso.</p></details>
+            </div>
+            <div class="micro-task">
+              <span class="component-label">Recuerda</span>
+              <p class="micro-task-q">En la Clase 1 escribiste <code>evento = input.required&lt;Evento&gt;()</code> en <code>TarjetaEvento</code>. ¿Para qué sirve?</p>
+              <details class="micro-reveal"><summary>Comprobar</summary><p class="micro-answer">Declara que la tarjeta <strong>necesita</strong> que quien la use le entregue un <code>Evento</code>. Así la misma tarjeta sirve para cualquier evento: quien la usa decide cuál le pasa con <code>[evento]="..."</code>. Y como el tipo es <code>Evento</code>, TypeScript revisa que lo que llegue tenga la forma correcta.</p></details>
+            </div>
+          </div>
+        </section>
+
+        <section class="section view" id="s2" data-accent="1" data-layout="canvas" data-escena="objetivos" hidden>
+          <div class="sec-head"><span class="sec-n">Ruta de hoy</span><h2 class="sec-t">Lo que lograrás en esta sesión</h2></div>
+          <div class="body">
+            <div class="estado-proyecto" role="group" aria-label="El proyecto antes y después de la clase">
+              <div class="estado-antes"><span class="component-label">Antes de hoy</span><p><code>tarima-web</code> tiene componentes, pero no muestra la cartelera, y toda la app vive en una sola dirección.</p></div>
+              <div class="estado-flecha" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
+              <div class="estado-despues"><span class="component-label">Al terminar</span><p>Tarima muestra la cartelera, tiene una dirección para cada página y para cada evento, y sabes explicar qué hacen Angular y TypeScript por ella.</p></div>
+            </div>
+            <ol class="objetivos">
+              <li><div><p class="obj-texto"><strong>Explicar</strong> con evidencia qué aportan Angular y TypeScript a Tarima.</p><p class="obj-evidencia">provocas en tus dos proyectos un error que TypeScript detecta y JavaScript deja pasar, y muestras que en Angular no existe ningún <code>pintar()</code>.</p></div></li>
+              <li><div><p class="obj-texto"><strong>Construir</strong> la navegación de Tarima: inicio, cartelera, detalle por URL y página 404.</p><p class="obj-evidencia">abres <code>http://localhost:4200/eventos/3</code> en una pestaña nueva y aparece “Risas sin Filtro”.</p></div></li>
+              <li><div><p class="obj-texto"><strong>Verificar</strong> cómo decide el router.</p><p class="obj-evidencia">una dirección inventada muestra la 404, un evento que no existe muestra “Evento no encontrado” y <code>ng build</code> muestra la cartelera y el detalle como archivos aparte.</p></div></li>
+            </ol>
+          </div>
+        </section>
+
+        <section class="section view" id="s3" data-accent="1" data-layout="canvas" data-escena="construccion" hidden>
+          <div class="sec-head">
+            <span class="sec-n">Construir · cartelera</span>
+            <h2 class="sec-t">Las piezas existen; falta montar la función</h2>
+            <p class="sec-s">La etiqueta, el encabezado y la tarjeta están construidos, pero ninguna página los usa todavía.</p>
+          </div>
+          <div class="body">
+            <div class="mision">
+              <div class="mision-head"><span class="mision-marca">1</span><span class="mision-titulo">Misión del bloque</span></div>
+              <div class="mision-grid">
+                <div class="mision-item"><span class="component-label">Para Hernán</span><p>Reunir tres pruebas de lo que Angular y TypeScript hacen por Tarima.</p></div>
+                <div class="mision-item"><span class="component-label">Lo que hacemos</span><p>Terminar la cartelera de Angular y comparar, lado a lado, lo mismo en <code>tarima-clase0</code> y en <code>tarima-web</code>.</p></div>
+                <div class="mision-item" data-resultado><span class="component-label">Cómo sabemos que quedó</span><p>Escribes las tres líneas para Hernán y cada una señala algo que viste en tu pantalla.</p></div>
+              </div>
+            </div>
+            <h3>3.1 · Preparar las dos ventanas</h3>
+            <p>Abre dos ventanas de VS Code: una con la carpeta <code>tarima-clase0</code> y otra con <code>tarima-web</code>. Ponlas lado a lado: así vas a hacer cada cambio en los dos proyectos.</p>
+            <div class="code-block" data-tipo="terminal"><div class="code-head"><div><span class="code-context">Terminal · desde tarima-web/</span></div><button class="copy-btn" type="button">Copiar</button></div><pre><code class="language-bash">ng serve</code></pre></div>
+            <div class="checkpoint"><span class="component-label">Checkpoint</span><h3>Los dos proyectos están visibles.</h3><p><code>tarima-web</code> corre en <code>http://localhost:4200/</code> y <code>tarima-clase0</code> está abierto con Live Server o desde el explorador.</p></div>
+            <h3>3.2 · Quién exige cada línea</h3>
+            <div class="table-wrap"><table class="data-table"><caption>Quién dice que va así</caption><thead><tr><th>Etiqueta</th><th>Quién lo dice</th><th>¿Se puede cambiar?</th><th>Dónde se verifica</th></tr></thead><tbody>
+              <tr><td>Lenguaje</td><td>La sintaxis de TypeScript, HTML o CSS</td><td>No</td><td>MDN, documentación de TypeScript</td></tr>
+              <tr><td>Plataforma</td><td>El navegador o Node.js</td><td>No, salvo por configuración</td><td>MDN, documentación de Node.js</td></tr>
+              <tr><td>Framework</td><td>Angular</td><td>No: si no se respeta, no funciona</td><td>angular.dev</td></tr>
+              <tr><td>Convención</td><td>La comunidad o la guía de estilo de Angular</td><td>Sí, aunque conviene respetarla</td><td>Guía de estilo de Angular</td></tr>
+              <tr><td>Decisión del proyecto</td><td>Nosotros, por el negocio de Tarima</td><td>Sí, si cambia el negocio</td><td>El caso de Valentina</td></tr>
+            </tbody></table></div>
+            <h3>3.3 · Limpiar la tarjeta</h3>
+            <article class="archivo">
+              <div class="archivo-ficha"><span class="archivo-accion">Editar</span><span class="archivo-nombre">tarjeta-evento.html</span><span class="archivo-ruta">tarima-web/src/app/components/tarjeta-evento/</span></div>
+              <p class="archivo-intro">Cuando generaste la tarjeta con <code>ng g c</code>, el CLI escribió un párrafo de prueba. Si sigue ahí, cada tarjeta mostrará “tarjeta-evento works!” arriba del evento.</p>
+              <div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h3 class="lectura-titulo">La tarjeta empieza en su contenedor real</h3><p class="lectura-proposito">Si la primera línea es <code>&lt;p&gt;tarjeta-evento works!&lt;/p&gt;</code>, bórrala completa.</p></div><div class="lectura-cuerpo">
+                <div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Línea 1</span></div></div><pre class="line-numbers" data-start="1"><code class="language-html">&lt;article class="tarjeta" [class.tarjeta--agotada]="estaAgotado()"&gt;</code></pre></div>
+                <ol class="notas"><li class="nota" data-lineas="1"><div class="nota-cabeza"><span class="nota-lineas">L1</span><code class="nota-codigo">&lt;article …&gt;</code></div><p>Lenguaje HTML · Es la etiqueta que envuelve toda la tarjeta. Si arriba de ella queda otra línea, Angular la pinta también, porque todo lo que está en la plantilla se muestra.</p></li></ol>
+              </div></div>
+              <details class="code-reveal" data-archivo="tarjeta-evento.html"><summary><span><span class="code-reveal-title">tarjeta-evento.html · como queda al terminar este momento</span><span class="code-reveal-note">29 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Editar</span><span class="code-file">tarjeta-evento.html</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-html">&lt;article class="tarjeta" [class.tarjeta--agotada]="estaAgotado()"&gt;
+  &lt;div class="tarjeta__etiquetas"&gt;
+    &lt;app-etiqueta [texto]="evento().categoria" /&gt;
+    @if (estaAgotado()) {
+      &lt;app-etiqueta texto="Agotado" tono="peligro" /&gt;
+    } @else if (quedanPocosCupos()) {
+      &lt;app-etiqueta [texto]="'Últimos ' + evento().cuposDisponibles + ' cupos'" tono="alerta" /&gt;
+    }
+  &lt;/div&gt;
+  &lt;h3 class="tarjeta__nombre"&gt;{{ evento().nombre }}&lt;/h3&gt;
+  &lt;p class="tarjeta__dato"&gt;📅 {{ evento().fecha | date: "EEEE d 'de' MMMM · h:mm a" }}&lt;/p&gt;
+  &lt;p class="tarjeta__dato"&gt;📍 {{ evento().lugar }}&lt;/p&gt;
+  &lt;p class="tarjeta__precio"&gt;
+    @if (evento().precio === 0) {
+      Entrada libre
+    } @else {
+      {{ evento().precio | currency: 'COP' : 'symbol-narrow' : '1.0-0' }}
+    }
+  &lt;/p&gt;
+  @if (mostrarDescripcion) {
+    &lt;p class="tarjeta__descripcion"&gt;{{ evento().descripcion }}&lt;/p&gt;
+  }
+  &lt;div class="tarjeta__acciones"&gt;
+    &lt;button type="button" class="boton boton--secundario" (click)="alternarDescripcion()"&gt;
+      {{ mostrarDescripcion ? 'Ocultar detalles' : 'Ver detalles' }}
+    &lt;/button&gt;
+    &lt;button type="button" class="boton" [disabled]="estaAgotado()"&gt;Reservar&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/article&gt;</code></pre></div></div></details>
+            </article>
+            <h3>3.4 · Crear la página de cartelera</h3>
+            <div class="code-block" data-tipo="terminal"><div class="code-head"><div><span class="code-context">Terminal · desde tarima-web/</span></div><button class="copy-btn" type="button">Copiar</button></div><pre><code class="language-bash">ng g c pages/listado-eventos --skip-tests</code></pre></div>
+            <article class="archivo">
+              <div class="archivo-ficha"><span class="archivo-accion">Reemplazar</span><span class="archivo-nombre">listado-eventos.ts</span><span class="archivo-ruta">tarima-web/src/app/pages/listado-eventos/</span></div>
+              <p class="archivo-intro">La página toma los seis eventos de <code>eventos.mock.ts</code> y se los entrega, uno por uno, a la tarjeta. Aquí nadie llama a una función para dibujar: la página solo dice qué datos tiene.</p>
+              <div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h3 class="lectura-titulo">La página conoce los datos y la tarjeta</h3><p class="lectura-proposito">Los imports conectan datos, componente y plantilla; la propiedad <code>eventos</code> queda disponible para el HTML.</p></div><div class="lectura-cuerpo">
+                <div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 1–13</span></div></div><pre class="line-numbers" data-start="1"><code class="language-typescript">import { Component } from '@angular/core';
+import { EVENTOS } from '../../data/eventos.mock';
+import { TarjetaEvento } from '../../components/tarjeta-evento/tarjeta-evento';
+
+@Component({
+  imports: [TarjetaEvento],
+  selector: 'app-listado-eventos',
+  styleUrl: './listado-eventos.css',
+  templateUrl: './listado-eventos.html',
+})
+export class ListadoEventos {
+  eventos = EVENTOS;
+}</code></pre></div>
+                <ol class="notas">
+                  <li class="nota" data-lineas="1-3"><div class="nota-cabeza"><span class="nota-lineas">L1–3</span><code class="nota-codigo">imports</code></div><p>TypeScript trae <code>Component</code>, los seis eventos y la tarjeta. Las rutas relativas suben desde <code>pages/listado-eventos</code> hasta <code>app</code> y luego bajan a la pieza necesaria.</p></li>
+                  <li class="nota" data-lineas="5-10"><div class="nota-cabeza"><span class="nota-lineas">L5–10</span><code class="nota-codigo">@Component</code></div><p>Angular recibe la configuración: la plantilla usa <code>TarjetaEvento</code>, el selector identifica la página y los archivos externos contienen sus estilos y su HTML.</p></li>
+                  <li class="nota" data-lineas="11-13"><div class="nota-cabeza"><span class="nota-lineas">L11–13</span><code class="nota-codigo">eventos = EVENTOS</code></div><p>La clase exportada guarda la lista en una propiedad pública. Sin esa propiedad, <code>eventos</code> no existiría en la plantilla.</p><p class="nota-enlace" data-dir="despues">En la Clase 4 esta lista se cambia por datos que llegan del backend.</p></li>
+                </ol>
+              </div></div>
+              <details class="code-reveal" data-archivo="listado-eventos.ts"><summary><span><span class="code-reveal-title">listado-eventos.ts · archivo completo</span><span class="code-reveal-note">13 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Reemplazar</span><span class="code-file">listado-eventos.ts</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-typescript">import { Component } from '@angular/core';
+import { EVENTOS } from '../../data/eventos.mock';
+import { TarjetaEvento } from '../../components/tarjeta-evento/tarjeta-evento';
+
+@Component({
+  imports: [TarjetaEvento],
+  selector: 'app-listado-eventos',
+  styleUrl: './listado-eventos.css',
+  templateUrl: './listado-eventos.html',
+})
+export class ListadoEventos {
+  eventos = EVENTOS;
+}</code></pre></div></div></details>
+            </article>
+            <article class="archivo">
+              <div class="archivo-ficha"><span class="archivo-accion">Reemplazar</span><span class="archivo-nombre">listado-eventos.html</span><span class="archivo-ruta">tarima-web/src/app/pages/listado-eventos/</span></div>
+              <p class="archivo-intro">La plantilla dice qué se ve: un título, cuántos eventos hay y una tarjeta por evento.</p>
+              <div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h3 class="lectura-titulo">Un título, el total y una tarjeta por evento</h3><p class="lectura-proposito">La interpolación muestra el total; <code>@for</code> recorre la lista y <code>@empty</code> evita una página en blanco.</p></div><div class="lectura-cuerpo">
+                <div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 1–12</span></div></div><pre class="line-numbers" data-start="1"><code class="language-html">&lt;section class="listado"&gt;
+  &lt;h2 class="listado__titulo"&gt;Cartelera de noviembre&lt;/h2&gt;
+  &lt;p class="listado__total"&gt;{{ eventos.length }} eventos en cartelera&lt;/p&gt;
+
+  &lt;div class="listado__grilla"&gt;
+    @for (evento of eventos; track evento.id) {
+      &lt;app-tarjeta-evento [evento]="evento" /&gt;
+    } @empty {
+      &lt;p class="listado__vacio"&gt;No hay eventos en cartelera por ahora.&lt;/p&gt;
+    }
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre></div>
+                <ol class="notas">
+                  <li class="nota" data-lineas="1-3"><div class="nota-cabeza"><span class="nota-lineas">L1–3</span><code class="nota-codigo">{{ eventos.length }}</code></div><p>HTML agrupa la cartelera y Angular muestra el número de elementos de la lista mediante interpolación.</p></li>
+                  <li class="nota" data-lineas="5-7"><div class="nota-cabeza"><span class="nota-lineas">L5–7</span><code class="nota-codigo">@for … track evento.id</code></div><p>Angular repite una tarjeta por evento. <code>track evento.id</code> le permite reconocer cada elemento y solo redibujar lo que cambió; sin <code>track</code> no compila.</p><p class="nota-enlace" data-dir="antes">El input <code>evento</code> es el que declaraste en la Clase 1.</p></li>
+                  <li class="nota" data-lineas="8-12"><div class="nota-cabeza"><span class="nota-lineas">L8–12</span><code class="nota-codigo">@empty</code></div><p>Si la lista queda vacía, se muestra un mensaje en lugar de una cuadrícula sin contenido.</p></li>
+                </ol>
+              </div></div>
+              <details class="code-reveal" data-archivo="listado-eventos.html"><summary><span><span class="code-reveal-title">listado-eventos.html · archivo completo</span><span class="code-reveal-note">12 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Reemplazar</span><span class="code-file">listado-eventos.html</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-html">&lt;section class="listado"&gt;
+  &lt;h2 class="listado__titulo"&gt;Cartelera de noviembre&lt;/h2&gt;
+  &lt;p class="listado__total"&gt;{{ eventos.length }} eventos en cartelera&lt;/p&gt;
+
+  &lt;div class="listado__grilla"&gt;
+    @for (evento of eventos; track evento.id) {
+      &lt;app-tarjeta-evento [evento]="evento" /&gt;
+    } @empty {
+      &lt;p class="listado__vacio"&gt;No hay eventos en cartelera por ahora.&lt;/p&gt;
+    }
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre></div></div></details>
+            </article>
+            <h3>3.5 · Montar la cartelera</h3>
+            <article class="archivo">
+              <div class="archivo-ficha"><span class="archivo-accion">Reemplazar</span><span class="archivo-nombre">app.ts + app.html</span><span class="archivo-ruta">tarima-web/src/app/</span></div>
+              <p class="archivo-intro"><code>App</code> organiza el encabezado y la cartelera. Este es el estado previo al router; en la escena 7 la página fija se convierte en un outlet.</p>
+              <details class="code-reveal" data-archivo="app.ts"><summary><span><span class="code-reveal-title">app.ts · como queda al terminar este momento</span><span class="code-reveal-note">11 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Reemplazar</span><span class="code-file">app.ts</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-typescript">import { Component } from '@angular/core';
+import { Encabezado } from './components/encabezado/encabezado';
+import { ListadoEventos } from './pages/listado-eventos/listado-eventos';
+
+@Component({
+  imports: [Encabezado, ListadoEventos],
+  selector: 'app-root',
+  styleUrl: './app.css',
+  templateUrl: './app.html',
+})
+export class App {}</code></pre></div></div></details>
+              <details class="code-reveal" data-archivo="app.html"><summary><span><span class="code-reveal-title">app.html · como queda al terminar este momento</span><span class="code-reveal-note">4 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Reemplazar</span><span class="code-file">app.html</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-html">&lt;app-encabezado /&gt;
+&lt;main class="contenedor"&gt;
+  &lt;app-listado-eventos /&gt;
+&lt;/main&gt;</code></pre></div></div></details>
+            </article>
+            <div class="active-build"><div class="build-step"><span class="build-step-index">▶</span><div class="build-step-copy"><h3 class="build-step-title">Pruébalo</h3><p class="build-step-purpose">Guarda los cuatro archivos y abre <code>http://localhost:4200</code>.</p><div class="consola"><div class="consola-head">Navegador</div><ol><li class="out">Tarima · La cartelera cultural de Bogotá</li><li class="out">Cartelera de noviembre · 6 eventos en cartelera</li><li class="out">Seis tarjetas; “Risas sin Filtro” aparece agotada y Reservar está bloqueado.</li></ol></div></div></div><div class="checkpoint"><span class="component-label">Checkpoint</span><h3>La cartelera de Angular ya funciona.</h3><p>Los componentes de la Clase 1 dejaron de estar guardados en bodega.</p></div></div>
+            <div class="micro-task"><span class="component-label">Para pensar</span><p class="micro-task-q">Cambiaste un número en los datos y tres cosas de la tarjeta cambiaron solas: la etiqueta, la opacidad y el botón. ¿Cuántas líneas de HTML tocaste?</p><details class="micro-reveal"><summary>Comprobar</summary><p class="micro-answer"><strong>Ninguna.</strong> La plantilla declara una sola vez la relación entre el dato y lo que se ve, y Angular la mantiene. El dato y la pantalla ya no pueden separarse.</p></details></div>
+          </div>
+        </section>
+
+        <section class="section view" id="s4" data-accent="1" data-layout="canvas" data-escena="concepto" hidden>
+          <div class="sec-head"><span class="sec-n">Comprender · Angular</span><h2 class="sec-t">No hay ningún <code>pintar()</code> que olvidar</h2><p class="sec-s">En la página manual, el dato podía cambiar sin que la pantalla se enterara. En Angular, la plantilla declara la relación una vez.</p></div>
+          <div class="body">
+            <h3>4.1 · Provocar la pantalla que miente</h3>
+            <p>En <code>tarima-clase0/app.js</code>, desactiva la llamada con <code>// pintar();</code>. Recarga, haz tres clics en Reservar de “Noche de Salsa Brava” y consulta <code>eventos[0].cuposDisponibles</code> en la consola.</p>
+            <div class="consola"><div class="consola-head">Resultado esperado</div><ol><li class="out">Pantalla: “120 cupos disponibles”</li><li class="out">Console: 117</li></ol></div>
+            <p>El dato dice 117; la pantalla dice 120. Nadie avisó. Quita las dos barras, guarda y recarga.</p>
+            <h3>4.2 · Buscar lo que Angular ya no necesita</h3>
+            <p>En <code>tarima-web/src</code>, busca <code>pintar</code>, <code>innerHTML</code> y <code>querySelector</code>: el resultado esperado es cero en las tres búsquedas.</p>
+            <div class="micro-task"><span class="component-label">Para pensar</span><p class="micro-task-q"><code>alternarDescripcion()</code> solo cambia <code>mostrarDescripcion</code>. En ningún archivo existe un <code>pintar()</code>. ¿Quién actualizó la pantalla?</p><details class="micro-reveal"><summary>Comprobar</summary><p class="micro-answer"><strong>Angular.</strong> Cuando ocurre un evento de la plantilla, como el <code>(click)</code>, Angular vuelve a revisar la tarjeta, evalúa otra vez <code>@if (mostrarDescripcion)</code> y actualiza solo lo que cambió. Tú cambias datos; Angular mantiene la pantalla igual a esos datos.</p></details></div>
+            <h3>4.3 · Data binding</h3>
+            <div class="definicion">
+              <div class="def-tecnica"><span class="component-label">Definición técnica</span><p class="def-termino">Data binding</p><p>Es la conexión que declaras en la plantilla entre un dato del componente y lo que se ve. Angular la mantiene: cuando el dato cambia por un evento de la plantilla o por un <code>input</code>, revisa el componente y actualiza solo las partes del DOM que cambiaron.</p></div>
+              <div class="def-vida"><span class="component-label">En la vida real</span><p>Es el tablero de vuelos de un aeropuerto. Nadie sube con una escalera a cambiar las letras cuando un vuelo se retrasa: el tablero está conectado al sistema de la aerolínea. Cambia el dato en el sistema, y el tablero lo muestra.</p></div>
+            </div>
+            <h3>4.4 · Encuentra el gemelo</h3>
+            <div class="sin-ia"><span class="sin-ia-icono" aria-hidden="true"></span><div><h3>Sin IA aquí</h3><p>Esta búsqueda es la que te enseña a moverte por un proyecto de Angular. Si se la pides a la IA, aprendes su respuesta, no el camino.</p></div></div>
+            <div class="table-wrap"><table class="data-table"><caption>De JavaScript manual a Angular</caption><thead><tr><th>En <code>tarima-clase0</code></th><th>En <code>tarima-web</code></th></tr></thead><tbody>
+              <tr><td><code>crearTarjeta</code></td><td><code>TarjetaEvento</code>: <code>tarjeta-evento.ts</code> y <code>tarjeta-evento.html</code></td></tr>
+              <tr><td><code>eventos.map(...)</code></td><td><code>@for (evento of eventos; track evento.id)</code></td></tr>
+              <tr><td><code>${evento.nombre}</code></td><td><code>{{ evento().nombre }}</code></td></tr>
+              <tr><td>Clase <code>agotada</code> con ternario</td><td><code>[class.tarjeta--agotada]="estaAgotado()"</code></td></tr>
+              <tr><td><code>disabled</code> con ternario</td><td><code>[disabled]="estaAgotado()"</code></td></tr>
+              <tr><td><code>addEventListener('click', ...)</code></td><td><code>(click)="alternarDescripcion()"</code></td></tr>
+              <tr><td><code>querySelector('#cartelera')</code></td><td>No existe: la plantilla ya dice dónde va cada cosa</td></tr>
+              <tr><td><code>pintar();</code></td><td>No existe: Angular redibuja solo</td></tr>
+            </tbody></table></div>
+          </div>
+        </section>
+
+        <section class="section view" id="s5" data-accent="1" data-layout="canvas" data-escena="prueba" hidden>
+          <div class="sec-head"><span class="sec-n">Comprender · TypeScript</span><h2 class="sec-t">Los errores se detectan antes de publicar</h2><p class="sec-s">El mismo cambio deja pasar <code>undefined</code> en JavaScript y produce una lista exacta de tareas en TypeScript.</p></div>
+          <div class="body">
+            <h3>5.1 · El artista que falta</h3>
+            <article class="chat">
+              <div class="chat-head"><span class="chat-canal">WhatsApp · Equipo Tarima</span><span class="chat-contexto">martes 3 de noviembre de 2026</span></div>
+              <ol class="chat-mensajes">
+                <li class="chat-msg"><span class="chat-avatar">V</span><span class="chat-autor">Valentina <time>11:20 a. m.</time></span><p class="chat-texto">Mercadeo pide que cada tarjeta muestre el artista. ¿Eso es difícil?</p></li>
+                <li class="chat-msg" data-lado="equipo"><span class="chat-avatar">J</span><span class="chat-autor">Julián <time>11:24 a. m.</time></span><p class="chat-texto">No. Es agregar un dato.</p></li>
+                <li class="chat-msg"><span class="chat-avatar">V</span><span class="chat-autor">Valentina <time>11:25 a. m.</time></span><p class="chat-texto">Pero son 40 eventos al mes… ¿y si se nos olvida alguno?</p></li>
+              </ol>
+            </article>
+            <p>En <code>tarima-clase0/app.js</code>, agrega <code>artista: 'Orquesta La Clave'</code> solo al evento 1 y muestra <code>${evento.artista}</code> en cada tarjeta.</p>
+            <div class="consola"><div class="consola-head">JavaScript deja pasar el olvido</div><ol><li class="out">Noche de Salsa Brava → Orquesta La Clave</li><li class="out">Las otras tarjetas → undefined</li><li class="out">Console: sin ningún mensaje en rojo</li></ol></div>
+            <div class="micro-task"><span class="component-label">Para pensar</span><p class="micro-task-q">Le pusiste artista solo a un evento. Las otras tarjetas dicen “undefined” y la consola no muestra ningún error. ¿Cuándo se habría enterado Tarima?</p><details class="micro-reveal"><summary>Comprobar</summary><p class="micro-answer"><strong>Cuando un cliente lo viera publicado.</strong> JavaScript no sabe qué propiedades debería tener un evento; si una no existe, devuelve <code>undefined</code> y sigue. Con 40 eventos al mes, encontrar los que faltan depende de revisar uno por uno a ojo.</p></details></div>
+            <h3>5.2 · El contrato avisa</h3>
+            <p>En <code>models/evento.ts</code>, agrega <code>artista: string;</code> debajo de <code>descripcion: string;</code>.</p>
+            <div class="consola"><div class="consola-head">TypeScript convierte el olvido en una lista</div><ol><li class="out">6 errores TS2741, uno por evento, en eventos.mock.ts</li><li class="out">Property 'artista' is missing … but required in type 'Evento'.</li><li class="out">Cada objeto aparece subrayado en rojo.</li></ol></div>
+            <p>Se lee: “a este objeto le falta <code>artista</code>, y el contrato <code>Evento</code> lo exige”. TypeScript da la lista exacta de los eventos que faltan.</p>
+            <h3>5.3 · También revisa el HTML</h3>
+            <p>Quita <code>artista: string;</code>. Después cambia <code>evento().lugar</code> por <code>evento().lugr</code> en <code>tarjeta-evento.html</code>.</p>
+            <div class="consola"><div class="consola-head">Terminal</div><ol><li class="out">TS2551: Property 'lugr' does not exist on type 'Evento'. Did you mean 'lugar'?</li><li class="out">Error occurs in the template of component TarjetaEvento.</li></ol></div>
+            <p>En Angular, el compilador revisa también las plantillas con los tipos de TypeScript y sugiere la corrección. Vuelve a escribir <code>lugar</code>.</p>
+            <p>En <code>eventos.mock.ts</code>, cambia temporalmente <code>categoria: 'Concierto'</code> por <code>categoria: 'Cine'</code>: <code>TS2322</code> avisa que <code>'Cine'</code> no pertenece al tipo <code>Categoria</code>. Después deja los dos proyectos como estaban.</p>
+            <h3>5.4 · Definición y respuesta a Hernán</h3>
+            <div class="definicion">
+              <div class="def-tecnica"><span class="component-label">Definición técnica</span><p class="def-termino">TypeScript</p><p>Agrega tipos estáticos a JavaScript: describes de antemano la forma de tus datos y el compilador revisa todo el código, incluidas las plantillas de Angular, antes de ejecutarlo. Los tipos desaparecen al compilar: al navegador llega JavaScript.</p></div>
+              <div class="def-vida"><span class="component-label">En la vida real</span><p>Es la lista de chequeo que un piloto recorre antes de despegar. Los errores se detectan en tierra, cuando corregirlos es barato, y no en el aire, cuando ya hay pasajeros.</p></div>
+            </div>
+            <div class="sin-ia"><span class="sin-ia-icono" aria-hidden="true"></span><div><h3>Sin IA aquí</h3><p>La respuesta tiene que salir de lo que tú provocaste en tus dos proyectos. Una frase sobre “frameworks modernos” no convence a Hernán ni demuestra que lo entendiste.</p></div></div>
+            <article class="chat">
+              <div class="chat-head"><span class="chat-canal">WhatsApp · Equipo Tarima</span><span class="chat-contexto">martes 3 de noviembre de 2026</span></div>
+              <ol class="chat-mensajes">
+                <li class="chat-msg" data-lado="equipo"><span class="chat-avatar">J</span><span class="chat-autor">Julián <time>8:00 p. m.</time></span><p class="chat-texto">Vale, para Hernán: (1) Angular calcula la pantalla desde los datos, así que lo de “Risas sin Filtro” ya no depende de que alguien se acuerde de actualizar. (2) TypeScript revisa el código antes de publicar: si falta un dato en uno de los 40 eventos, nos dice cuál, antes de que lo vea un cliente. (3) Sin esto, cada error lo descubre un cliente.</p></li>
+                <li class="chat-msg"><span class="chat-avatar">V</span><span class="chat-autor">Valentina <time>8:02 p. m.</time></span><p class="chat-texto">Perfecto, eso lo entiende cualquiera.</p></li>
+              </ol>
+            </article>
+            <div class="table-wrap"><table class="data-table"><caption>Dudas de la Fase 1</caption><thead><tr><th>Si en tu PR ves…</th><th>Revisa…</th></tr></thead><tbody>
+              <tr><td>Lees un input sin paréntesis</td><td>En la plantilla, <code>mascota().nombre</code>, no <code>mascota.nombre</code></td></tr>
+              <tr><td>Angular no conoce <code>&lt;app-etiqueta&gt;</code></td><td>Que <code>Etiqueta</code> esté en <code>imports</code> de <code>TarjetaMascota</code></td></tr>
+              <tr><td>No exporta <code>TarjetaMascota</code></td><td>Que la clase se llame <code>TarjetaMascota</code>, sin <code>Component</code></td></tr>
+              <tr><td><code>especie</code> acepta valores incorrectos</td><td>Que sea <code>'perro' | 'gato'</code>, no <code>string</code></td></tr>
+              <tr><td>12 meses no se muestra como 1 año</td><td>Menos de 12 se muestra en meses: <code>&lt; 12</code>, no <code>&lt;= 12</code></td></tr>
+              <tr><td>23 o 30 meses sale mal</td><td>Redondea años hacia abajo con <code>Math.floor</code></td></tr>
+              <tr><td>Falta <code>src/app/services</code></td><td>Git no sube carpetas vacías: crea <code>.gitkeep</code></td></tr>
+            </tbody></table></div>
+          </div>
+        </section>
+
+        <section class="section view" id="s6" data-accent="1" data-layout="canvas" data-escena="concepto" hidden>
+          <div class="sec-head"><span class="sec-n">Comprender · router</span><h2 class="sec-t">Un enlace debe llevar al show, no a buscarlo</h2><p class="sec-s">Una SPA es rápida, pero necesita un router para que cada vista tenga su propia dirección.</p></div>
+          <div class="body">
+            <article class="chat">
+              <div class="chat-head"><span class="chat-canal">WhatsApp · Valentina y Camila</span><span class="chat-contexto">martes 3 de noviembre de 2026</span></div>
+              <ol class="chat-mensajes">
+                <li class="chat-msg"><span class="chat-avatar">C</span><span class="chat-autor">Camila <time>5:12 p. m.</time></span><p class="chat-texto">Vale, abrimos función extra el 13 por la demanda. Quiero compartir el show en mis historias. ¿Cuál es el enlace?</p></li>
+                <li class="chat-msg"><span class="chat-avatar">V</span><span class="chat-autor">Valentina <time>5:14 p. m.</time></span><p class="chat-texto">tarima-cartelera.co</p></li>
+                <li class="chat-msg"><span class="chat-avatar">C</span><span class="chat-autor">Camila <time>5:20 p. m.</time></span><p class="chat-texto">Pero eso abre la cartelera completa. Mis seguidores tienen que buscarme entre todos los eventos… En otras páginas cada show tiene su propio enlace.</p></li>
+                <li class="chat-msg" data-lado="equipo"><span class="chat-avatar">V</span><span class="chat-autor">Valentina <time>5:21 p. m.</time></span><p class="chat-texto">Tienes razón. Le pregunto al equipo.</p></li>
+              </ol>
+            </article>
+            <figure class="figura">
+              <div class="figura-stage"><img src="img/modelo-router-angular.png" alt="Una solicitud entra a un directorio de rutas ordenadas; una ruta con parámetro conduce a un evento específico y una última opción recibe lo que no coincide."></div>
+              <figcaption>El router compara la URL con su mapa y activa un solo destino; la parte variable selecciona el evento y el último camino recibe lo desconocido.<span class="figura-credito">Ilustración original creada para esta clase.</span></figcaption>
+            </figure>
+            <div class="definicion">
+              <div class="def-tecnica"><span class="component-label">Definición técnica</span><p class="def-termino">Router</p><p>Es el servicio de Angular que relaciona cada dirección (URL) con un componente. Cuando la URL cambia, busca en una lista de rutas cuál coincide y pone ese componente en pantalla, sin recargar la aplicación. También actualiza la URL cuando navegas dentro de la app.</p></div>
+              <div class="def-vida"><span class="component-label">En la vida real</span><p>Es el directorio de un centro comercial: le dices “local 204” y te lleva ahí. La lista de rutas es el directorio; la URL es el número del local.</p></div>
+            </div>
+            <div class="table-wrap"><table class="data-table"><caption>Las piezas del router</caption><thead><tr><th>Pieza</th><th>Para qué sirve</th><th>Dónde vive</th></tr></thead><tbody>
+              <tr><td>Lista de rutas</td><td>Dice qué componente va en cada dirección</td><td><code>app.routes.ts</code></td></tr>
+              <tr><td><code>provideRouter</code></td><td>Activa el router en la aplicación</td><td><code>app.config.ts</code></td></tr>
+              <tr><td><code>&lt;router-outlet /&gt;</code></td><td>Marca dónde se pone la página de la ruta</td><td><code>app.html</code></td></tr>
+              <tr><td><code>routerLink</code></td><td>Navega a otra ruta sin recargar</td><td>En cualquier plantilla</td></tr>
+            </tbody></table></div>
+          </div>
+        </section>
+
+        <section class="section view" id="s7" data-accent="1" data-layout="canvas" data-escena="construccion" hidden>
+          <div class="sec-head"><span class="sec-n">Construir · rutas base</span><h2 class="sec-t">El mapa de direcciones de Tarima</h2><p class="sec-s">La raíz deja de elegir la página; la URL decide qué componente ocupa el centro.</p></div>
+          <div class="body">
+            <h3>7.1 · Dejar un hueco para cada página</h3>
+            <article class="archivo">
+              <div class="archivo-ficha"><span class="archivo-accion">Editar</span><span class="archivo-nombre">app.html + app.ts</span><span class="archivo-ruta">tarima-web/src/app/</span></div>
+              <p class="archivo-intro">La cartelera estaba fija en <code>App</code>. <code>RouterOutlet</code> marca el lugar donde el router insertará la página activa.</p>
+              <div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h3 class="lectura-titulo">La raíz usa el outlet en vez de la cartelera</h3><p class="lectura-proposito"><b>Necesidad:</b> el centro debe quedar libre. <b>Dónde va:</b> cambia la línea 3 del HTML e importa <code>RouterOutlet</code> en la raíz.</p></div><div class="lectura-cuerpo">
+                <div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Import · línea 2</span></div></div><pre class="line-numbers" data-start="2"><code class="language-typescript">import { RouterOutlet } from '@angular/router';</code></pre></div>
+                <ol class="notas"><li class="nota" data-lineas="2"><div class="nota-cabeza"><span class="nota-lineas">L2</span><code class="nota-codigo">RouterOutlet</code></div><p>Framework Angular · La pieza de <code>@angular/router</code> hace funcionar <code>&lt;router-outlet /&gt;</code>.</p></li></ol>
+                <div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Metadatos · línea 6</span></div></div><pre class="line-numbers" data-start="6"><code class="language-typescript">  imports: [Encabezado, RouterOutlet],</code></pre></div>
+                <ol class="notas"><li class="nota" data-lineas="6"><div class="nota-cabeza"><span class="nota-lineas">L6</span><code class="nota-codigo">imports</code></div><p><code>ListadoEventos</code> sale porque la raíz ya no lo usa directamente; desde ahora la pone el router.</p></li></ol>
+              </div></div>
+              <details class="code-reveal" data-archivo="app.ts"><summary><span><span class="code-reveal-title">app.ts · como queda al terminar este momento</span><span class="code-reveal-note">11 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Editar</span><span class="code-file">app.ts</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-typescript">import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { Encabezado } from './components/encabezado/encabezado';
+
+@Component({
+  imports: [Encabezado, RouterOutlet],
+  selector: 'app-root',
+  styleUrl: './app.css',
+  templateUrl: './app.html',
+})
+export class App {}</code></pre></div></div></details>
+              <details class="code-reveal" data-archivo="app.html"><summary><span><span class="code-reveal-title">app.html · como queda al terminar este momento</span><span class="code-reveal-note">4 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Editar</span><span class="code-file">app.html</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-html">&lt;app-encabezado /&gt;
+&lt;main class="contenedor"&gt;
+  &lt;router-outlet /&gt;
+&lt;/main&gt;</code></pre></div></div></details>
+            </article>
+            <div class="active-build"><div class="build-step"><span class="build-step-index">▶</span><div class="build-step-copy"><h3 class="build-step-title">Pruébalo</h3><div class="consola"><div class="consola-head">Navegador</div><ol><li class="out">Solo el encabezado: Tarima / La cartelera cultural de Bogotá</li><li class="out">Debajo, nada. Terminal sin errores.</li></ol></div></div></div><div class="checkpoint"><span class="component-label">Checkpoint</span><h3>El outlet existe, pero el mapa sigue vacío.</h3><p><code>app.routes.ts</code> todavía tiene <code>routes = []</code>.</p></div></div>
+            <div class="micro-task"><span class="component-label">Para pensar</span><p class="micro-task-q">El outlet está en su lugar y no hay errores, pero debajo del encabezado no aparece nada. ¿Qué le falta al router?</p><details class="micro-reveal"><summary>Comprobar</summary><p class="micro-answer">Le falta la lista de rutas. El router mira la URL, no encuentra ninguna ruta que coincida y deja el outlet vacío.</p></details></div>
+            <h3>7.2 · Crear el mapa y la página de inicio</h3>
+            <div class="code-block" data-tipo="terminal"><div class="code-head"><div><span class="code-context">Terminal · desde tarima-web/</span></div><button class="copy-btn" type="button">Copiar</button></div><pre><code class="language-bash">ng g c pages/inicio --skip-tests</code></pre></div>
+            <article class="archivo">
+              <div class="archivo-ficha"><span class="archivo-accion">Editar</span><span class="archivo-nombre">app.routes.ts</span><span class="archivo-ruta">tarima-web/src/app/</span></div>
+              <p class="archivo-intro">Cada objeto dice “en esta dirección, esta página”. <code>path</code> se escribe sin barra inicial y <code>title</code> nombra la pestaña.</p>
+              <div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h3 class="lectura-titulo">Inicio y cartelera reciben direcciones</h3><p class="lectura-proposito"><b>Necesidad:</b> <code>/</code> y <code>/eventos</code> deben mostrar páginas distintas. <b>Dónde va:</b> en la lista <code>routes</code>.</p></div><div class="lectura-cuerpo">
+                <div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 1–8</span></div></div><pre class="line-numbers" data-start="1"><code class="language-typescript">import { Routes } from '@angular/router';
+import { Inicio } from './pages/inicio/inicio';
+import { ListadoEventos } from './pages/listado-eventos/listado-eventos';
+
+export const routes: Routes = [
+  { path: '', component: Inicio, title: 'Tarima · Inicio' },
+  { path: 'eventos', component: ListadoEventos, title: 'Tarima · Cartelera' },
+];</code></pre></div>
+                <ol class="notas"><li class="nota" data-lineas="1-3"><div class="nota-cabeza"><span class="nota-lineas">L1–3</span><code class="nota-codigo">Routes · Inicio · ListadoEventos</code></div><p><code>Routes</code> tipa la lista y las otras importaciones traen las páginas que el mapa necesita.</p></li><li class="nota" data-lineas="5"><div class="nota-cabeza"><span class="nota-lineas">L5</span><code class="nota-codigo">export const routes: Routes</code></div><p>TypeScript revisa que cada objeto tenga la forma de una ruta; <code>app.config.ts</code> importa esta constante.</p></li><li class="nota" data-lineas="6-7"><div class="nota-cabeza"><span class="nota-lineas">L6–7</span><code class="nota-codigo">path · component · title</code></div><p>Framework Angular · La ruta vacía representa la raíz y <code>eventos</code> la cartelera. El router cambia también el título de la pestaña.</p><p class="nota-enlace" data-dir="negocio">Camila puede compartir la cartelera y cada pestaña se reconoce.</p></li></ol>
+              </div></div>
+              <details class="code-reveal" data-archivo="app.routes.ts"><summary><span><span class="code-reveal-title">app.routes.ts · como queda al terminar este momento</span><span class="code-reveal-note">8 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Editar</span><span class="code-file">app.routes.ts</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-typescript">import { Routes } from '@angular/router';
+import { Inicio } from './pages/inicio/inicio';
+import { ListadoEventos } from './pages/listado-eventos/listado-eventos';
+
+export const routes: Routes = [
+  { path: '', component: Inicio, title: 'Tarima · Inicio' },
+  { path: 'eventos', component: ListadoEventos, title: 'Tarima · Cartelera' },
+];</code></pre></div></div></details>
+            </article>
+            <h3>7.3 · Reutilizar la tarjeta en el inicio</h3>
+            <article class="archivo">
+              <div class="archivo-ficha"><span class="archivo-accion">Reemplazar</span><span class="archivo-nombre">inicio.ts + inicio.html</span><span class="archivo-ruta">tarima-web/src/app/pages/inicio/</span></div>
+              <p class="archivo-intro">El inicio filtra eventos con cupos, toma los primeros tres y reutiliza <code>TarjetaEvento</code>.</p>
+              <details class="code-reveal" data-archivo="inicio.ts"><summary><span><span class="code-reveal-title">inicio.ts · como queda al terminar este momento</span><span class="code-reveal-note">13 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Reemplazar</span><span class="code-file">inicio.ts</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-typescript">import { Component } from '@angular/core';
+import { EVENTOS } from '../../data/eventos.mock';
+import { TarjetaEvento } from '../../components/tarjeta-evento/tarjeta-evento';
+
+@Component({
+  imports: [TarjetaEvento],
+  selector: 'app-inicio',
+  styleUrl: './inicio.css',
+  templateUrl: './inicio.html',
+})
+export class Inicio {
+  destacados = EVENTOS.filter((evento) => evento.cuposDisponibles &gt; 0).slice(0, 3);
+}</code></pre></div></div></details>
+              <details class="code-reveal" data-archivo="inicio.html"><summary><span><span class="code-reveal-title">inicio.html · como queda al terminar este momento</span><span class="code-reveal-note">6 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Reemplazar</span><span class="code-file">inicio.html</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-html">&lt;h2 class="listado__titulo"&gt;Con cupos disponibles&lt;/h2&gt;
+&lt;div class="listado__grilla"&gt;
+  @for (evento of destacados; track evento.id) {
+    &lt;app-tarjeta-evento [evento]="evento" /&gt;
+  }
+&lt;/div&gt;</code></pre></div></div></details>
+            </article>
+            <div class="micro-task"><span class="component-label">Para pensar</span><p class="micro-task-q">En el inicio y en la cartelera se ve la misma tarjeta. Si mercadeo pide cambiar su diseño, ¿cuántos archivos tocas?</p><details class="micro-reveal"><summary>Comprobar</summary><p class="micro-answer"><strong>Uno:</strong> <code>tarjeta-evento.html</code> o su CSS. Las dos páginas usan el mismo componente.</p></details></div>
+          </div>
+        </section>
+
+        <section class="section view" id="s8" data-accent="1" data-layout="canvas" data-escena="construccion" hidden>
+          <div class="sec-head"><span class="sec-n">Construir · navegación</span><h2 class="sec-t">Navegar sin volver a arrancar la app</h2><p class="sec-s"><code>routerLink</code> cambia la URL y la vista sin descargar otra vez <code>index.html</code> ni perder el estado en memoria.</p></div>
+          <div class="body">
+            <h3>8.1 · Agregar el kit de navegación</h3>
+            <article class="archivo">
+              <div class="archivo-ficha" data-tipo="apoyo"><span class="archivo-accion">Editar</span><span class="archivo-nombre">styles.css</span><span class="archivo-ruta">tarima-web/src/</span></div>
+              <p class="archivo-intro">Pega el bloque completo al final del archivo. Agrega la barra de navegación, los enlaces de tarjeta, la portada, el detalle y los avisos.</p>
+              <details class="code-reveal" data-archivo="no"><summary><span><span class="code-reveal-title">styles.css · bloque de Clase 2</span><span class="code-reveal-note">16 líneas · listo para copiar al final</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Editar</span><span class="code-file">styles.css</span></div><button class="copy-btn" type="button">Copiar bloque</button></div><pre class="line-numbers"><code class="language-css">/* ── Clase 2 · Navegación y páginas ── */
+.encabezado__nav { display: flex; justify-content: center; gap: 8px; margin-top: 14px; }
+.encabezado__nav a { color: #fff; text-decoration: none; padding: 6px 14px; border-radius: 999px; opacity: 0.8; }
+.encabezado__nav a:hover { opacity: 1; background: rgb(255 255 255 / 0.12); }
+.encabezado__nav a.activo { opacity: 1; background: var(--color-vibrante); font-weight: 600; }
+.tarjeta__nombre a { color: inherit; text-decoration: none; }
+.tarjeta__nombre a:hover { color: var(--color-principal); text-decoration: underline; }
+.portada { background: #fff; border-radius: var(--radio); padding: 28px 24px; margin-bottom: 28px; text-align: center; }
+.portada__titulo { margin: 0; color: var(--color-oscuro); }
+.portada__texto { color: #555; }
+.portada__boton { display: inline-block; flex: none; text-decoration: none; padding: 10px 22px; }
+.detalle { max-width: 420px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+.detalle__volver { color: var(--color-principal); text-decoration: none; font-weight: 600; }
+.aviso { background: #fff; border-radius: var(--radio); padding: 32px 24px; max-width: 520px; margin: 0 auto; text-align: center; }
+.aviso .boton { display: inline-block; flex: none; text-decoration: none; padding: 10px 22px; }
+.aviso__codigo { margin: 0; font-size: 3rem; font-weight: 800; color: var(--color-principal); }</code></pre></div></div></details>
+            </article>
+            <h3>8.2 · Enlaces del encabezado</h3>
+            <article class="archivo">
+              <div class="archivo-ficha"><span class="archivo-accion">Editar</span><span class="archivo-nombre">encabezado.html + encabezado.ts</span><span class="archivo-ruta">tarima-web/src/app/components/encabezado/</span></div>
+              <p class="archivo-intro">El encabezado vive fuera del outlet y permanece en todas las páginas. Cada enlace conoce su ruta y recibe la clase <code>activo</code> cuando corresponde.</p>
+              <details class="code-reveal" data-archivo="encabezado.html"><summary><span><span class="code-reveal-title">encabezado.html · como queda al terminar este momento</span><span class="code-reveal-note">8 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Editar</span><span class="code-file">encabezado.html</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-html">&lt;header class="encabezado"&gt;
+  &lt;h1 class="encabezado__marca"&gt;🎭 {{ nombreApp }}&lt;/h1&gt;
+  &lt;p class="encabezado__eslogan"&gt;{{ eslogan }}&lt;/p&gt;
+  &lt;nav class="encabezado__nav"&gt;
+    &lt;a routerLink="/" routerLinkActive="activo" [routerLinkActiveOptions]="{ exact: true }"&gt;Inicio&lt;/a&gt;
+    &lt;a routerLink="/eventos" routerLinkActive="activo"&gt;Cartelera&lt;/a&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;</code></pre></div></div></details>
+              <details class="code-reveal" data-archivo="encabezado.ts"><summary><span><span class="code-reveal-title">encabezado.ts · como queda al terminar este momento</span><span class="code-reveal-note">13 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Editar</span><span class="code-file">encabezado.ts</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-typescript">import { Component } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+
+@Component({
+  imports: [RouterLink, RouterLinkActive],
+  selector: 'app-encabezado',
+  styleUrl: './encabezado.css',
+  templateUrl: './encabezado.html',
+})
+export class Encabezado {
+  nombreApp = 'Tarima';
+  eslogan = 'La cartelera cultural de Bogotá';
+}</code></pre></div></div></details>
+            </article>
+            <div class="micro-task"><span class="component-label">Para pensar</span><p class="micro-task-q">Estás en <code>/eventos</code> y los dos enlaces aparecen activos. ¿Por qué “Inicio” también?</p><details class="micro-reveal"><summary>Comprobar</summary><p class="micro-answer"><code>routerLinkActive</code> compara por comienzo de la dirección y toda dirección empieza con <code>/</code>. Para el inicio se pide coincidencia exacta con <code>[routerLinkActiveOptions]="{ exact: true }"</code>.</p></details></div>
+            <div class="callout" data-tone="warning"><span class="callout-icon">!</span><div><h3>Quítala y mira</h3><p>Quita <code>RouterLink</code> de <code>imports</code>: el enlace escrito sin corchetes deja de funcionar sin mostrar error, porque el navegador lo trata como un atributo cualquiera y el <code>&lt;a&gt;</code> queda sin <code>href</code>.</p></div></div>
+            <h3>8.3 · <code>routerLink</code> contra <code>href</code></h3>
+            <p>Con <code>href="/eventos"</code>, Network muestra una petición nueva de tipo document, la página parpadea y todos los archivos se descargan otra vez. Con <code>routerLink="/eventos"</code>, no hay nueva petición de documento.</p>
+            <div class="micro-task"><span class="component-label">Para pensar</span><p class="micro-task-q">Con <code>href</code> la página igual llegó a la cartelera. ¿Qué tiene de malo?</p><details class="micro-reveal"><summary>Comprobar</summary><p class="micro-answer">Vuelve a arrancar toda la aplicación y se pierde lo que estaba en memoria. Cuando haya un carrito de entradas, un <code>href</code> lo vaciaría.</p></details></div>
+            <h3>8.4 · Una invitación en el inicio</h3>
+            <article class="archivo">
+              <div class="archivo-ficha"><span class="archivo-accion">Editar</span><span class="archivo-nombre">inicio.ts + inicio.html</span><span class="archivo-ruta">tarima-web/src/app/pages/inicio/</span></div>
+              <p class="archivo-intro">El inicio importa <code>RouterLink</code> y agrega una portada con un enlace a toda la cartelera.</p>
+              <details class="code-reveal" data-archivo="inicio.html"><summary><span><span class="code-reveal-title">inicio.html · como queda al terminar este momento</span><span class="code-reveal-note">12 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Editar</span><span class="code-file">inicio.html</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-html">&lt;section class="portada"&gt;
+  &lt;h2 class="portada__titulo"&gt;Lo mejor de la cultura en Bogotá, en un solo lugar&lt;/h2&gt;
+  &lt;p class="portada__texto"&gt;Conciertos, teatro y stand-up. Elige, comparte y reserva.&lt;/p&gt;
+  &lt;a class="boton portada__boton" routerLink="/eventos"&gt;Ver toda la cartelera&lt;/a&gt;
+&lt;/section&gt;
+
+&lt;h2 class="listado__titulo"&gt;Con cupos disponibles&lt;/h2&gt;
+&lt;div class="listado__grilla"&gt;
+  @for (evento of destacados; track evento.id) {
+    &lt;app-tarjeta-evento [evento]="evento" /&gt;
+  }
+&lt;/div&gt;</code></pre></div></div></details>
+              <details class="code-reveal" data-archivo="inicio.ts"><summary><span><span class="code-reveal-title">inicio.ts · como queda al terminar este momento</span><span class="code-reveal-note">14 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Editar</span><span class="code-file">inicio.ts</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-typescript">import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { EVENTOS } from '../../data/eventos.mock';
+import { TarjetaEvento } from '../../components/tarjeta-evento/tarjeta-evento';
+
+@Component({
+  imports: [RouterLink, TarjetaEvento],
+  selector: 'app-inicio',
+  styleUrl: './inicio.css',
+  templateUrl: './inicio.html',
+})
+export class Inicio {
+  destacados = EVENTOS.filter((evento) => evento.cuposDisponibles &gt; 0).slice(0, 3);
+}</code></pre></div></div></details>
+            </article>
+          </div>
+        </section>
+
+        <section class="section view" id="s9" data-accent="1" data-layout="canvas" data-escena="construccion" hidden>
+          <div class="sec-head"><span class="sec-n">Construir · parámetro de ruta</span><h2 class="sec-t">Una página sirve para todos los eventos</h2><p class="sec-s">La parte variable <code>:id</code> de la URL le dice a <code>DetalleEvento</code> qué evento buscar.</p></div>
+          <div class="body">
+            <div class="definicion"><div class="def-tecnica"><span class="component-label">Definición técnica</span><p class="def-termino">Parámetro de ruta</p><p>Es un segmento variable del <code>path</code>, escrito con dos puntos (<code>:id</code>). Cuando una URL coincide, el router guarda ese valor con ese nombre y se lo entrega al componente como un <code>input</code>.</p></div><div class="def-vida"><span class="component-label">En la vida real</span><p>La dirección de un apartamento: el edificio es uno solo; el número del apartamento dice a qué puerta ir.</p></div></div>
+            <h3>9.1 · Crear la dirección variable</h3>
+            <div class="code-block" data-tipo="terminal"><div class="code-head"><div><span class="code-context">Terminal · desde tarima-web/</span></div><button class="copy-btn" type="button">Copiar</button></div><pre><code class="language-bash">ng g c pages/detalle-evento --skip-tests</code></pre></div>
+            <p>Agrega a <code>app.routes.ts</code> el import de <code>DetalleEvento</code> y la ruta <code>{ path: 'eventos/:id', component: DetalleEvento, title: 'Tarima · Evento' }</code>. <code>:id</code> coincide con <code>/eventos/3</code>, <code>/eventos/42</code> o cualquier otro segundo segmento.</p>
+            <h3>9.2 · Recibir el número de la URL</h3>
+            <article class="archivo">
+              <div class="archivo-ficha"><span class="archivo-accion">Editar</span><span class="archivo-nombre">detalle-evento.ts</span><span class="archivo-ruta">tarima-web/src/app/pages/detalle-evento/</span></div>
+              <p class="archivo-intro">La página declara un input obligatorio llamado <code>id</code>. El nombre coincide con <code>:id</code>; el tipo es <code>string</code> porque todo lo que llega en una URL es texto.</p>
+              <div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h3 class="lectura-titulo">La página pide el número</h3><p class="lectura-proposito"><b>Necesidad:</b> saber qué evento solicita la URL. <b>Dónde va:</b> dentro de la clase generada.</p></div><div class="lectura-cuerpo">
+                <div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Import · línea 1</span></div></div><pre class="line-numbers" data-start="1"><code class="language-typescript">import { Component, input } from '@angular/core';</code></pre></div>
+                <ol class="notas"><li class="nota" data-lineas="1"><div class="nota-cabeza"><span class="nota-lineas">L1</span><code class="nota-codigo">input</code></div><p>Framework Angular · Es la misma función usada por <code>TarjetaEvento</code> para recibir el evento.</p></li></ol>
+                <div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Clase · líneas 9–11</span></div></div><pre class="line-numbers" data-start="9"><code class="language-typescript">export class DetalleEvento {
+  id = input.required&lt;string&gt;();
+}</code></pre></div>
+                <ol class="notas"><li class="nota" data-lineas="9-11"><div class="nota-cabeza"><span class="nota-lineas">L9–11</span><code class="nota-codigo">input.required&lt;string&gt;()</code></div><p>La página necesita un dato llamado <code>id</code>. El router lo tiene, pero todavía debe configurarse para entregarlo.</p></li></ol>
+              </div></div>
+            </article>
+            <p>Reemplaza provisionalmente <code>detalle-evento.html</code> por <code>&lt;p&gt;Evento número {{ id() }}&lt;/p&gt;</code>.</p>
+            <div class="consola"><div class="consola-head">Sin input binding</div><ol><li class="out">NG0950: Input "id" is required but no value is available yet.</li></ol></div>
+            <p>Se lee: “el input <code>id</code> es obligatorio, pero todavía no tiene ningún valor”.</p>
+            <h3>9.3 · Entregar parámetros como inputs</h3>
+            <article class="archivo">
+              <div class="archivo-ficha"><span class="archivo-accion">Editar</span><span class="archivo-nombre">app.config.ts</span><span class="archivo-ruta">tarima-web/src/app/</span></div>
+              <p class="archivo-intro"><code>withComponentInputBinding()</code> conecta los parámetros de ruta con los inputs de la página que tienen el mismo nombre.</p>
+              <details class="code-reveal" data-archivo="app.config.ts"><summary><span><span class="code-reveal-title">app.config.ts · como queda al terminar este momento</span><span class="code-reveal-note">15 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Editar</span><span class="code-file">app.config.ts</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-typescript">import { ApplicationConfig, LOCALE_ID, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeEsCo from '@angular/common/locales/es-CO';
+import { provideRouter, withComponentInputBinding } from '@angular/router';
+import { routes } from './app.routes';
+
+registerLocaleData(localeEsCo);
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideBrowserGlobalErrorListeners(),
+    provideRouter(routes, withComponentInputBinding()),
+    { provide: LOCALE_ID, useValue: 'es-CO' },
+  ],
+};</code></pre></div></div></details>
+            </article>
+            <div class="active-build"><div class="build-step"><span class="build-step-index">▶</span><div class="build-step-copy"><h3 class="build-step-title">Pruébalo</h3><div class="consola"><div class="consola-head">Navegador</div><ol><li class="out">/eventos/3 → Evento número 3</li><li class="out">/eventos/42 → Evento número 42</li></ol></div></div></div><div class="checkpoint"><span class="component-label">Checkpoint</span><h3>El mismo componente recibe distintos valores.</h3><p>La URL decide el <code>id</code>; no existen 300 componentes de detalle.</p></div></div>
+            <h3>9.4 · Buscar el evento</h3>
+            <p>Agrega <code>EVENTOS</code> y la interfaz <code>Evento</code>. Si comparas <code>evento.id === this.id()</code>, TypeScript muestra <code>TS2367</code>: un <code>number</code> y un <code>string</code> nunca serán iguales.</p>
+            <div class="micro-task"><span class="component-label">Para pensar</span><p class="micro-task-q">TypeScript dice que comparar un <code>number</code> con un <code>string</code> parece no intencional. ¿Qué habría pasado en JavaScript, sin este aviso?</p><details class="micro-reveal"><summary>Comprobar</summary><p class="micro-answer">Nunca habría encontrado ningún evento. <code>3 === '3'</code> es <code>false</code>: el id de los datos es el número 3 y el de la URL es el texto <code>'3'</code>.</p></details></div>
+            <p>La corrección es <code>Number(this.id())</code>. <code>find</code> devuelve el primer evento que coincide o <code>undefined</code> si no existe.</p>
+            <h3>9.5 · Mostrar el evento o el aviso</h3>
+            <article class="archivo">
+              <div class="archivo-ficha"><span class="archivo-accion">Editar</span><span class="archivo-nombre">detalle-evento.ts + detalle-evento.html</span><span class="archivo-ruta">tarima-web/src/app/pages/detalle-evento/</span></div>
+              <p class="archivo-intro">La página reutiliza <code>TarjetaEvento</code>. El tipo <code>Evento | undefined</code> obliga a manejar también el caso en que el número no existe.</p>
+              <details class="code-reveal" data-archivo="detalle-evento.ts"><summary><span><span class="code-reveal-title">detalle-evento.ts · archivo completo</span><span class="code-reveal-note">19 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Editar</span><span class="code-file">detalle-evento.ts</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-typescript">import { Component, input } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { EVENTOS } from '../../data/eventos.mock';
+import { Evento } from '../../models/evento';
+import { TarjetaEvento } from '../../components/tarjeta-evento/tarjeta-evento';
+
+@Component({
+  imports: [RouterLink, TarjetaEvento],
+  selector: 'app-detalle-evento',
+  styleUrl: './detalle-evento.css',
+  templateUrl: './detalle-evento.html',
+})
+export class DetalleEvento {
+  id = input.required&lt;string&gt;();
+
+  eventoActual(): Evento | undefined {
+    return EVENTOS.find((evento) => evento.id === Number(this.id()));
+  }
+}</code></pre></div></div></details>
+              <details class="code-reveal" data-archivo="detalle-evento.html"><summary><span><span class="code-reveal-title">detalle-evento.html · archivo completo</span><span class="code-reveal-note">12 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Reemplazar</span><span class="code-file">detalle-evento.html</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-html">@if (eventoActual(); as evento) {
+  &lt;section class="detalle"&gt;
+    &lt;a class="detalle__volver" routerLink="/eventos"&gt;← Volver a la cartelera&lt;/a&gt;
+    &lt;app-tarjeta-evento [evento]="evento" /&gt;
+  &lt;/section&gt;
+} @else {
+  &lt;section class="aviso"&gt;
+    &lt;h2&gt;Evento no encontrado&lt;/h2&gt;
+    &lt;p&gt;En Tarima no hay ningún evento con el número {{ id() }}.&lt;/p&gt;
+    &lt;a class="boton" routerLink="/eventos"&gt;Ver la cartelera&lt;/a&gt;
+  &lt;/section&gt;
+}</code></pre></div></div></details>
+            </article>
+            <div class="consola"><div class="consola-head">Casos de prueba</div><ol><li class="out">/eventos/3 → “Risas sin Filtro” · Agotado</li><li class="out">/eventos/99 → “Evento no encontrado” · número 99</li><li class="out">/eventos/abc → “Evento no encontrado” · número abc</li></ol></div>
+          </div>
+        </section>
+
+        <section class="section view" id="s10" data-accent="1" data-layout="canvas" data-escena="construccion" hidden>
+          <div class="sec-head"><span class="sec-n">Construir · enlace dinámico</span><h2 class="sec-t">El nombre de cada tarjeta abre su detalle</h2><p class="sec-s">Un arreglo de segmentos combina la parte fija de la URL con el id del evento.</p></div>
+          <div class="body">
+            <article class="archivo">
+              <div class="archivo-ficha"><span class="archivo-accion">Editar</span><span class="archivo-nombre">tarjeta-evento.html + tarjeta-evento.ts</span><span class="archivo-ruta">tarima-web/src/app/components/tarjeta-evento/</span></div>
+              <p class="archivo-intro">La tarjeta importa <code>RouterLink</code> y convierte el nombre en un enlace como <code>/eventos/3</code>.</p>
+              <div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h3 class="lectura-titulo">El id completa la dirección</h3><p class="lectura-proposito"><b>Necesidad:</b> llegar al detalle desde la cartelera. <b>Dónde va:</b> dentro del título de la tarjeta.</p></div><div class="lectura-cuerpo">
+                <div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 10–12</span></div></div><pre class="line-numbers" data-start="10"><code class="language-html">  &lt;h3 class="tarjeta__nombre"&gt;
+    &lt;a [routerLink]="['/eventos', evento().id]"&gt;{{ evento().nombre }}&lt;/a&gt;
+  &lt;/h3&gt;</code></pre></div>
+                <ol class="notas"><li class="nota" data-lineas="10,12"><div class="nota-cabeza"><span class="nota-lineas">L10,12</span><code class="nota-codigo">h3</code></div><p>HTML · El nombre sigue siendo un título y ahora contiene un enlace.</p></li><li class="nota" data-lineas="11"><div class="nota-cabeza"><span class="nota-lineas">L11</span><code class="nota-codigo">['/eventos', evento().id]</code></div><p>Framework Angular · El arreglo de segmentos produce <code>/eventos/3</code>. Se usa una expresión porque una parte de la ruta sale de los datos.</p><p class="nota-enlace" data-dir="negocio">Valentina puede copiar la dirección y enviársela a Camila.</p></li></ol>
+              </div></div>
+              <details class="code-reveal" data-archivo="tarjeta-evento.ts"><summary><span><span class="code-reveal-title">tarjeta-evento.ts · como queda al terminar este momento</span><span class="code-reveal-note">29 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Editar</span><span class="code-file">tarjeta-evento.ts</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-typescript">import { Component, input } from '@angular/core';
+import { CurrencyPipe, DatePipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { Evento } from '../../models/evento';
+import { Etiqueta } from '../../shared/etiqueta/etiqueta';
+
+@Component({
+  imports: [Etiqueta, CurrencyPipe, DatePipe, RouterLink],
+  selector: 'app-tarjeta-evento',
+  styleUrl: './tarjeta-evento.css',
+  templateUrl: './tarjeta-evento.html',
+})
+export class TarjetaEvento {
+  evento = input.required&lt;Evento&gt;();
+  mostrarDescripcion = false;
+
+  estaAgotado(): boolean {
+    return this.evento().cuposDisponibles === 0;
+  }
+
+  quedanPocosCupos(): boolean {
+    const cupos = this.evento().cuposDisponibles;
+    return cupos &gt; 0 &amp;&amp; cupos &lt;= 10;
+  }
+
+  alternarDescripcion(): void {
+    this.mostrarDescripcion = !this.mostrarDescripcion;
+  }
+}</code></pre></div></div></details>
+              <details class="code-reveal" data-archivo="tarjeta-evento.html"><summary><span><span class="code-reveal-title">tarjeta-evento.html · como queda al terminar este momento</span><span class="code-reveal-note">31 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Editar</span><span class="code-file">tarjeta-evento.html</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-html">&lt;article class="tarjeta" [class.tarjeta--agotada]="estaAgotado()"&gt;
+  &lt;div class="tarjeta__etiquetas"&gt;
+    &lt;app-etiqueta [texto]="evento().categoria" /&gt;
+    @if (estaAgotado()) {
+      &lt;app-etiqueta texto="Agotado" tono="peligro" /&gt;
+    } @else if (quedanPocosCupos()) {
+      &lt;app-etiqueta [texto]="'Últimos ' + evento().cuposDisponibles + ' cupos'" tono="alerta" /&gt;
+    }
+  &lt;/div&gt;
+  &lt;h3 class="tarjeta__nombre"&gt;
+    &lt;a [routerLink]="['/eventos', evento().id]"&gt;{{ evento().nombre }}&lt;/a&gt;
+  &lt;/h3&gt;
+  &lt;p class="tarjeta__dato"&gt;📅 {{ evento().fecha | date: "EEEE d 'de' MMMM · h:mm a" }}&lt;/p&gt;
+  &lt;p class="tarjeta__dato"&gt;📍 {{ evento().lugar }}&lt;/p&gt;
+  &lt;p class="tarjeta__precio"&gt;
+    @if (evento().precio === 0) {
+      Entrada libre
+    } @else {
+      {{ evento().precio | currency: 'COP' : 'symbol-narrow' : '1.0-0' }}
+    }
+  &lt;/p&gt;
+  @if (mostrarDescripcion) {
+    &lt;p class="tarjeta__descripcion"&gt;{{ evento().descripcion }}&lt;/p&gt;
+  }
+  &lt;div class="tarjeta__acciones"&gt;
+    &lt;button type="button" class="boton boton--secundario" (click)="alternarDescripcion()"&gt;
+      {{ mostrarDescripcion ? 'Ocultar detalles' : 'Ver detalles' }}
+    &lt;/button&gt;
+    &lt;button type="button" class="boton" [disabled]="estaAgotado()"&gt;Reservar&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/article&gt;</code></pre></div></div></details>
+            </article>
+            <div class="active-build"><div class="build-step"><span class="build-step-index">▶</span><div class="build-step-copy"><h3 class="build-step-title">Pruébalo</h3><div class="consola"><div class="consola-head">Navegador</div><ol><li class="out">Clic en “Risas sin Filtro” → /eventos/3 y su detalle.</li><li class="out">Copiar dirección y abrirla en otra pestaña → el mismo detalle.</li><li class="out">“Cartelera” sigue activa porque /eventos/3 empieza con /eventos.</li></ol></div></div></div><div class="checkpoint"><span class="component-label">Checkpoint</span><h3>El enlace de Camila funciona.</h3><p>La URL abre directamente el show, incluso en una pestaña nueva.</p></div></div>
+          </div>
+        </section>
+
+        <section class="section view" id="s11" data-accent="1" data-layout="canvas" data-escena="prueba" hidden>
+          <div class="sec-head"><span class="sec-n">Verificar · 404</span><h2 class="sec-t">Una dirección desconocida necesita salida</h2><p class="sec-s">La ruta comodín atrapa lo que ninguna otra reconoce, por eso debe estar de última.</p></div>
+          <div class="body">
+            <div class="definicion"><div class="def-tecnica"><span class="component-label">Definición técnica</span><p class="def-termino">Ruta comodín</p><p>Usa <code>path: '**'</code> y coincide con cualquier dirección. Como el router revisa las rutas en orden y se queda con la primera coincidencia, va siempre de última.</p></div><div class="def-vida"><span class="component-label">En la vida real</span><p>Es “si ninguna de las opciones anteriores aplica, marque 0” en una línea de atención: va al final del menú.</p></div></div>
+            <h3>11.1 · Crear la página amable</h3>
+            <div class="code-block" data-tipo="terminal"><div class="code-head"><div><span class="code-context">Terminal · desde tarima-web/</span></div><button class="copy-btn" type="button">Copiar</button></div><pre><code class="language-bash">ng g c pages/no-encontrada --skip-tests</code></pre></div>
+            <article class="archivo">
+              <div class="archivo-ficha"><span class="archivo-accion">Reemplazar</span><span class="archivo-nombre">no-encontrada.ts + no-encontrada.html</span><span class="archivo-ruta">tarima-web/src/app/pages/no-encontrada/</span></div>
+              <p class="archivo-intro">Es el mismo patrón de aviso del detalle, pero para direcciones que no existen en la aplicación.</p>
+              <details class="code-reveal" data-archivo="no-encontrada.ts"><summary><span><span class="code-reveal-title">no-encontrada.ts · archivo completo</span><span class="code-reveal-note">10 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Reemplazar</span><span class="code-file">no-encontrada.ts</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-typescript">import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+
+@Component({
+  imports: [RouterLink],
+  selector: 'app-no-encontrada',
+  styleUrl: './no-encontrada.css',
+  templateUrl: './no-encontrada.html',
+})
+export class NoEncontrada {}</code></pre></div></div></details>
+              <details class="code-reveal" data-archivo="no-encontrada.html"><summary><span><span class="code-reveal-title">no-encontrada.html · archivo completo</span><span class="code-reveal-note">6 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Reemplazar</span><span class="code-file">no-encontrada.html</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-html">&lt;section class="aviso"&gt;
+  &lt;p class="aviso__codigo"&gt;404&lt;/p&gt;
+  &lt;h2&gt;Esta función no está en cartelera&lt;/h2&gt;
+  &lt;p&gt;La dirección que escribiste no existe en Tarima.&lt;/p&gt;
+  &lt;a class="boton" routerLink="/"&gt;Volver al inicio&lt;/a&gt;
+&lt;/section&gt;</code></pre></div></div></details>
+            </article>
+            <h3>11.2 · Dejar el comodín al final</h3>
+            <p>Agrega el import de <code>NoEncontrada</code> y la ruta <code>{ path: '**', component: NoEncontrada, title: 'Tarima · Página no encontrada' }</code> como última entrada.</p>
+            <div class="active-build"><div class="build-step"><span class="build-step-index">▶</span><div class="build-step-copy"><h3 class="build-step-title">Pruébalo</h3><div class="consola"><div class="consola-head">Casos</div><ol><li class="out">/eventos-en-marte → página 404</li><li class="out">/eventos/3 → detalle de “Risas sin Filtro”</li></ol></div></div></div><div class="checkpoint"><span class="component-label">Checkpoint</span><h3>La 404 no roba rutas válidas.</h3><p>Solo recibe lo que ninguna ruta anterior reconoció.</p></div></div>
+            <div class="callout" data-tone="warning"><span class="callout-icon">!</span><div><h3>Quítala y mira</h3><p>Mueve <code>**</code> al comienzo: ahora <code>/</code>, <code>/eventos</code> y <code>/eventos/3</code> muestran la 404, porque el comodín coincide con todo y gana la primera coincidencia.</p></div></div>
+            <div class="micro-task"><span class="component-label">Para pensar</span><p class="micro-task-q"><code>/eventos/99</code> no existe, pero no muestra la 404 sino “Evento no encontrado”. ¿Por qué?</p><details class="micro-reveal"><summary>Comprobar</summary><p class="micro-answer">Para el router sí existe: coincide con <code>eventos/:id</code>. El router no conoce los eventos; eso lo sabe la página de detalle.</p></details></div>
+          </div>
+        </section>
+
+        <section class="section view" id="s12" data-accent="1" data-layout="canvas" data-escena="construccion" hidden>
+          <div class="sec-head"><span class="sec-n">Construir · rendimiento</span><h2 class="sec-t">Descargar cada página cuando se visita</h2><p class="sec-s"><code>loadComponent</code> separa la cartelera y el detalle en archivos que llegan bajo demanda.</p></div>
+          <div class="body">
+            <div class="definicion"><div class="def-tecnica"><span class="component-label">Definición técnica</span><p class="def-termino">Lazy loading</p><p>Es cargar el código de un componente solo cuando se necesita. <code>loadComponent</code> recibe una función con un import dinámico; Angular crea un archivo JavaScript aparte y lo descarga al visitar la ruta.</p></div><div class="def-vida"><span class="component-label">En la vida real</span><p>Una plataforma de video no descarga todo el catálogo cuando abres la aplicación: descarga la película que eliges, cuando la eliges.</p></div></div>
+            <h3>12.1 · Medir antes</h3>
+            <div class="code-block" data-tipo="terminal"><div class="code-head"><div><span class="code-context">Terminal · desde tarima-web/</span></div><button class="copy-btn" type="button">Copiar</button></div><pre><code class="language-bash">ng build</code></pre></div>
+            <div class="consola"><div class="consola-head">Antes</div><ol><li class="out">main-XXXXXXXX.js · 260.02 kB</li><li class="out">Initial total · 263.22 kB</li></ol></div>
+            <p>Todo está en el archivo inicial: para ver el inicio, el navegador descarga también cartelera, detalle y 404.</p>
+            <h3>12.2 · Separar cartelera y detalle</h3>
+            <article class="archivo">
+              <div class="archivo-ficha"><span class="archivo-accion">Editar</span><span class="archivo-nombre">app.routes.ts</span><span class="archivo-ruta">tarima-web/src/app/</span></div>
+              <p class="archivo-intro">Los imports estáticos de <code>ListadoEventos</code> y <code>DetalleEvento</code> desaparecen. La función se ejecuta la primera vez que la ruta se visita.</p>
+              <div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h3 class="lectura-titulo">Importar la página cuando haga falta</h3><p class="lectura-proposito"><b>Necesidad:</b> no descargar páginas que la persona no visita. <b>Dónde va:</b> en las rutas de cartelera y detalle.</p></div><div class="lectura-cuerpo">
+                <div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 7–18</span></div></div><pre class="line-numbers" data-start="7"><code class="language-typescript">  {
+    path: 'eventos',
+    loadComponent: () =&gt;
+      import('./pages/listado-eventos/listado-eventos').then((m) =&gt; m.ListadoEventos),
+    title: 'Tarima · Cartelera',
+  },
+  {
+    path: 'eventos/:id',
+    loadComponent: () =&gt;
+      import('./pages/detalle-evento/detalle-evento').then((m) =&gt; m.DetalleEvento),
+    title: 'Tarima · Evento',
+  },</code></pre></div>
+                <ol class="notas"><li class="nota" data-lineas="7-12"><div class="nota-cabeza"><span class="nota-lineas">L7–12</span><code class="nota-codigo">loadComponent · ListadoEventos</code></div><p>Angular recibe una función en lugar de la clase. El import dinámico devuelve una promesa; <code>then</code> selecciona la clase exportada cuando el archivo llega.</p></li><li class="nota" data-lineas="13-18"><div class="nota-cabeza"><span class="nota-lineas">L13–18</span><code class="nota-codigo">loadComponent · DetalleEvento</code></div><p>El mismo patrón separa el detalle. Las direcciones y los títulos no cambian.</p><p class="nota-enlace" data-dir="negocio">Cuando el detalle tenga reserva y administración, ese peso no llegará a quien solo ve el inicio.</p></li></ol>
+              </div></div>
+              <details class="code-reveal" data-archivo="app.routes.ts"><summary><span><span class="code-reveal-title">app.routes.ts · versión final de la clase</span><span class="code-reveal-note">20 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Editar</span><span class="code-file">app.routes.ts</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-typescript">import { Routes } from '@angular/router';
+import { Inicio } from './pages/inicio/inicio';
+import { NoEncontrada } from './pages/no-encontrada/no-encontrada';
+
+export const routes: Routes = [
+  { path: '', component: Inicio, title: 'Tarima · Inicio' },
+  {
+    path: 'eventos',
+    loadComponent: () =&gt;
+      import('./pages/listado-eventos/listado-eventos').then((m) =&gt; m.ListadoEventos),
+    title: 'Tarima · Cartelera',
+  },
+  {
+    path: 'eventos/:id',
+    loadComponent: () =&gt;
+      import('./pages/detalle-evento/detalle-evento').then((m) =&gt; m.DetalleEvento),
+    title: 'Tarima · Evento',
+  },
+  { path: '**', component: NoEncontrada, title: 'Tarima · Página no encontrada' },
+];</code></pre></div></div></details>
+            </article>
+            <h3>12.3 · Medir después</h3>
+            <div class="consola"><div class="consola-head">Después</div><ol><li class="out">main-XXXXXXXX.js · 5.17 kB</li><li class="out">detalle-evento · lazy chunk</li><li class="out">listado-eventos · lazy chunk</li></ol></div>
+            <div class="micro-task"><span class="component-label">Para pensar</span><p class="micro-task-q">El total inicial casi no cambió. ¿Valió la pena?</p><details class="micro-reveal"><summary>Comprobar</summary><p class="micro-answer">Hoy el ahorro es mínimo porque casi todo el peso es Angular y la tarjeta, que el inicio también usa. El valor está en la estructura: las futuras funciones pesadas no se descargarán para quien solo ve el inicio.</p></details></div>
+            <div class="pipeline" role="group" aria-label="Traza de la URL al componente">
+              <div class="pipe-step"><span class="component-label">Entrada</span><h3><code>/eventos/3</code></h3><ul><li>segmentos eventos · 3</li></ul></div>
+              <div class="pipe-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
+              <div class="pipe-step" data-emphasis><span class="component-label">Router</span><h3><code>eventos/:id</code></h3><ul><li>id = '3'</li><li>loadComponent</li></ul></div>
+              <div class="pipe-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
+              <div class="pipe-step"><span class="component-label">Salida</span><h3>DetalleEvento</h3><ul><li>Risas sin Filtro</li></ul></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section view" id="s13" data-accent="1" data-layout="canvas" data-escena="prueba" hidden>
+          <div class="sec-head"><span class="sec-n">Verificar · criterio profesional</span><h2 class="sec-t">Detectar rutas de Angular viejo</h2><p class="sec-s">La IA puede producir código que funciona y aun así no pertenece a la arquitectura standalone de este proyecto.</p></div>
+          <div class="body">
+            <div class="momento-ia">
+              <div class="momento-ia-head"><span class="momento-ia-titulo">Momento IA</span><span class="ia-nivel">Nivel 0 · Tutor</span><span class="ia-herramienta">Chat navegador</span></div>
+              <div class="momento-ia-body">
+                <div class="ia-grid"><div><span class="component-label">Primero razonas tú</span><p>Sin mirar tu código, escribe en una línea en qué orden deben ir las rutas <code>''</code>, <code>eventos/:id</code>, <code>**</code> y <code>eventos</code>, y por qué.</p></div><div class="ia-no-delega"><span class="component-label">No se delega</span><p>Decidir qué páginas van con lazy loading y en qué orden van las rutas. Eso depende de cómo navega la gente en tu aplicación.</p></div></div>
+                <div class="code-block" data-tipo="prompt"><div class="code-head"><div><span class="code-context">Prompt sugerido</span><span class="code-file">Chat navegador</span></div><button class="copy-btn" type="button">Copiar</button></div><pre><code class="language-plaintext">Estoy aprendiendo Angular 22 con componentes standalone. Escríbeme el archivo de rutas para un portal de adopción de mascotas con inicio, listado, detalle por id y una página 404. Solo el archivo de rutas, sin explicaciones.</code></pre></div>
+                <div><span class="component-label">Cómo validar la respuesta</span><ul class="checklist"><li>Pásala por la tabla del detector.</li><li>Cuenta cuántas señales de Angular viejo encuentras.</li><li>Comprueba que <code>**</code> quedó de último.</li></ul></div>
+              </div>
+            </div>
+            <div class="table-wrap"><table class="data-table"><caption>Detector de rutas viejas</caption><thead><tr><th>Si la IA te da…</th><th>En Angular 22 se usa…</th></tr></thead><tbody>
+              <tr><td><code>RouterModule.forRoot(routes)</code> dentro de un <code>NgModule</code></td><td><code>provideRouter(routes)</code> en <code>app.config.ts</code></td></tr>
+              <tr><td><code>loadChildren</code> con un módulo</td><td><code>loadComponent</code> con el componente standalone</td></tr>
+              <tr><td><code>DetalleMascotaComponent</code></td><td><code>DetalleMascota</code>, sin sufijo</td></tr>
+              <tr><td><code>ActivatedRoute.snapshot.paramMap.get('id')</code></td><td><code>input.required&lt;string&gt;()</code> + <code>withComponentInputBinding()</code></td></tr>
+              <tr><td><code>**</code> en cualquier lugar</td><td><code>**</code> siempre de último</td></tr>
+              <tr><td><code>&lt;a href="/mascotas"&gt;</code></td><td><code>&lt;a routerLink="/mascotas"&gt;</code></td></tr>
+            </tbody></table></div>
+            <div class="table-wrap"><table class="data-table"><caption>Errores que vas a leer</caption><thead><tr><th>Mensaje o síntoma</th><th>Qué significa</th><th>Corrección</th></tr></thead><tbody>
+              <tr><td><code>NG8001 · router-outlet is not a known element</code></td><td>La raíz no conoce el outlet</td><td>Importar <code>RouterOutlet</code> en <code>App</code></td></tr>
+              <tr><td><code>NG0950 · Input id is required</code></td><td>El router no entregó el parámetro</td><td>Activar <code>withComponentInputBinding()</code> y usar el mismo nombre</td></tr>
+              <tr><td><code>TS2367 · number and string have no overlap</code></td><td>El id de la URL es texto</td><td><code>Number(this.id())</code></td></tr>
+              <tr><td><code>NG8002 · Can't bind to routerLink</code></td><td>Falta la directiva en el componente</td><td>Importar <code>RouterLink</code></td></tr>
+              <tr><td>Un enlace no hace nada y no da error</td><td><code>routerLink</code> sin corchetes y sin import</td><td>Revisar <code>imports</code> del componente</td></tr>
+              <tr><td><code>NG04014 · path cannot start with a slash</code></td><td>El <code>path</code> del mapa tiene <code>/</code></td><td>Usar <code>path: 'eventos'</code></td></tr>
+              <tr><td><code>TS2307</code> o <code>TS2551</code></td><td>Ruta o export mal escrito en <code>import()</code></td><td>Copiar ruta y nombre desde el archivo</td></tr>
+              <tr><td>Todas las páginas muestran la 404</td><td><code>**</code> no está de última</td><td>Moverla al final</td></tr>
+            </tbody></table></div>
+          </div>
+        </section>
+
+        <section class="section view" id="s14" data-accent="1" data-layout="canvas" data-escena="prueba" hidden>
+          <div class="sec-head"><span class="sec-n">Aplicar · Huella Amiga</span><h2 class="sec-t">Fase 2: direcciones propias para cada mascota</h2><p class="sec-s">El concepto se transfiere; el código no se copia literalmente.</p></div>
+          <div class="body">
+            <div class="mision"><div class="mision-head"><span class="mision-marca">2</span><span class="mision-titulo">Lo que pidió la fundación</span></div><div class="mision-grid"><div class="mision-item"><span class="component-label">Necesidad</span><p>Compartir el enlace de cada mascota por WhatsApp.</p></div><div class="mision-item"><span class="component-label">Lo que construyes</span><p>Inicio, listado, detalle por id, 404 y navegación.</p></div><div class="mision-item" data-resultado><span class="component-label">Evidencia</span><p>Los tests reconocen las rutas, los enlaces y los estados de “no encontrada”.</p></div></div></div>
+            <ol class="checklist">
+              <li>Rutas en <code>app.routes.ts</code>: <code>''</code>, <code>mascotas</code>, <code>mascotas/:id</code> y <code>**</code> de última.</li>
+              <li>Lazy loading con <code>loadComponent</code> en listado y detalle.</li>
+              <li><code>withComponentInputBinding()</code> en <code>app.config.ts</code>.</li>
+              <li><code>Inicio</code> con enlace al listado y tres mascotas disponibles, reutilizando <code>TarjetaMascota</code>.</li>
+              <li><code>DetalleMascota</code> recibe el id como input y muestra la mascota.</li>
+              <li>Página <code>NoEncontrada</code>.</li>
+              <li>Enlaces en <code>Encabezado</code> con <code>routerLinkActive</code> y “Ver detalle” en cada tarjeta.</li>
+            </ol>
+            <div class="table-wrap"><table class="data-table"><caption>Criterios de aceptación</caption><thead><tr><th>#</th><th>Archivo</th><th>Qué debe cumplir</th></tr></thead><tbody>
+              <tr><td class="num">1</td><td><code>app.routes.ts</code></td><td><code>''</code> → Inicio, <code>mascotas</code> → ListadoMascotas, <code>mascotas/:id</code> → DetalleMascota, <code>**</code> → NoEncontrada</td></tr>
+              <tr><td class="num">2</td><td><code>app.routes.ts</code></td><td>Listado y detalle usan <code>loadComponent</code></td></tr>
+              <tr><td class="num">3</td><td><code>app.config.ts</code></td><td><code>provideRouter(routes, withComponentInputBinding())</code></td></tr>
+              <tr><td class="num">4</td><td><code>pages/inicio/inicio.ts</code></td><td>Clase <code>Inicio</code>; enlace <code>data-testid="ir-a-mascotas"</code>; tres mascotas disponibles</td></tr>
+              <tr><td class="num">5</td><td><code>pages/detalle-mascota/detalle-mascota.ts</code></td><td>Clase <code>DetalleMascota</code>, id con <code>input.required</code> y <code>data-testid="detalle-nombre"</code></td></tr>
+              <tr><td class="num">6</td><td>Detalle inexistente</td><td><code>data-testid="mascota-no-encontrada"</code> y <code>data-testid="volver-listado"</code></td></tr>
+              <tr><td class="num">7</td><td><code>TarjetaMascota</code></td><td><code>data-testid="ver-detalle"</code> lleva a <code>/mascotas/&lt;id&gt;</code></td></tr>
+              <tr><td class="num">8</td><td><code>NoEncontrada</code></td><td>Muestra <code>data-testid="pagina-404"</code></td></tr>
+              <tr><td class="num">9</td><td><code>Encabezado</code></td><td>Enlaces a <code>/</code> y <code>/mascotas</code> con <code>routerLink</code> y <code>routerLinkActive</code></td></tr>
+            </tbody></table></div>
+            <div class="callout" data-tone="info"><span class="callout-icon">i</span><div><h3>Entrega</h3><p>Haz <code>git push</code> a tu fork. Tu Pull Request se actualiza solo: no abras otro. Agrega la entrada 2 de <code>BITACORA-IA.md</code> con el Momento IA de hoy. Checkpoint: lunes 9 de noviembre, 11:59 p. m.</p></div></div>
+          </div>
+        </section>
+
+        <section class="section view" id="s15" data-accent="1" data-layout="canvas" data-escena="cierre" hidden>
+          <div class="sec-head"><span class="sec-n">Cierre</span><h2 class="sec-t">Tarima ya tiene direcciones que se pueden compartir</h2></div>
+          <div class="body">
+            <article class="chat"><div class="chat-head"><span class="chat-canal">WhatsApp · Valentina y Camila</span><span class="chat-contexto">martes 3 de noviembre de 2026</span></div><ol class="chat-mensajes"><li class="chat-msg"><span class="chat-avatar">V</span><span class="chat-autor">Valentina <time>10:05 p. m.</time></span><p class="chat-texto">Camila, ya está: tarima-cartelera.co/eventos/3</p></li><li class="chat-msg"><span class="chat-avatar">C</span><span class="chat-autor">Camila <time>10:07 p. m.</time></span><p class="chat-texto">¡Abre directo mi show! Y si alguien escribe mal el enlace, por lo menos le dice que se equivocó.</p></li><li class="chat-msg" data-lado="equipo"><span class="chat-avatar">V</span><span class="chat-autor">Valentina <time>10:08 p. m.</time></span><p class="chat-texto">Y Hernán ya tiene sus tres líneas para la junta.</p></li></ol></article>
+            <ol class="ideas">
+              <li><span><strong>Angular</strong> mantiene la pantalla igual a los datos; <strong>TypeScript</strong> convierte olvidos y errores de escritura en avisos antes de que los vea un cliente.</span></li>
+              <li><span>El <strong>router</strong> traduce cada URL en una página sin recargar: mapa en <code>app.routes.ts</code>, página en <code>&lt;router-outlet /&gt;</code> y navegación con <code>routerLink</code>.</span></li>
+              <li><span>Un <strong>parámetro de ruta</strong> (<code>:id</code>) permite que una sola página sirva para todos los eventos; <code>withComponentInputBinding()</code> lo entrega como input.</span></li>
+            </ol>
+            <div class="callout" data-tone="info"><span class="callout-icon">i</span><div><h3>La decisión técnica del día</h3><p><code>/eventos/99</code> y <code>/eventos-en-marte</code> son errores distintos. El router sabe qué direcciones existen; la página de detalle sabe qué eventos existen.</p></div></div>
+            <div class="autoevaluacion"><span class="component-label">¿Ya puedo…?</span><ul>
+              <li><label><input type="checkbox"><span>Explicar con evidencia qué aportan Angular y TypeScript a Tarima.</span></label></li>
+              <li><label><input type="checkbox"><span>Construir la navegación y abrir <code>/eventos/3</code> en una pestaña nueva.</span></label></li>
+              <li><label><input type="checkbox"><span>Verificar la 404, el evento inexistente y los chunks lazy del build.</span></label></li>
+            </ul></div>
+            <div class="papel"><span class="component-label">Lo que sigue</span><p><strong>Taller:</strong> Fase 2 de Huella Amiga. <strong>Tutoría:</strong> arreglos en TypeScript (<code>find</code>, <code>filter</code>, <code>map</code>, <code>includes</code>). <strong>Clase 3:</strong> Valentina quiere un carrito “Mis entradas” que se vea desde el encabezado, la cartelera y el detalle; ahí entran las signals y los servicios.</p></div>
+          </div>
+        </section>
+
+        <section class="section view" id="glosario" data-accent="1" data-layout="canvas" data-escena="consulta" hidden>
+          <div class="sec-head"><span class="sec-n">Consultar</span><h2 class="sec-t">Glosario de la clase</h2><p class="sec-s">Los conceptos de hoy en un solo lugar.</p></div>
+          <div class="body"><dl class="glosario">
+            <div class="glos-item" data-termino="data-binding"><dt class="glos-termino">Data binding</dt><dd class="glos-tecnica">Conexión declarada entre un dato del componente y lo que se ve; Angular la mantiene actualizada.</dd><dd class="glos-vida">El tablero de vuelos conectado al sistema de la aerolínea.</dd><dd class="glos-donde">Angular · pantalla y datos</dd></div>
+            <div class="glos-item" data-termino="typescript"><dt class="glos-termino">TypeScript</dt><dd class="glos-tecnica">JavaScript con tipos declarados de antemano; revisa código y plantillas antes de ejecutar.</dd><dd class="glos-vida">La lista de chequeo del piloto antes de despegar.</dd><dd class="glos-donde">Pruebas de contrato</dd></div>
+            <div class="glos-item" data-termino="spa"><dt class="glos-termino">SPA</dt><dd class="glos-tecnica">Aplicación con un solo <code>index.html</code> cuyo contenido cambia con JavaScript, sin recargar.</dd><dd class="glos-vida">Una pantalla de aeropuerto que cambia de información sin cambiar de pantalla.</dd><dd class="glos-donde">Por qué un router</dd></div>
+            <div class="glos-item" data-termino="router"><dt class="glos-termino">Router</dt><dd class="glos-tecnica">Servicio de Angular que relaciona cada URL con un componente y cambia la vista sin recargar.</dd><dd class="glos-vida">El directorio de un centro comercial.</dd><dd class="glos-donde">Mapa de direcciones</dd></div>
+            <div class="glos-item" data-termino="ruta"><dt class="glos-termino">Ruta</dt><dd class="glos-tecnica">Objeto <code>{ path, component }</code> o <code>loadComponent</code> dentro del arreglo <code>routes</code>.</dd><dd class="glos-vida">Una línea del directorio: “Local 204 → Librería”.</dd><dd class="glos-donde"><code>app.routes.ts</code></dd></div>
+            <div class="glos-item" data-termino="router-outlet"><dt class="glos-termino"><code>&lt;router-outlet /&gt;</code></dt><dd class="glos-tecnica">Marcador donde el router pone la página de la ruta activa.</dd><dd class="glos-vida">El marco de un cuadro en el que se cambia la foto.</dd><dd class="glos-donde"><code>app.html</code></dd></div>
+            <div class="glos-item" data-termino="router-link"><dt class="glos-termino"><code>routerLink</code></dt><dd class="glos-tecnica">Directiva que navega a una ruta sin recargar la aplicación.</dd><dd class="glos-vida">Cambiar de canal en vez de apagar y prender el televisor.</dd><dd class="glos-donde">Encabezado, inicio y tarjetas</dd></div>
+            <div class="glos-item" data-termino="router-link-active"><dt class="glos-termino"><code>routerLinkActive</code></dt><dd class="glos-tecnica">Directiva que agrega una clase al enlace de la ruta activa.</dd><dd class="glos-vida">El “Usted está aquí” de un mapa.</dd><dd class="glos-donde">Navegación</dd></div>
+            <div class="glos-item" data-termino="parametro-ruta"><dt class="glos-termino">Parámetro de ruta</dt><dd class="glos-tecnica">Segmento variable del <code>path</code> (<code>:id</code>) cuyo valor se entrega al componente.</dd><dd class="glos-vida">El número del apartamento en una dirección.</dd><dd class="glos-donde">Detalle de evento</dd></div>
+            <div class="glos-item" data-termino="ruta-comodin"><dt class="glos-termino">Ruta comodín</dt><dd class="glos-tecnica">Ruta <code>**</code> que coincide con cualquier dirección; va de última.</dd><dd class="glos-vida">“Si ninguna opción aplica, marque 0”.</dd><dd class="glos-donde">Página 404</dd></div>
+            <div class="glos-item" data-termino="lazy-loading"><dt class="glos-termino">Lazy loading</dt><dd class="glos-tecnica">Cargar el código de una página solo cuando se visita, con <code>loadComponent</code>.</dd><dd class="glos-vida">La plataforma que descarga solo la película elegida.</dd><dd class="glos-donde">Rutas finales</dd></div>
+          </dl></div>
+        </section>
+
+        <section class="section view" id="documentacion" data-accent="1" data-layout="canvas" data-escena="consulta" hidden>
+          <div class="sec-head"><span class="sec-n">Consultar</span><h2 class="sec-t">Documentación para profundizar</h2><p class="sec-s">Fuentes oficiales y la parte concreta que conviene leer.</p></div>
+          <div class="body">
+            <ul class="docs">
+              <li><div class="doc-meta"><span class="doc-fuente">Angular</span><span class="doc-tipo">Guía oficial v22</span><span class="doc-idioma">Inglés</span></div><a class="doc-titulo" href="https://angular.dev/guide/routing/define-routes" target="_blank" rel="noopener">Define routes</a><p class="doc-que-leer">Rutas con parámetros, ruta comodín y títulos de página; es lo que construiste en <code>app.routes.ts</code>.</p></li>
+              <li><div class="doc-meta"><span class="doc-fuente">Angular</span><span class="doc-tipo">Guía oficial v22</span><span class="doc-idioma">Inglés</span></div><a class="doc-titulo" href="https://angular.dev/guide/routing/common-router-tasks" target="_blank" rel="noopener">Common routing tasks</a><p class="doc-que-leer">Recibir información de la ruta con inputs y <code>withComponentInputBinding</code>.</p></li>
+              <li><div class="doc-meta"><span class="doc-fuente">Angular</span><span class="doc-tipo">Rendimiento</span><span class="doc-idioma">Inglés</span></div><a class="doc-titulo" href="https://angular.dev/best-practices/performance/lazy-loaded-routes" target="_blank" rel="noopener">Lazy-loaded routes</a><p class="doc-que-leer">Por qué cargar rutas bajo demanda y cómo hacerlo con <code>loadComponent</code>.</p></li>
+              <li><div class="doc-meta"><span class="doc-fuente">Angular</span><span class="doc-tipo">API</span><span class="doc-idioma">Inglés</span></div><a class="doc-titulo" href="https://angular.dev/api/router/withComponentInputBinding" target="_blank" rel="noopener">withComponentInputBinding</a><p class="doc-que-leer">El ejemplo inicial; compáralo con tu <code>app.config.ts</code>.</p></li>
+            </ul>
+            <p class="doc-foot">© 2026 Ana Alvarado · Educadora Tech &amp; Desarrolladora Full Stack · Todos los derechos reservados · linkedin.com/in/ana-alvarado-instructora-full-stack</p>
+          </div>
+        </section>
+      </div>
+
+      <nav class="view-controls" id="viewControls" aria-label="Navegación entre secciones">
+        <button class="view-btn" id="prevView" type="button" aria-label="Sección anterior">←</button>
+        <span class="view-position" id="viewPosition" aria-live="polite">Portada</span>
+        <button class="view-btn" id="nextView" type="button" aria-label="Sección siguiente">→</button>
+      </nav>
+    </main>
+  </div>
+
+  <div class="watermark" aria-hidden="true">© 2026 ANA ALVARADO</div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+  <script src="anaclase-v12.js"></script>
+</body>
+</html>
+
+
+

@@ -18,7 +18,7 @@ window.CURSO = {
         {
           "titulo": "Routing y Navegación Profesional en Angular",
           "carpeta": "guias/modulo-01-angular-moderno/clase-02",
-          "guia": null
+          "guia": "guias/modulo-01-angular-moderno/clase-02/index.html"
         },
         {
           "titulo": "Gestión de Estado y Comunicación entre Componentes",
