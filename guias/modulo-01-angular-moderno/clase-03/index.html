@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="es" data-tema="oscuro" data-tema-base="oscuro" data-empresa="dev-senior" data-paleta="caribe">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Ana Alvarado">
+  <meta name="copyright" content="© 2026 Ana Alvarado — Todos los derechos reservados">
+  <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+  <title>Clase 3 · Signals y estado compartido · Ana Alvarado</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&amp;family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+  <link rel="stylesheet" href="anaestilos-v12.css">
+</head>
+<body>
+  <a class="skip-link" href="#s1">Saltar al contenido</a>
+  <div class="topline" id="topline" aria-hidden="true"></div>
+  <div class="controls" aria-label="Controles">
+    <button class="ctrl" id="temaBtn" type="button" aria-label="Cambiar tema">☀</button>
+    <button class="ctrl" id="fullscreenBtn" type="button" aria-label="Pantalla completa">⛶</button>
+  </div>
+  <div class="shell" id="shell" data-collapsed="false">
+    <aside class="sidebar" aria-label="Índice de la clase">
+      <div class="sb-top"><span class="brand-mark">A</span><div class="sb-title"><b>Java Full Stack · Módulo 1</b><span>Clase 3 · Angular moderno</span></div></div>
+      <button class="sb-toggle" id="collapseBtn" type="button" aria-label="Colapsar menú">‹</button>
+      <nav class="sb-nav" id="nav" aria-label="Secciones">
+        <a class="nav-item active" href="#portada"><span class="nav-index">00</span><span class="nav-label">Portada</span></a>
+        <span class="nav-group">Problema</span>
+        <a class="nav-item" href="#s1"><span class="nav-index">01</span><span class="nav-label">Lo que pidió Valentina</span></a>
+        <a class="nav-item" href="#s2"><span class="nav-index">02</span><span class="nav-label">Lo que lograrás hoy</span></a>
+        <a class="nav-item" href="#s3"><span class="nav-index">03</span><span class="nav-label">Punto de control</span></a>
+        <span class="nav-group">Estado y signals</span>
+        <a class="nav-item" href="#s4"><span class="nav-index">04</span><span class="nav-label">El dato que avisa</span></a>
+        <a class="nav-item" href="#s5"><span class="nav-index">05</span><span class="nav-label">La cartelera recuerda</span></a>
+        <span class="nav-group">Valor derivado</span>
+        <a class="nav-item" href="#s6"><span class="nav-index">06</span><span class="nav-label">La fórmula que se actualiza</span></a>
+        <a class="nav-item" href="#s7"><span class="nav-index">07</span><span class="nav-label">Filtrar la cartelera</span></a>
+        <span class="nav-group">Hijo → padre</span>
+        <a class="nav-item" href="#s8"><span class="nav-index">08</span><span class="nav-label">La tarjeta avisa</span></a>
+        <a class="nav-item" href="#s9"><span class="nav-index">09</span><span class="nav-label">Conectar el aviso</span></a>
+        <span class="nav-group">Estado compartido</span>
+        <a class="nav-item" href="#s10"><span class="nav-index">10</span><span class="nav-label">Una sola fuente de verdad</span></a>
+        <a class="nav-item" href="#s11"><span class="nav-index">11</span><span class="nav-label">Construir el store</span></a>
+        <a class="nav-item" href="#s12"><span class="nav-index">12</span><span class="nav-label">Conectar el carrito</span></a>
+        <a class="nav-item" href="#s13"><span class="nav-index">13</span><span class="nav-label">Mis entradas</span></a>
+        <span class="nav-group">Aplicar y revisar</span>
+        <a class="nav-item" href="#s14"><span class="nav-index">14</span><span class="nav-label">Revisión con IA</span></a>
+        <a class="nav-item" href="#s15"><span class="nav-index">15</span><span class="nav-label">Inicio y detalle</span></a>
+        <a class="nav-item" href="#s16"><span class="nav-index">16</span><span class="nav-label">Huella Amiga · Fase 3</span></a>
+        <span class="nav-group">Cerrar</span>
+        <a class="nav-item" href="#s17"><span class="nav-index">17</span><span class="nav-label">Lo que se queda</span></a>
+        <span class="nav-group">Consultar</span>
+        <a class="nav-item" href="#glosario"><span class="nav-index">18</span><span class="nav-label">Glosario</span></a>
+        <a class="nav-item" href="#documentacion"><span class="nav-index">19</span><span class="nav-label">Documentación</span></a>
+      </nav>
+      <div class="sb-prog"><div class="lbl"><span>Progreso</span><span id="progPct">0%</span></div><div class="track"><div class="fill" id="progFill"></div></div></div>
+    </aside>
+    <main class="main">
+      <header class="hero view" id="portada" data-accent="1">
+        <div class="hero-inner">
+          <div class="hero-copy">
+            <span class="eyebrow">Dev Senior · Java Full Stack</span>
+            <h1 class="hero-title">Un estado, toda la aplicación</h1>
+            <p class="hero-lead">La cartelera filtra mientras escribes, cada tarjeta agrega entradas a un carrito único y el encabezado cuenta las entradas en cualquier página.</p>
+            <div class="meta"><span class="pill" data-hot>Angular 22.2</span><span class="pill">Signals</span><span class="pill">Módulo 1 · Clase 3</span></div>
+          </div>
+          <figure class="hero-visual">
+            <img src="img/signals-estado-compartido-hero.png" alt="Tres partes de una aplicación cultural intentan compartir selecciones y terminan conectadas por una única fuente central de estado">
+            <figcaption class="hero-note">La cartelera, el contador y el carrito dejan de vivir aislados cuando comparten una sola fuente de verdad.</figcaption>
+          </figure>
+        </div>
+      </header>
+      <div class="content">
+
+        <section class="section view" id="s1" data-accent="1" data-layout="canvas" data-escena="apertura" hidden>
+          <div class="sec-head"><span class="sec-n">El problema</span><h2 class="sec-t">Cuatro pedidos que Tarima todavía no sabe resolver</h2><p class="sec-s">La cartelera muestra eventos, pero ninguna página recuerda lo que hace la persona.</p></div>
+          <div class="body">
+            <div class="micro-task"><span class="component-label">Recuerda</span><p class="micro-task-q">En <code>TarjetaEvento</code> escribimos <code>evento = input.required&lt;Evento&gt;()</code>. ¿Por qué en la plantilla se escribe <code>evento().nombre</code> y no <code>evento.nombre</code>?</p><details class="micro-reveal"><summary>Comprobar</summary><p class="micro-answer">Porque <code>input()</code> no guarda el evento directamente: guarda una <strong>signal</strong>, una caja que contiene el evento. Los paréntesis abren la caja y entregan el valor actual. Hoy vas a crear tus propias signals: las de <code>input()</code> las llena el padre; las de hoy las llenas tú.</p></details></div>
+            <article class="chat">
+              <div class="chat-head"><span class="chat-canal">Equipo Tarima</span><span class="chat-contexto">WhatsApp · lunes 9 de noviembre de 2026</span></div>
+              <ol class="chat-mensajes">
+                <li class="chat-msg"><span class="chat-avatar">V</span><span class="chat-autor">Valentina <time>8:12 a. m.</time></span><p class="chat-texto">Equipo, el enlace de cada evento funcionó increíble: Camila vendió todo “Risas sin Filtro” 🎉</p></li>
+                <li class="chat-msg"><span class="chat-avatar">V</span><span class="chat-autor">Valentina <time>8:14 a. m.</time></span><p class="chat-texto">Ahora me están escribiendo dos cosas. La primera: con tantos eventos, la gente quiere <strong>buscar por nombre</strong> y ver <strong>solo teatro</strong> o <strong>solo conciertos</strong>.</p></li>
+                <li class="chat-msg"><span class="chat-avatar">V</span><span class="chat-autor">Valentina <time>8:15 a. m.</time></span><p class="chat-texto">La segunda: una señora me dijo que quería ir a tres eventos y no sabía dónde “ir guardando” las entradas. Necesito un botón <strong>Agregar entrada</strong> en cada evento, y que arriba, en cualquier página, se vea <strong>cuántas entradas lleva</strong>.</p></li>
+                <li class="chat-msg"><span class="chat-avatar">V</span><span class="chat-autor">Valentina <time>8:16 a. m.</time></span><p class="chat-texto">Y una página <strong>Mis entradas</strong> con lo que eligió, cuántas de cada una, el <strong>total en pesos</strong> y la opción de <strong>quitar</strong>.</p></li>
+                <li class="chat-msg" data-lado="equipo"><span class="chat-avatar">EQ</span><span class="chat-autor">Equipo <time>8:30 a. m.</time></span><p class="chat-texto">Listo, Valentina. Mañana en la noche queda.</p></li>
+              </ol>
+            </article>
+            <div class="table-wrap"><table class="data-table"><caption>Lo que exige cada pedido</caption><thead><tr><th>Pedido de Valentina</th><th>Lo que exige</th></tr></thead><tbody><tr><td>Buscar y filtrar en la cartelera</td><td>Que la página <strong>recuerde</strong> lo que escribes y <strong>reaccione</strong> al cambio</td></tr><tr><td>Botón <strong>Agregar entrada</strong> en cada tarjeta</td><td>Que la tarjeta <strong>avise</strong> a la página que la usa</td></tr><tr><td>El número de entradas arriba, en cualquier página</td><td>Que <strong>varios componentes</strong> lean <strong>el mismo dato</strong></td></tr><tr><td>Total en pesos que se actualiza solo</td><td>Un valor que se <strong>calcula</strong> a partir de otro, sin copiarlo a mano</td></tr></tbody></table></div>
+          </div>
+        </section>
+
+        <section class="section view" id="s2" data-accent="1" data-layout="canvas" data-escena="objetivos" hidden>
+          <div class="sec-head"><span class="sec-n">Ruta de hoy</span><h2 class="sec-t">Lo que lograrás en esta sesión</h2></div>
+          <div class="body">
+            <div class="estado-proyecto" role="group" aria-label="El proyecto antes y después de la clase"><div class="estado-antes"><span class="component-label">Antes de hoy</span><p>Tarima tiene páginas con dirección propia, pero ninguna recuerda lo que hace la persona: la cartelera no filtra, el botón de la tarjeta no hace nada y no hay dónde juntar entradas.</p></div><div class="estado-flecha" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div><div class="estado-despues"><span class="component-label">Al terminar</span><p>La cartelera filtra mientras escribes, cada tarjeta agrega entradas a un carrito único, el encabezado cuenta las entradas en cualquier página y <strong>Mis entradas</strong> muestra el total en pesos.</p></div></div>
+            <ol class="objetivos">
+              <li><div><p class="obj-texto"><strong>Explicar</strong> qué es el estado de una interfaz y por qué una signal avisa cuando cambia.</p><p class="obj-evidencia">escribes “jazz” en el buscador y explicas qué signal cambió y quién se enteró.</p></div></li>
+              <li><div><p class="obj-texto"><strong>Construir</strong> un valor derivado con <code>computed</code> en lugar de copiarlo a mano.</p><p class="obj-evidencia">el total de <strong>Mis entradas</strong> cambia solo al quitar una entrada y puedes decir por qué no hay una variable <code>total</code> que actualizar.</p></div></li>
+              <li><div><p class="obj-texto"><strong>Construir</strong> la comunicación de un componente hijo hacia su padre con <code>output()</code>.</p><p class="obj-evidencia">la tarjeta emite el evento y la página decide qué hacer con él.</p></div></li>
+              <li><div><p class="obj-texto"><strong>Decidir</strong> si un estado es local o compartido y construir el compartido en un servicio.</p><p class="obj-evidencia">el contador del encabezado sube al agregar desde la cartelera, desde el inicio o desde el detalle.</p></div></li>
+              <li><div><p class="obj-texto"><strong>Reconocer</strong> estos cuatro conceptos en un negocio distinto a Tarima.</p><p class="obj-evidencia">respondes las preguntas de transferencia de cada momento: una aerolínea, un gimnasio, una app de domicilios y un restaurante.</p></div></li>
+            </ol>
+          </div>
+        </section>
+
+        <section class="section view" id="s3" data-accent="1" data-layout="canvas" data-escena="construccion" hidden>
+          <div class="sec-head"><span class="sec-n">Preparar</span><h2 class="sec-t">Todos desde el mismo lugar</h2><p class="sec-s">Lo de hoy se construye sobre <code>tarima-web</code> tal como quedó al final de la Clase 2.</p></div>
+          <div class="body">
+            <h3>3.1 · Levantar y comprobar</h3>
+            <p>Desde la carpeta <code>tarima-web</code>, en la terminal de VS Code:</p>
+            <div class="code-block" data-tipo="terminal"><div class="code-head"><div><span class="code-context">Terminal · desde tarima-web/</span></div><button class="copy-btn" type="button">Copiar</button></div><pre><code class="language-bash">ng serve</code></pre></div>
+            <div class="consola"><div class="consola-head">Punto de control de la Clase 2</div><ol><li class="in">http://localhost:4200/eventos</li><li class="out">Cartelera de noviembre</li><li class="out">6 eventos en cartelera</li><li class="in">http://localhost:4200/eventos/3</li><li class="out">Tarjeta de Risas sin Filtro con la etiqueta Agotado y el botón Reservar deshabilitado</li></ol></div>
+            <h3>3.2 · Preparar los estilos</h3>
+            <p>Igual que en las clases anteriores, el CSS viene listo: hoy no escribimos CSS. El bloque nuevo le da forma al buscador, a los botones de categoría, al contador del encabezado y a la página <strong>Mis entradas</strong>.</p>
+            <article class="archivo"><div class="archivo-ficha" data-tipo="apoyo"><span class="archivo-accion">Editar</span><span class="archivo-nombre">styles.css</span><span class="archivo-ruta">tarima-web/src/</span></div><p class="archivo-intro">Este archivo es el kit de estilos de Tarima. Le pegamos al final un bloque con las clases que van a usar las plantillas de hoy; ninguna regla de lo que ya existe cambia.</p>
+              <div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h3 class="lectura-titulo">Las piezas nuevas de la cartelera, el encabezado y el carrito</h3><p class="lectura-proposito"><b>Dónde va:</b> al final de <code>styles.css</code>, después de la última línea, dejando una línea en blanco.</p></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 75–87</span></div></div><pre class="line-numbers" data-start="75"><code class="language-css">/* ── Clase 3 · Filtros, contador y carrito ── */
+.filtros { display: flex; flex-direction: column; gap: 12px; margin: 16px 0 8px; }
+.filtros__buscador { padding: 10px 14px; border: 1px solid #d6d0e6; border-radius: 10px; font-size: 1rem; }
+.filtros__categorias { display: flex; flex-wrap: wrap; gap: 8px; }
+.filtros__chip { border: 1px solid #d6d0e6; background: #fff; color: var(--color-oscuro); border-radius: 999px; padding: 6px 14px; cursor: pointer; }
+.filtros__chip.activo { background: var(--color-principal); border-color: var(--color-principal); color: #fff; }
+.encabezado__contador { display: inline-block; min-width: 22px; margin-left: 4px; padding: 0 6px; border-radius: 999px; background: #fff; color: var(--color-oscuro); font-weight: 700; }
+.carrito { max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+.carrito__fila { display: flex; align-items: center; gap: 12px; background: #fff; border-radius: var(--radio); padding: 12px 16px; }
+.carrito__nombre { flex: 1; margin: 0; font-weight: 600; }
+.carrito__cantidad { margin: 0; color: #444; }
+.carrito__fila .boton { flex: none; }
+.carrito__total { margin: 8px 0 0; text-align: right; font-weight: 700; font-size: 1.1rem; color: var(--color-principal); }</code></pre></div><ol class="notas"><li class="nota" data-lineas="75"><div class="nota-cabeza"><span class="nota-lineas">L75</span><code class="nota-codigo">el comentario</code></div><p>Separa el bloque de hoy de los anteriores, para que mañana encuentres rápido qué se agregó en la Clase 3.</p></li><li class="nota" data-lineas="76-78"><div class="nota-cabeza"><span class="nota-lineas">L76–78</span><code class="nota-codigo">.filtros, .filtros__buscador, .filtros__categorias</code></div><p><code>.filtros</code> apila el buscador y los botones uno debajo del otro; <code>.filtros__buscador</code> le da al cuadro de texto borde redondeado y letra de tamaño normal; <code>.filtros__categorias</code> pone los botones en fila y los deja saltar de renglón en pantallas angostas.</p></li><li class="nota" data-lineas="79-80"><div class="nota-cabeza"><span class="nota-lineas">L79–80</span><code class="nota-codigo">.filtros__chip y .filtros__chip.activo</code></div><p>Cada botón de categoría es una “píldora” blanca. Cuando además tiene la clase <code>activo</code>, se pinta del morado de Tarima. Esa clase la pone Angular según una signal: así se ve cuál categoría está elegida.</p></li><li class="nota" data-lineas="81"><div class="nota-cabeza"><span class="nota-lineas">L81</span><code class="nota-codigo">.encabezado__contador</code></div><p>El círculo blanco con el número de entradas al lado de <strong>Mis entradas</strong> en el menú.</p></li><li class="nota" data-lineas="82-87"><div class="nota-cabeza"><span class="nota-lineas">L82–87</span><code class="nota-codigo">.carrito…</code></div><p>Forma de la página <strong>Mis entradas</strong>: una columna centrada, cada evento en una fila con nombre, cantidad y botón, el nombre ocupa el espacio que sobra, el botón <strong>Quitar</strong> no se estira y el total va a la derecha, en morado.</p></li></ol></div></div>
+              <div class="active-build"><div class="build-step"><span class="build-step-index">▶</span><div class="build-step-copy"><h3 class="build-step-title">Pruébalo</h3><p class="build-step-purpose">Guarda <code>styles.css</code> y mira <code>http://localhost:4200/eventos</code>.</p><div class="consola"><div class="consola-head">Salida esperada</div><ol><li class="out">La cartelera se ve igual que antes: las clases nuevas todavía no las usa ninguna plantilla.</li></ol></div></div></div></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section view" id="s4" data-accent="1" data-layout="canvas" data-escena="concepto" hidden>
+          <div class="sec-head"><span class="sec-n">Estado y signals</span><h2 class="sec-t">El dato que cambia y avisa</h2><p class="sec-s">Angular necesita saber qué datos mira cada parte de la pantalla y cuándo cambian.</p></div>
+          <div class="body">
+            <h3>4.1 · Para qué existe</h3>
+            <p>Hoy <code>ListadoEventos</code> tiene un solo dato: <code>eventos = EVENTOS</code>. Ese dato nunca cambia mientras la página está abierta. Para buscar, la página necesita guardar otro dato: lo que la persona escribió. Y ese dato sí cambia, letra por letra.</p>
+            <p>Guardar un dato que cambia no es difícil: una propiedad normal lo hace. Lo difícil es que <strong>la pantalla se entere</strong> de que cambió. En la Clase 0, con JavaScript a mano, cada vez que un dato cambiaba había que llamar a una función <code>pintar()</code> que borraba y volvía a dibujar la lista. Si se te olvidaba llamarla, la pantalla mostraba datos viejos.</p>
+            <h3>4.2 · Qué es</h3>
+            <div class="definicion"><div class="def-tecnica"><span class="component-label">Definición técnica</span><p class="def-termino">Estado y signal</p><p>El <button class="termino" data-glosario="estado">estado</button> de una interfaz son los datos que, al cambiar, cambian lo que se ve. Una <button class="termino" data-glosario="signal">signal</button> es un envoltorio alrededor de un valor que avisa a quienes lo leen cuando ese valor cambia. Se crea con <code>signal(valorInicial)</code>, se lee llamándola como función (<code>busqueda()</code>) y se cambia con <code>set(nuevoValor)</code> o con <code>update(funcion)</code>.</p></div><div class="def-vida"><span class="component-label">Explicación sencilla</span><p>Una signal es una caja con un dato adentro y una lista de “interesados”. Cuando la plantilla abre la caja para leer el dato, queda anotada en la lista. Cuando alguien cambia el dato con <code>set</code>, la caja revisa su lista y les avisa a todos: “cambié, vuelvan a mirar”.</p><span class="component-label">En la vida real</span><p>El tablero de turnos de un banco. Muchas personas lo miran; nadie tiene que preguntar a cada rato “¿ya cambió?”. Cuando el cajero llama el siguiente turno, el tablero cambia y todos los que lo miran se enteran al mismo tiempo.</p></div></div>
+            <h3>4.3 · Cómo funciona</h3>
+            <ol><li><code>busqueda = signal('')</code> crea la caja con el texto vacío adentro.</li><li>Cuando la plantilla ejecuta <code>busqueda()</code>, Angular anota que esa plantilla depende de esa signal.</li><li>El evento <code>(input)</code> ejecuta <code>busqueda.set('j')</code>. Como el valor cambió, la signal marca como “sucios” a sus interesados.</li><li>Angular vuelve a dibujar solo las plantillas marcadas.</li><li>Si <code>set</code> recibe el mismo valor, no avisa a nadie.</li></ol>
+            <div class="consola"><div class="consola-head">La categoría en la cartelera</div><ol><li class="out">Al abrir /eventos · categoria() = 'Todas' → el botón “Todas” tiene la clase activo</li><li class="in">Clic en “Teatro” · categoria.set('Teatro')</li><li class="out">Angular redibuja · “Teatro” gana activo, “Todas” lo pierde</li><li class="in">Clic otra vez en “Teatro” · mismo valor</li><li class="out">Nadie se entera, nada se redibuja</li></ol></div>
+            <p><code>set</code> reemplaza el valor por uno nuevo. <code>update</code> calcula el valor nuevo <strong>a partir del anterior</strong>: <code>contador.update((n) =&gt; n + 1)</code>. Usas <code>set</code> cuando ya sabes el valor final y <code>update</code> cuando depende del que había.</p>
+            <h3>4.4 · Cómo reconocerlo</h3>
+            <p>Hazte una pregunta: <strong>¿este dato cambia mientras la página está abierta, y algo de la pantalla debe cambiar cuando él cambia?</strong></p>
+            <div class="table-wrap"><table class="data-table"><caption>La misma idea en otros negocios</caption><thead><tr><th>Negocio</th><th>Estado</th><th>Cómo cambia</th><th>Qué se redibuja</th></tr></thead><tbody><tr><td>Supermercado en línea</td><td>Cantidad de un producto en el carrito</td><td>Botones + y −</td><td>El número junto al producto</td></tr><tr><td>Banco</td><td>Saldo de la cuenta</td><td>Una transferencia</td><td>El saldo en la pantalla principal</td></tr><tr><td>Clínica</td><td>Turno que se está atendiendo</td><td>El médico llama al siguiente</td><td>El tablero de la sala de espera</td></tr><tr><td>Colegio</td><td>Pestaña elegida en el boletín</td><td>Un clic en la pestaña</td><td>Las notas que se muestran</td></tr></tbody></table></div>
+            <h3>4.5 · Límites y errores</h3>
+            <ul><li><strong>No uses una signal</strong> para datos que no cambian mientras la página está abierta.</li><li>Los valores que se calculan a partir de otra signal se derivan con <code>computed</code>.</li><li>Al cambiar un arreglo, entrega uno nuevo; si haces <code>push</code> sobre el mismo arreglo, la signal no avisa.</li></ul>
+            <div class="table-wrap"><table class="data-table"><caption>Propiedad normal y signal</caption><thead><tr><th></th><th>Propiedad normal</th><th>Signal</th></tr></thead><tbody><tr><td>Se lee</td><td><code>mostrarDescripcion</code></td><td><code>busqueda()</code></td></tr><tr><td>Se cambia</td><td><code>this.mostrarDescripcion = !this.mostrarDescripcion</code></td><td><code>this.busqueda.set('jazz')</code></td></tr><tr><td>¿Quién se entera?</td><td>Solo el componente donde ocurrió el clic</td><td>Cualquier plantilla que la haya leído</td></tr></tbody></table></div>
+            <div class="callout" data-tone="warning"><span class="callout-icon">!</span><div><h3>Errores frecuentes</h3><p><code>TS2304</code>: falta importar <code>signal</code>. <code>TS2322</code>: intentaste reemplazar la signal por un texto. <code>TS2345</code>: entregaste un tipo distinto. <code>NG8109</code> o <code>NG8117</code>: olvidaste los paréntesis al leerla.</p></div></div>
+          </div>
+        </section>
+
+        <section class="section view" id="s5" data-accent="1" data-layout="canvas" data-escena="construccion" hidden>
+          <div class="sec-head"><span class="sec-n">Construir · estado local</span><h2 class="sec-t">La cartelera recuerda lo que eliges</h2><p class="sec-s">La página guarda el texto del buscador y la categoría elegida en dos signals.</p></div>
+          <div class="body">
+            <div class="mision"><div class="mision-head"><span class="mision-marca">1</span><span class="mision-titulo">Misión del bloque</span></div><div class="mision-grid"><div class="mision-item"><span class="component-label">Para Valentina</span><p>“La gente quiere buscar por nombre y ver solo teatro o solo conciertos”.</p></div><div class="mision-item"><span class="component-label">Lo que hacemos</span><p>Que la cartelera recuerde lo que escribe la persona y la categoría que elige.</p></div><div class="mision-item" data-resultado><span class="component-label">Cómo sabemos que quedó</span><p>Al hacer clic en <strong>Teatro</strong>, ese botón se marca; al escribir, el texto queda guardado.</p></div></div></div>
+            <h3>5.1 · Guardar e importar</h3>
+            <article class="archivo"><div class="archivo-ficha"><span class="archivo-accion">Editar</span><span class="archivo-nombre">listado-eventos.ts</span><span class="archivo-ruta">tarima-web/src/app/pages/listado-eventos/</span></div><p class="archivo-intro">Valentina pidió buscar por nombre y elegir una categoría. Ahora el archivo va a guardar dos datos que cambian.</p>
+              <div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h3 class="lectura-titulo">Guardar lo que elige la persona</h3><p class="lectura-proposito"><b>Necesidad:</b> la cartelera no tiene dónde guardar el texto ni la categoría. <b>Dónde va:</b> debajo de <code>eventos = EVENTOS;</code>.</p></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 13–16</span></div></div><pre class="line-numbers" data-start="13"><code class="language-typescript">  categorias = ['Todas', 'Concierto', 'Teatro', 'Stand-up'];
+
+  busqueda = signal('');
+  categoria = signal('Todas');</code></pre></div><ol class="notas"><li class="nota" data-lineas="13"><div class="nota-cabeza"><span class="nota-lineas">L13</span><code class="nota-codigo">categorias = [...]</code></div><p>Es la lista de botones. Es una propiedad normal porque esta lista no cambia mientras la página está abierta.</p></li><li class="nota" data-lineas="15"><div class="nota-cabeza"><span class="nota-lineas">L15</span><code class="nota-codigo">busqueda = signal('')</code></div><p>Crea la caja del texto del buscador, vacía al empezar. Vacío significa “no se ha buscado nada”.</p></li><li class="nota" data-lineas="16"><div class="nota-cabeza"><span class="nota-lineas">L16</span><code class="nota-codigo">categoria = signal('Todas')</code></div><p>La caja de la categoría elegida. Empieza en <code>'Todas'</code> porque al abrir la cartelera se deben ver todos los eventos.</p></li></ol></div></div>
+              <div class="active-build"><div class="build-step"><span class="build-step-index">▶</span><div class="build-step-copy"><h3 class="build-step-title">Pruébalo</h3><div class="consola"><div class="consola-head">Salida esperada</div><ol><li class="out">✘ [ERROR] TS2304: Cannot find name 'signal'.</li></ol></div></div></div></div>
+              <div class="lectura"><div class="lectura-head"><span class="lectura-num">2</span><h3 class="lectura-titulo">Traer <code>signal</code> de Angular</h3><p class="lectura-proposito"><b>Necesidad:</b> el error anterior. <b>Dónde va:</b> cambia la línea 1.</p></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Línea 1</span></div></div><pre class="line-numbers" data-start="1"><code class="language-typescript">import { Component, signal } from '@angular/core';</code></pre></div><ol class="notas"><li class="nota" data-lineas="1"><div class="nota-cabeza"><span class="nota-lineas">L1</span><code class="nota-codigo">Component, signal</code></div><p><code>Component</code> ya estaba. Agregamos <code>signal</code> porque también viene de <code>@angular/core</code>.</p><p class="nota-enlace" data-dir="despues">En el siguiente momento se suma <code>computed</code> a esta misma línea.</p></li></ol></div></div>
+              <details class="code-reveal" data-archivo="listado-eventos.ts"><summary><span><span class="code-reveal-title">listado-eventos.ts · como queda después del paso 2</span><span class="code-reveal-note">17 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Editar</span><span class="code-file">listado-eventos.ts</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-typescript">import { Component, signal } from '@angular/core';
+import { EVENTOS } from '../../data/eventos.mock';
+import { TarjetaEvento } from '../../components/tarjeta-evento/tarjeta-evento';
+
+@Component({
+  imports: [TarjetaEvento],
+  selector: 'app-listado-eventos',
+  styleUrl: './listado-eventos.css',
+  templateUrl: './listado-eventos.html',
+})
+export class ListadoEventos {
+  eventos = EVENTOS;
+  categorias = ['Todas', 'Concierto', 'Teatro', 'Stand-up'];
+
+  busqueda = signal('');
+  categoria = signal('Todas');
+}</code></pre></div></div></details>
+            </article>
+            <h3>5.2 · Escribir y leer las signals</h3>
+            <article class="archivo"><div class="archivo-ficha"><span class="archivo-accion">Editar</span><span class="archivo-nombre">listado-eventos.html</span><span class="archivo-ruta">tarima-web/src/app/pages/listado-eventos/</span></div><p class="archivo-intro">La plantilla gana una zona de filtros. Es aquí donde la persona escribe en las signals con <code>set</code> y donde la pantalla las lee con paréntesis.</p>
+              <div class="lectura"><div class="lectura-head"><span class="lectura-num">3</span><h3 class="lectura-titulo">El buscador</h3><p class="lectura-proposito"><b>Necesidad:</b> un lugar donde escribir y llevar el texto a <code>busqueda</code>.</p></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 4–12</span></div></div><pre class="line-numbers" data-start="4"><code class="language-html">  &lt;div class="filtros"&gt;
+    &lt;input
+      #campo
+      class="filtros__buscador"
+      type="search"
+      placeholder="Busca por nombre"
+      (input)="busqueda.set(campo.value)"
+    /&gt;
+  &lt;/div&gt;</code></pre></div><ol class="notas"><li class="nota" data-lineas="4"><div class="nota-cabeza"><span class="nota-lineas">L4</span><code class="nota-codigo">div.filtros</code></div><p>Agrupa los controles de búsqueda y los apila uno debajo del otro.</p></li><li class="nota" data-lineas="6"><div class="nota-cabeza"><span class="nota-lineas">L6</span><code class="nota-codigo">#campo</code></div><p>Es una referencia de plantilla: le pone nombre al <code>input</code> para usarlo en esta plantilla.</p></li><li class="nota" data-lineas="10"><div class="nota-cabeza"><span class="nota-lineas">L10</span><code class="nota-codigo">(input)</code></div><p>Ocurre cada vez que cambia el texto. <code>campo.value</code> se guarda en la signal con <code>set</code>.</p></li></ol></div></div>
+              <div class="lectura"><div class="lectura-head"><span class="lectura-num">4</span><h3 class="lectura-titulo">Los botones de categoría</h3><p class="lectura-proposito"><b>Necesidad:</b> ver solo una categoría y saber cuál está elegida.</p></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 12–23</span></div></div><pre class="line-numbers" data-start="12"><code class="language-html">    &lt;div class="filtros__categorias"&gt;
+      @for (opcion of categorias; track opcion) {
+        &lt;button
+          type="button"
+          class="filtros__chip"
+          [class.activo]="categoria() === opcion"
+          (click)="categoria.set(opcion)"
+        &gt;
+          {{ opcion }}
+        &lt;/button&gt;
+      }
+    &lt;/div&gt;</code></pre></div><ol class="notas"><li class="nota" data-lineas="13"><div class="nota-cabeza"><span class="nota-lineas">L13</span><code class="nota-codigo">@for</code></div><p>Recorre la lista fija y repite el botón una vez por opción. <code>track opcion</code> usa el texto como identificador.</p></li><li class="nota" data-lineas="17"><div class="nota-cabeza"><span class="nota-lineas">L17</span><code class="nota-codigo">[class.activo]</code></div><p>Aquí la pantalla lee la signal. Si su valor es igual a esta opción, Angular pone la clase <code>activo</code>.</p></li><li class="nota" data-lineas="18"><div class="nota-cabeza"><span class="nota-lineas">L18</span><code class="nota-codigo">categoria.set(opcion)</code></div><p>Aquí la pantalla escribe en la signal: al hacer clic, la categoría elegida pasa a ser la de este botón.</p></li></ol></div></div>
+              <div class="micro-task"><span class="component-label">Para pensar</span><p class="micro-task-q">Haces clic dos veces seguidas en “Teatro”. ¿Cuántas veces se redibujan los botones?</p><details class="micro-reveal"><summary>Comprobar</summary><p class="micro-answer">Una sola. En el segundo clic, <code>categoria.set('Teatro')</code> recibe el mismo valor que ya tenía; la signal compara, ve que no cambió y no avisa a nadie.</p></details></div>
+              <details class="code-reveal" data-archivo="listado-eventos.html"><summary><span><span class="code-reveal-title">listado-eventos.html · como queda después del paso 4</span><span class="code-reveal-note">35 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Editar</span><span class="code-file">listado-eventos.html</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-html">&lt;section class="listado"&gt;
+  &lt;h2 class="listado__titulo"&gt;Cartelera de noviembre&lt;/h2&gt;
+
+  &lt;div class="filtros"&gt;
+    &lt;input
+      #campo
+      class="filtros__buscador"
+      type="search"
+      placeholder="Busca por nombre"
+      (input)="busqueda.set(campo.value)"
+    /&gt;
+    &lt;div class="filtros__categorias"&gt;
+      @for (opcion of categorias; track opcion) {
+        &lt;button type="button" class="filtros__chip" [class.activo]="categoria() === opcion" (click)="categoria.set(opcion)"&gt;
+          {{ opcion }}
+        &lt;/button&gt;
+      }
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;p class="listado__total"&gt;{{ eventos.length }} eventos en cartelera&lt;/p&gt;
+  &lt;div class="listado__grilla"&gt;
+    @for (evento of eventos; track evento.id) {
+      &lt;app-tarjeta-evento [evento]="evento" /&gt;
+    } @empty {
+      &lt;p class="listado__vacio"&gt;No hay eventos en cartelera por ahora.&lt;/p&gt;
+    }
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre></div></div></details>
+            </article>
+            <div class="micro-task"><span class="component-label">Para pensar</span><p class="micro-task-q">En la app de una aerolínea eliges tu silla en un mapa del avión. La silla que tocas se pinta de verde y arriba dice “Silla elegida: 14C”. El mapa no cambia mientras eliges. ¿Qué sería una signal y qué sería una propiedad normal? ¿Quién la lee?</p><details class="micro-reveal"><summary>Comprobar</summary><p class="micro-answer">La <strong>silla elegida</strong> es estado: cambia con cada toque y dos partes de la pantalla deben cambiar con ella. Va en una signal. El <strong>mapa</strong> no cambia mientras eliges: es una propiedad normal. Los lectores son la silla y el texto de arriba.</p></details></div>
+          </div>
+        </section>
+
+        <section class="section view" id="s6" data-accent="1" data-layout="canvas" data-escena="concepto" hidden>
+          <div class="sec-head"><span class="sec-n">Valor derivado</span><h2 class="sec-t">La fórmula que se actualiza sola</h2><p class="sec-s">No guardas el resultado; guardas cómo se calcula.</p></div>
+          <div class="body">
+            <h3>6.1 · El problema</h3>
+            <p>Ya tienes <code>busqueda()</code> y <code>categoria()</code>. La lista visible debe ser “los eventos cuyo nombre contiene el texto y que son de la categoría elegida”. Si guardas esa lista aparte, cada lugar que cambie el texto o la categoría tiene que acordarse de recalcularla. El día que alguien olvide una llamada, la pantalla mostrará una lista que no corresponde a lo elegido, sin ningún error.</p>
+            <h3>6.2 · Qué es</h3>
+            <div class="definicion"><div class="def-tecnica"><span class="component-label">Definición técnica</span><p class="def-termino"><code>computed</code></p><p><code>computed(() =&gt; expresión)</code> crea una <button class="termino" data-glosario="valor-derivado">signal de solo lectura</button> cuyo valor es el resultado de la función. Angular registra qué signals lee esa función y la vuelve a ejecutar cuando alguna cambia. No tiene <code>set</code> ni <code>update</code>.</p></div><div class="def-vida"><span class="component-label">Explicación sencilla</span><p>Es una fórmula. Cada vez que alguien pregunta por el valor, Angular responde con el resultado usando los datos de ese momento.</p><span class="component-label">En la vida real</span><p>Una celda de Excel con fórmula: en <code>C1</code> escribes <code>=A1*B1</code>. Nunca escribes el resultado a mano. Cambias <code>A1</code> y <code>C1</code> cambia sola.</p></div></div>
+            <h3>6.3 · Cómo funciona</h3>
+            <ol><li><code>computed</code> espera hasta que alguien la lee: es perezosa.</li><li>La primera vez registra <code>busqueda()</code> y <code>categoria()</code> como dependencias.</li><li>Memoriza el resultado y no recalcula si ninguna dependencia cambió.</li><li>Cuando una dependencia cambia, queda desactualizada; al volver a leerla, recalcula.</li></ol>
+            <div class="consola"><div class="consola-head">Valores concretos</div><ol><li class="out">busqueda() = '' · categoria() = 'Todas' → 6 eventos</li><li class="in">busqueda.set('jazz')</li><li class="out">1 evento: Jazz en la Terraza</li><li class="in">categoria.set('Teatro')</li><li class="out">2 eventos cuando la búsqueda está vacía</li><li class="in">busqueda.set('xyz')</li><li class="out">0 eventos</li></ol></div>
+            <h3>6.4 · Reconocer y comparar</h3>
+            <p>Pregúntate: <strong>¿este valor se puede calcular siempre a partir de otros datos que ya tengo?</strong> Pistas: “el total de…”, “cuántos hay…”, “los que cumplen…”, “si está vacío…”.</p>
+            <div class="table-wrap"><table class="data-table"><caption>La misma idea en otros negocios</caption><thead><tr><th>Negocio</th><th>Datos de origen</th><th>Valor derivado</th></tr></thead><tbody><tr><td>Supermercado</td><td>Productos y cantidades</td><td>Total a pagar · cantidad de artículos</td></tr><tr><td>Banco</td><td>Movimientos del mes</td><td>Saldo · gastos por categoría</td></tr><tr><td>Biblioteca</td><td>Libros prestados y fecha</td><td>Libros vencidos · multa acumulada</td></tr><tr><td>Restaurante</td><td>Pedidos y su estado</td><td>Pendientes · tiempo promedio</td></tr></tbody></table></div>
+            <div class="table-wrap"><table class="data-table"><caption>Método y <code>computed</code></caption><thead><tr><th></th><th>Método</th><th><code>computed</code></th></tr></thead><tbody><tr><td>Se escribe</td><td><code>estaAgotado(): boolean { … }</code></td><td><code>eventosFiltrados = computed(() =&gt; …)</code></td></tr><tr><td>En la plantilla</td><td><code>estaAgotado()</code></td><td><code>eventosFiltrados()</code></td></tr><tr><td>¿Cuándo se ejecuta?</td><td>Cada vez que Angular revisa</td><td>Solo cuando cambió una dependencia</td></tr><tr><td>¿Avisa a otro <code>computed</code>?</td><td>No</td><td>Sí</td></tr></tbody></table></div>
+            <h3>6.5 · Límites y errores</h3>
+            <ul><li>No lo uses para guardar algo que la persona decide.</li><li>No lo uses para hacer algo hacia afuera: guardar, enviar o escribir en consola.</li><li>No cambies otra signal adentro de un <code>computed</code>.</li><li>Solo se anotan las signals leídas en la última ejecución: las dependencias son dinámicas.</li></ul>
+            <div class="callout" data-tone="warning"><span class="callout-icon">!</span><div><h3>Errores frecuentes</h3><p><code>TS2304</code>: falta importar <code>computed</code>. <code>TS2339</code>: intentaste hacer <code>set</code> sobre una signal de solo lectura. Si la lista no filtra, quizá la calculaste una sola vez como propiedad normal. Si ves <code>[Computed …]</code> o un total incorrecto, faltaron los paréntesis.</p></div></div>
+          </div>
+        </section>
+
+        <section class="section view" id="s7" data-accent="1" data-layout="canvas" data-escena="construccion" hidden>
+          <div class="sec-head"><span class="sec-n">Construir · valor derivado</span><h2 class="sec-t">La cartelera filtrada</h2><p class="sec-s">Una lista nueva se calcula a partir de los eventos, del texto y de la categoría.</p></div>
+          <div class="body">
+            <div class="mision"><div class="mision-head"><span class="mision-marca">2</span><span class="mision-titulo">Misión del bloque</span></div><div class="mision-grid"><div class="mision-item"><span class="component-label">Para Valentina</span><p>Que al buscar y elegir categoría la lista cambie de verdad.</p></div><div class="mision-item"><span class="component-label">Lo que hacemos</span><p>Una lista que Angular recalcula sola cuando cambia el texto o la categoría.</p></div><div class="mision-item" data-resultado><span class="component-label">Cómo sabemos que quedó</span><p>Al escribir “jazz” la cartelera dice “1 de 6 eventos” y muestra solo <strong>Jazz en la Terraza</strong>.</p></div></div></div>
+            <h3>7.1 · Crear la fórmula</h3>
+            <article class="archivo"><div class="archivo-ficha"><span class="archivo-accion">Editar</span><span class="archivo-nombre">listado-eventos.ts</span><span class="archivo-ruta">tarima-web/src/app/pages/listado-eventos/</span></div><p class="archivo-intro">Las dos signals ya guardan lo que elige la persona; ahora agregamos la fórmula que las combina con los 6 eventos.</p>
+              <div class="lectura"><div class="lectura-head"><span class="lectura-num">5</span><h3 class="lectura-titulo">La fórmula de la cartelera filtrada</h3><p class="lectura-proposito"><b>Necesidad:</b> escribir “jazz” todavía no cambia la lista. <b>Dónde va:</b> debajo de <code>categoria</code>.</p></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 18–26</span></div></div><pre class="line-numbers" data-start="18"><code class="language-typescript">  eventosFiltrados = computed(() =&gt; {
+    const texto = this.busqueda().trim().toLowerCase();
+    const categoria = this.categoria();
+    return this.eventos.filter(
+      (evento) =&gt;
+        evento.nombre.toLowerCase().includes(texto) &amp;&amp;
+        (categoria === 'Todas' || evento.categoria === categoria),
+    );
+  });</code></pre></div><ol class="notas"><li class="nota" data-lineas="18"><div class="nota-cabeza"><span class="nota-lineas">L18</span><code class="nota-codigo">computed(() =&gt; {</code></div><p>Crea la signal derivada. Lo que devuelva con <code>return</code> será el valor de <code>eventosFiltrados()</code>.</p></li><li class="nota" data-lineas="19"><div class="nota-cabeza"><span class="nota-lineas">L19</span><code class="nota-codigo">busqueda().trim().toLowerCase()</code></div><p>Lee la signal, quita espacios de los extremos y pasa el texto a minúsculas.</p></li><li class="nota" data-lineas="20"><div class="nota-cabeza"><span class="nota-lineas">L20</span><code class="nota-codigo">categoria()</code></div><p>Lee la otra signal antes de filtrar, para que quede anotada siempre como dependencia.</p></li><li class="nota" data-lineas="21-24"><div class="nota-cabeza"><span class="nota-lineas">L21–24</span><code class="nota-codigo">filter</code></div><p>Devuelve un arreglo nuevo con los eventos cuyo nombre contiene el texto y cuya categoría coincide, o todos cuando se eligió <code>'Todas'</code>.</p></li></ol></div></div>
+              <div class="active-build"><div class="build-step"><span class="build-step-index">▶</span><div class="build-step-copy"><h3 class="build-step-title">Pruébalo</h3><div class="consola"><div class="consola-head">Salida esperada</div><ol><li class="out">✘ [ERROR] TS2304: Cannot find name 'computed'.</li></ol></div></div></div></div>
+              <div class="lectura"><div class="lectura-head"><span class="lectura-num">6</span><h3 class="lectura-titulo">Traer <code>computed</code></h3><p class="lectura-proposito"><b>Dónde va:</b> cambia la línea 1.</p></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Línea 1</span></div></div><pre class="line-numbers" data-start="1"><code class="language-typescript">import { Component, computed, signal } from '@angular/core';</code></pre></div><ol class="notas"><li class="nota" data-lineas="1"><div class="nota-cabeza"><span class="nota-lineas">L1</span><code class="nota-codigo">computed</code></div><p>Se suma a la misma lista de <code>@angular/core</code>. El orden dentro de las llaves no importa.</p></li></ol></div></div>
+            </article>
+            <h3>7.2 · Mostrar la lista calculada</h3>
+            <article class="archivo"><div class="archivo-ficha"><span class="archivo-accion">Editar</span><span class="archivo-nombre">listado-eventos.html</span><span class="archivo-ruta">tarima-web/src/app/pages/listado-eventos/</span></div><p class="archivo-intro">La plantilla deja de mostrar la lista completa y muestra la calculada.</p>
+              <div class="lectura"><div class="lectura-head"><span class="lectura-num">7</span><h3 class="lectura-titulo">Mostrar la lista calculada</h3><p class="lectura-proposito">Cambian el total, el <code>@for</code> y el mensaje vacío.</p></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 26–32</span></div></div><pre class="line-numbers" data-start="26"><code class="language-html">  &lt;p class="listado__total"&gt;{{ eventosFiltrados().length }} de {{ eventos.length }} eventos&lt;/p&gt;
+
+  &lt;div class="listado__grilla"&gt;
+    @for (evento of eventosFiltrados(); track evento.id) {
+      &lt;app-tarjeta-evento [evento]="evento" /&gt;
+    } @empty {
+      &lt;p class="listado__vacio"&gt;Ningún evento coincide con tu búsqueda.&lt;/p&gt;</code></pre></div><ol class="notas"><li class="nota" data-lineas="26"><div class="nota-cabeza"><span class="nota-lineas">L26</span><code class="nota-codigo">eventosFiltrados().length</code></div><p>Muestra cuántos quedan después de filtrar y de cuántos. Lleva paréntesis porque es una signal.</p></li><li class="nota" data-lineas="29"><div class="nota-cabeza"><span class="nota-lineas">L29</span><code class="nota-codigo">@for … eventosFiltrados()</code></div><p>Ahora recorre la lista calculada. <code>track</code> sigue usando el id.</p></li><li class="nota" data-lineas="32"><div class="nota-cabeza"><span class="nota-lineas">L32</span><code class="nota-codigo">@empty</code></div><p>El caso vacío ahora explica que la búsqueda no encontró nada.</p></li></ol></div></div>
+              <div class="active-build"><div class="build-step"><span class="build-step-index">▶</span><div class="build-step-copy"><h3 class="build-step-title">Pruébalo</h3><div class="consola"><div class="consola-head">Casos esperados</div><ol><li class="in">Escribe “JAZZ”</li><li class="out">1 de 6 eventos · Jazz en la Terraza</li><li class="in">Borra el texto y haz clic en “Teatro”</li><li class="out">2 de 6 eventos</li><li class="in">Escribe “xyz”</li><li class="out">0 de 6 eventos · Ningún evento coincide con tu búsqueda.</li></ol></div></div></div></div>
+              <div class="callout" data-tone="warning"><span class="callout-icon">!</span><div><h3>Quítala y mira</h3><p>Ejecuta la función una sola vez en lugar de usar <code>computed</code>. Al escribir “jazz”, la cartelera sigue diciendo <strong>6 de 6 eventos</strong>. Sin error: la lista se calculó una vez y nadie la vuelve a calcular. Deshaz el cambio.</p></div></div>
+            </article>
+            <div class="micro-task"><span class="component-label">Para pensar</span><p class="micro-task-q">En una app de gimnasio aparece “Te quedan 3 clases este mes”. ¿Ese 3 es una signal o un <code>computed</code>? ¿De qué depende?</p><details class="micro-reveal"><summary>Comprobar</summary><p class="micro-answer">Es un valor derivado: se calcula como <code>clasesDelPlan - clasesTomadas().length</code>, así que va en un <code>computed</code>. Depende de la signal con las clases tomadas y del plan.</p></details></div>
+          </div>
+        </section>
+
+        <section class="section view" id="s8" data-accent="1" data-layout="canvas" data-escena="concepto" hidden>
+          <div class="sec-head"><span class="sec-n">Comunicación hijo → padre</span><h2 class="sec-t">La pieza avisa; quien la usa decide</h2><p class="sec-s">El clic ocurre dentro de la tarjeta, pero la decisión pertenece a la página.</p></div>
+          <div class="body">
+            <h3>8.1 · Para qué existe</h3>
+            <p><code>TarjetaEvento</code> se usa en el inicio, la cartelera y el detalle. Si la tarjeta decidiera por su cuenta qué hacer al pulsar <strong>Agregar entrada</strong>, quedaría amarrada a un solo uso y dejaría de ser reutilizable.</p>
+            <h3>8.2 · Qué es</h3>
+            <div class="definicion"><div class="def-tecnica"><span class="component-label">Definición técnica</span><p class="def-termino"><code>output()</code></p><p><code>output&lt;T&gt;()</code> declara un evento propio de un componente. El componente lo dispara con <code>emit(valor)</code> y el padre lo escucha con <code>(nombreDelOutput)="hacerAlgo($event)"</code>. <code>$event</code> es el valor emitido.</p></div><div class="def-vida"><span class="component-label">Explicación sencilla</span><p>Si <code>input()</code> es la puerta por donde entran datos, <code>output()</code> es el timbre por donde el componente avisa hacia afuera.</p><span class="component-label">En la vida real</span><p>El timbre de un apartamento. Quien está afuera avisa que llegó; quien está adentro decide si abre, pregunta o no hace nada.</p></div></div>
+            <h3>8.3 · Cómo funciona</h3>
+            <ol><li><code>entradaAgregada = output&lt;Evento&gt;()</code> crea un emisor.</li><li>El padre suscribe su expresión al emisor de cada tarjeta.</li><li>El clic ejecuta <code>entradaAgregada.emit(evento())</code>; el padre recibe el evento en <code>$event</code>.</li><li>Si nadie escucha, <code>emit</code> no hace nada y no da error.</li></ol>
+            <div class="pipeline" role="group" aria-label="El dato baja y el aviso sube"><div class="pipe-step"><span class="component-label">Padre</span><h3>ListadoEventos</h3><ul><li>decide qué hacer</li></ul></div><div class="pipe-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div><div class="pipe-step" data-emphasis><span class="component-label">Hijo</span><h3>TarjetaEvento</h3><ul><li>[evento] entra</li><li>(entradaAgregada) sale</li></ul></div><div class="pipe-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H4M10 6l-6 6 6 6"/></svg></div><div class="pipe-step"><span class="component-label">Padre</span><h3>Recibe <code>$event</code></h3><ul><li>agrega o decide otra cosa</li></ul></div></div>
+            <h3>8.4 · Reconocer y comparar</h3>
+            <p>Pregúntate: <strong>¿algo ocurre dentro de una pieza reutilizable, pero lo que se debe hacer depende de dónde está puesta?</strong></p>
+            <div class="table-wrap"><table class="data-table"><caption><code>input()</code> y <code>output()</code></caption><thead><tr><th></th><th><code>input()</code></th><th><code>output()</code></th></tr></thead><tbody><tr><td>Dirección</td><td>Padre → hijo</td><td>Hijo → padre</td></tr><tr><td>En la plantilla</td><td>Corchetes</td><td>Paréntesis</td></tr><tr><td>En el hijo</td><td>Se lee: <code>evento()</code></td><td>Se dispara: <code>emit(…)</code></td></tr><tr><td>¿Es una signal?</td><td>Sí</td><td>No: es un emisor</td></tr></tbody></table></div>
+            <h3>8.5 · Límites y errores</h3>
+            <ul><li>Para datos que bajan se usa <code>input()</code>.</li><li>Para componentes que no son padre e hijo se usa estado compartido.</li><li>Si hay demasiados saltos, el dato debería vivir en un servicio.</li><li>Un evento sin datos usa <code>output&lt;void&gt;()</code>; emite solo lo que el padre necesita.</li></ul>
+            <div class="callout" data-tone="warning"><span class="callout-icon">!</span><div><h3>Errores frecuentes</h3><p><code>TS2304</code>: falta importar <code>output</code>. <code>TS2554</code>: faltó el valor emitido o <code>$event</code>. <code>TS2345</code>: emitiste la signal en vez de su valor, o escribiste mal el nombre del output. Si no pasa nada, el padre quizá no escucha.</p></div></div>
+          </div>
+        </section>
+
+        <section class="section view" id="s9" data-accent="1" data-layout="canvas" data-escena="construccion" hidden>
+          <div class="sec-head"><span class="sec-n">Construir · output</span><h2 class="sec-t">Conectar la tarjeta con la página</h2><p class="sec-s">La tarjeta toca el timbre; la cartelera recibe el evento.</p></div>
+          <div class="body">
+            <div class="mision"><div class="mision-head"><span class="mision-marca">3</span><span class="mision-titulo">Misión del bloque</span></div><div class="mision-grid"><div class="mision-item"><span class="component-label">Para Valentina</span><p>“Necesito un botón Agregar entrada en cada evento”.</p></div><div class="mision-item"><span class="component-label">Lo que hacemos</span><p>La tarjeta avisa qué evento eligieron.</p></div><div class="mision-item" data-resultado><span class="component-label">Cómo sabemos que quedó</span><p>La consola muestra <code>Agregar entrada: Noche de Salsa Brava</code>.</p></div></div></div>
+            <h3>9.1 · Declarar y disparar</h3>
+            <article class="archivo"><div class="archivo-ficha"><span class="archivo-accion">Editar</span><span class="archivo-nombre">tarjeta-evento.ts</span><span class="archivo-ruta">tarima-web/src/app/components/tarjeta-evento/</span></div><p class="archivo-intro">La tarjeta gana un output que lleva el evento elegido. No importa nada del carrito.</p><div class="lectura"><div class="lectura-head"><span class="lectura-num">8–9</span><h3 class="lectura-titulo">Declarar el aviso y traer <code>output</code></h3></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 1 y 15</span></div></div><pre class="line-numbers" data-start="1"><code class="language-typescript">import { Component, input, output } from '@angular/core';
+  entradaAgregada = output&lt;Evento&gt;();</code></pre></div><ol class="notas"><li class="nota" data-lineas="1"><div class="nota-cabeza"><span class="nota-lineas">L1</span><code class="nota-codigo">output</code></div><p>Viene de <code>@angular/core</code>, igual que <code>input</code>.</p></li><li class="nota" data-lineas="2"><div class="nota-cabeza"><span class="nota-lineas">L15</span><code class="nota-codigo">entradaAgregada</code></div><p>Declara el evento propio de la tarjeta. <code>&lt;Evento&gt;</code> dice que con el aviso viaja un evento completo.</p></li></ol></div></div></article>
+            <article class="archivo"><div class="archivo-ficha"><span class="archivo-accion">Editar</span><span class="archivo-nombre">tarjeta-evento.html</span><span class="archivo-ruta">tarima-web/src/app/components/tarjeta-evento/</span></div><p class="archivo-intro">El botón <strong>Reservar</strong> ahora se llama <strong>Agregar entrada</strong> y dispara el aviso.</p><div class="lectura"><div class="lectura-head"><span class="lectura-num">10</span><h3 class="lectura-titulo">El botón que avisa</h3></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 29–36</span></div></div><pre class="line-numbers" data-start="29"><code class="language-html">    &lt;button
+      type="button"
+      class="boton"
+      [disabled]="estaAgotado()"
+      (click)="entradaAgregada.emit(evento())"
+    &gt;
+      Agregar entrada
+    &lt;/button&gt;</code></pre></div><ol class="notas"><li class="nota" data-lineas="29-32"><div class="nota-cabeza"><span class="nota-lineas">L29–32</span><code class="nota-codigo">button</code></div><p>El mismo botón de la Clase 1. Un evento agotado sigue sin dejar agregar entradas.</p></li><li class="nota" data-lineas="33"><div class="nota-cabeza"><span class="nota-lineas">L33</span><code class="nota-codigo">emit(evento())</code></div><p>Dispara el aviso y entrega el evento que muestra esta tarjeta.</p></li></ol></div></div></article>
+            <h3>9.2 · La página recibe</h3>
+            <article class="archivo"><div class="archivo-ficha"><span class="archivo-accion">Editar</span><span class="archivo-nombre">listado-eventos.ts</span><span class="archivo-ruta">tarima-web/src/app/pages/listado-eventos/</span></div><p class="archivo-intro">La cartelera decide qué hacer. Por ahora escribe el evento en la consola.</p><div class="lectura"><div class="lectura-head"><span class="lectura-num">11–12</span><h3 class="lectura-titulo">Lo que decide la página</h3></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 28–30</span></div></div><pre class="line-numbers" data-start="28"><code class="language-typescript">  agregarAlCarrito(evento: Evento): void {
+    console.log('Agregar entrada:', evento.nombre);
+  }</code></pre></div><ol class="notas"><li class="nota" data-lineas="28"><div class="nota-cabeza"><span class="nota-lineas">L28</span><code class="nota-codigo">agregarAlCarrito</code></div><p>Recibe el evento emitido. El tipo <code>Evento</code> hace que TypeScript revise el contrato.</p></li><li class="nota" data-lineas="29"><div class="nota-cabeza"><span class="nota-lineas">L29</span><code class="nota-codigo">console.log</code></div><p>Es temporal: comprueba que el aviso llega con el evento correcto.</p></li></ol></div></div><div class="callout" data-tone="warning"><span class="callout-icon">!</span><div><h3>Error esperado</h3><p><code>TS2552: Cannot find name 'Evento'. Did you mean 'Event'?</code> Corrige importando <code>Evento</code> desde <code>../../models/evento</code>.</p></div></div></article>
+            <article class="archivo"><div class="archivo-ficha"><span class="archivo-accion">Editar</span><span class="archivo-nombre">listado-eventos.html</span><span class="archivo-ruta">tarima-web/src/app/pages/listado-eventos/</span></div><p class="archivo-intro">La página escucha el timbre de cada tarjeta y lo conecta con su método.</p><div class="lectura"><div class="lectura-head"><span class="lectura-num">13</span><h3 class="lectura-titulo">Escuchar a cada tarjeta</h3></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Línea 30</span></div></div><pre class="line-numbers" data-start="30"><code class="language-html">      &lt;app-tarjeta-evento [evento]="evento" (entradaAgregada)="agregarAlCarrito($event)" /&gt;</code></pre></div><ol class="notas"><li class="nota" data-lineas="30"><div class="nota-cabeza"><span class="nota-lineas">L30</span><code class="nota-codigo">(entradaAgregada)</code></div><p>Los paréntesis escuchan el output. <code>$event</code> es el <code>Evento</code> emitido.</p></li></ol></div></div><div class="active-build"><div class="build-step"><span class="build-step-index">▶</span><div class="build-step-copy"><h3 class="build-step-title">Pruébalo</h3><div class="consola"><div class="consola-head">Consola del navegador</div><ol><li class="in">Clic en Noche de Salsa Brava</li><li class="out">Agregar entrada: Noche de Salsa Brava</li><li class="in">Clic en Jazz en la Terraza</li><li class="out">Agregar entrada: Jazz en la Terraza</li></ol></div></div></div></div><div class="callout" data-tone="warning"><span class="callout-icon">!</span><div><h3>Quítala y mira</h3><p>Borra la escucha del output y haz clic. La consola no muestra nada y no aparece ningún error: la tarjeta emitió, pero nadie escuchaba.</p></div></div></article>
+            <div class="micro-task"><span class="component-label">Para pensar</span><p class="micro-task-q">Una <code>TarjetaRestaurante</code> se usa en “Cerca de ti” y “Tus favoritos”. Al tocar el corazón, una página agrega y la otra quita. ¿Qué debe emitir la tarjeta y quién decide?</p><details class="micro-reveal"><summary>Comprobar</summary><p class="micro-answer">La tarjeta solo emite un output con el id del restaurante. Cada página escucha y decide agregar o quitar.</p></details></div>
+          </div>
+        </section>
+
+        <section class="section view" id="s10" data-accent="1" data-layout="canvas" data-escena="concepto" hidden>
+          <div class="sec-head"><span class="sec-n">Estado compartido</span><h2 class="sec-t">Una sola fuente de verdad</h2><p class="sec-s">La cartelera escribe, el encabezado mira y Mis entradas mira el mismo dato.</p></div>
+          <div class="body">
+            <h3>10.1 · El problema</h3>
+            <p>Si <code>ListadoEventos</code> y <code>Encabezado</code> tienen cada uno su arreglo <code>entradas</code>, son dos datos diferentes. Lo que se agrega en uno no existe en el otro. <code>output()</code> tampoco alcanza: el encabezado y la cartelera no son padre e hijo, y al navegar el router destruye la cartelera.</p>
+            <figure class="figura"><div class="figura-stage"><img src="img/carrito-fuente-unica.png" alt="Una lista de eventos actualiza un depósito central protegido y dos componentes independientes leen el mismo conjunto de entradas"></div><figcaption>Una única ruta escribe en el estado protegido; el encabezado y la página de entradas leen la misma información.<span class="figura-credito">Ilustración original creada para la clase.</span></figcaption></figure>
+            <h3>10.2 · Qué es</h3>
+            <div class="definicion"><div class="def-tecnica"><span class="component-label">Definición técnica</span><p class="def-termino">Servicio con estado compartido</p><p>Un <button class="termino" data-glosario="servicio">servicio</button> es una clase sin plantilla que Angular crea una sola vez y entrega a cualquier componente con <code>inject(Clase)</code>. Cuando guarda el dato en una signal, cualquier componente que la lea se entera de los cambios. La regla es una sola <button class="termino" data-glosario="fuente-verdad">fuente de verdad</button>.</p></div><div class="def-vida"><span class="component-label">Explicación sencilla</span><p>Es un tablero único: la cartelera escribe en él, el encabezado lo mira y <strong>Mis entradas</strong> lo mira.</p><span class="component-label">En la vida real</span><p>La lista de mercado pegada en la nevera de la casa. Cada persona agrega lo que falta y todos leen la misma lista.</p></div></div>
+            <h3>10.3 · Cómo funciona</h3>
+            <ol><li><code>@Service()</code> registra la clase en el inyector raíz.</li><li>El primer <code>inject(CarritoStore)</code> crea el objeto; los siguientes reciben el mismo.</li><li><code>items = signal&lt;ItemCarrito[]&gt;([])</code> es la única caja de entradas.</li><li>El encabezado lee <code>totalEntradas()</code> y queda como lector.</li><li>La cartelera llama <code>agregar</code>; la signal cambia, el <code>computed</code> se invalida y el encabezado se redibuja.</li><li>Al cambiar de página, el servicio sigue vivo.</li></ol>
+            <div class="consola"><div class="consola-head">Un solo objeto</div><ol><li class="out">inject en Encabezado → crea el objeto #1</li><li class="out">inject en ListadoEventos → entrega el objeto #1</li><li class="in">Agregar Salsa</li><li class="out">objeto #1: items = [{ Salsa, cantidad 1 }]</li><li class="out">Navegar a /mis-entradas → la cartelera se destruye; el objeto #1 sigue</li></ol></div>
+            <h3>10.4 · Proteger el dato</h3>
+            <ul><li>La signal escribible es <code>private</code>.</li><li>Hacia afuera se expone <code>entradas = items.asReadonly()</code>: la misma signal, pero sin <code>set</code> ni <code>update</code>.</li><li>Los cambios solo pasan por métodos del servicio: <code>agregar</code> y <code>quitar</code>.</li></ul>
+            <h3>10.5 · Reconocer, límites y errores</h3>
+            <p><strong>El estado vive lo más cerca posible de quien lo usa, y sube a un servicio solo cuando varios lo necesitan.</strong></p>
+            <div class="table-wrap"><table class="data-table"><caption><code>output()</code> y servicio con signal</caption><thead><tr><th></th><th><code>output()</code></th><th>Servicio con signal</th></tr></thead><tbody><tr><td>Entre quiénes</td><td>Hijo y padre directo</td><td>Cualquier componente</td></tr><tr><td>Qué viaja</td><td>Un aviso</td><td>Un dato que queda guardado</td></tr><tr><td>¿Dura al navegar?</td><td>No</td><td>Sí</td></tr></tbody></table></div>
+            <ul><li>No subas a un servicio el estado que solo usa un componente.</li><li>No hagas un <code>AppStore</code> para datos sin relación.</li><li>Un servicio no guarda datos después de recargar la página.</li><li><code>asReadonly()</code> no congela el contenido; entrega arreglos nuevos desde los métodos.</li></ul>
+            <div class="callout" data-tone="warning"><span class="callout-icon">!</span><div><h3>Errores frecuentes</h3><p><code>NG0201</code>: falta <code>@Service()</code>. <code>TS2341</code>: intentaste tocar <code>items</code>, que es privada. <code>TS2339</code>: intentaste hacer <code>set</code> sobre <code>entradas</code>. Si el contador no cambia, quizá modificaste el mismo arreglo con <code>push</code>.</p></div></div>
+          </div>
+        </section>
+
+        <section class="section view" id="s11" data-accent="1" data-layout="canvas" data-escena="construccion" hidden>
+          <div class="sec-head"><span class="sec-n">Construir · fuente de verdad</span><h2 class="sec-t">El store y el contador global</h2><p class="sec-s">Un servicio guarda las entradas una sola vez para toda la aplicación.</p></div>
+          <div class="body">
+            <div class="mision"><div class="mision-head"><span class="mision-marca">4</span><span class="mision-titulo">Misión del bloque</span></div><div class="mision-grid"><div class="mision-item"><span class="component-label">Para Valentina</span><p>“Que arriba, en cualquier página, se vea cuántas entradas lleva”.</p></div><div class="mision-item"><span class="component-label">Lo que hacemos</span><p>Un <code>CarritoStore</code> único y un encabezado que lo lee.</p></div><div class="mision-item" data-resultado><span class="component-label">Cómo sabemos que quedó</span><p>En el menú aparece <strong>Mis entradas 0</strong>, en todas las páginas.</p></div></div></div>
+            <h3>11.1 · Describir una fila</h3>
+            <div class="code-block" data-tipo="terminal"><div class="code-head"><div><span class="code-context">Terminal · desde tarima-web/</span></div><button class="copy-btn" type="button">Copiar</button></div><pre><code class="language-bash">ng g interface models/item-carrito</code></pre></div>
+            <article class="archivo"><div class="archivo-ficha" data-tipo="apoyo"><span class="archivo-accion">Crear</span><span class="archivo-nombre">item-carrito.ts</span><span class="archivo-ruta">tarima-web/src/app/models/</span></div><p class="archivo-intro">El carrito guarda cuántas entradas hay de cada evento. Este archivo describe esa forma.</p><div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h3 class="lectura-titulo">Una fila del carrito</h3></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 1–6</span></div></div><pre class="line-numbers" data-start="1"><code class="language-typescript">import { Evento } from './evento';
+
+export interface ItemCarrito {
+  evento: Evento;
+  cantidad: number;
+}</code></pre></div><ol class="notas"><li class="nota" data-lineas="1"><div class="nota-cabeza"><span class="nota-lineas">L1</span><code class="nota-codigo">Evento</code></div><p>Trae la forma de un evento desde la misma carpeta.</p></li><li class="nota" data-lineas="3"><div class="nota-cabeza"><span class="nota-lineas">L3</span><code class="nota-codigo">ItemCarrito</code></div><p>Declara la forma de una fila: solo describe campos, no tiene lógica.</p></li><li class="nota" data-lineas="4"><div class="nota-cabeza"><span class="nota-lineas">L4</span><code class="nota-codigo">evento</code></div><p>Guarda el evento completo para mostrar nombre y precio.</p></li><li class="nota" data-lineas="5"><div class="nota-cabeza"><span class="nota-lineas">L5</span><code class="nota-codigo">cantidad</code></div><p>Dos entradas de Salsa son una fila con cantidad 2, no dos filas repetidas.</p></li></ol></div></div><details class="code-reveal" data-archivo="item-carrito.ts"><summary><span><span class="code-reveal-title">item-carrito.ts · archivo completo</span><span class="code-reveal-note">6 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Crear</span><span class="code-file">item-carrito.ts</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-typescript">import { Evento } from './evento';
+
+export interface ItemCarrito {
+  evento: Evento;
+  cantidad: number;
+}</code></pre></div></div></details></article>
+            <h3>11.2 · Crear la caja única</h3>
+            <div class="code-block" data-tipo="terminal"><div class="code-head"><div><span class="code-context">Terminal · desde tarima-web/</span></div><button class="copy-btn" type="button">Copiar</button></div><pre><code class="language-bash">ng g service services/carrito-store --skip-tests</code></pre></div>
+            <article class="archivo"><div class="archivo-ficha"><span class="archivo-accion">Crear</span><span class="archivo-nombre">carrito-store.ts</span><span class="archivo-ruta">tarima-web/src/app/services/</span></div><p class="archivo-intro">Este es el único lugar donde viven las entradas. Lo leen el encabezado y <strong>Mis entradas</strong>; lo escribe la cartelera.</p>
+              <div class="lectura"><div class="lectura-head"><span class="lectura-num">14</span><h3 class="lectura-titulo">La caja única de entradas</h3></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 1–9</span></div></div><pre class="line-numbers" data-start="1"><code class="language-typescript">import { Service, signal } from '@angular/core';
+import { ItemCarrito } from '../models/item-carrito';
+
+@Service()
+export class CarritoStore {
+  private readonly items = signal&lt;ItemCarrito[]&gt;([]);
+
+  readonly entradas = this.items.asReadonly();
+}</code></pre></div><ol class="notas"><li class="nota" data-lineas="1"><div class="nota-cabeza"><span class="nota-lineas">L1</span><code class="nota-codigo">Service, signal</code></div><p><code>Service</code> marca la clase y <code>signal</code> crea la caja.</p></li><li class="nota" data-lineas="4"><div class="nota-cabeza"><span class="nota-lineas">L4</span><code class="nota-codigo">@Service()</code></div><p>Angular crea un solo objeto de esta clase y lo entrega con <code>inject</code>.</p></li><li class="nota" data-lineas="6"><div class="nota-cabeza"><span class="nota-lineas">L6</span><code class="nota-codigo">private readonly items</code></div><p>La única caja de entradas. Solo el servicio puede escribir en ella.</p></li><li class="nota" data-lineas="8"><div class="nota-cabeza"><span class="nota-lineas">L8</span><code class="nota-codigo">asReadonly()</code></div><p>Expone la misma signal sin <code>set</code> ni <code>update</code>.</p></li></ol></div></div>
+              <div class="lectura"><div class="lectura-head"><span class="lectura-num">15–16</span><h3 class="lectura-titulo">Cuántas entradas lleva</h3><p class="lectura-proposito">El número del encabezado es un valor derivado.</p></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 10–16</span></div></div><pre class="line-numbers" data-start="10"><code class="language-typescript">  readonly totalEntradas = computed(() =&gt; {
+    let total = 0;
+    for (const item of this.items()) {
+      total += item.cantidad;
+    }
+    return total;
+  });</code></pre></div><ol class="notas"><li class="nota" data-lineas="10"><div class="nota-cabeza"><span class="nota-lineas">L10</span><code class="nota-codigo">totalEntradas</code></div><p>Signal derivada y pública: cualquiera la lee, nadie la escribe.</p></li><li class="nota" data-lineas="11-13"><div class="nota-cabeza"><span class="nota-lineas">L11–13</span><code class="nota-codigo">for … total +=</code></div><p>Recorre cada fila y suma su cantidad. Dos de Salsa y una de Jazz dan 3.</p></li></ol></div></div>
+              <details class="code-reveal" data-archivo="carrito-store.ts"><summary><span><span class="code-reveal-title">carrito-store.ts · como queda al terminar este momento</span><span class="code-reveal-note">17 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Crear</span><span class="code-file">carrito-store.ts</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-typescript">import { Service, computed, signal } from '@angular/core';
+import { ItemCarrito } from '../models/item-carrito';
+
+@Service()
+export class CarritoStore {
+  private readonly items = signal&lt;ItemCarrito[]&gt;([]);
+  readonly entradas = this.items.asReadonly();
+
+  readonly totalEntradas = computed(() =&gt; {
+    let total = 0;
+    for (const item of this.items()) total += item.cantidad;
+    return total;
+  });
+}</code></pre></div></div></details>
+            </article>
+            <h3>11.3 · El encabezado lee</h3>
+            <article class="archivo"><div class="archivo-ficha"><span class="archivo-accion">Editar</span><span class="archivo-nombre">encabezado.ts</span><span class="archivo-ruta">tarima-web/src/app/components/encabezado/</span></div><p class="archivo-intro">El encabezado está en todas las páginas. Pide el servicio y solo lo lee.</p><div class="lectura"><div class="lectura-head"><span class="lectura-num">17–18</span><h3 class="lectura-titulo">Pedir el carrito</h3></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Imports y línea 11</span></div></div><pre class="line-numbers" data-start="1"><code class="language-typescript">import { Component, inject } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { CarritoStore } from '../../services/carrito-store';
+
+  protected readonly carrito = inject(CarritoStore);</code></pre></div><ol class="notas"><li class="nota" data-lineas="1-3"><div class="nota-cabeza"><span class="nota-lineas">L1–3</span><code class="nota-codigo">inject y CarritoStore</code></div><p>Trae la función que pide dependencias y la clase que se pide.</p></li><li class="nota" data-lineas="5"><div class="nota-cabeza"><span class="nota-lineas">L11</span><code class="nota-codigo">protected readonly carrito</code></div><p>Pide el objeto único. Es <code>protected</code> porque la plantilla lo usa.</p></li></ol></div></div></article>
+            <article class="archivo"><div class="archivo-ficha"><span class="archivo-accion">Editar</span><span class="archivo-nombre">encabezado.html</span><span class="archivo-ruta">tarima-web/src/app/components/encabezado/</span></div><p class="archivo-intro">El menú agrega <strong>Mis entradas</strong> con el contador.</p><div class="lectura"><div class="lectura-head"><span class="lectura-num">19</span><h3 class="lectura-titulo">El contador en el menú</h3></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 7–9</span></div></div><pre class="line-numbers" data-start="7"><code class="language-html">    &lt;a routerLink="/mis-entradas" routerLinkActive="activo"&gt;
+      Mis entradas &lt;span class="encabezado__contador"&gt;{{ carrito.totalEntradas() }}&lt;/span&gt;
+    &lt;/a&gt;</code></pre></div><ol class="notas"><li class="nota" data-lineas="7"><div class="nota-cabeza"><span class="nota-lineas">L7</span><code class="nota-codigo">routerLink</code></div><p>El tercer enlace del menú. La página todavía no existe: por ahora cae en la 404.</p></li><li class="nota" data-lineas="8"><div class="nota-cabeza"><span class="nota-lineas">L8</span><code class="nota-codigo">totalEntradas()</code></div><p>Lee el <code>computed</code>; el encabezado queda anotado como lector.</p></li></ol></div></div><div class="checkpoint"><span class="component-label">Checkpoint</span><h3>En todas las páginas aparece Mis entradas 0.</h3><p>El enlace todavía conduce a la 404; la página se crea después.</p></div></article>
+          </div>
+        </section>
+
+        <section class="section view" id="s12" data-accent="1" data-layout="canvas" data-escena="construccion" hidden>
+          <div class="sec-head"><span class="sec-n">Construir · conexión</span><h2 class="sec-t">El clic llega al contador</h2><p class="sec-s">La tarjeta avisa, la cartelera decide, el servicio cambia y el encabezado se entera.</p></div>
+          <div class="body">
+            <div class="mision"><div class="mision-head"><span class="mision-marca">5</span><span class="mision-titulo">Misión del bloque</span></div><div class="mision-grid"><div class="mision-item"><span class="component-label">Para Valentina</span><p>Que <strong>Agregar entrada</strong> de verdad sume.</p></div><div class="mision-item"><span class="component-label">Lo que hacemos</span><p>El método <code>agregar</code> y la cartelera pasándole el evento.</p></div><div class="mision-item" data-resultado><span class="component-label">Cómo sabemos que quedó</span><p>Dos clics en Salsa y uno en Jazz → <strong>Mis entradas 3</strong>.</p></div></div></div>
+            <h3>12.1 · Agregar sin mutar</h3>
+            <article class="archivo"><div class="archivo-ficha"><span class="archivo-accion">Editar</span><span class="archivo-nombre">carrito-store.ts</span><span class="archivo-ruta">tarima-web/src/app/services/</span></div><p class="archivo-intro">Si el evento ya está, suma una entrada; si no, entra con cantidad 1.</p><div class="lectura"><div class="lectura-head"><span class="lectura-num">20–21</span><h3 class="lectura-titulo">Agregar una entrada</h3></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 18–28</span></div></div><pre class="line-numbers" data-start="18"><code class="language-typescript">  agregar(evento: Evento): void {
+    this.items.update((items) =&gt; {
+      const yaEsta = items.some((item) =&gt; item.evento.id === evento.id);
+      if (!yaEsta) {
+        return [...items, { evento, cantidad: 1 }];
+      }
+      return items.map((item) =&gt;
+        item.evento.id === evento.id ? { ...item, cantidad: item.cantidad + 1 } : item,
+      );
+    });
+  }</code></pre></div><ol class="notas"><li class="nota" data-lineas="18"><div class="nota-cabeza"><span class="nota-lineas">L18</span><code class="nota-codigo">agregar(evento)</code></div><p>El único camino para sumar entradas desde afuera.</p></li><li class="nota" data-lineas="19"><div class="nota-cabeza"><span class="nota-lineas">L19</span><code class="nota-codigo">items.update</code></div><p>Recibe el arreglo actual y espera un arreglo nuevo.</p></li><li class="nota" data-lineas="20"><div class="nota-cabeza"><span class="nota-lineas">L20</span><code class="nota-codigo">some</code></div><p>Responde si al menos una fila corresponde al evento, comparando por id.</p></li><li class="nota" data-lineas="21-22"><div class="nota-cabeza"><span class="nota-lineas">L21–22</span><code class="nota-codigo">[...items, nuevo]</code></div><p>Si no estaba, devuelve un arreglo nuevo con una fila de cantidad 1.</p></li><li class="nota" data-lineas="24-26"><div class="nota-cabeza"><span class="nota-lineas">L24–26</span><code class="nota-codigo">map</code></div><p>Si ya estaba, devuelve un arreglo nuevo y reemplaza solo esa fila por una copia con una entrada más.</p></li></ol></div></div></article>
+            <h3>12.2 · La cartelera pide y usa el store</h3>
+            <article class="archivo"><div class="archivo-ficha"><span class="archivo-accion">Editar</span><span class="archivo-nombre">listado-eventos.ts</span><span class="archivo-ruta">tarima-web/src/app/pages/listado-eventos/</span></div><p class="archivo-intro">El método que antes escribía en consola ahora pasa el evento al servicio.</p><div class="lectura"><div class="lectura-head"><span class="lectura-num">22–24</span><h3 class="lectura-titulo">Pedir el carrito y agregar</h3></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Dependencia y método</span></div></div><pre class="line-numbers" data-start="13"><code class="language-typescript">  private readonly carrito = inject(CarritoStore);
+
+  agregarAlCarrito(evento: Evento): void {
+    this.carrito.agregar(evento);
+  }</code></pre></div><ol class="notas"><li class="nota" data-lineas="13"><div class="nota-cabeza"><span class="nota-lineas">L13</span><code class="nota-codigo">inject(CarritoStore)</code></div><p>Pide el mismo objeto que ya recibió el encabezado. Es <code>private</code> porque la plantilla no lo toca.</p></li><li class="nota" data-lineas="15-17"><div class="nota-cabeza"><span class="nota-lineas">L32–34</span><code class="nota-codigo">carrito.agregar(evento)</code></div><p>La cartelera decide mandar al carrito el evento que avisó la tarjeta.</p></li></ol></div></div><div class="active-build"><div class="build-step"><span class="build-step-index">▶</span><div class="build-step-copy"><h3 class="build-step-title">Pruébalo</h3><div class="consola"><div class="consola-head">Recorrido observable</div><ol><li class="in">Un clic en Salsa</li><li class="out">Mis entradas 1</li><li class="in">Otro clic en Salsa y uno en La Casa de las Voces</li><li class="out">Mis entradas 3</li><li class="in">Navega a Inicio y vuelve</li><li class="out">El contador sigue en 3</li><li class="in">Recarga la página</li><li class="out">El contador vuelve a 0</li></ol></div></div></div></div></article>
+            <div class="callout" data-tone="warning"><span class="callout-icon">!</span><div><h3>Quítala y mira</h3><p>Cambia el arreglo nuevo por <code>items.push(...); return items;</code>. El contador sigue en 0: la signal ve la misma referencia y no avisa. Deshaz el cambio.</p></div></div>
+            <div class="callout" data-tone="info"><span class="callout-icon">i</span><div><h3>Ojo técnico</h3><p>Al recargar la página, el carrito vuelve a 0. Es lo esperado: el servicio vive en la memoria de la pestaña. Para que las entradas se guarden de verdad hace falta el backend.</p></div></div>
+            <h3>12.3 · Seguir la traza</h3>
+            <ol><li>Clic en <strong>Agregar entrada</strong>.</li><li><code>TarjetaEvento</code> emite el evento.</li><li><code>ListadoEventos</code> recibe <code>$event</code>.</li><li>La cartelera llama <code>carrito.agregar(evento)</code>.</li><li><code>items.update</code> entrega un arreglo nuevo.</li><li><code>items</code> avisa; <code>totalEntradas</code> queda desactualizado.</li><li>El encabezado se redibuja y lee el nuevo total.</li></ol>
+            <div class="micro-task"><span class="component-label">Para pensar</span><p class="micro-task-q">En un restaurante, la tablet del mesero agrega platos, la cocina muestra pendientes y la caja calcula el total. ¿Qué dato es compartido, dónde vive, quién lo cambia y quién solo lo lee?</p><details class="micro-reveal"><summary>Comprobar</summary><p class="micro-answer">El pedido de la mesa es estado compartido y vive en un servicio. La tablet lo cambia con un método; la cocina y la caja lo leen. El total es un <code>computed</code>. Si el botón está en una tarjeta reutilizable, la tarjeta avisa con un <code>output()</code>.</p></details></div>
+          </div>
+        </section>
+
+        <section class="section view" id="s13" data-accent="1" data-layout="canvas" data-escena="construccion" hidden>
+          <div class="sec-head"><span class="sec-n">Construir · otra página</span><h2 class="sec-t">Mis entradas lee el mismo estado</h2><p class="sec-s">Una página que no agregó nada encuentra todas las entradas porque inyecta el mismo servicio.</p></div>
+          <div class="body">
+            <div class="mision"><div class="mision-head"><span class="mision-marca">6</span><span class="mision-titulo">Misión del bloque</span></div><div class="mision-grid"><div class="mision-item"><span class="component-label">Para Valentina</span><p>Una página con lo elegido, cantidades, total y opción de quitar.</p></div><div class="mision-item"><span class="component-label">Lo que hacemos</span><p>Ruta, página, segundo <code>computed</code> y método <code>quitar</code>.</p></div><div class="mision-item" data-resultado><span class="component-label">Cómo sabemos que quedó</span><p>Salsa ×2 + La Casa ×1 = <strong>3 entradas · $ 128.000</strong>; quitar actualiza todo.</p></div></div></div>
+            <h3>13.1 · Crear la ruta y la página</h3>
+            <div class="code-block" data-tipo="terminal"><div class="code-head"><div><span class="code-context">Terminal · desde tarima-web/</span></div><button class="copy-btn" type="button">Copiar</button></div><pre><code class="language-bash">ng g c pages/mis-entradas --skip-tests</code></pre></div>
+            <article class="archivo"><div class="archivo-ficha"><span class="archivo-accion">Editar</span><span class="archivo-nombre">app.routes.ts</span><span class="archivo-ruta">tarima-web/src/app/</span></div><p class="archivo-intro">Agrega <code>/mis-entradas</code> antes de la ruta comodín.</p><div class="lectura"><div class="lectura-head"><span class="lectura-num">25</span><h3 class="lectura-titulo">La dirección de Mis entradas</h3></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 19–23</span></div></div><pre class="line-numbers" data-start="19"><code class="language-typescript">  {
+    path: 'mis-entradas',
+    loadComponent: () =&gt; import('./pages/mis-entradas/mis-entradas').then((m) =&gt; m.MisEntradas),
+    title: 'Tarima · Mis entradas',
+  },</code></pre></div><ol class="notas"><li class="nota" data-lineas="20"><div class="nota-cabeza"><span class="nota-lineas">L20</span><code class="nota-codigo">path</code></div><p>La dirección sin barra inicial.</p></li><li class="nota" data-lineas="21"><div class="nota-cabeza"><span class="nota-lineas">L21</span><code class="nota-codigo">loadComponent</code></div><p>Carga la página solo cuando alguien la visita.</p></li><li class="nota" data-lineas="22"><div class="nota-cabeza"><span class="nota-lineas">L22</span><code class="nota-codigo">title</code></div><p>El nombre de la pestaña del navegador.</p></li></ol></div></div></article>
+            <article class="archivo"><div class="archivo-ficha"><span class="archivo-accion">Editar</span><span class="archivo-nombre">mis-entradas.ts</span><span class="archivo-ruta">tarima-web/src/app/pages/mis-entradas/</span></div><p class="archivo-intro">La página importa <code>inject</code>, <code>CurrencyPipe</code>, <code>RouterLink</code> y <code>CarritoStore</code>; luego inyecta el carrito como <code>protected</code>.</p><details class="code-reveal" data-archivo="mis-entradas.ts"><summary><span><span class="code-reveal-title">mis-entradas.ts · archivo completo</span><span class="code-reveal-note">14 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Editar</span><span class="code-file">mis-entradas.ts</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-typescript">import { Component, inject } from '@angular/core';
+import { CurrencyPipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { CarritoStore } from '../../services/carrito-store';
+
+@Component({
+  imports: [CurrencyPipe, RouterLink],
+  selector: 'app-mis-entradas',
+  styleUrl: './mis-entradas.css',
+  templateUrl: './mis-entradas.html',
+})
+export class MisEntradas {
+  protected readonly carrito = inject(CarritoStore);
+}</code></pre></div></div></details></article>
+            <h3>13.2 · Mostrar, calcular y quitar</h3>
+            <article class="archivo"><div class="archivo-ficha"><span class="archivo-accion">Editar</span><span class="archivo-nombre">carrito-store.ts</span><span class="archivo-ruta">tarima-web/src/app/services/</span></div><p class="archivo-intro">El total en pesos es otro valor derivado; quitar devuelve un arreglo nuevo sin la fila elegida.</p><div class="lectura"><div class="lectura-head"><span class="lectura-num">33 y 35</span><h3 class="lectura-titulo">Total y quitar</h3></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Métodos nuevos</span></div></div><pre class="line-numbers" data-start="19"><code class="language-typescript">  readonly totalAPagar = computed(() =&gt; {
+    let total = 0;
+    for (const item of this.items()) {
+      total += item.cantidad * item.evento.precio;
+    }
+    return total;
+  });
+
+  quitar(id: number): void {
+    this.items.update((items) =&gt; items.filter((item) =&gt; item.evento.id !== id));
+  }</code></pre></div><ol class="notas"><li class="nota" data-lineas="19-25"><div class="nota-cabeza"><span class="nota-lineas">L19–25</span><code class="nota-codigo">totalAPagar</code></div><p>Otra signal derivada de <code>items</code>. Cada fila aporta cantidad por precio.</p></li><li class="nota" data-lineas="27-29"><div class="nota-cabeza"><span class="nota-lineas">L39–41</span><code class="nota-codigo">quitar</code></div><p>Recibe solo el id y usa <code>filter</code> para crear un arreglo nuevo sin esa fila.</p></li></ol></div></div><details class="code-reveal" data-archivo="carrito-store.ts"><summary><span><span class="code-reveal-title">carrito-store.ts · versión final</span><span class="code-reveal-note">42 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Editar</span><span class="code-file">carrito-store.ts</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-typescript">import { Service, computed, signal } from '@angular/core';
+import { Evento } from '../models/evento';
+import { ItemCarrito } from '../models/item-carrito';
+
+@Service()
+export class CarritoStore {
+  private readonly items = signal&lt;ItemCarrito[]&gt;([]);
+  readonly entradas = this.items.asReadonly();
+
+  readonly totalEntradas = computed(() =&gt; {
+    let total = 0;
+    for (const item of this.items()) total += item.cantidad;
+    return total;
+  });
+
+  readonly totalAPagar = computed(() =&gt; {
+    let total = 0;
+    for (const item of this.items()) total += item.cantidad * item.evento.precio;
+    return total;
+  });
+
+  agregar(evento: Evento): void {
+    this.items.update((items) =&gt; {
+      const yaEsta = items.some((item) =&gt; item.evento.id === evento.id);
+      if (!yaEsta) return [...items, { evento, cantidad: 1 }];
+      return items.map((item) =&gt;
+        item.evento.id === evento.id ? { ...item, cantidad: item.cantidad + 1 } : item,
+      );
+    });
+  }
+
+  quitar(id: number): void {
+    this.items.update((items) =&gt; items.filter((item) =&gt; item.evento.id !== id));
+  }
+}</code></pre></div></div></details></article>
+            <article class="archivo"><div class="archivo-ficha"><span class="archivo-accion">Reemplazar</span><span class="archivo-nombre">mis-entradas.html</span><span class="archivo-ruta">tarima-web/src/app/pages/mis-entradas/</span></div><p class="archivo-intro">La plantilla recorre las entradas, muestra cantidad y precio, maneja el caso vacío, presenta el total y llama <code>quitar</code>.</p><details class="code-reveal" data-archivo="mis-entradas.html"><summary><span><span class="code-reveal-title">mis-entradas.html · archivo completo</span><span class="code-reveal-note">25 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Reemplazar</span><span class="code-file">mis-entradas.html</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-html">&lt;section class="carrito"&gt;
+  &lt;h2 class="listado__titulo"&gt;Mis entradas&lt;/h2&gt;
+  @for (item of carrito.entradas(); track item.evento.id) {
+    &lt;div class="carrito__fila"&gt;
+      &lt;p class="carrito__nombre"&gt;{{ item.evento.nombre }}&lt;/p&gt;
+      &lt;p class="carrito__cantidad"&gt;
+        {{ item.cantidad }} × {{ item.evento.precio | currency: 'COP' : 'symbol-narrow' : '1.0-0' }}
+      &lt;/p&gt;
+      &lt;button type="button" class="boton boton--secundario" (click)="carrito.quitar(item.evento.id)"&gt;Quitar&lt;/button&gt;
+    &lt;/div&gt;
+  } @empty {
+    &lt;p class="listado__vacio"&gt;Todavía no tienes entradas.&lt;/p&gt;
+    &lt;a class="boton portada__boton" routerLink="/eventos"&gt;Ir a la cartelera&lt;/a&gt;
+  }
+  @if (carrito.totalEntradas() &gt; 0) {
+    &lt;p class="carrito__total"&gt;
+      Entradas: {{ carrito.totalEntradas() }} · Total a pagar:
+      {{ carrito.totalAPagar() | currency: 'COP' : 'symbol-narrow' : '1.0-0' }}
+    &lt;/p&gt;
+  }
+&lt;/section&gt;</code></pre></div></div></details><div class="active-build"><div class="build-step"><span class="build-step-index">▶</span><div class="build-step-copy"><h3 class="build-step-title">Pruébalo</h3><div class="consola"><div class="consola-head">Resultado esperado</div><ol><li class="out">Noche de Salsa Brava · 2 × $ 45.000</li><li class="out">La Casa de las Voces · 1 × $ 38.000</li><li class="out">Entradas: 3 · Total a pagar: $ 128.000</li><li class="in">Quitar Salsa</li><li class="out">Entradas: 1 · Total a pagar: $ 38.000 · menú: Mis entradas 1</li></ol></div></div></div></div></article>
+          </div>
+        </section>
+
+        <section class="section view" id="s14" data-accent="1" data-layout="canvas" data-escena="prueba" hidden>
+          <div class="sec-head"><span class="sec-n">Momento de IA</span><h2 class="sec-t">Revisar el diseño del estado</h2><p class="sec-s">La IA entra como revisora después de que tú hayas tomado una postura técnica.</p></div>
+          <div class="body">
+          <div class="momento-ia">
+            <div class="momento-ia-head">
+              <span class="momento-ia-titulo">Revisión del store</span>
+              <span class="ia-nivel">Nivel 1 · Revisor</span>
+              <span class="ia-herramienta">Herramienta: Chat en el navegador</span>
+            </div>
+            <div class="momento-ia-body">
+            <div class="ia-grid">
+              <div>
+                <span class="component-label">1 · Razona primero</span>
+                <p>Antes de abrir la IA, escribe en una línea, con tus palabras, por qué <code>totalAPagar</code> es un <code>computed</code> y no una signal que se actualiza en <code>agregar</code> y <code>quitar</code>.</p>
+              </div>
+              <div>
+                <span class="component-label">2 · Usa este prompt</span>
+                <div class="code-block" data-tipo="prompt">
+                  <div class="code-head"><span class="code-context">Prompt sugerido</span><button class="copy-btn" type="button">Copiar</button></div>
+                  <pre><code>Estoy aprendiendo Angular 22 con signals. Tengo un servicio `CarritoStore` con una signal privada `items` (arreglo de `{ evento, cantidad }`) y quiero un total a pagar que se actualice solo cuando agrego o quito entradas. Ya lo resolví yo; te pego mi código abajo. No me lo reescribas: revísalo y dime (1) si hay algo de Angular viejo, (2) si el estado está bien protegido y (3) qué mejorarías y por qué. Usa solo signal, computed, @Service e inject.
+[pega aquí tu `carrito-store.ts` completo]</code></pre>
+                </div>
+              </div>
+            </div>
+            <h3>3. Valida lo que responda</h3>
+            <div class="table-wrap">
+              <table class="data-table">
+                <thead><tr><th>Si la IA te propone…</th><th>En Angular 22 se usa…</th><th>Por qué</th></tr></thead>
+                <tbody>
+                  <tr><td><code>effect(() =&gt; this.total.set(…))</code> para copiar el total</td><td><code>computed(() =&gt; …)</code></td><td>Copiar un valor en otra signal crea dos fuentes; <code>effect</code> es para efectos hacia afuera.</td></tr>
+                  <tr><td><code>BehaviorSubject</code> y <code>.next()</code></td><td><code>signal</code> + <code>update</code></td><td>Válido, pero es la forma anterior (RxJS); el curso usa signals.</td></tr>
+                  <tr><td><code>items = signal(...)</code> pública</td><td><code>private</code> + <code>asReadonly()</code></td><td>Cualquiera podría borrar el carrito con <code>set</code>.</td></tr>
+                  <tr><td><code>@Injectable({ providedIn: 'root' })</code></td><td><code>@Service()</code></td><td>Angular 22.</td></tr>
+                  <tr><td><code>items().push(...)</code></td><td><code>update</code> con un arreglo nuevo</td><td>La signal no se entera del cambio.</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="sin-ia">
+              <span class="sin-ia-icono" aria-hidden="true"></span><div><h3>No delegues</h3><p>Decidir qué es estado de origen y qué es derivado, y decidir quién puede cambiar el carrito. Nunca pegues claves, contraseñas ni archivos <code>.env</code> en una IA.</p></div>
+            </div>
+            </div>
+          </div>
+
+          <div class="micro-task">
+            <span class="component-label">Comprueba tu criterio</span>
+            <p class="micro-task-q">La IA te responde: “Para que el total se actualice, agrega <code>total = signal(0)</code> y un <code>effect</code> que haga <code>this.total.set(…)</code> cada vez que cambie <code>items</code>”. Funciona en el navegador. ¿Lo aceptas?</p>
+            <details class="micro-reveal"><summary>Comprobar</summary><p class="micro-answer"><strong>Respuesta correcta:</strong> No. Crea un segundo dato (<code>total</code>) que debe decir lo mismo que <code>items</code> y que cualquiera podría cambiar con <code>set</code>; además usa un efecto para algo que es una fórmula. <code>computed</code> hace lo mismo sin una segunda fuente de verdad y sin poder escribirse desde afuera. Que funcione no significa que esté bien diseñado.</p></details>
+          </div>
+          </div>
+        </section>
+
+        <section class="section view" id="s15" data-accent="1" data-layout="canvas" data-escena="construccion" hidden>
+          <div class="sec-head"><span class="sec-n">Las otras páginas</span><h2 class="sec-t">El mismo aviso en detalle e inicio</h2><p class="sec-s">El inicio y el detalle escuchan el aviso de la tarjeta y lo mandan al mismo carrito. De paso, la búsqueda del detalle pasa a ser un <code>computed</code>.</p></div>
+          <div class="body">
+
+          <details class="code-reveal" open>
+            <summary><span><span class="code-reveal-title">Detalle · detalle-evento.ts</span><span class="code-reveal-note">Lee el mismo CarritoStore</span></span></summary>
+            <div class="code-reveal-body">
+              <div class="code-block"><div class="code-head"><span class="code-context">detalle-evento.ts</span><button class="copy-btn" type="button">Copiar</button></div><pre class="line-numbers" data-start="1"><code class="language-typescript">import { Component, computed, inject, input } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { EVENTOS } from '../../data/eventos.mock';
+import { TarjetaEvento } from '../../components/tarjeta-evento/tarjeta-evento';
+import { CarritoStore } from '../../services/carrito-store';
+
+@Component({
+  imports: [RouterLink, TarjetaEvento],
+  selector: 'app-detalle-evento',
+  styleUrl: './detalle-evento.css',
+  templateUrl: './detalle-evento.html',
+})
+export class DetalleEvento {
+  protected readonly carrito = inject(CarritoStore);
+
+  id = input.required&lt;string&gt;();
+
+  eventoActual = computed(() =&gt; EVENTOS.find((evento) =&gt; evento.id === Number(this.id())));
+}</code></pre></div>
+            </div>
+          </details>
+
+          <details class="code-reveal">
+            <summary><span><span class="code-reveal-title">Detalle · detalle-evento.html</span><span class="code-reveal-note">La tarjeta también avisa</span></span></summary>
+            <div class="code-reveal-body">
+              <div class="code-block"><div class="code-head"><span class="code-context">detalle-evento.html</span><button class="copy-btn" type="button">Copiar</button></div><pre class="line-numbers" data-start="1"><code class="language-html">@if (eventoActual(); as evento) {
+  &lt;section class="detalle"&gt;
+    &lt;a class="detalle__volver" routerLink="/eventos"&gt;← Volver a la cartelera&lt;/a&gt;
+    &lt;app-tarjeta-evento [evento]="evento" (entradaAgregada)="carrito.agregar($event)" /&gt;
+  &lt;/section&gt;
+} @else {
+  &lt;section class="aviso"&gt;
+    &lt;h2&gt;Evento no encontrado&lt;/h2&gt;
+    &lt;p&gt;En Tarima no hay ningún evento con el número {{ id() }}.&lt;/p&gt;
+    &lt;a class="boton" routerLink="/eventos"&gt;Ver la cartelera&lt;/a&gt;
+  &lt;/section&gt;
+}</code></pre></div>
+            </div>
+          </details>
+
+          <details class="code-reveal">
+            <summary><span><span class="code-reveal-title">Inicio · inicio.ts + inicio.html</span><span class="code-reveal-note">Las tarjetas destacadas también avisan</span></span></summary>
+            <div class="code-reveal-body">
+              <div class="code-block"><div class="code-head"><span class="code-context">inicio.ts</span><button class="copy-btn" type="button">Copiar</button></div><pre class="line-numbers" data-start="1"><code class="language-typescript">import { Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { EVENTOS } from '../../data/eventos.mock';
+import { TarjetaEvento } from '../../components/tarjeta-evento/tarjeta-evento';
+import { CarritoStore } from '../../services/carrito-store';
+
+@Component({
+  imports: [RouterLink, TarjetaEvento],
+  selector: 'app-inicio',
+  styleUrl: './inicio.css',
+  templateUrl: './inicio.html',
+})
+export class Inicio {
+  protected readonly carrito = inject(CarritoStore);
+
+  destacados = EVENTOS.filter((evento) =&gt; evento.cuposDisponibles &gt; 0).slice(0, 3);
+}</code></pre></div>
+              <div class="code-block"><div class="code-head"><span class="code-context">inicio.html</span><button class="copy-btn" type="button">Copiar</button></div><pre class="line-numbers" data-start="1"><code class="language-html">&lt;section class="portada"&gt;
+  &lt;h2 class="portada__titulo"&gt;Lo mejor de la cultura en Bogotá, en un solo lugar&lt;/h2&gt;
+  &lt;p class="portada__texto"&gt;Conciertos, teatro y stand-up. Elige, comparte y reserva.&lt;/p&gt;
+  &lt;a class="boton portada__boton" routerLink="/eventos"&gt;Ver toda la cartelera&lt;/a&gt;
+&lt;/section&gt;
+
+&lt;h2 class="listado__titulo"&gt;Con cupos disponibles&lt;/h2&gt;
+&lt;div class="listado__grilla"&gt;
+  @for (evento of destacados; track evento.id) {
+    &lt;app-tarjeta-evento [evento]="evento" (entradaAgregada)="carrito.agregar($event)" /&gt;
+  }
+&lt;/div&gt;</code></pre></div>
+            </div>
+          </details>
+
+          <div class="callout" data-tone="info"><span class="callout-icon">✓</span><div><h3>Prueba rápida</h3><p>En <code>/eventos/4</code> y en el inicio, <strong>Agregar entrada</strong> debe subir el número de <strong>Mis entradas</strong> en el menú. En <code>/eventos/3</code>, el botón debe seguir deshabilitado porque el evento está agotado.</p></div></div>
+          </div>
+        </section>
+
+        <section class="section view" id="s16" data-accent="1" data-layout="canvas" data-escena="construccion" hidden>
+          <div class="sec-head"><span class="sec-n">Taller · Fase 3</span><h2 class="sec-t">Huella Amiga: guardar las que les gustan</h2><p class="sec-s">La fundación necesita búsqueda, filtro de disponibilidad y una lista de favoritas compartida entre páginas.</p></div>
+          <div class="body">
+
+          <article class="correo">
+            <div class="correo-head"><span class="correo-avatar">HA</span><div><p class="correo-remitente">Coordinación de Adopciones</p><p class="correo-ruta">Fundación Huella Amiga</p></div></div>
+            <div class="correo-asunto">Que la gente pueda guardar las que le gustan</div>
+            <div class="correo-body">
+              <p>Ya podemos compartir el enlace de cada mascota, ¡qué alegría! Ahora nos escriben personas que vieron cinco o seis mascotas y no recuerdan cuáles les gustaron. Queremos que puedan <strong>buscar por nombre</strong>, ver <strong>solo las que siguen disponibles</strong> y marcar con un clic las que les interesan. Arriba, en el encabezado, que siempre se vea <strong>cuántas llevan marcadas</strong>, y que en <strong>“Mi lista”</strong> las encuentren juntas.</p>
+            </div>
+          </article>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>En la clase</th><th>En Huella Amiga</th></tr></thead>
+              <tbody>
+                <tr><td>Buscador y categorías con <code>signal</code> + <code>computed</code></td><td>Buscador y casilla “solo disponibles” con <code>signal</code> + <code>computed</code></td></tr>
+                <tr><td><code>CarritoStore</code> con <code>@Service()</code></td><td><code>FavoritosStore</code> con <code>@Service()</code></td></tr>
+                <tr><td><code>entradaAgregada = output&lt;Evento&gt;()</code></td><td><code>favoritoAlternado = output&lt;number&gt;()</code> (solo el id)</td></tr>
+                <tr><td>Contador de entradas en el encabezado</td><td>Contador de favoritas en el encabezado</td></tr>
+                <tr><td>Página <strong>Mis entradas</strong></td><td>Página <strong>Mi lista</strong></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Criterios de aceptación</h3>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Parte</th><th>Qué revisa</th><th>Pruebas</th></tr></thead>
+              <tbody>
+                <tr><td>3.1</td><td><code>FavoritosStore</code>: <code>@Service</code>, <code>ids</code> de solo lectura y <code>total</code> con <code>computed</code></td><td>4</td></tr>
+                <tr><td>3.2</td><td><code>alternar(id)</code> agrega o quita sin repetir; <code>esFavorita(id)</code></td><td>3</td></tr>
+                <tr><td>3.3</td><td>Tarjeta: <code>esFavorita = input(false)</code>, <code>favoritoAlternado = output&lt;number&gt;()</code>, botón <code>boton-favorito</code> (“🤍 Me interesa” / “❤️ En mi lista”)</td><td>4</td></tr>
+                <tr><td>3.4</td><td>Buscador <code>buscador</code> sin importar mayúsculas</td><td>3</td></tr>
+                <tr><td>3.5</td><td>Casilla <code>solo-disponibles</code></td><td>2</td></tr>
+                <tr><td>3.6</td><td><code>total-mascotas</code> filtrado y el listado conectado al servicio</td><td>2</td></tr>
+                <tr><td>3.7</td><td>Contador <code>contador-favoritas</code> en el encabezado</td><td>2</td></tr>
+                <tr><td>3.8</td><td>Página <code>MiLista</code> en <code>/mi-lista</code>, con <code>lista-vacia</code></td><td>4</td></tr>
+                <tr><td>3.9</td><td>Estructura: <code>signal</code> y <code>computed</code> en el listado, <code>@Service</code> y <code>asReadonly</code> en el servicio, la tarjeta no inyecta el servicio, nada de Angular viejo</td><td>6</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="panel">
+            <h3>Reglas de negocio</h3>
+            <ul class="checklist">
+              <li>Una mascota está en la lista una sola vez: marcarla de nuevo la <strong>quita</strong>.</li>
+              <li>El contador cambia solo, desde cualquier página donde se marque.</li>
+              <li>Buscar y “solo disponibles” se combinan: con “nube” y la casilla marcada no queda ninguna (Nube está adoptada).</li>
+            </ul>
+          </div>
+
+          <h3>Revisión entre pares</h3>
+          <div class="stepper">
+            <div class="step-item"><span class="step-num">1</span><h4>Estado</h4><p>¿El estado local está en el listado y el compartido en el servicio?</p></div>
+            <div class="step-item"><span class="step-num">2</span><h4>Evento</h4><p>¿La tarjeta emite en vez de usar el servicio?</p></div>
+            <div class="step-item"><span class="step-num">3</span><h4>Derivación</h4><p>¿El total es un <code>computed</code>?</p></div>
+            <div class="step-item"><span class="step-num">4</span><h4>Versión</h4><p>¿Hay señales de Angular viejo?</p></div>
+            <div class="step-item"><span class="step-num">5</span><h4>Mejora</h4><p>Deja al menos una mejora concreta, con archivo y línea.</p></div>
+          </div>
+
+          <div class="code-block" data-tipo="terminal">
+            <div class="code-head"><span class="code-context">Entrega en Git</span><button class="copy-btn" type="button">Copiar</button></div>
+            <pre><code class="language-bash">git status
+git add .
+git commit -m "Fase 3"
+git push</code></pre>
+          </div>
+
+          <details class="code-reveal" data-reference="true">
+            <summary><span><span class="code-reveal-title">Mapa final de archivos de Tarima</span><span class="code-reveal-note">Qué se agregó o cambió en la clase</span></span></summary>
+            <div class="code-reveal-body"><div class="code-block"><div class="code-head"><span class="code-context">tarima-web/src/</span></div><pre><code>tarima-web/src/
+├── styles.css                 ← + bloque Clase 3
+└── app/
+    ├── app.routes.ts          ← + mis-entradas
+    ├── models/
+    │   ├── evento.ts
+    │   └── item-carrito.ts    ← nuevo
+    ├── services/
+    │   └── carrito-store.ts   ← nuevo: la fuente de verdad
+    ├── components/
+    │   ├── encabezado/        ← contador
+    │   └── tarjeta-evento/    ← output entradaAgregada
+    └── pages/
+        ├── inicio/            ← escucha la tarjeta
+        ├── listado-eventos/   ← buscador, categorías, computed
+        ├── detalle-evento/    ← computed + escucha la tarjeta
+        ├── mis-entradas/      ← nueva
+        └── no-encontrada/</code></pre></div></div>
+          </details>
+          </div>
+        </section>
+
+        <section class="section view" id="s17" data-accent="1" data-layout="canvas" data-escena="cierre" hidden>
+          <div class="sec-head"><span class="sec-n">Cierre</span><h2 class="sec-t">El estado vive cerca de quien lo usa</h2></div>
+          <div class="body">
+
+          <article class="chat">
+            <div class="chat-head"><span class="chat-canal">Equipo Tarima</span><span class="chat-contexto">WhatsApp · martes 10 de noviembre de 2026</span></div>
+            <ol class="chat-mensajes">
+              <li class="chat-msg" data-lado="equipo"><span class="chat-avatar">EQ</span><span class="chat-autor">Equipo <time>9:52 p. m.</time></span><p class="chat-texto">Valentina, ya está: la cartelera busca por nombre y filtra por categoría, cada evento tiene <strong>Agregar entrada</strong> y arriba se ve cuántas llevas, en cualquier página. En <strong>Mis entradas</strong> está el total en pesos y se puede quitar.</p></li>
+              <li class="chat-msg"><span class="chat-avatar">V</span><span class="chat-autor">Valentina <time>9:55 p. m.</time></span><p class="chat-texto">¡Lo probé con tres eventos y el total cuadra! 🙌 ¿Y si recargo?</p></li>
+              <li class="chat-msg" data-lado="equipo"><span class="chat-avatar">EQ</span><span class="chat-autor">Equipo <time>9:56 p. m.</time></span><p class="chat-texto">Ahí se borra: todavía no hay servidor que guarde las entradas. Eso es lo de la próxima semana.</p></li>
+            </ol>
+          </article>
+
+          <div class="cards">
+            <article class="card"><b>1 · Estado y signal</b><p><strong>Estado</strong> es el dato que, al cambiar, cambia lo que se ve. Una <strong>signal</strong> lo guarda y avisa a quien lo lee: se lee con <code>()</code> y se cambia con <code>set</code> o <code>update</code>.</p></article>
+            <article class="card"><b>2 · Valor derivado</b><p>Lo que se puede <strong>calcular</strong> a partir de otro estado no se guarda aparte: se declara con <strong><code>computed</code></strong> y se recalcula solo.</p></article>
+            <article class="card"><b>3 · Hijo → padre</b><p>Una pieza reutilizable <strong>avisa</strong> con <strong><code>output()</code></strong>; quien la usa <strong>decide</strong> qué hacer.</p></article>
+            <article class="card"><b>4 · Estado compartido</b><p>El estado que necesitan varios componentes vive <strong>una sola vez</strong> en un <strong>servicio</strong> (<code>@Service()</code>), protegido (<code>private</code> + <code>asReadonly()</code>), y cada componente lo pide con <code>inject()</code>.</p></article>
+          </div>
+
+          <div class="callout" data-tone="success"><span class="callout-icon">✓</span><div><h3>La decisión técnica del día</h3><p>El texto del buscador se quedó en la cartelera y las entradas subieron a un servicio. No es una preferencia: el buscador solo le importa a una página y debe olvidarse al salir; las entradas las necesitan tres componentes y deben sobrevivir a la navegación. <strong>El estado vive lo más cerca posible de quien lo usa.</strong></p></div></div>
+
+          <div class="autoevaluacion"><span class="component-label">Autoevaluación</span><ul>
+            <li><label><input type="checkbox"><span><strong>Explicar</strong> qué es el estado y por qué una signal avisa: escribo “jazz” y digo qué signal cambió y quién se enteró.</span></label></li>
+            <li><label><input type="checkbox"><span><strong>Construir</strong> un valor derivado con <code>computed</code>: quito una entrada en <strong>Mis entradas</strong> y explico por qué el total cambió sin una variable <code>total</code>.</span></label></li>
+            <li><label><input type="checkbox"><span><strong>Construir</strong> la comunicación hijo → padre con <code>output()</code>: la tarjeta emite y la página decide.</span></label></li>
+            <li><label><input type="checkbox"><span><strong>Decidir</strong> si un estado es local o compartido: el contador sube desde la cartelera, el inicio y el detalle.</span></label></li>
+            <li><label><input type="checkbox"><span><strong>Reconocer</strong> los cuatro conceptos en un negocio distinto a Tarima (aerolínea, gimnasio, domicilios, restaurante).</span></label></li>
+          </ul></div>
+
+          <div class="panel">
+            <span class="component-label">Lo que sigue</span>
+            <h3>Huella Amiga y Clase 4</h3>
+            <p>Continúa con la Fase 3 de Huella Amiga y la revisión entre pares. Después, los eventos y las reservas dejan de vivir en el código y llegan de un backend con <code>HttpClient</code>; las signals guardarán también “cargando” y “error”.</p>
+          </div>
+          </div>
+        </section>
+
+        <section class="section view" id="glosario" data-accent="1" data-layout="canvas" data-escena="consulta" hidden>
+          <div class="sec-head"><span class="sec-n">Consultar</span><h2 class="sec-t">Glosario de la clase</h2></div>
+          <div class="body"><div class="glosario">
+            <article class="glos-item" data-termino="estado"><h3 class="glos-termino">Estado</h3><p class="glos-tecnica">Datos de la interfaz que, al cambiar, cambian lo que se ve.</p><p class="glos-vida">El saldo de tu cuenta en la app del banco.</p><p class="glos-donde">3 · Estado local</p></article>
+            <article class="glos-item" data-termino="signal"><h3 class="glos-termino">Signal</h3><p class="glos-tecnica">Envoltorio de un valor que avisa a quienes lo leen cuando cambia; se lee con <code>()</code> y se cambia con <code>set</code> o <code>update</code>.</p><p class="glos-vida">El tablero de turnos de un banco: todos lo miran y se enteran a la vez cuando cambia.</p><p class="glos-donde">3 · Estado local</p></article>
+            <article class="glos-item" data-termino="set-update"><h3 class="glos-termino"><code>set</code> y <code>update</code></h3><p class="glos-tecnica"><code>set(valor)</code> reemplaza el valor de una signal; <code>update(fn)</code> calcula el nuevo a partir del anterior.</p><p class="glos-vida">Escribir un número nuevo en el tablero contra “sumarle uno al que había”.</p><p class="glos-donde">3 · Estado local · 7 · Conectar la cartelera</p></article>
+            <article class="glos-item" data-termino="computed"><h3 class="glos-termino"><code>computed</code></h3><p class="glos-tecnica">Signal de solo lectura cuyo valor se calcula a partir de otras signals y se recalcula solo cuando cambian.</p><p class="glos-vida">Una celda de Excel con fórmula.</p><p class="glos-donde">4 · La cartelera filtrada</p></article>
+            <article class="glos-item" data-termino="valor-derivado"><h3 class="glos-termino">Valor derivado</h3><p class="glos-tecnica">Dato que siempre se puede calcular a partir de otro estado; no se guarda aparte.</p><p class="glos-vida">“Libros vencidos” en una biblioteca: sale de los préstamos y la fecha de hoy.</p><p class="glos-donde">4 · La cartelera filtrada</p></article>
+            <article class="glos-item" data-termino="referencia-plantilla"><h3 class="glos-termino">Referencia de plantilla (<code>#campo</code>)</h3><p class="glos-tecnica">Nombre que se le da a un elemento de la plantilla para usarlo en otra parte de la misma plantilla.</p><p class="glos-vida">Ponerle una etiqueta con tu nombre a tu taza en la oficina.</p><p class="glos-donde">3 · Estado local</p></article>
+            <article class="glos-item" data-termino="output"><h3 class="glos-termino"><code>output()</code></h3><p class="glos-tecnica">Evento propio de un componente; se dispara con <code>emit(valor)</code> y el padre lo escucha con <code>(nombre)="…"</code>.</p><p class="glos-vida">El timbre: avisa que alguien llegó; quien está adentro decide si abre.</p><p class="glos-donde">5 · La tarjeta avisa</p></article>
+            <article class="glos-item" data-termino="event"><h3 class="glos-termino"><code>$event</code></h3><p class="glos-tecnica">Variable de la plantilla con el valor que llegó en un evento; en un output, es lo que se emitió.</p><p class="glos-vida">El paquete que te entregan cuando suena el timbre.</p><p class="glos-donde">5 · La tarjeta avisa</p></article>
+            <article class="glos-item" data-termino="servicio"><h3 class="glos-termino">Servicio (<code>@Service()</code>)</h3><p class="glos-tecnica">Clase sin plantilla que Angular crea una sola vez para toda la aplicación y entrega con <code>inject()</code>.</p><p class="glos-vida">La recepción de un edificio: todos los apartamentos consultan el mismo lugar.</p><p class="glos-donde">6 · El carrito compartido</p></article>
+            <article class="glos-item" data-termino="inject"><h3 class="glos-termino"><code>inject()</code></h3><p class="glos-tecnica">Función de Angular que entrega una dependencia (por ejemplo, el objeto único de un servicio) al crear un componente.</p><p class="glos-vida">Pedir la llave del salón en portería en lugar de hacer una copia propia.</p><p class="glos-donde">6 · El carrito compartido</p></article>
+            <article class="glos-item" data-termino="estado-local-compartido"><h3 class="glos-termino">Estado local y estado compartido</h3><p class="glos-tecnica">El local vive en un componente y solo él lo usa; el compartido vive en un servicio y lo leen varios componentes.</p><p class="glos-vida">Tu lista de mercado personal contra la lista de la nevera de la casa.</p><p class="glos-donde">6 · El carrito compartido</p></article>
+            <article class="glos-item" data-termino="fuente-verdad"><h3 class="glos-termino">Fuente de verdad</h3><p class="glos-tecnica">El único lugar donde vive un dato; todos los demás lo leen de ahí.</p><p class="glos-vida">El calendario oficial de la empresa: si cada quien anota las reuniones en su cuaderno, nadie sabe cuál es la hora correcta.</p><p class="glos-donde">6 · El carrito compartido</p></article>
+            <article class="glos-item" data-termino="as-readonly"><h3 class="glos-termino"><code>asReadonly()</code></h3><p class="glos-tecnica">Devuelve la misma signal sin <code>set</code> ni <code>update</code>, para exponerla sin dejar que la cambien desde afuera.</p><p class="glos-vida">Una vitrina: todos ven lo que hay, pero solo quien tiene la llave lo cambia.</p><p class="glos-donde">6 · El carrito compartido</p></article>
+          </div></div>
+        </section>
+
+        <section class="section view" id="documentacion" data-accent="1" data-layout="canvas" data-escena="consulta" hidden>
+          <div class="sec-head"><span class="sec-n">Consultar</span><h2 class="sec-t">Documentación para profundizar</h2></div>
+          <div class="body"><ul class="docs">
+            <li><div class="doc-meta"><span class="doc-fuente">Angular · angular.dev</span><span class="doc-idioma">Inglés</span><span class="doc-tipo">Documentación oficial</span></div><a class="doc-titulo" href="https://angular.dev/guide/signals" target="_blank" rel="noopener noreferrer">Angular Signals</a><p class="doc-que-leer">Lee las secciones de <em>writable signals</em> (<code>set</code> y <code>update</code>) y <em>computed signals</em> (perezosas, memorizadas y con dependencias dinámicas). Compara cada ejemplo con <code>busqueda</code>, <code>categoria</code> y <code>eventosFiltrados</code> de la cartelera.</p></li>
+            <li><div class="doc-meta"><span class="doc-fuente">Angular · angular.dev</span><span class="doc-idioma">Inglés</span><span class="doc-tipo">Documentación oficial</span></div><a class="doc-titulo" href="https://angular.dev/guide/components/outputs" target="_blank" rel="noopener noreferrer">Custom events with outputs</a><p class="doc-que-leer">Lee el primer ejemplo y la parte de enviar datos con <code>emit</code> y recibirlos con <code>$event</code>. Después, sin mirar, escribe en un papel cómo quedaría el <code>output</code> de la tarjeta de Huella Amiga (<code>favoritoAlternado</code>).</p></li>
+            <li><div class="doc-meta"><span class="doc-fuente">Angular · angular.dev</span><span class="doc-idioma">Inglés</span><span class="doc-tipo">Práctica interactiva</span></div><a class="doc-titulo" href="https://angular.dev/tutorials/signals" target="_blank" rel="noopener noreferrer">Learn Angular signals</a><p class="doc-que-leer">Haz las lecciones 1 (<em>Creating and updating your first signal</em>) y 2 (<em>Deriving state with computed signals</em>) en el editor del navegador; si te atascas, usa “Reveal answer” solo después de intentarlo.</p></li>
+            <li><div class="doc-meta"><span class="doc-fuente">Google Codelabs</span><span class="doc-idioma">Inglés</span><span class="doc-tipo">Práctica interactiva</span></div><a class="doc-titulo" href="https://codelabs.developers.google.com/angular-signals" target="_blank" rel="noopener noreferrer">Getting started with Angular Signals</a><p class="doc-que-leer">Construye el juego de cifrado paso a paso. Fíjate en cuáles datos son <code>signal</code> y cuáles son <code>computed</code>; si aparece <code>@Injectable</code> o <code>*ngIf</code>, tradúcelo con el Detector de Angular viejo.</p></li>
+          </ul>
+          <p class="doc-foot">Documentación oficial y material de práctica recomendados en la guía de clase.</p></div>
+        </section>
+      </div>
+      <nav class="view-controls" id="viewControls" aria-label="Navegación entre secciones"><button class="view-btn" id="prevView" type="button" aria-label="Sección anterior">←</button><span class="view-position" id="viewPosition" aria-live="polite">Portada</span><button class="view-btn" id="nextView" type="button" aria-label="Sección siguiente">→</button></nav>
+    </main>
+  </div>
+  <div class="watermark" aria-hidden="true">© 2026 ANA ALVARADO</div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+  <script src="anaclase-v12.js"></script>
+</body>
+</html>

@@ -23,7 +23,7 @@ window.CURSO = {
         {
           "titulo": "Gestión de Estado y Comunicación entre Componentes",
           "carpeta": "guias/modulo-01-angular-moderno/clase-03",
-          "guia": null
+          "guia": "guias/modulo-01-angular-moderno/clase-03/index.html"
         },
         {
           "titulo": "Consumo de APIs y Conexión con Backend",
