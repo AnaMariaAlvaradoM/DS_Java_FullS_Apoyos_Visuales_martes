@@ -28,7 +28,7 @@ window.CURSO = {
         {
           "titulo": "Consumo de APIs y Conexión con Backend",
           "carpeta": "guias/modulo-01-angular-moderno/clase-04",
-          "guia": null
+          "guia": "guias/modulo-01-angular-moderno/clase-04/index.html"
         }
       ]
     },

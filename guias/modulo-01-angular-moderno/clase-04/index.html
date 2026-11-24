@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="es" data-tema="oscuro" data-tema-base="oscuro" data-empresa="dev-senior" data-paleta="cian">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Ana Alvarado">
+  <meta name="copyright" content="© 2026 Ana Alvarado — Todos los derechos reservados">
+  <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+  <title>Clase 4 · HttpClient y APIs · Ana Alvarado</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&amp;family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+  <link rel="stylesheet" href="anaestilos-v12.css">
+</head>
+<body>
+  <a class="skip-link" href="#apertura">Saltar al contenido</a>
+  <div class="topline" id="topline" aria-hidden="true"></div>
+  <div class="controls" aria-label="Controles">
+    <button class="ctrl" id="temaBtn" type="button" aria-label="Cambiar tema">☀</button>
+    <button class="ctrl" id="fullscreenBtn" type="button" aria-label="Pantalla completa">⛶</button>
+  </div>
+  <div class="shell" id="shell" data-collapsed="false">
+    <aside class="sidebar" aria-label="Índice de la clase">
+      <div class="sb-top"><span class="brand-mark">A</span><div class="sb-title"><b>Java Full Stack · Módulo 1</b><span>Clase 4 · HttpClient</span></div></div>
+      <button class="sb-toggle" id="collapseBtn" type="button" aria-label="Colapsar menú">‹</button>
+      <nav class="sb-nav" id="nav" aria-label="Secciones">
+        <a class="nav-item active" href="#portada"><span class="nav-index">00</span><span class="nav-label">Portada</span></a>
+        <span class="nav-group">Problema</span>
+        <a class="nav-item" href="#apertura"><span class="nav-index">01</span><span class="nav-label">El evento que nadie ve</span></a>
+        <a class="nav-item" href="#objetivos"><span class="nav-index">02</span><span class="nav-label">Lo que lograrás hoy</span></a>
+        <span class="nav-group">Observable</span>
+        <a class="nav-item" href="#observable-concepto"><span class="nav-index">03</span><span class="nav-label">La respuesta que llega después</span></a>
+        <a class="nav-item" href="#observable-ejemplo"><span class="nav-index">04</span><span class="nav-label">El pedido frío</span></a>
+        <a class="nav-item" href="#observable-aplicacion-a"><span class="nav-index">05</span><span class="nav-label">Backend y proxy</span></a>
+        <a class="nav-item" href="#observable-aplicacion-b"><span class="nav-index">06</span><span class="nav-label">EventosApi y cartelera</span></a>
+        <a class="nav-item" href="#observable-limites"><span class="nav-index">07</span><span class="nav-label">Límites del Observable</span></a>
+        <span class="nav-group">Estados de una petición</span>
+        <a class="nav-item" href="#estados-concepto"><span class="nav-index">08</span><span class="nav-label">Cuatro estados distintos</span></a>
+        <a class="nav-item" href="#estados-aplicacion-a"><span class="nav-index">09</span><span class="nav-label">Mensajes y cartelera</span></a>
+        <a class="nav-item" href="#estados-aplicacion-b"><span class="nav-index">10</span><span class="nav-label">El detalle y el 404</span></a>
+        <a class="nav-item" href="#estados-limites"><span class="nav-index">11</span><span class="nav-label">Vacío no es error</span></a>
+        <span class="nav-group">POST</span>
+        <a class="nav-item" href="#post-concepto"><span class="nav-index">12</span><span class="nav-label">Enviar y recibir confirmación</span></a>
+        <a class="nav-item" href="#post-aplicacion-a"><span class="nav-index">13</span><span class="nav-label">Contrato y servicio</span></a>
+        <a class="nav-item" href="#post-aplicacion-b"><span class="nav-index">14</span><span class="nav-label">Reservar desde Mis entradas</span></a>
+        <a class="nav-item" href="#post-limites"><span class="nav-index">15</span><span class="nav-label">Límites de POST</span></a>
+        <span class="nav-group">Cerrar</span>
+        <a class="nav-item" href="#refactor"><span class="nav-index">16</span><span class="nav-label">Adiós al mock</span></a>
+        <a class="nav-item" href="#cierre"><span class="nav-index">17</span><span class="nav-label">Cierre y puente</span></a>
+        <span class="nav-group">Consultar</span>
+        <a class="nav-item" href="#glosario"><span class="nav-index">18</span><span class="nav-label">Glosario</span></a>
+        <a class="nav-item" href="#documentacion"><span class="nav-index">19</span><span class="nav-label">Documentación</span></a>
+      </nav>
+      <div class="sb-prog"><div class="lbl"><span>Progreso</span><span id="progPct">0%</span></div><div class="track"><div class="fill" id="progFill"></div></div></div>
+    </aside>
+    <main class="main">
+      <header class="hero view" id="portada" data-accent="1">
+        <div class="hero-inner">
+          <div class="hero-copy">
+            <span class="eyebrow">Dev Senior · Java Full Stack · Módulo 1</span>
+            <h1 class="hero-title">Tarima conversa con el backend</h1>
+            <p class="hero-lead">La cartelera, el detalle y el inicio piden los eventos a un backend, cada pantalla avisa si está cargando o si falló, y la reserva se envía al backend y devuelve un código.</p>
+            <div class="meta"><span class="pill" data-hot>Clase 4</span><span class="pill">Angular 22.2</span><span class="pill">Observable · estados · POST</span></div>
+          </div>
+          <figure class="hero-visual">
+            <img src="img/conexion-api-tarima.png" alt="Un frontend cultural intercambia eventos y reservas con un backend, que devuelve una confirmación">
+            <figcaption class="hero-note">Los eventos llegan del backend; la reserva viaja en sentido contrario y vuelve con un código.</figcaption>
+          </figure>
+        </div>
+      </header>
+      <div class="content">
+        <section class="section view" id="apertura" data-accent="1" data-layout="canvas" data-escena="apertura" hidden>
+          <div class="sec-head"><span class="sec-n">El problema</span><h2 class="sec-t">Un evento existe, pero Tarima no lo ve</h2><p class="sec-s">Todos los eventos viven dentro del código y la reserva no llega a ningún sistema.</p></div>
+          <div class="body">
+            <div class="micro-task"><span class="component-label">Recuerda</span><p class="micro-task-q">En la Clase 3, <code>CarritoStore</code> guardaba las entradas en una signal privada y las entregaba con <code>asReadonly()</code>. ¿Por qué nadie de afuera podía cambiarlas directamente?</p><details class="micro-reveal"><summary>Comprobar</summary><p class="micro-answer">Porque la signal <code>items</code> es <code>private</code>: solo los métodos del propio servicio (<code>agregar</code>, <code>quitar</code>) la cambian, y los demás reciben una versión de solo lectura. Hoy vas a crear otro servicio, <code>EventosApi</code>, con la misma idea de responsabilidad única: él sabe <strong>dónde</strong> están los datos; las páginas solo los piden.</p></details></div>
+            <article class="chat">
+              <div class="chat-head"><span class="chat-canal">WhatsApp · Equipo Tarima</span><span class="chat-contexto">lunes 23 de noviembre de 2026</span></div>
+              <ol class="chat-mensajes">
+                <li class="chat-msg"><span class="chat-avatar">V</span><span class="chat-autor">Valentina <time>9:02 a. m.</time></span><p class="chat-texto">Equipo, me escribió la Biblioteca Virgilio Barco: publicaron <strong>“Cuentería bajo la Luna”</strong> para el sábado 28 y en Tarima no aparece 😟</p></li>
+                <li class="chat-msg"><span class="chat-avatar">V</span><span class="chat-autor">Valentina <time>9:03 a. m.</time></span><p class="chat-texto">Me dicen que su sistema ya lo tiene. ¿Por qué Tarima no lo ve?</p></li>
+                <li class="chat-msg"><span class="chat-avatar">V</span><span class="chat-autor">Valentina <time>9:05 a. m.</time></span><p class="chat-texto">Y lo otro: la gente arma su carrito, pero cuando le da “reservar” no pasa nada. Necesito que la reserva <strong>llegue al sistema</strong> y que la persona reciba un <strong>código</strong>.</p></li>
+                <li class="chat-msg"><span class="chat-avatar">V</span><span class="chat-autor">Valentina <time>9:06 a. m.</time></span><p class="chat-texto">Ah, y si algo falla, que diga qué pasó. Nada de pantallas en blanco.</p></li>
+                <li class="chat-msg" data-lado="equipo"><span class="chat-avatar">EQ</span><span class="chat-autor">Equipo <time>9:20 a. m.</time></span><p class="chat-texto">El sistema de eventos ya tiene su API. Mañana conectamos Tarima.</p></li>
+              </ol>
+            </article>
+          </div>
+        </section>
+
+        <section class="section view" id="objetivos" data-accent="1" data-layout="canvas" data-escena="objetivos" hidden>
+          <div class="sec-head"><span class="sec-n">Ruta de hoy</span><h2 class="sec-t">Lo que lograrás en esta sesión</h2></div>
+          <div class="body">
+            <div class="estado-proyecto" role="group" aria-label="El proyecto antes y después de la clase"><div class="estado-antes"><span class="component-label">Antes de hoy</span><p>Tarima muestra los eventos de un archivo dentro del código; un evento nuevo no aparece hasta que alguien edita el código, y la reserva no llega a ningún sistema.</p></div><div class="estado-flecha" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div><div class="estado-despues"><span class="component-label">Al terminar</span><p>La cartelera, el detalle y el inicio piden los eventos a un backend, cada pantalla avisa si está cargando o si falló, y la reserva se envía al backend y devuelve un código.</p></div></div>
+            <ol class="objetivos">
+              <li><div><p class="obj-texto"><strong>Explicar</strong> qué es un Observable y por qué la petición sale solo al suscribirse.</p><p class="obj-evidencia">predices qué imprime <code>ejemplos/observable/pedido.mjs</code> antes de ejecutarlo y explicas por qué la cartelera queda vacía si quitas el <code>subscribe</code>.</p></div></li>
+              <li><div><p class="obj-texto"><strong>Construir</strong> una pantalla que maneja los estados de una petición (cargando, error, éxito y vacío).</p><p class="obj-evidencia">apagas el backend y la cartelera muestra un mensaje claro en lugar de quedarse en blanco o cargando para siempre.</p></div></li>
+              <li><div><p class="obj-texto"><strong>Construir</strong> el envío de datos con POST y leer su respuesta.</p><p class="obj-evidencia">reservas desde <strong>Mis entradas</strong>, ves el <code>201</code> en la pestaña Red del navegador y el código de la reserva en pantalla.</p></div></li>
+              <li><div><p class="obj-texto"><strong>Reconocer</strong> estos tres conceptos en un negocio distinto a Tarima.</p><p class="obj-evidencia">respondes las preguntas de transferencia de cada momento (un banco, una app de domicilios y una clínica).</p></div></li>
+            </ol>
+          </div>
+        </section>
+
+        <section class="section view" id="observable-concepto" data-accent="1" data-layout="canvas" data-escena="concepto" hidden>
+          <div class="sec-head"><span class="sec-n">Observable · concepto</span><h2 class="sec-t">La respuesta que llega después</h2><p class="sec-s">Describir lo que va a llegar y dejar instrucciones para cuando llegue, mientras el programa sigue con lo demás.</p></div>
+          <div class="body">
+            <h3>3.1 · Para qué existe</h3>
+            <p>Casi todo lo que has programado hasta ahora pasa de inmediato: sumas dos números y el resultado está en la línea siguiente; filtras una lista y la lista filtrada ya existe. Pero hay cosas que <strong>tardan</strong>: una respuesta de un servidor, un archivo que se lee del disco, un temporizador. No sabes si va a tardar 50 milisegundos o 5 segundos, ni si va a llegar.</p>
+            <p>Si el programa se quedara quieto esperando, la pantalla se congelaría: no podrías escribir en el buscador ni hacer clic en nada. Lo que hace falta es una forma de <strong>describir</strong> “lo que va a llegar” y <strong>dejar instrucciones</strong> para cuando llegue, mientras el programa sigue con lo demás.</p>
+            <h3>3.2 · Qué es</h3>
+            <div class="definicion"><div class="def-tecnica"><span class="component-label">Definición técnica</span><p class="def-termino">Observable</p><p>Un Observable es un objeto que representa una fuente de valores que llegan con el tiempo (cero, uno o muchos) y que solo empieza a producirlos cuando alguien se <strong>suscribe</strong> con <code>subscribe()</code>. Quien se suscribe entrega funciones que el Observable llama en cada momento: <code>next</code> cuando llega un valor, <code>error</code> si algo falla y <code>complete</code> cuando ya no habrá más valores. Viene de la librería <strong>RxJS</strong>, que Angular instala con cada proyecto.</p><span class="def-fuente">RxJS · Angular</span></div><div class="def-vida"><span class="component-label">Explicación sencilla</span><p>Es un pedido que dejas descrito, pero que nadie empieza a preparar hasta que dices “sí, lo quiero”. Cuando dices que sí, dejas dicho qué hacer cuando llegue, y sigues con lo tuyo.</p><span class="component-label">En la vida real</span><p>El domicilio. Armar el pedido en la app no hace que la cocina prepare nada; tocar <strong>Pedir</strong> sí. Desde ese momento la app te avisa: “tu pedido llegó” (<code>next</code>), “el restaurante canceló” (<code>error</code>) o “pedido entregado, fin” (<code>complete</code>).</p></div></div>
+            <h3>3.3 · Cómo funciona</h3>
+            <p>Cuando escribes <code>new Observable(receta)</code>, RxJS guarda la receta y no la ejecuta. El Observable es solo una <strong>descripción</strong>. Cuando llamas <code>subscribe(observer)</code>, RxJS ejecuta la receta y le pasa un <code>cliente</code> conectado a tu observer: cada <code>cliente.next(x)</code> termina llamando a tu <code>next(x)</code>.</p>
+            <p>Lo que tarda no bloquea: <code>setTimeout</code> deja la entrega programada y el programa sigue. <code>HttpClient</code> funciona igual: <code>http.get(url)</code> <strong>no</strong> envía la petición; devuelve un Observable cuya receta es “envía la petición”. La petición sale cuando alguien se suscribe, y cuando llega la respuesta el Observable llama <code>next</code> con los datos y después <code>complete</code>.</p>
+            <div class="pipeline" role="group" aria-label="Descripción, suscripción y respuesta"><div class="pipe-step"><span class="component-label">Descripción</span><h3><code>http.get(url)</code></h3><ul><li>todavía no sale</li></ul></div><div class="pipe-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div><div class="pipe-step" data-emphasis><span class="component-label">Arranque</span><h3><code>subscribe</code></h3><ul><li>sale la petición</li></ul></div><div class="pipe-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div><div class="pipe-step"><span class="component-label">Avisos</span><h3><code>next</code> · <code>error</code> · <code>complete</code></h3></div></div>
+            <h3>3.4 · Cómo reconocerlo</h3>
+            <p>Hazte dos preguntas: <strong>¿el valor que necesito existe ya, o va a llegar después?</strong> y <strong>¿quiero poder describir el pedido ahora y decidir después cuándo hacerlo?</strong> Si el valor llega después (una respuesta de red, un temporizador, un clic que todavía no ha pasado), necesitas algo como un Observable. Y si ves <code>.subscribe(</code> en un código, ahí es donde el pedido realmente sale.</p>
+            <h3>3.5 · La misma idea en otros negocios</h3>
+            <div class="table-wrap"><table class="data-table"><caption>Observable fuera de Tarima</caption><thead><tr><th>Negocio</th><th>Lo que se describe</th><th>Cuándo arranca</th><th><code>next</code></th><th><code>complete</code> / <code>error</code></th></tr></thead><tbody><tr><td>App de transporte</td><td>“Pedir un carro a esta dirección”</td><td>Al tocar <strong>Confirmar viaje</strong></td><td>“Tu conductor está a 3 min”</td><td>Viaje terminado / no hay conductores</td></tr><tr><td>Banco</td><td>“Consultar el saldo”</td><td>Al abrir la pantalla de cuentas</td><td>El saldo</td><td>Consulta terminada / el sistema no responde</td></tr><tr><td>Restaurante</td><td>La comanda escrita</td><td>Cuando el mesero la lleva a cocina</td><td>Cada plato que sale</td><td>Mesa servida / se acabó un ingrediente</td></tr><tr><td>Clima</td><td>“Temperatura de Bogotá”</td><td>Al abrir la app</td><td>14 °C</td><td>Dato entregado / sin conexión</td></tr></tbody></table></div>
+            <p>En la app de transporte, armar el viaje no llama a ningún carro: escoges origen y destino y nada pasa en la calle. Al tocar <strong>Confirmar viaje</strong> (suscribirte), la app empieza a buscar y te avisa <strong>muchas veces</strong>: “conductor asignado”, “a 3 minutos”, “llegó”. Ese Observable entrega varios <code>next</code> antes de su <code>complete</code>. El de <code>HttpClient</code> es el caso más simple: un solo <code>next</code> con la respuesta.</p>
+          </div>
+        </section>
+
+        <section class="section view" id="observable-ejemplo" data-accent="1" data-layout="canvas" data-escena="concepto" hidden>
+          <div class="sec-head"><span class="sec-n">Observable · ejemplo aislado</span><h2 class="sec-t">El pedido que no arranca solo</h2><p class="sec-s">Las dos ideas del Observable: no hace nada hasta que alguien se suscribe y su valor llega después.</p></div>
+          <div class="body">
+            <div class="micro-task"><span class="component-label">Para pensar</span><p class="micro-task-q">En el paso 1 vas a crear el Observable <code>pedido</code> y a imprimir “Pedido creado”, pero sin suscribirte. Antes de ejecutarlo: ¿se imprime también “La cocina empieza a preparar”?</p><details class="micro-reveal"><summary>Comprobar</summary><p class="micro-answer">No. La función que está dentro de <code>new Observable(...)</code> es la receta del pedido, y solo se ejecuta cuando alguien se suscribe. Sin <code>subscribe</code>, la cocina nunca empieza: por eso a estos Observables se les llama <strong>fríos</strong>.</p></details></div>
+            <article class="archivo">
+              <div class="archivo-ficha"><span class="archivo-accion">Crear</span><span class="archivo-nombre">pedido.mjs</span><span class="archivo-ruta">tarima-web/ejemplos/observable/</span></div>
+              <p class="archivo-intro">Este archivo muestra las dos ideas del Observable: que no hace nada hasta que alguien se suscribe y que su valor llega después, mientras el resto del programa sigue. La extensión <code>.mjs</code> le dice a Node que el archivo usa <code>import</code>.</p>
+              <div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h3 class="lectura-titulo">Describir un pedido que tarda</h3><p class="lectura-proposito"><b>Necesidad:</b> empezar por describir algo que tarda un segundo en llegar, sin pedirlo todavía. <b>Dónde va:</b> archivo nuevo y vacío.</p></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 1–11</span></div></div><pre class="line-numbers" data-start="1"><code class="language-javascript">import { Observable } from 'rxjs';
+
+const pedido = new Observable((cliente) =&gt; {
+  console.log('La cocina empieza a preparar');
+  setTimeout(() =&gt; {
+    cliente.next('Pizza hawaiana');
+    cliente.complete();
+  }, 1000);
+});
+
+console.log('Pedido creado');</code></pre></div><ol class="notas"><li class="nota" data-lineas="1"><div class="nota-cabeza"><span class="nota-lineas">L1</span><code class="nota-codigo">Observable</code></div><p>Trae la clase <code>Observable</code> de RxJS. No hay que instalar nada: RxJS ya está en <code>node_modules</code> porque Angular la usa.</p></li><li class="nota" data-lineas="3"><div class="nota-cabeza"><span class="nota-lineas">L3</span><code class="nota-codigo">new Observable</code></div><p>Crea el Observable y recibe la <strong>receta</strong> de lo que pasará cuando alguien se suscriba. El parámetro <code>cliente</code> es quien recibe los avisos.</p></li><li class="nota" data-lineas="4-8"><div class="nota-cabeza"><span class="nota-lineas">L4–8</span><code class="nota-codigo">setTimeout · next · complete</code></div><p>La consola marca cuándo arranca la receta; <code>setTimeout</code> programa la entrega sin detener el programa; <code>next</code> entrega el valor y <code>complete</code> avisa que terminó.</p></li><li class="nota" data-lineas="11"><div class="nota-cabeza"><span class="nota-lineas">L11</span><code class="nota-codigo">Pedido creado</code></div><p>Se imprime después de crear el Observable y permite comprobar que la receta todavía no corrió.</p></li></ol></div></div>
+              <div class="active-build"><div class="build-step"><span class="build-step-index">▶</span><div class="build-step-copy"><h3 class="build-step-title">Pruébalo</h3><div class="consola"><div class="consola-head">node ejemplos/observable/pedido.mjs</div><ol><li class="out">Pedido creado</li></ol></div><p class="build-step-purpose">Solo una línea. La cocina nunca empezó: nadie se suscribió.</p></div></div></div>
+              <div class="lectura"><div class="lectura-head"><span class="lectura-num">2</span><h3 class="lectura-titulo">Pedirlo de verdad y seguir con lo tuyo</h3><p class="lectura-proposito"><b>Necesidad:</b> el pedido está descrito pero nadie lo pidió. Suscribirse es tocar <strong>Pedir</strong>. <b>Dónde va:</b> al final del archivo.</p></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 12–18</span></div></div><pre class="line-numbers" data-start="12"><code class="language-javascript">
+pedido.subscribe({
+  next: (plato) =&gt; console.log('Llegó:', plato),
+  complete: () =&gt; console.log('Pedido cerrado'),
+});
+
+console.log('Mientras tanto, pongo la mesa');</code></pre></div><ol class="notas"><li class="nota" data-lineas="13"><div class="nota-cabeza"><span class="nota-lineas">L13</span><code class="nota-codigo">subscribe</code></div><p>Arranca la receta y recibe las instrucciones para cada aviso.</p></li><li class="nota" data-lineas="14"><div class="nota-cabeza"><span class="nota-lineas">L14</span><code class="nota-codigo">next</code></div><p>Corre cuando llega el valor; <code>plato</code> recibe <code>'Pizza hawaiana'</code>.</p></li><li class="nota" data-lineas="15"><div class="nota-cabeza"><span class="nota-lineas">L15</span><code class="nota-codigo">complete</code></div><p>Corre cuando ya no habrá más valores.</p></li><li class="nota" data-lineas="18"><div class="nota-cabeza"><span class="nota-lineas">L18</span><code class="nota-codigo">Mientras tanto</code></div><p>Está después de <code>subscribe</code>, pero se imprime antes de que llegue la pizza: suscribirse no detiene el programa.</p></li></ol></div></div>
+              <div class="active-build"><div class="build-step"><span class="build-step-index">▶</span><div class="build-step-copy"><h3 class="build-step-title">Pruébalo</h3><div class="consola"><div class="consola-head">node ejemplos/observable/pedido.mjs</div><ol><li class="out">Pedido creado</li><li class="out">La cocina empieza a preparar</li><li class="out">Mientras tanto, pongo la mesa</li><li class="out">Llegó: Pizza hawaiana</li><li class="out">Pedido cerrado</li></ol></div><p class="build-step-purpose">Las dos últimas líneas aparecen un segundo después que las tres primeras.</p></div></div></div>
+              <div class="callout" data-tone="warning"><span class="callout-icon">!</span><div><h3>Quítala y mira</h3><p>Borra <code>cliente.complete();</code> y ejecuta. Llega la pizza, pero “Pedido cerrado” nunca aparece. Vuelve a escribirla.</p></div></div>
+              <details class="code-reveal" data-archivo="pedido.mjs"><summary><span><span class="code-reveal-title">pedido.mjs · archivo completo</span><span class="code-reveal-note">18 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Crear</span><span class="code-file">pedido.mjs</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-javascript">import { Observable } from 'rxjs';
+
+const pedido = new Observable((cliente) =&gt; {
+  console.log('La cocina empieza a preparar');
+  setTimeout(() =&gt; {
+    cliente.next('Pizza hawaiana');
+    cliente.complete();
+  }, 1000);
+});
+
+console.log('Pedido creado');
+
+pedido.subscribe({
+  next: (plato) =&gt; console.log('Llegó:', plato),
+  complete: () =&gt; console.log('Pedido cerrado'),
+});
+
+console.log('Mientras tanto, pongo la mesa');</code></pre></div></div></details>
+            </article>
+          </div>
+        </section>
+
+        <section class="section view" id="observable-aplicacion-a" data-accent="1" data-layout="canvas" data-escena="construccion" hidden>
+          <div class="sec-head"><span class="sec-n">Observable · aplicación</span><h2 class="sec-t">Del backend al navegador, sin CORS</h2><p class="sec-s">Valentina pidió que “Cuentería bajo la Luna” aparezca sin que nadie edite el código.</p></div>
+          <div class="body">
+            <h3>5.1 · Entender el contrato</h3>
+            <p>Valentina pidió que <strong>“Cuentería bajo la Luna” aparezca sin que nadie edite el código</strong>. Eso exige dos cosas: un backend que tenga los eventos y una forma de pedírselos. Al final, la cartelera muestra lo que responde el backend.</p>
+            <div class="pipeline" role="group" aria-label="Recorrido de una petición"><div class="pipe-step"><span class="component-label">Navegador</span><h3>ListadoEventos</h3><ul><li>pide a EventosApi</li></ul></div><div class="pipe-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div><div class="pipe-step" data-emphasis><span class="component-label">Angular</span><h3>HttpClient + proxy</h3><ul><li>GET /api/eventos</li></ul></div><div class="pipe-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div><div class="pipe-step"><span class="component-label">Backend</span><h3>api-modulo1</h3><ul><li>responde JSON</li></ul></div></div>
+            <div class="cards"><div class="card"><b>API REST</b><p>La forma en que un backend ofrece sus datos por HTTP. Cada recurso tiene una URL (<code>/api/eventos</code>, <code>/api/eventos/7</code>) y se usa con un método: <code>GET</code> para pedir, <code>POST</code> para enviar algo nuevo.</p></div><div class="card"><b>JSON</b><p>El formato de texto en que viajan los datos. Se ve casi igual que un objeto de TypeScript, pero es texto plano que cualquier lenguaje entiende.</p></div><div class="card"><b>Código de estado</b><p>El número con que el servidor dice cómo le fue: <code>200</code> bien, <code>201</code> creado, <code>404</code> no existe y <code>500</code> falló el servidor.</p></div></div>
+            <h3>5.2 · Levantar el backend</h3>
+            <div class="code-block" data-tipo="terminal"><div class="code-head"><div><span class="code-context">Terminal · carpeta del archivo</span></div><button class="copy-btn" type="button">Copiar</button></div><pre><code class="language-bash">java -jar api-modulo1.jar</code></pre></div>
+            <p>Necesitas <strong>JDK 21</strong>. El backend queda escuchando en el puerto <code>8080</code>. Abre <code>http://localhost:8080/api/eventos</code>: ves un texto JSON con <strong>7</strong> eventos, uno más que en <code>eventos.mock.ts</code>.</p>
+            <div class="consola"><div class="consola-head">http://localhost:8080/api/eventos/7</div><ol><li class="out">{"id":7,"nombre":"Cuentería bajo la Luna","categoria":"Teatro","fecha":"2026-11-28T19:00:00","lugar":"Biblioteca Virgilio Barco","precio":20000,"cuposDisponibles":60,"descripcion":"Narradores orales de todo el país en una noche al aire libre."}</li></ol></div>
+            <div class="callout" data-tone="warning"><span class="callout-icon">!</span><div><h3>Ojo técnico</h3><p>Si el navegador dice que no puede conectar con <code>localhost:8080</code>, el backend no está corriendo o se cerró su terminal. Todo lo que sigue necesita que esté encendido.</p></div></div>
+            <h3>5.3 · Resolver CORS con el proxy</h3>
+            <p>Tarima corre en <code>http://localhost:4200</code> y el backend en <code>http://localhost:8080</code>. Para el navegador son <strong>orígenes distintos</strong>, y por seguridad no deja que el código de una página lea respuestas de otro origen, salvo que ese otro origen lo autorice con unas cabeceras especiales. Esa regla se llama <strong>CORS</strong>.</p>
+            <p>La solución de desarrollo es el <strong>proxy</strong> de <code>ng serve</code>: tu código pide a <code>/api/eventos</code> en el mismo origen, y el servidor de Angular reenvía esa petición a <code>localhost:8080</code>. Es como el portero del edificio que recibe el paquete por ti.</p>
+            <article class="archivo"><div class="archivo-ficha" data-tipo="apoyo"><span class="archivo-accion">Crear</span><span class="archivo-nombre">proxy.conf.json</span><span class="archivo-ruta">tarima-web/</span></div><p class="archivo-intro">Le dice al servidor de desarrollo de Angular que reenvíe todo lo que empiece por <code>/api</code> al backend.</p><div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h3 class="lectura-titulo">Todo lo que empiece por /api va al backend</h3></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 1–6</span></div></div><pre class="line-numbers" data-start="1"><code class="language-json">{
+  "/api": {
+    "target": "http://localhost:8080",
+    "secure": false
+  }
+}</code></pre></div><ol class="notas"><li class="nota" data-lineas="2"><div class="nota-cabeza"><span class="nota-lineas">L2</span><code class="nota-codigo">/api</code></div><p>Es el prefijo que se reenvía: eventos, detalles y reservas empiezan por <code>/api</code>.</p></li><li class="nota" data-lineas="3"><div class="nota-cabeza"><span class="nota-lineas">L3</span><code class="nota-codigo">target</code></div><p>La ruta se conserva: <code>/api/eventos</code> llega a <code>http://localhost:8080/api/eventos</code>.</p></li><li class="nota" data-lineas="4"><div class="nota-cabeza"><span class="nota-lineas">L4</span><code class="nota-codigo">secure</code></div><p>Permite reenviar a un destino local sin certificado HTTPS válido.</p></li></ol></div></div><details class="code-reveal" data-archivo="proxy.conf.json"><summary><span><span class="code-reveal-title">proxy.conf.json · archivo completo</span><span class="code-reveal-note">6 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Crear</span><span class="code-file">proxy.conf.json</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-json">{
+  "/api": {
+    "target": "http://localhost:8080",
+    "secure": false
+  }
+}</code></pre></div></div></details></article>
+            <article class="archivo"><div class="archivo-ficha" data-tipo="apoyo"><span class="archivo-accion">Editar</span><span class="archivo-nombre">angular.json</span><span class="archivo-ruta">tarima-web/</span></div><p class="archivo-intro"><code>ng serve</code> no lee <code>proxy.conf.json</code> por su cuenta: hay que decirle dónde está.</p><div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h3 class="lectura-titulo">ng serve usa el proxy</h3><p class="lectura-proposito"><b>Dónde va:</b> en el bloque <code>serve</code>, debajo de <code>builder</code>.</p></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 56–60</span></div></div><pre class="line-numbers" data-start="56"><code class="language-json">        "serve": {
+          "builder": "@angular/build:dev-server",
+          "options": {
+            "proxyConfig": "proxy.conf.json"
+          },</code></pre></div><ol class="notas"><li class="nota" data-lineas="56-57"><div class="nota-cabeza"><span class="nota-lineas">L56–57</span><code class="nota-codigo">serve · builder</code></div><p>Ya existían: configuran lo que hace <code>ng serve</code> y qué programa de Angular lo ejecuta.</p></li><li class="nota" data-lineas="58-60"><div class="nota-cabeza"><span class="nota-lineas">L58–60</span><code class="nota-codigo">proxyConfig</code></div><p>La ruta es relativa a la raíz del proyecto. La coma final es obligatoria porque sigue <code>configurations</code>.</p></li></ol></div></div><div class="active-build"><div class="build-step"><span class="build-step-index">▶</span><div class="build-step-copy"><h3 class="build-step-title">Pruébalo</h3><p class="build-step-purpose">Detén <code>ng serve</code> con <code>Ctrl + C</code> y vuelve a correrlo. Abre <code>http://localhost:4200/api/eventos/4</code>. La dirección dice 4200, pero la respuesta la dio el backend del 8080.</p></div></div></div><details class="code-reveal" data-archivo="angular.json"><summary><span><span class="code-reveal-title">angular.json · bloque serve</span><span class="code-reveal-note">líneas 56–70 · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Editar</span><span class="code-file">angular.json</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers" data-start="56"><code class="language-json">        "serve": {
+          "builder": "@angular/build:dev-server",
+          "options": {
+            "proxyConfig": "proxy.conf.json"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "tarima-web:build:production"
+            },
+            "development": {
+              "buildTarget": "tarima-web:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },</code></pre></div></div></details></article>
+          </div>
+        </section>
+
+        <section class="section view" id="observable-aplicacion-b" data-accent="1" data-layout="canvas" data-escena="construccion" hidden>
+          <div class="sec-head"><span class="sec-n">Observable · aplicación</span><h2 class="sec-t">El servicio trae; la cartelera muestra</h2><p class="sec-s">Un servicio concentra dónde están los datos y evita repetir la URL en cada pantalla.</p></div>
+          <div class="body">
+            <article class="archivo"><div class="archivo-ficha"><span class="archivo-accion">Crear</span><span class="archivo-nombre">eventos-api.ts</span><span class="archivo-ruta">tarima-web/src/app/services/</span></div><p class="archivo-intro">La cartelera necesita los eventos del backend y no debe saber cómo se piden. <code>EventosApi</code> se crea una sola vez para toda la aplicación y usa <code>HttpClient</code>, que devuelve cada respuesta como un Observable.</p>
+              <div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h3 class="lectura-titulo">Un servicio que tiene el cliente HTTP</h3><p class="lectura-proposito"><b>Necesidad:</b> el servicio necesita existir y tener en la mano el cliente HTTP de Angular.</p></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 1–9</span></div></div><pre class="line-numbers" data-start="1"><code class="language-typescript">import { HttpClient } from '@angular/common/http';
+import { Service, inject } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Evento } from '../models/evento';
+
+@Service()
+export class EventosApi {
+  private readonly http = inject(HttpClient);
+  private readonly url = '/api/eventos';</code></pre></div><ol class="notas"><li class="nota" data-lineas="1"><div class="nota-cabeza"><span class="nota-lineas">L1</span><code class="nota-codigo">HttpClient</code></div><p>Trae el cliente HTTP de Angular. En Angular 22 ya viene disponible: no hay que importar <code>HttpClientModule</code>.</p></li><li class="nota" data-lineas="2"><div class="nota-cabeza"><span class="nota-lineas">L2</span><code class="nota-codigo">Service · inject</code></div><p>Son el decorador que convierte la clase en servicio y la función que pide dependencias. Ya lo viste en <code>carrito-store.ts</code>.</p></li><li class="nota" data-lineas="6-8"><div class="nota-cabeza"><span class="nota-lineas">L6–8</span><code class="nota-codigo">@Service · inject(HttpClient)</code></div><p>Angular crea un solo <code>EventosApi</code> y le entrega el cliente HTTP. Es privado porque nadie de afuera debe saltarse los métodos del servicio.</p></li><li class="nota" data-lineas="9"><div class="nota-cabeza"><span class="nota-lineas">L9</span><code class="nota-codigo">/api/eventos</code></div><p>La URL relativa pasa por el proxy y queda guardada en un solo lugar.</p></li></ol></div></div>
+              <div class="lectura"><div class="lectura-head"><span class="lectura-num">2</span><h3 class="lectura-titulo">Pedir la lista de eventos</h3><p class="lectura-proposito">El método devuelve el pedido; los eventos llegan después, a quien se suscriba.</p></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 11–13</span></div></div><pre class="line-numbers" data-start="11"><code class="language-typescript">  listar(): Observable&lt;Evento[]&gt; {
+    return this.http.get&lt;Evento[]&gt;(this.url);
+  }</code></pre></div><ol class="notas"><li class="nota" data-lineas="11"><div class="nota-cabeza"><span class="nota-lineas">L11</span><code class="nota-codigo">Observable&lt;Evento[]&gt;</code></div><p>Declara que el método entregará una lista de eventos. No devuelve los eventos: devuelve el pedido.</p></li><li class="nota" data-lineas="12"><div class="nota-cabeza"><span class="nota-lineas">L12</span><code class="nota-codigo">http.get</code></div><p>Prepara un <code>GET</code>. <code>HttpClient</code> convierte el JSON en objetos, pero nada sale hasta el <code>subscribe</code>.</p></li></ol></div></div>
+              <details class="code-reveal" data-archivo="eventos-api.ts"><summary><span><span class="code-reveal-title">eventos-api.ts · como queda</span><span class="code-reveal-note">14 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Crear</span><span class="code-file">eventos-api.ts</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-typescript">import { HttpClient } from '@angular/common/http';
+import { Service, inject } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Evento } from '../models/evento';
+
+@Service()
+export class EventosApi {
+  private readonly http = inject(HttpClient);
+  private readonly url = '/api/eventos';
+
+  listar(): Observable&lt;Evento[]&gt; {
+    return this.http.get&lt;Evento[]&gt;(this.url);
+  }
+}</code></pre></div></div></details>
+            </article>
+            <article class="archivo"><div class="archivo-ficha"><span class="archivo-accion">Editar</span><span class="archivo-nombre">listado-eventos.ts</span><span class="archivo-ruta">tarima-web/src/app/pages/listado-eventos/</span></div><p class="archivo-intro">La lista tiene que poder empezar vacía y cambiar cuando llegue la respuesta, y avisar a la pantalla cuando cambie. Eso es una <strong>signal</strong>. La cartelera se suscribe a <code>listar()</code> y guarda lo que llega.</p>
+              <div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h3 class="lectura-titulo">La lista empieza vacía y puede cambiar</h3></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 16–25</span></div></div><pre class="line-numbers" data-start="16"><code class="language-typescript">  eventos = signal&lt;Evento[]&gt;([]);
+  categorias = ['Todas', 'Concierto', 'Teatro', 'Stand-up'];
+
+  busqueda = signal('');
+  categoria = signal('Todas');
+
+  eventosFiltrados = computed(() =&gt; {
+    const texto = this.busqueda().trim().toLowerCase();
+    const categoria = this.categoria();
+    return this.eventos().filter(</code></pre></div><ol class="notas"><li class="nota" data-lineas="16"><div class="nota-cabeza"><span class="nota-lineas">L16</span><code class="nota-codigo">signal&lt;Evento[]&gt;([])</code></div><p>Empieza con un arreglo vacío y fija el tipo de lo que guardará cuando llegue la respuesta.</p></li><li class="nota" data-lineas="25"><div class="nota-cabeza"><span class="nota-lineas">L25</span><code class="nota-codigo">this.eventos()</code></div><p>La signal se lee con <code>()</code>. El <code>computed</code> se recalcula cuando llegan los eventos.</p></li></ol></div></div>
+              <div class="lectura"><div class="lectura-head"><span class="lectura-num">2</span><h3 class="lectura-titulo">Suscribirse y guardar lo que llega</h3></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 33–35</span></div></div><pre class="line-numbers" data-start="33"><code class="language-typescript">  constructor() {
+    this.api.listar().subscribe((eventos) =&gt; this.eventos.set(eventos));
+  }</code></pre></div><ol class="notas"><li class="nota" data-lineas="33"><div class="nota-cabeza"><span class="nota-lineas">L33</span><code class="nota-codigo">constructor</code></div><p>Corre una vez cuando Angular crea la página al entrar a <code>/eventos</code>.</p></li><li class="nota" data-lineas="34"><div class="nota-cabeza"><span class="nota-lineas">L34</span><code class="nota-codigo">listar().subscribe</code></div><p><code>listar()</code> devuelve el pedido; <code>subscribe</code> lo envía. Cuando llega la lista, <code>set</code> actualiza la signal y la plantilla.</p></li></ol></div></div>
+              <div class="checkpoint"><span class="component-label">Checkpoint</span><h3>7 de 7 eventos</h3><p>La cartelera muestra “Cuentería bajo la Luna” y la pestaña Red muestra <code>GET /api/eventos 200</code>.</p></div>
+              <div class="callout" data-tone="warning"><span class="callout-icon">!</span><div><h3>Quítala y mira</h3><p>Cambia la suscripción por <code>this.api.listar();</code>. La pestaña Red no muestra ninguna petición y la cartelera dice <code>0 de 0 eventos</code>: el Observable es frío.</p></div></div>
+              <details class="code-reveal" data-archivo="listado-eventos.ts"><summary><span><span class="code-reveal-title">listado-eventos.ts · como queda</span><span class="code-reveal-note">40 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Editar</span><span class="code-file">listado-eventos.ts</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-typescript">import { Component, computed, inject, signal } from '@angular/core';
+import { Evento } from '../../models/evento';
+import { TarjetaEvento } from '../../components/tarjeta-evento/tarjeta-evento';
+import { CarritoStore } from '../../services/carrito-store';
+import { EventosApi } from '../../services/eventos-api';
+
+@Component({
+  imports: [TarjetaEvento],
+  selector: 'app-listado-eventos',
+  styleUrl: './listado-eventos.css',
+  templateUrl: './listado-eventos.html',
+})
+export class ListadoEventos {
+  private readonly carrito = inject(CarritoStore);
+  private readonly api = inject(EventosApi);
+
+  eventos = signal&lt;Evento[]&gt;([]);
+  categorias = ['Todas', 'Concierto', 'Teatro', 'Stand-up'];
+
+  busqueda = signal('');
+  categoria = signal('Todas');
+
+  eventosFiltrados = computed(() =&gt; {
+    const texto = this.busqueda().trim().toLowerCase();
+    const categoria = this.categoria();
+    return this.eventos().filter(
+      (evento) =&gt;
+        evento.nombre.toLowerCase().includes(texto) &amp;&amp;
+        (categoria === 'Todas' || evento.categoria === categoria),
+    );
+  });
+
+  constructor() {
+    this.api.listar().subscribe((eventos) =&gt; this.eventos.set(eventos));
+  }
+
+  agregarAlCarrito(evento: Evento): void {
+    this.carrito.agregar(evento);
+  }
+}</code></pre></div></div></details>
+              <details class="code-reveal" data-archivo="listado-eventos.html"><summary><span><span class="code-reveal-title">listado-eventos.html · como queda</span><span class="code-reveal-note">35 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Editar</span><span class="code-file">listado-eventos.html</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-html">&lt;section class="listado"&gt;
+  &lt;h2 class="listado__titulo"&gt;Cartelera de noviembre&lt;/h2&gt;
+
+  &lt;div class="filtros"&gt;
+    &lt;input
+      #campo
+      class="filtros__buscador"
+      type="search"
+      placeholder="Busca por nombre"
+      (input)="busqueda.set(campo.value)"
+    /&gt;
+    &lt;div class="filtros__categorias"&gt;
+      @for (opcion of categorias; track opcion) {
+        &lt;button type="button" class="filtros__chip" [class.activo]="categoria() === opcion" (click)="categoria.set(opcion)"&gt;
+          {{ opcion }}
+        &lt;/button&gt;
+      }
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;p class="listado__total"&gt;{{ eventosFiltrados().length }} de {{ eventos().length }} eventos&lt;/p&gt;
+
+  &lt;div class="listado__grilla"&gt;
+    @for (evento of eventosFiltrados(); track evento.id) {
+      &lt;app-tarjeta-evento [evento]="evento" (entradaAgregada)="agregarAlCarrito($event)" /&gt;
+    } @empty {
+      &lt;p class="listado__vacio"&gt;Ningún evento coincide con tu búsqueda.&lt;/p&gt;
+    }
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre></div></div></details>
+            </article>
+          </div>
+        </section>
+
+        <section class="section view" id="observable-limites" data-accent="1" data-layout="canvas" data-escena="concepto" hidden>
+          <div class="sec-head"><span class="sec-n">Observable · límites</span><h2 class="sec-t">No todo necesita un Observable</h2></div>
+          <div class="body">
+            <h3>7.1 · Cuándo no usarlo</h3><p>No uses un Observable para algo que ya tienes. Si el valor existe en este instante (una lista en memoria, el texto del buscador, un total que se calcula), una variable, una signal o un <code>computed</code> son más simples y más claros.</p><p>En Angular, el lugar natural de los Observables es la frontera con lo que tarda: <code>HttpClient</code>, eventos del navegador, temporizadores. Dentro de la aplicación, el estado vive en signals, y las respuestas que llegan como Observable se guardan en signals con <code>set</code>.</p>
+            <h3>7.2 · Con qué se confunde</h3><div class="table-wrap"><table class="data-table"><caption>Promesa y Observable</caption><thead><tr><th></th><th>Promesa</th><th>Observable</th></tr></thead><tbody><tr><td>Cuándo arranca</td><td>Al crearla</td><td>Al suscribirse</td></tr><tr><td>Cuántos valores entrega</td><td>Uno</td><td>Cero, uno o muchos</td></tr><tr><td>Cómo se lee</td><td><code>.then</code> o <code>await</code></td><td><code>.subscribe</code></td></tr><tr><td>Quién la usa</td><td><code>fetch</code></td><td><code>HttpClient</code></td></tr></tbody></table></div>
+            <h3>7.3 · Errores frecuentes</h3><div class="cards"><div class="card"><b>Olvidar el subscribe</b><p>No hay petición en Red y la pantalla se queda con el valor inicial.</p></div><div class="card"><b>Llamar directo y chocar con CORS</b><p>El backend respondió, pero el navegador no permite leer la respuesta. Usa la URL relativa y el proxy.</p></div><div class="card"><b>No reiniciar ng serve</b><p>El proxy solo se lee al arrancar. Detén y vuelve a correr el servidor.</p></div></div>
+            <h3>7.4 · En un sistema real</h3><p>El proxy es solo para desarrollo. Al publicar, frontend y backend pueden estar bajo el mismo dominio o el backend puede configurar CORS. Por eso la URL del servicio es relativa: el mismo código funciona en los dos casos.</p>
+            <h3>7.5 · Conexión</h3><p>En la Clase 3 las signals guardaban estado que cambiaba con un clic. Hoy cambian con algo que llega de afuera. Ya resolviste la primera petición de Valentina. Pero queda algo abierto: ¿qué ve la persona <strong>mientras</strong> llega la respuesta, o si el backend está apagado?</p>
+            <div class="socratica"><span class="component-label">Para pensar</span><p class="socratica-q">Un banco tiene una app. En la pantalla de cuentas, el código hace <code>const saldo$ = api.consultarSaldo();</code> pero nunca hace <code>subscribe</code>. ¿Qué ve el cliente y qué pasa en el servidor del banco?</p><details class="reveal"><summary>Ver respuesta</summary><div class="reveal-body"><p class="lead-answer">El cliente no ve el saldo y el servidor del banco ni se entera.</p><p><code>consultarSaldo()</code> solo describió el pedido. Como la petición sale al suscribirse, sin <code>subscribe</code> no hay petición.</p></div></details></div>
+          </div>
+        </section>
+
+        <section class="section view" id="estados-concepto" data-accent="1" data-layout="canvas" data-escena="concepto" hidden>
+          <div class="sec-head"><span class="sec-n">Estados de una petición · concepto</span><h2 class="sec-t">Cargando, error, vacío y éxito</h2><p class="sec-s">Tres situaciones muy distintas no pueden verse como el mismo hueco en pantalla.</p></div>
+          <div class="body">
+            <figure class="figura"><div class="figura-stage"><img src="img/estados-peticion.png" alt="Una petición pasa por carga y termina con datos, una respuesta vacía o un error"></div><figcaption>Desde “cargando”, la petición termina con datos, sin datos o con un error.<span class="figura-credito">Ilustración original creada para esta clase.</span></figcaption></figure>
+            <h3>8.1 · Para qué existe</h3><p>Cuando un dato llega de afuera, la pantalla pasa por momentos distintos: primero no hay nada porque la respuesta no ha llegado; después llega bien o llega un error. Si el código solo contempla el caso feliz, los otros se ven como si fueran ese caso: un “cargando” se ve como “no hay nada”, y un servidor caído también.</p><p>Hay un problema peor: si solo se contempla el caso feliz y la respuesta falla, el programa se encuentra con un error que nadie atiende. En el mejor caso no pasa nada visible; en el peor, el programa se detiene.</p>
+            <h3>8.2 · Qué es</h3><div class="definicion"><div class="def-tecnica"><span class="component-label">Definición técnica</span><p class="def-termino">Estados de una petición</p><p>Las situaciones en que puede estar una vista que depende de datos remotos: <strong>cargando</strong> (la petición salió y no ha respondido), <strong>error</strong> (respondió con un fallo o no pudo conectar), <strong>vacío</strong> (respondió bien, pero sin datos que mostrar) y <strong>éxito</strong> (respondió con datos). En código, cada estado se representa con un dato que se actualiza en <code>next</code> y en <code>error</code>.</p></div><div class="def-vida"><span class="component-label">Explicación sencilla</span><p>Antes de mostrar los datos, la pantalla se pregunta “¿ya llegó?”, “¿llegó bien?” y “¿llegó algo?”, y para cada respuesta tiene un mensaje.</p><span class="component-label">En la vida real</span><p>El tablero de un aeropuerto. Un vuelo dice “Programado”, “Embarcando”, “Demorado” o “Cancelado”. Nadie ve una fila vacía y adivina.</p></div></div>
+            <div class="table-wrap"><table class="data-table"><caption>Códigos de estado</caption><thead><tr><th>Código</th><th>Significa</th><th>Qué debe ver la persona</th></tr></thead><tbody><tr><td><code>200</code></td><td>Bien, aquí están los datos</td><td>Los datos</td></tr><tr><td><code>404</code></td><td>Lo que pediste no existe</td><td>“No encontramos lo que buscas”</td></tr><tr><td><code>500</code> o más</td><td>El servidor falló</td><td>“Tuvimos un problema en el servidor”</td></tr><tr><td><code>0</code></td><td>No hubo respuesta</td><td>“No pudimos conectar con el servidor”</td></tr></tbody></table></div>
+            <h3>8.3 · Míralo funcionar</h3>
+            <div class="micro-task"><span class="component-label">Para pensar</span><p class="micro-task-q">En el paso 2, <code>mostrar</code> solo tiene <code>next</code>, y la ciudad “Atlantis” responde con error. Antes de ejecutarlo: ¿qué pasa con Atlantis?</p><details class="micro-reveal"><summary>Comprobar</summary><p class="micro-answer">El programa se cae. Bogotá alcanza a mostrarse, pero el error de Atlantis no lo atiende nadie y RxJS lo lanza como error sin manejar: Node imprime <code>{ status: 404 }</code> y termina.</p></details></div>
+            <article class="archivo"><div class="archivo-ficha"><span class="archivo-accion">Crear</span><span class="archivo-nombre">clima.mjs</span><span class="archivo-ruta">tarima-web/ejemplos/estados/</span></div><p class="archivo-intro">Este archivo muestra los dos finales posibles de una petición (éxito y error) y el estado <code>cargando</code> que existe mientras tanto.</p>
+              <div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h3 class="lectura-titulo">Una consulta que puede salir bien o mal</h3><p class="lectura-proposito"><b>Necesidad:</b> simular un servidor que tarda y responde bien para una ciudad y con error para otra.</p></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 1–14</span></div></div><pre class="line-numbers" data-start="1"><code class="language-javascript">import { Observable } from 'rxjs';
+
+function pedirClima(ciudad) {
+  return new Observable((cliente) =&gt; {
+    setTimeout(() =&gt; {
+      if (ciudad === 'Atlantis') {
+        cliente.error({ status: 404 });
+      } else {
+        cliente.next({ ciudad, grados: 14 });
+        cliente.complete();
+      }
+    }, 500);
+  });
+}</code></pre></div><ol class="notas"><li class="nota" data-lineas="3-4"><div class="nota-cabeza"><span class="nota-lineas">L3–4</span><code class="nota-codigo">pedirClima · Observable</code></div><p>La función recibe la ciudad y devuelve el pedido, igual que <code>EventosApi.listar()</code>.</p></li><li class="nota" data-lineas="5"><div class="nota-cabeza"><span class="nota-lineas">L5</span><code class="nota-codigo">setTimeout</code></div><p>Simula la demora en la que la pantalla está cargando.</p></li><li class="nota" data-lineas="6-7"><div class="nota-cabeza"><span class="nota-lineas">L6–7</span><code class="nota-codigo">cliente.error</code></div><p>Para una ciudad inexistente, avisa un error con el mismo campo <code>status</code> de un error HTTP.</p></li><li class="nota" data-lineas="8-10"><div class="nota-cabeza"><span class="nota-lineas">L8–10</span><code class="nota-codigo">next · complete</code></div><p>Para cualquier otra ciudad, entrega el dato y termina.</p></li></ol></div></div>
+              <div class="lectura"><div class="lectura-head"><span class="lectura-num">2</span><h3 class="lectura-titulo">Mostrar el clima con su estado de carga</h3><p class="lectura-proposito"><b>Necesidad:</b> una pantalla que diga que está cargando y muestre el resultado.</p></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 16–28</span></div></div><pre class="line-numbers" data-start="16"><code class="language-javascript">function mostrar(ciudad) {
+  let cargando = true;
+  console.log(`[${ciudad}] cargando: ${cargando}`);
+  pedirClima(ciudad).subscribe({
+    next: (clima) =&gt; {
+      cargando = false;
+      console.log(`[${ciudad}] éxito: ${clima.grados} °C · cargando: ${cargando}`);
+    },
+  });
+}
+
+mostrar('Bogotá');
+mostrar('Atlantis');</code></pre></div><ol class="notas"><li class="nota" data-lineas="17-18"><div class="nota-cabeza"><span class="nota-lineas">L17–18</span><code class="nota-codigo">cargando = true</code></div><p>El estado empieza en verdadero y la consola muestra lo que vería la pantalla mientras espera.</p></li><li class="nota" data-lineas="19"><div class="nota-cabeza"><span class="nota-lineas">L19</span><code class="nota-codigo">subscribe</code></div><p>Arma el pedido y lo envía.</p></li><li class="nota" data-lineas="20-23"><div class="nota-cabeza"><span class="nota-lineas">L20–23</span><code class="nota-codigo">next</code></div><p>Cuando llega el dato, primero apaga la carga y después muestra el clima.</p></li><li class="nota" data-lineas="27-28"><div class="nota-cabeza"><span class="nota-lineas">L27–28</span><code class="nota-codigo">mostrar</code></div><p>Consulta las dos ciudades casi al tiempo.</p></li></ol></div></div>
+              <div class="lectura"><div class="lectura-head"><span class="lectura-num">3</span><h3 class="lectura-titulo">Atender el error</h3><p class="lectura-proposito"><b>Necesidad:</b> el error de Atlantis rompió el programa. Hay que darle instrucciones.</p></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 24–27</span></div></div><pre class="line-numbers" data-start="24"><code class="language-javascript">    error: (error) =&gt; {
+      cargando = false;
+      console.log(`[${ciudad}] error ${error.status} · cargando: ${cargando}`);
+    },</code></pre></div><ol class="notas"><li class="nota" data-lineas="24"><div class="nota-cabeza"><span class="nota-lineas">L24</span><code class="nota-codigo">error</code></div><p>Corre cuando el Observable avisa un error y recibe <code>{ status: 404 }</code>.</p></li><li class="nota" data-lineas="25"><div class="nota-cabeza"><span class="nota-lineas">L25</span><code class="nota-codigo">cargando = false</code></div><p>Un error también es una respuesta; si no se apaga, la pantalla carga para siempre.</p></li><li class="nota" data-lineas="26"><div class="nota-cabeza"><span class="nota-lineas">L26</span><code class="nota-codigo">error.status</code></div><p>Muestra el código. En Tarima se traducirá a un mensaje para personas.</p></li></ol></div></div>
+              <div class="consola"><div class="consola-head">node ejemplos/estados/clima.mjs</div><ol><li class="out">[Bogotá] cargando: true</li><li class="out">[Atlantis] cargando: true</li><li class="out">[Bogotá] éxito: 14 °C · cargando: false</li><li class="out">[Atlantis] error 404 · cargando: false</li></ol></div>
+              <div class="callout" data-tone="warning"><span class="callout-icon">!</span><div><h3>Quítala y mira</h3><p>Borra <code>cargando = false</code> dentro de <code>error</code>. La última línea termina con <code>cargando: true</code>. Vuelve a escribirla.</p></div></div>
+              <details class="code-reveal" data-archivo="clima.mjs"><summary><span><span class="code-reveal-title">clima.mjs · archivo completo</span><span class="code-reveal-note">32 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Crear</span><span class="code-file">clima.mjs</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-javascript">import { Observable } from 'rxjs';
+
+function pedirClima(ciudad) {
+  return new Observable((cliente) =&gt; {
+    setTimeout(() =&gt; {
+      if (ciudad === 'Atlantis') {
+        cliente.error({ status: 404 });
+      } else {
+        cliente.next({ ciudad, grados: 14 });
+        cliente.complete();
+      }
+    }, 500);
+  });
+}
+
+function mostrar(ciudad) {
+  let cargando = true;
+  console.log(`[${ciudad}] cargando: ${cargando}`);
+  pedirClima(ciudad).subscribe({
+    next: (clima) =&gt; {
+      cargando = false;
+      console.log(`[${ciudad}] éxito: ${clima.grados} °C · cargando: ${cargando}`);
+    },
+    error: (error) =&gt; {
+      cargando = false;
+      console.log(`[${ciudad}] error ${error.status} · cargando: ${cargando}`);
+    },
+  });
+}
+
+mostrar('Bogotá');
+mostrar('Atlantis');</code></pre></div></div></details>
+            </article>
+            <h3>8.4 · Cómo reconocerlo</h3><p>Hazte esta pregunta: <strong>¿lo que esta pantalla muestra depende de algo que puede tardar o fallar?</strong> Si la respuesta es sí, la pantalla necesita sus estados. Imagina las cuatro situaciones y comprueba que cada una se vea distinta.</p>
+            <h3>8.5 · La misma idea en otros negocios</h3><div class="table-wrap"><table class="data-table"><caption>Los cuatro estados</caption><thead><tr><th>Negocio</th><th>Cargando</th><th>Error</th><th>Vacío</th><th>Éxito</th></tr></thead><tbody><tr><td>App de domicilios</td><td>Buscando restaurantes cerca…</td><td>No pudimos cargar los restaurantes</td><td>No hay restaurantes abiertos</td><td>La lista</td></tr><tr><td>Banco</td><td>Consultando tu saldo…</td><td>No pudimos consultar tu saldo</td><td>No tienes movimientos</td><td>Los movimientos</td></tr><tr><td>Clínica</td><td>Buscando citas…</td><td>El sistema no responde</td><td>No hay citas</td><td>Las citas disponibles</td></tr><tr><td>Ventanilla</td><td>Estamos verificando</td><td>El sistema está caído</td><td>No tiene trámites</td><td>El trámite</td></tr></tbody></table></div>
+          </div>
+        </section>
+
+        <section class="section view" id="estados-aplicacion-a" data-accent="1" data-layout="canvas" data-escena="construccion" hidden>
+          <div class="sec-head"><span class="sec-n">Estados · aplicación</span><h2 class="sec-t">Mensajes claros y una cartelera honesta</h2><p class="sec-s">Si algo falla, la persona sabe qué pasó; nunca recibe una pantalla en blanco ni un texto técnico.</p></div>
+          <div class="body">
+            <div class="mision"><div class="mision-head"><span class="mision-marca">1</span><span class="mision-titulo">Misión del bloque</span></div><div class="mision-grid"><div class="mision-item"><span class="component-label">Para Valentina</span><p>Que nadie vea una pantalla en blanco ni un texto técnico cuando algo falla.</p></div><div class="mision-item"><span class="component-label">Lo que hacemos</span><p><code>mensajeDeError</code> en <code>shared/</code>, estados <code>cargando</code> y <code>error</code> en cartelera y detalle.</p></div><div class="mision-item" data-resultado><span class="component-label">Cómo sabemos que quedó</span><p>Con el backend apagado, la cartelera dice “Tuvimos un problema en el servidor. Intenta más tarde.”</p></div></div></div>
+            <article class="archivo"><div class="archivo-ficha"><span class="archivo-accion">Crear</span><span class="archivo-nombre">mensaje-error.ts</span><span class="archivo-ruta">tarima-web/src/app/shared/</span></div><p class="archivo-intro"><code>HttpClient</code> entrega un <code>HttpErrorResponse</code> con <code>status</code>. Esta función traduce el código en un texto para personas y sirve en cualquier proyecto.</p>
+              <div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h3 class="lectura-titulo">Un mensaje para cada caso conocido</h3></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 1–14</span></div></div><pre class="line-numbers" data-start="1"><code class="language-typescript">import { HttpErrorResponse } from '@angular/common/http';
+
+export function mensajeDeError(error: HttpErrorResponse): string {
+  if (error.status === 0) {
+    return 'No pudimos conectar con el servidor. Intenta más tarde.';
+  }
+  if (error.status === 404) {
+    return 'No encontramos lo que buscas.';
+  }
+  if (error.status &gt;= 500) {
+    return 'Tuvimos un problema en el servidor. Intenta más tarde.';
+  }
+  return `Ocurrió un error (código ${error.status}).`;
+}</code></pre></div><ol class="notas"><li class="nota" data-lineas="1"><div class="nota-cabeza"><span class="nota-lineas">L1</span><code class="nota-codigo">HttpErrorResponse</code></div><p>Trae el tipo del error, para que TypeScript sepa que tiene <code>status</code>.</p></li><li class="nota" data-lineas="3"><div class="nota-cabeza"><span class="nota-lineas">L3</span><code class="nota-codigo">mensajeDeError</code></div><p>Es una función exportada y pura: recibe el error y devuelve un <code>string</code>.</p></li><li class="nota" data-lineas="4-12"><div class="nota-cabeza"><span class="nota-lineas">L4–12</span><code class="nota-codigo">0 · 404 · &gt;= 500</code></div><p><code>0</code> es sin respuesta, <code>404</code> es recurso inexistente y <code>&gt;= 500</code> cubre los fallos del servidor, incluido el <code>502</code> del proxy.</p></li><li class="nota" data-lineas="13"><div class="nota-cabeza"><span class="nota-lineas">L13</span><code class="nota-codigo">mensaje de respaldo</code></div><p>Se usa cuando ninguno de los casos conocidos coincide.</p></li></ol></div></div>
+              <details class="code-reveal" data-archivo="mensaje-error.ts"><summary><span><span class="code-reveal-title">mensaje-error.ts · archivo completo</span><span class="code-reveal-note">14 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Crear</span><span class="code-file">mensaje-error.ts</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-typescript">import { HttpErrorResponse } from '@angular/common/http';
+
+export function mensajeDeError(error: HttpErrorResponse): string {
+  if (error.status === 0) {
+    return 'No pudimos conectar con el servidor. Intenta más tarde.';
+  }
+  if (error.status === 404) {
+    return 'No encontramos lo que buscas.';
+  }
+  if (error.status &gt;= 500) {
+    return 'Tuvimos un problema en el servidor. Intenta más tarde.';
+  }
+  return `Ocurrió un error (código ${error.status}).`;
+}</code></pre></div></div></details>
+            </article>
+            <article class="archivo"><div class="archivo-ficha" data-tipo="apoyo"><span class="archivo-accion">Editar</span><span class="archivo-nombre">styles.css</span><span class="archivo-ruta">tarima-web/src/</span></div><p class="archivo-intro">El kit de Tarima no traía estilos para mensajes ni para el formulario de reserva. Se agregan al final.</p><div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h3 class="lectura-titulo">Mensajes y formulario</h3></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 94–100</span></div></div><pre class="line-numbers" data-start="94"><code class="language-css">/* Clase 4 · mensajes de estado y formulario de reserva */
+.mensaje { background: #fff; border-radius: var(--radio); padding: 16px 20px; margin: 16px 0; color: #444; }
+.mensaje--error { border-left: 4px solid var(--color-peligro); color: var(--color-peligro); }
+.mensaje--exito { border-left: 4px solid #15803d; color: #15803d; }
+.reserva { display: flex; flex-direction: column; gap: 12px; background: #fff; border-radius: var(--radio); padding: 20px; }
+.campo { display: flex; flex-direction: column; gap: 4px; font-weight: 600; }
+.campo input { padding: 10px 14px; border: 1px solid #d6d0e6; border-radius: 999px; font: inherit; font-weight: 400; }</code></pre></div><ol class="notas"><li class="nota" data-lineas="95"><div class="nota-cabeza"><span class="nota-lineas">L95</span><code class="nota-codigo">.mensaje</code></div><p>La caja blanca de cualquier mensaje, con las mismas esquinas de las tarjetas.</p></li><li class="nota" data-lineas="96-97"><div class="nota-cabeza"><span class="nota-lineas">L96–97</span><code class="nota-codigo">error · éxito</code></div><p>Una franja roja para errores y una verde para la confirmación.</p></li><li class="nota" data-lineas="98-100"><div class="nota-cabeza"><span class="nota-lineas">L98–100</span><code class="nota-codigo">reserva · campo</code></div><p>La caja y los campos del formulario de Mis entradas.</p></li></ol></div></div><details class="code-reveal" data-archivo="styles.css"><summary><span><span class="code-reveal-title">styles.css · líneas agregadas</span><span class="code-reveal-note">líneas 94–100 · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Editar</span><span class="code-file">styles.css</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers" data-start="94"><code class="language-css">/* Clase 4 · mensajes de estado y formulario de reserva */
+.mensaje { background: #fff; border-radius: var(--radio); padding: 16px 20px; margin: 16px 0; color: #444; }
+.mensaje--error { border-left: 4px solid var(--color-peligro); color: var(--color-peligro); }
+.mensaje--exito { border-left: 4px solid #15803d; color: #15803d; }
+.reserva { display: flex; flex-direction: column; gap: 12px; background: #fff; border-radius: var(--radio); padding: 20px; }
+.campo { display: flex; flex-direction: column; gap: 4px; font-weight: 600; }
+.campo input { padding: 10px 14px; border: 1px solid #d6d0e6; border-radius: 999px; font: inherit; font-weight: 400; }</code></pre></div></div></details></article>
+            <article class="archivo"><div class="archivo-ficha"><span class="archivo-accion">Editar</span><span class="archivo-nombre">listado-eventos.ts</span><span class="archivo-ruta">tarima-web/src/app/pages/listado-eventos/</span></div><p class="archivo-intro">La cartelera agrega dos signals, convierte el <code>subscribe</code> en un objeto con <code>next</code> y <code>error</code>, y apaga la carga en los dos caminos.</p>
+              <div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h3 class="lectura-titulo">Cada respuesta apaga la carga</h3></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 37–48</span></div></div><pre class="line-numbers" data-start="37"><code class="language-typescript">  constructor() {
+    this.api.listar().subscribe({
+      next: (eventos) =&gt; {
+        this.eventos.set(eventos);
+        this.cargando.set(false);
+      },
+      error: (error: HttpErrorResponse) =&gt; {
+        this.error.set(mensajeDeError(error));
+        this.cargando.set(false);
+      },
+    });
+  }</code></pre></div><ol class="notas"><li class="nota" data-lineas="38"><div class="nota-cabeza"><span class="nota-lineas">L38</span><code class="nota-codigo">subscribe</code></div><p>Ahora recibe dos funciones, como en el ejemplo del clima.</p></li><li class="nota" data-lineas="39-42"><div class="nota-cabeza"><span class="nota-lineas">L39–42</span><code class="nota-codigo">next</code></div><p>Guarda los eventos y apaga la carga.</p></li><li class="nota" data-lineas="43-46"><div class="nota-cabeza"><span class="nota-lineas">L43–46</span><code class="nota-codigo">error</code></div><p>Traduce el error y también apaga la carga. Sin ese <code>set(false)</code>, el error queda escondido detrás de “Cargando…”.</p></li></ol></div></div>
+              <div class="checkpoint"><span class="component-label">Prueba los cuatro estados</span><h3>La pantalla distingue cada caso</h3><p>Backend encendido: 7 de 7. Con demora: “Cargando la cartelera…”. Backend apagado: mensaje del servidor. Sin red: mensaje de conexión. Búsqueda “zzz”: estado vacío.</p></div>
+              <details class="code-reveal" data-archivo="listado-eventos.ts"><summary><span><span class="code-reveal-title">listado-eventos.ts · como queda</span><span class="code-reveal-note">53 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Editar</span><span class="code-file">listado-eventos.ts</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-typescript">import { HttpErrorResponse } from '@angular/common/http';
+import { Component, computed, inject, signal } from '@angular/core';
+import { Evento } from '../../models/evento';
+import { TarjetaEvento } from '../../components/tarjeta-evento/tarjeta-evento';
+import { CarritoStore } from '../../services/carrito-store';
+import { EventosApi } from '../../services/eventos-api';
+import { mensajeDeError } from '../../shared/mensaje-error';
+
+@Component({
+  imports: [TarjetaEvento],
+  selector: 'app-listado-eventos',
+  styleUrl: './listado-eventos.css',
+  templateUrl: './listado-eventos.html',
+})
+export class ListadoEventos {
+  private readonly carrito = inject(CarritoStore);
+  private readonly api = inject(EventosApi);
+
+  eventos = signal&lt;Evento[]&gt;([]);
+  cargando = signal(true);
+  error = signal('');
+  categorias = ['Todas', 'Concierto', 'Teatro', 'Stand-up'];
+
+  busqueda = signal('');
+  categoria = signal('Todas');
+
+  eventosFiltrados = computed(() =&gt; {
+    const texto = this.busqueda().trim().toLowerCase();
+    const categoria = this.categoria();
+    return this.eventos().filter(
+      (evento) =&gt;
+        evento.nombre.toLowerCase().includes(texto) &amp;&amp;
+        (categoria === 'Todas' || evento.categoria === categoria),
+    );
+  });
+
+  constructor() {
+    this.api.listar().subscribe({
+      next: (eventos) =&gt; {
+        this.eventos.set(eventos);
+        this.cargando.set(false);
+      },
+      error: (error: HttpErrorResponse) =&gt; {
+        this.error.set(mensajeDeError(error));
+        this.cargando.set(false);
+      },
+    });
+  }
+
+  agregarAlCarrito(evento: Evento): void {
+    this.carrito.agregar(evento);
+  }
+}</code></pre></div></div></details>
+              <details class="code-reveal" data-archivo="listado-eventos.html"><summary><span><span class="code-reveal-title">listado-eventos.html · como queda</span><span class="code-reveal-note">41 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Editar</span><span class="code-file">listado-eventos.html</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-html">&lt;section class="listado"&gt;
+  &lt;h2 class="listado__titulo"&gt;Cartelera de noviembre&lt;/h2&gt;
+
+  &lt;div class="filtros"&gt;
+    &lt;input #campo class="filtros__buscador" type="search" placeholder="Busca por nombre" (input)="busqueda.set(campo.value)" /&gt;
+    &lt;div class="filtros__categorias"&gt;
+      @for (opcion of categorias; track opcion) {
+        &lt;button type="button" class="filtros__chip" [class.activo]="categoria() === opcion" (click)="categoria.set(opcion)"&gt;
+          {{ opcion }}
+        &lt;/button&gt;
+      }
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  @if (cargando()) {
+    &lt;p class="mensaje"&gt;Cargando la cartelera…&lt;/p&gt;
+  } @else if (error()) {
+    &lt;p class="mensaje mensaje--error"&gt;{{ error() }}&lt;/p&gt;
+  } @else {
+    &lt;p class="listado__total"&gt;{{ eventosFiltrados().length }} de {{ eventos().length }} eventos&lt;/p&gt;
+
+    &lt;div class="listado__grilla"&gt;
+      @for (evento of eventosFiltrados(); track evento.id) {
+        &lt;app-tarjeta-evento [evento]="evento" (entradaAgregada)="agregarAlCarrito($event)" /&gt;
+      } @empty {
+        &lt;p class="listado__vacio"&gt;Ningún evento coincide con tu búsqueda.&lt;/p&gt;
+      }
+    &lt;/div&gt;
+  }
+&lt;/section&gt;</code></pre></div></div></details>
+            </article>
+          </div>
+        </section>
+
+        <section class="section view" id="estados-aplicacion-b" data-accent="1" data-layout="canvas" data-escena="construccion" hidden>
+          <div class="sec-head"><span class="sec-n">Estados · aplicación</span><h2 class="sec-t">Un 404 no es un servidor caído</h2><p class="sec-s">El detalle pide un evento por su número y separa “no existe” de “el servidor falló”.</p></div>
+          <div class="body">
+            <h3>10.1 · Pedir un evento</h3>
+            <article class="archivo"><div class="archivo-ficha"><span class="archivo-accion">Editar</span><span class="archivo-nombre">eventos-api.ts</span><span class="archivo-ruta">tarima-web/src/app/services/</span></div><p class="archivo-intro">El detalle no necesita los siete eventos, necesita uno. El backend lo ofrece en <code>/api/eventos/{id}</code>.</p><div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h3 class="lectura-titulo">Pedir un evento por su número</h3></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 14–17</span></div></div><pre class="line-numbers" data-start="14"><code class="language-typescript">
+  obtener(id: number): Observable&lt;Evento&gt; {
+    return this.http.get&lt;Evento&gt;(`${this.url}/${id}`);
+  }</code></pre></div><ol class="notas"><li class="nota" data-lineas="15"><div class="nota-cabeza"><span class="nota-lineas">L15</span><code class="nota-codigo">obtener</code></div><p>Recibe el número del evento y devuelve el pedido de un solo <code>Evento</code>.</p></li><li class="nota" data-lineas="16"><div class="nota-cabeza"><span class="nota-lineas">L16</span><code class="nota-codigo">${this.url}/${id}</code></div><p>Arma la dirección a partir de la base. Si no existe, el backend responde <code>404</code>.</p></li></ol></div></div><details class="code-reveal" data-archivo="eventos-api.ts"><summary><span><span class="code-reveal-title">eventos-api.ts · como queda</span><span class="code-reveal-note">18 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Editar</span><span class="code-file">eventos-api.ts</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-typescript">import { HttpClient } from '@angular/common/http';
+import { Service, inject } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Evento } from '../models/evento';
+
+@Service()
+export class EventosApi {
+  private readonly http = inject(HttpClient);
+  private readonly url = '/api/eventos';
+
+  listar(): Observable&lt;Evento[]&gt; {
+    return this.http.get&lt;Evento[]&gt;(this.url);
+  }
+
+  obtener(id: number): Observable&lt;Evento&gt; {
+    return this.http.get&lt;Evento&gt;(`${this.url}/${id}`);
+  }
+}</code></pre></div></div></details></article>
+            <h3>10.2 · Pedir cuando el input ya llegó</h3>
+            <article class="archivo"><div class="archivo-ficha"><span class="archivo-accion">Editar</span><span class="archivo-nombre">detalle-evento.ts</span><span class="archivo-ruta">tarima-web/src/app/pages/detalle-evento/</span></div><p class="archivo-intro">El evento deja de calcularse desde el mock: empieza vacío, llega desde <code>EventosApi</code> y tiene estados. Un <code>404</code> deja el evento vacío, pero no crea un mensaje de servidor.</p>
+              <div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h3 class="lectura-titulo">El evento llega, no se calcula</h3></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 18–24</span></div></div><pre class="line-numbers" data-start="18"><code class="language-typescript">  private readonly api = inject(EventosApi);
+
+  id = input.required&lt;string&gt;();
+
+  eventoActual = signal&lt;Evento | undefined&gt;(undefined);
+  cargando = signal(true);
+  error = signal('');</code></pre></div><ol class="notas"><li class="nota" data-lineas="18"><div class="nota-cabeza"><span class="nota-lineas">L18</span><code class="nota-codigo">inject(EventosApi)</code></div><p>Angular entrega la misma instancia que usa la cartelera.</p></li><li class="nota" data-lineas="20"><div class="nota-cabeza"><span class="nota-lineas">L20</span><code class="nota-codigo">input.required</code></div><p>El router llena el número de la URL, como texto.</p></li><li class="nota" data-lineas="22-24"><div class="nota-cabeza"><span class="nota-lineas">L22–24</span><code class="nota-codigo">Evento | undefined</code></div><p>Empieza sin evento, cargando y sin mensaje de error.</p></li></ol></div></div>
+              <div class="lectura"><div class="lectura-head"><span class="lectura-num">2</span><h3 class="lectura-titulo">Pedir el evento y separar el 404</h3></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 26–39</span></div></div><pre class="line-numbers" data-start="26"><code class="language-typescript">  ngOnInit(): void {
+    this.api.obtener(Number(this.id())).subscribe({
+      next: (evento) =&gt; {
+        this.eventoActual.set(evento);
+        this.cargando.set(false);
+      },
+      error: (error: HttpErrorResponse) =&gt; {
+        if (error.status !== 404) {
+          this.error.set(mensajeDeError(error));
+        }
+        this.cargando.set(false);
+      },
+    });
+  }</code></pre></div><ol class="notas"><li class="nota" data-lineas="26"><div class="nota-cabeza"><span class="nota-lineas">L26</span><code class="nota-codigo">ngOnInit</code></div><p>Angular lo llama después de entregar los inputs; aquí el <code>id</code> ya existe.</p></li><li class="nota" data-lineas="27"><div class="nota-cabeza"><span class="nota-lineas">L27</span><code class="nota-codigo">Number(this.id())</code></div><p>Convierte el texto de la URL en el número que pide <code>obtener</code>.</p></li><li class="nota" data-lineas="28-31"><div class="nota-cabeza"><span class="nota-lineas">L28–31</span><code class="nota-codigo">next</code></div><p>Guarda el evento y apaga la carga.</p></li><li class="nota" data-lineas="33-36"><div class="nota-cabeza"><span class="nota-lineas">L33–36</span><code class="nota-codigo">status !== 404</code></div><p>Un error distinto de 404 recibe mensaje; el 404 queda para la pantalla “Evento no encontrado”.</p></li></ol></div></div>
+              <details class="code-reveal" data-archivo="detalle-evento.ts"><summary><span><span class="code-reveal-title">detalle-evento.ts · archivo completo</span><span class="code-reveal-note">40 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Editar</span><span class="code-file">detalle-evento.ts</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-typescript">import { HttpErrorResponse } from '@angular/common/http';
+import { Component, inject, input, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { Evento } from '../../models/evento';
+import { TarjetaEvento } from '../../components/tarjeta-evento/tarjeta-evento';
+import { CarritoStore } from '../../services/carrito-store';
+import { EventosApi } from '../../services/eventos-api';
+import { mensajeDeError } from '../../shared/mensaje-error';
+
+@Component({
+  imports: [RouterLink, TarjetaEvento],
+  selector: 'app-detalle-evento',
+  styleUrl: './detalle-evento.css',
+  templateUrl: './detalle-evento.html',
+})
+export class DetalleEvento {
+  protected readonly carrito = inject(CarritoStore);
+  private readonly api = inject(EventosApi);
+
+  id = input.required&lt;string&gt;();
+
+  eventoActual = signal&lt;Evento | undefined&gt;(undefined);
+  cargando = signal(true);
+  error = signal('');
+
+  ngOnInit(): void {
+    this.api.obtener(Number(this.id())).subscribe({
+      next: (evento) =&gt; {
+        this.eventoActual.set(evento);
+        this.cargando.set(false);
+      },
+      error: (error: HttpErrorResponse) =&gt; {
+        if (error.status !== 404) {
+          this.error.set(mensajeDeError(error));
+        }
+        this.cargando.set(false);
+      },
+    });
+  }
+}</code></pre></div></div></details>
+            </article>
+            <h3>10.3 · Preguntar en el orden correcto</h3>
+            <article class="archivo"><div class="archivo-ficha"><span class="archivo-accion">Editar</span><span class="archivo-nombre">detalle-evento.html</span><span class="archivo-ruta">tarima-web/src/app/pages/detalle-evento/</span></div><p class="archivo-intro">La plantilla pregunta primero si está cargando, después si llegó el evento, luego si hubo un error y deja el último caso para el 404.</p><div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h3 class="lectura-titulo">Cuatro ramas excluyentes</h3></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 1–19</span></div></div><pre class="line-numbers" data-start="1"><code class="language-html">@if (cargando()) {
+  &lt;p class="mensaje"&gt;Cargando el evento…&lt;/p&gt;
+} @else if (eventoActual(); as evento) {
+  &lt;section class="detalle"&gt;
+    &lt;a class="detalle__volver" routerLink="/eventos"&gt;← Volver a la cartelera&lt;/a&gt;
+    &lt;app-tarjeta-evento [evento]="evento" (entradaAgregada)="carrito.agregar($event)" /&gt;
+  &lt;/section&gt;
+} @else if (error()) {
+  &lt;section class="aviso"&gt;
+    &lt;p class="mensaje mensaje--error"&gt;{{ error() }}&lt;/p&gt;
+    &lt;a class="boton" routerLink="/eventos"&gt;Volver a la cartelera&lt;/a&gt;
+  &lt;/section&gt;
+} @else {
+  &lt;section class="aviso"&gt;
+    &lt;h2&gt;Evento no encontrado&lt;/h2&gt;
+    &lt;p&gt;En Tarima no hay ningún evento con el número {{ id() }}.&lt;/p&gt;
+    &lt;a class="boton" routerLink="/eventos"&gt;Ver la cartelera&lt;/a&gt;
+  &lt;/section&gt;
+}</code></pre></div><ol class="notas"><li class="nota" data-lineas="1-2"><div class="nota-cabeza"><span class="nota-lineas">L1–2</span><code class="nota-codigo">cargando</code></div><p>Evita mostrar un falso “no encontrado” antes de recibir la respuesta.</p></li><li class="nota" data-lineas="3-7"><div class="nota-cabeza"><span class="nota-lineas">L3–7</span><code class="nota-codigo">eventoActual</code></div><p>Si llegó el evento, <code>as evento</code> lo guarda para usarlo dentro de la rama.</p></li><li class="nota" data-lineas="8-12"><div class="nota-cabeza"><span class="nota-lineas">L8–12</span><code class="nota-codigo">error</code></div><p>Los fallos distintos de 404 muestran el mensaje y un camino de salida.</p></li><li class="nota" data-lineas="13-19"><div class="nota-cabeza"><span class="nota-lineas">L13–19</span><code class="nota-codigo">else</code></div><p>No está cargando, no hay evento y no hay error: el backend respondió 404.</p></li></ol></div></div><details class="code-reveal" data-archivo="detalle-evento.html"><summary><span><span class="code-reveal-title">detalle-evento.html · archivo completo</span><span class="code-reveal-note">19 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Editar</span><span class="code-file">detalle-evento.html</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-html">@if (cargando()) {
+  &lt;p class="mensaje"&gt;Cargando el evento…&lt;/p&gt;
+} @else if (eventoActual(); as evento) {
+  &lt;section class="detalle"&gt;
+    &lt;a class="detalle__volver" routerLink="/eventos"&gt;← Volver a la cartelera&lt;/a&gt;
+    &lt;app-tarjeta-evento [evento]="evento" (entradaAgregada)="carrito.agregar($event)" /&gt;
+  &lt;/section&gt;
+} @else if (error()) {
+  &lt;section class="aviso"&gt;
+    &lt;p class="mensaje mensaje--error"&gt;{{ error() }}&lt;/p&gt;
+    &lt;a class="boton" routerLink="/eventos"&gt;Volver a la cartelera&lt;/a&gt;
+  &lt;/section&gt;
+} @else {
+  &lt;section class="aviso"&gt;
+    &lt;h2&gt;Evento no encontrado&lt;/h2&gt;
+    &lt;p&gt;En Tarima no hay ningún evento con el número {{ id() }}.&lt;/p&gt;
+    &lt;a class="boton" routerLink="/eventos"&gt;Ver la cartelera&lt;/a&gt;
+  &lt;/section&gt;
+}</code></pre></div></div></details></article>
+            <div class="checkpoint"><span class="component-label">Checkpoint</span><h3>El mismo hueco ya no significa dos cosas</h3><p><code>/eventos/99</code> muestra “Evento no encontrado”; con el backend apagado, <code>/eventos/2</code> muestra “Tuvimos un problema en el servidor. Intenta más tarde.”</p></div>
+          </div>
+        </section>
+
+        <section class="section view" id="estados-limites" data-accent="1" data-layout="canvas" data-escena="concepto" hidden>
+          <div class="sec-head"><span class="sec-n">Estados · límites</span><h2 class="sec-t">Vacío no es error</h2></div>
+          <div class="body">
+            <h3>11.1 · Cuándo no usarlo</h3><p>Los estados de carga y error son para datos que <strong>llegan de afuera</strong>. Un valor calculado en memoria, una lista que ya llegó y se filtra, o un dato que el usuario acaba de escribir no tienen “cargando” ni “error de red”. Agregarlos complica la plantilla y enseña a la persona a desconfiar de pantallas que sí son confiables.</p>
+            <h3>11.2 · Con qué se confunde</h3><div class="table-wrap"><table class="data-table"><caption>Vacío y error</caption><thead><tr><th></th><th>Vacío</th><th>Error</th></tr></thead><tbody><tr><td>¿Respondió el servidor?</td><td>Sí, bien (<code>200</code>)</td><td>No, o respondió con fallo</td></tr><tr><td>¿La información es confiable?</td><td>Sí: de verdad no hay</td><td>No: no sabemos si hay</td></tr><tr><td>Qué hace la persona</td><td>Cambia la búsqueda</td><td>Intenta más tarde</td></tr><tr><td>En Tarima</td><td><code>@empty</code></td><td><code>mensaje--error</code></td></tr></tbody></table></div>
+            <h3>11.3 · Variantes y casos límite</h3><p><strong>El 404 depende de la pantalla.</strong> En el detalle, un 404 es “ese evento no existe”. En la cartelera, un 404 de <code>/api/eventos</code> significaría que la dirección está mal: ahí sí es un error.</p><p><strong>El 0 y el 502 dicen cosas distintas.</strong> Con el proxy, si el backend está apagado responde el proxy con <code>502</code>. Si no hay red o el navegador bloqueó la petición, no hay respuesta y el código es <code>0</code>.</p>
+            <h3>11.4 · Errores frecuentes</h3><div class="cards"><div class="card"><b>Apagar la carga solo en next</b><p>Con el servidor caído, la pantalla queda en “Cargando…” para siempre.</p></div><div class="card"><b>Apagar después del subscribe</b><p>Esa línea corre de inmediato, antes de la respuesta. La carga se apaga dentro de <code>next</code> y <code>error</code>.</p></div><div class="card"><b>Mostrar error.message</b><p>La persona ve un texto técnico. Se corrige con <code>mensajeDeError</code>.</p></div><div class="card"><b>Preguntar primero por datos</b><p>Mientras carga aparece “Evento no encontrado”.</p></div></div>
+            <h3>11.5 · En un sistema real</h3><p>Además de los cuatro estados, las aplicaciones suelen agregar un botón <strong>Reintentar</strong>, un tiempo máximo de espera y un registro del error real para el equipo. El mensaje para la persona y el detalle para el equipo son dos cosas distintas.</p>
+            <h3>11.6 · Momento IA</h3>
+            <div class="momento-ia"><div class="momento-ia-head"><span class="momento-ia-titulo">Momento IA</span><span class="ia-nivel">Nivel 2 · Copiloto</span><span class="ia-herramienta">Chat navegador o Copilot VS Code</span></div><div class="momento-ia-body"><div class="ia-grid"><div><span class="component-label">Primero razonas tú</span><p>Escribe en un papel los cuatro estados de la cartelera y qué mensaje debe ver la persona en cada uno, incluido el servidor apagado.</p></div><div class="ia-no-delega"><span class="component-label">No se delega</span><p>Qué estados tiene la pantalla y qué dice cada mensaje: eso lo decide quien conoce a Valentina y a su público.</p></div></div><div class="code-block" data-tipo="prompt"><div class="code-head"><div><span class="code-context">Prompt sugerido</span><span class="code-file">Chat de Copilot</span></div><button class="copy-btn" type="button">Copiar</button></div><pre><code class="language-plaintext">Estoy en Angular 22 con componentes standalone, signals e `inject()`. Tengo este componente que pide eventos con `HttpClient` [pega `listado-eventos.ts`]. Manéjale los errores de la petición para que la persona vea un mensaje claro según el código de estado, incluido el caso de servidor apagado. No cambies el resto del componente y explícame cada cambio.</code></pre></div><div><span class="component-label">Cómo validar la respuesta</span><ul class="checklist"><li>¿Importó <code>HttpClientModule</code>?</li><li>¿Usó <code>constructor(private http: HttpClient)</code> en lugar de <code>inject()</code>?</li><li>¿Contempla el código <code>0</code>?</li><li>¿Le muestra a la persona <code>error.message</code> crudo?</li><li>¿Apaga <code>cargando</code> también en el error?</li><li>Después pruébalo con el backend apagado.</li></ul></div></div></div>
+            <h3>11.7 · Conexión</h3><p>Con esto se cumple el “nada de pantallas en blanco” de Valentina. Falta su otra petición: la reserva tiene que <strong>llegar</strong> al sistema. Hasta ahora solo le pedimos datos al backend; ahora hay que enviárselos.</p>
+            <div class="socratica"><span class="component-label">Para pensar</span><p class="socratica-q">Una clínica tiene una pantalla para buscar citas con un especialista. Hoy, si el sistema de citas no responde, la pantalla dice “No hay citas disponibles esta semana”. ¿Qué estado está mal representado, qué consecuencia tiene para el paciente y cómo lo corregirías?</p><details class="reveal"><summary>Ver respuesta</summary><div class="reveal-body"><p class="lead-answer">Se está mostrando un <strong>error</strong> como si fuera <strong>vacío</strong>.</p><p>El paciente cree que no hay citas y busca otra clínica, cuando en realidad el sistema solo falló. Se corrige atendiendo el <code>error</code> del <code>subscribe</code> con su propio mensaje y dejando “No hay citas” solo para una lista vacía recibida correctamente.</p></div></details></div>
+          </div>
+        </section>
+
+        <section class="section view" id="post-concepto" data-accent="1" data-layout="canvas" data-escena="concepto" hidden>
+          <div class="sec-head"><span class="sec-n">POST · concepto</span><h2 class="sec-t">Entregar datos y recibir el comprobante</h2><p class="sec-s"><code>GET</code> pregunta; <code>POST</code> entrega un sobre con datos y espera el recibo.</p></div>
+          <div class="body">
+            <h3>12.1 · Para qué existe</h3><p>Con <code>GET</code> el navegador pide algo que ya existe en el servidor. Pero muchas acciones consisten en <strong>crear</strong> algo nuevo: una reserva, un pedido, un comentario, un registro. Ese algo nuevo no está en el servidor; lo tiene el navegador, en lo que la persona escribió.</p><p>Hace falta una forma de decirle al servidor “toma estos datos y guárdalos”, llevando los datos <strong>dentro</strong> de la petición, y de saber después si de verdad quedaron guardados.</p>
+            <h3>12.2 · Qué es</h3><div class="definicion"><div class="def-tecnica"><span class="component-label">Definición técnica</span><p class="def-termino">POST</p><p><code>POST</code> es el método HTTP para enviar datos al servidor con el fin de que cree un recurso o procese una acción. Los datos viajan en el <strong>cuerpo</strong> de la petición, normalmente como JSON, con la cabecera <code>Content-Type: application/json</code>. Si creó el recurso, responde <code>201 Created</code>; si los datos no sirven, responde <code>400 Bad Request</code>.</p></div><div class="def-vida"><span class="component-label">Explicación sencilla</span><p><code>GET</code> es preguntar; <code>POST</code> es entregar un sobre con datos y esperar el recibo.</p><span class="component-label">En la vida real</span><p>Radicar una carta: entregas el sobre, en la ventanilla le ponen un sello con número de radicado y, si falta la firma, te lo devuelven sin radicar.</p></div></div>
+            <h3>12.3 · Míralo funcionar</h3>
+            <div class="micro-task"><span class="component-label">Para pensar</span><p class="micro-task-q">La nota que envías tiene <code>title</code>, <code>body</code> y <code>userId</code>. Antes de ejecutar el paso 2: ¿qué campo de más crees que trae la respuesta?</p><details class="micro-reveal"><summary>Comprobar</summary><p class="micro-answer">Trae <code>id: 101</code>. Lo que envías no tiene número, porque el número lo asigna quien guarda. Por eso el servidor devuelve lo que guardó: para que sepas cómo quedó registrado.</p></details></div>
+            <article class="archivo"><div class="archivo-ficha"><span class="archivo-accion">Crear</span><span class="archivo-nombre">nota.mjs</span><span class="archivo-ruta">tarima-web/ejemplos/post/</span></div><p class="archivo-intro">Este archivo muestra las tres piezas de un POST: el método, el cuerpo en JSON con su cabecera y la respuesta del servidor con su código y lo que creó. Usa JSONPlaceholder y necesita conexión a internet.</p>
+              <div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h3 class="lectura-titulo">Enviar la nota</h3><p class="lectura-proposito"><b>Necesidad:</b> enviar un dato nuevo y ver si el servidor lo aceptó.</p></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 1–9</span></div></div><pre class="line-numbers" data-start="1"><code class="language-javascript">const nota = { title: 'Comprar pan', body: 'Dos mogollas y un roscón', userId: 1 };
+
+const respuesta = await fetch('https://jsonplaceholder.typicode.com/posts', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(nota),
+});
+
+console.log('Código:', respuesta.status);</code></pre></div><ol class="notas"><li class="nota" data-lineas="1"><div class="nota-cabeza"><span class="nota-lineas">L1</span><code class="nota-codigo">nota</code></div><p>El dato nuevo, con los nombres que exige el contrato de esta API.</p></li><li class="nota" data-lineas="3"><div class="nota-cabeza"><span class="nota-lineas">L3</span><code class="nota-codigo">await fetch</code></div><p><code>fetch</code> envía la petición y <code>await</code> espera la respuesta antes de seguir.</p></li><li class="nota" data-lineas="4"><div class="nota-cabeza"><span class="nota-lineas">L4</span><code class="nota-codigo">POST</code></div><p>Sin esta línea, <code>fetch</code> usaría GET.</p></li><li class="nota" data-lineas="5-6"><div class="nota-cabeza"><span class="nota-lineas">L5–6</span><code class="nota-codigo">Content-Type · stringify</code></div><p>La cabecera anuncia el formato y <code>JSON.stringify</code> convierte el objeto en texto JSON.</p></li><li class="nota" data-lineas="9"><div class="nota-cabeza"><span class="nota-lineas">L9</span><code class="nota-codigo">respuesta.status</code></div><p>Muestra el código con que respondió el servidor.</p></li></ol></div></div>
+              <div class="active-build"><div class="build-step"><span class="build-step-index">▶</span><div class="build-step-copy"><h3 class="build-step-title">Pruébalo</h3><div class="consola"><div class="consola-head">node ejemplos/post/nota.mjs</div><ol><li class="out">Código: 201</li></ol></div></div></div></div>
+              <div class="callout" data-tone="warning"><span class="callout-icon">!</span><div><h3>Quítala y mira</h3><p>Borra <code>method: 'POST'</code>. El programa se detiene con <code>TypeError: Request with GET/HEAD method cannot have body.</code></p></div></div>
+              <div class="lectura"><div class="lectura-head"><span class="lectura-num">2</span><h3 class="lectura-titulo">Leer lo que el servidor guardó</h3></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 10–12</span></div></div><pre class="line-numbers" data-start="10"><code class="language-javascript">const guardada = await respuesta.json();
+console.log('El servidor la guardó con id', guardada.id);
+console.log(guardada);</code></pre></div><ol class="notas"><li class="nota" data-lineas="10"><div class="nota-cabeza"><span class="nota-lineas">L10</span><code class="nota-codigo">respuesta.json()</code></div><p>Lee el cuerpo y lo convierte de texto JSON a objeto.</p></li><li class="nota" data-lineas="11"><div class="nota-cabeza"><span class="nota-lineas">L11</span><code class="nota-codigo">guardada.id</code></div><p>Es el campo que tú no enviaste y el servidor sí devolvió.</p></li><li class="nota" data-lineas="12"><div class="nota-cabeza"><span class="nota-lineas">L12</span><code class="nota-codigo">guardada</code></div><p>Muestra lo que enviaste más lo que agregó el servidor.</p></li></ol></div></div>
+              <div class="consola"><div class="consola-head">Salida esperada</div><ol><li class="out">Código: 201</li><li class="out">El servidor la guardó con id 101</li><li class="out">{ title: 'Comprar pan', body: 'Dos mogollas y un roscón', userId: 1, id: 101 }</li></ol></div>
+              <details class="code-reveal" data-archivo="nota.mjs"><summary><span><span class="code-reveal-title">nota.mjs · archivo completo</span><span class="code-reveal-note">12 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Crear</span><span class="code-file">nota.mjs</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-javascript">const nota = { title: 'Comprar pan', body: 'Dos mogollas y un roscón', userId: 1 };
+
+const respuesta = await fetch('https://jsonplaceholder.typicode.com/posts', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(nota),
+});
+
+console.log('Código:', respuesta.status);
+const guardada = await respuesta.json();
+console.log('El servidor la guardó con id', guardada.id);
+console.log(guardada);</code></pre></div></div></details>
+            </article>
+            <h3>12.4 · Cómo funciona por dentro</h3><div class="compare"><div class="compare-card" data-side="negative"><h3>Petición</h3><ol><li><code>POST /posts HTTP/1.1</code></li><li><code>Content-Type: application/json</code></li><li><code>{"title":"Comprar pan",…}</code></li></ol></div><div class="compare-card" data-side="positive"><h3>Respuesta</h3><ol><li><code>HTTP/1.1 201 Created</code></li><li><code>Content-Type: application/json</code></li><li><code>{"title":"Comprar pan",…,"id":101}</code></li></ol></div></div>
+            <h3>12.5 · Cómo reconocerlo</h3><p>Pregúntate: <strong>¿esta acción crea algo nuevo en el servidor con datos que tiene el usuario?</strong> Si sí, es un <code>POST</code> con esos datos en el cuerpo. Si solo consulta algo que ya existe, es un <code>GET</code> y no lleva cuerpo.</p>
+            <h3>12.6 · La misma idea en otros negocios</h3><div class="table-wrap"><table class="data-table"><caption>POST fuera de Tarima</caption><thead><tr><th>Negocio</th><th>Cuerpo</th><th>Respuesta correcta</th><th>Datos inválidos</th></tr></thead><tbody><tr><td>App de domicilios</td><td>Productos, dirección y pago</td><td><code>201</code> + número de pedido</td><td><code>400</code>: fuera de cobertura</td></tr><tr><td>Banco</td><td>Cuenta destino y valor</td><td><code>201</code> + número de transacción</td><td><code>400</code>: saldo insuficiente</td></tr><tr><td>Clínica</td><td>Paciente, especialista y hora</td><td><code>201</code> + código de cita</td><td><code>400</code>: hora ocupada</td></tr><tr><td>Correspondencia</td><td>La carta</td><td>Sello con radicado</td><td>Falta la firma</td></tr></tbody></table></div>
+          </div>
+        </section>
+
+        <section class="section view" id="post-aplicacion-a" data-accent="1" data-layout="canvas" data-escena="construccion" hidden>
+          <div class="sec-head"><span class="sec-n">POST · aplicación</span><h2 class="sec-t">El contrato de la reserva</h2><p class="sec-s">Quién reserva, qué reserva y qué devuelve el backend.</p></div>
+          <div class="body">
+            <div class="mision"><div class="mision-head"><span class="mision-marca">2</span><span class="mision-titulo">Misión del bloque</span></div><div class="mision-grid"><div class="mision-item"><span class="component-label">Para Valentina</span><p>Que la reserva quede en el sistema y la persona tenga su código.</p></div><div class="mision-item"><span class="component-label">Lo que hacemos</span><p>Modelo <code>Reserva</code>, <code>EventosApi.reservar()</code>, formulario con estados y <code>CarritoStore.vaciar()</code>.</p></div><div class="mision-item" data-resultado><span class="component-label">Cómo sabemos que quedó</span><p><code>POST /api/reservas 201</code> y el mensaje con <code>TAR-1001</code>.</p></div></div></div>
+            <div class="pipeline" role="group" aria-label="Reserva de Tarima"><div class="pipe-step"><span class="component-label">Mis entradas</span><h3>nombre · correo · carrito</h3></div><div class="pipe-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div><div class="pipe-step" data-emphasis><span class="component-label">EventosApi</span><h3>POST /api/reservas</h3></div><div class="pipe-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div><div class="pipe-step"><span class="component-label">Backend</span><h3>201 + código</h3></div></div>
+            <article class="archivo"><div class="archivo-ficha" data-tipo="apoyo"><span class="archivo-accion">Crear</span><span class="archivo-nombre">reserva.ts</span><span class="archivo-ruta">tarima-web/src/app/models/</span></div><p class="archivo-intro">Es el contrato escrito en TypeScript: lo que viaja en el cuerpo y lo que vuelve.</p><div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h3 class="lectura-titulo">Lo que viaja al backend</h3></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 1–10</span></div></div><pre class="line-numbers" data-start="1"><code class="language-typescript">export interface EntradaReservada {
+  eventoId: number;
+  cantidad: number;
+}
+
+export interface Reserva {
+  nombreCompleto: string;
+  correo: string;
+  entradas: EntradaReservada[];
+}</code></pre></div><ol class="notas"><li class="nota" data-lineas="1-4"><div class="nota-cabeza"><span class="nota-lineas">L1–4</span><code class="nota-codigo">EntradaReservada</code></div><p>Una línea de la reserva: el número del evento y la cantidad. El backend busca el resto.</p></li><li class="nota" data-lineas="6-10"><div class="nota-cabeza"><span class="nota-lineas">L6–10</span><code class="nota-codigo">Reserva</code></div><p>El cuerpo completo. Los nombres son los del contrato: si cambian, el backend responde 400.</p></li></ol></div></div><div class="lectura"><div class="lectura-head"><span class="lectura-num">2</span><h3 class="lectura-titulo">Lo que vuelve</h3></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 12–14</span></div></div><pre class="line-numbers" data-start="12"><code class="language-typescript">export interface ConfirmacionReserva {
+  codigo: string;
+}</code></pre></div><ol class="notas"><li class="nota" data-lineas="12-14"><div class="nota-cabeza"><span class="nota-lineas">L12–14</span><code class="nota-codigo">ConfirmacionReserva</code></div><p>El cuerpo del <code>201</code>: el código que asignó el backend.</p></li></ol></div></div><details class="code-reveal" data-archivo="reserva.ts"><summary><span><span class="code-reveal-title">reserva.ts · archivo completo</span><span class="code-reveal-note">14 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Crear</span><span class="code-file">reserva.ts</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-typescript">export interface EntradaReservada {
+  eventoId: number;
+  cantidad: number;
+}
+
+export interface Reserva {
+  nombreCompleto: string;
+  correo: string;
+  entradas: EntradaReservada[];
+}
+
+export interface ConfirmacionReserva {
+  codigo: string;
+}</code></pre></div></div></details></article>
+            <article class="archivo"><div class="archivo-ficha"><span class="archivo-accion">Editar</span><span class="archivo-nombre">eventos-api.ts</span><span class="archivo-ruta">tarima-web/src/app/services/</span></div><p class="archivo-intro"><code>EventosApi</code> sabe pedir; ahora también sabe enviar.</p><div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h3 class="lectura-titulo">Enviar la reserva</h3></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 19–22</span></div></div><pre class="line-numbers" data-start="19"><code class="language-typescript">
+  reservar(reserva: Reserva): Observable&lt;ConfirmacionReserva&gt; {
+    return this.http.post&lt;ConfirmacionReserva&gt;('/api/reservas', reserva);
+  }</code></pre></div><ol class="notas"><li class="nota" data-lineas="20"><div class="nota-cabeza"><span class="nota-lineas">L20</span><code class="nota-codigo">Reserva → ConfirmacionReserva</code></div><p>Recibe la reserva completa y devuelve el pedido de la confirmación.</p></li><li class="nota" data-lineas="21"><div class="nota-cabeza"><span class="nota-lineas">L21</span><code class="nota-codigo">http.post</code></div><p>Recibe la dirección y el cuerpo. Convierte el objeto a JSON, pone la cabecera y convierte la respuesta. Sigue siendo frío: no sale hasta el <code>subscribe</code>.</p></li></ol></div></div><details class="code-reveal" data-archivo="eventos-api.ts"><summary><span><span class="code-reveal-title">eventos-api.ts · como queda</span><span class="code-reveal-note">23 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Editar</span><span class="code-file">eventos-api.ts</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-typescript">import { HttpClient } from '@angular/common/http';
+import { Service, inject } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Evento } from '../models/evento';
+import { ConfirmacionReserva, Reserva } from '../models/reserva';
+
+@Service()
+export class EventosApi {
+  private readonly http = inject(HttpClient);
+  private readonly url = '/api/eventos';
+
+  listar(): Observable&lt;Evento[]&gt; {
+    return this.http.get&lt;Evento[]&gt;(this.url);
+  }
+
+  obtener(id: number): Observable&lt;Evento&gt; {
+    return this.http.get&lt;Evento&gt;(`${this.url}/${id}`);
+  }
+
+  reservar(reserva: Reserva): Observable&lt;ConfirmacionReserva&gt; {
+    return this.http.post&lt;ConfirmacionReserva&gt;('/api/reservas', reserva);
+  }
+}</code></pre></div></div></details></article>
+          </div>
+        </section>
+
+        <section class="section view" id="post-aplicacion-b" data-accent="1" data-layout="canvas" data-escena="construccion" hidden>
+          <div class="sec-head"><span class="sec-n">POST · aplicación</span><h2 class="sec-t">Reservar desde Mis entradas</h2><p class="sec-s">El formulario envía, confirma y vacía el carrito solo cuando el backend responde bien.</p></div>
+          <div class="body">
+            <h3>14.1 · Guardar lo escrito y armar el cuerpo</h3>
+            <article class="archivo"><div class="archivo-ficha"><span class="archivo-accion">Editar</span><span class="archivo-nombre">mis-entradas.ts</span><span class="archivo-ruta">tarima-web/src/app/pages/mis-entradas/</span></div><p class="archivo-intro">La página guarda nombre y correo, sabe si el formulario está completo y maneja enviando, éxito y error.</p><div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h3 class="lectura-titulo">Lo que escribe la persona y si está completo</h3></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 17–27</span></div></div><pre class="line-numbers" data-start="17"><code class="language-typescript">  private readonly api = inject(EventosApi);
+
+  nombreCompleto = signal('');
+  correo = signal('');
+  enviando = signal(false);
+  codigoReserva = signal('');
+  errorReserva = signal('');
+
+  formularioCompleto = computed(
+    () =&gt; this.nombreCompleto().trim() !== '' &amp;&amp; this.correo().trim() !== '',
+  );</code></pre></div><ol class="notas"><li class="nota" data-lineas="17"><div class="nota-cabeza"><span class="nota-lineas">L17</span><code class="nota-codigo">inject(EventosApi)</code></div><p>El mismo servicio de cartelera y detalle.</p></li><li class="nota" data-lineas="19-23"><div class="nota-cabeza"><span class="nota-lineas">L19–23</span><code class="nota-codigo">signals</code></div><p>Dos entradas del usuario y tres estados de la petición. <code>enviando</code> empieza en falso porque nada se envía hasta el clic.</p></li><li class="nota" data-lineas="25-27"><div class="nota-cabeza"><span class="nota-lineas">L25–27</span><code class="nota-codigo">formularioCompleto</code></div><p>Es verdadero solo si los dos campos tienen algo además de espacios.</p></li></ol></div></div>
+              <div class="lectura"><div class="lectura-head"><span class="lectura-num">2</span><h3 class="lectura-titulo">Armar la reserva y atender la respuesta</h3></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 29–52</span></div></div><pre class="line-numbers" data-start="29"><code class="language-typescript">  reservar(): void {
+    this.enviando.set(true);
+    this.errorReserva.set('');
+    const entradas = this.carrito.entradas().map((item) =&gt; ({
+      eventoId: item.evento.id,
+      cantidad: item.cantidad,
+    }));
+    this.api
+      .reservar({
+        nombreCompleto: this.nombreCompleto().trim(),
+        correo: this.correo().trim(),
+        entradas,
+      })
+      .subscribe({
+        next: (confirmacion) =&gt; {
+          this.codigoReserva.set(confirmacion.codigo);
+          this.carrito.vaciar();
+          this.enviando.set(false);
+        },
+        error: (error: HttpErrorResponse) =&gt; {
+          this.errorReserva.set(mensajeDeError(error));
+          this.enviando.set(false);
+        },
+      });
+  }</code></pre></div><ol class="notas"><li class="nota" data-lineas="30-31"><div class="nota-cabeza"><span class="nota-lineas">L30–31</span><code class="nota-codigo">enviando · errorReserva</code></div><p>Evita doble clic y borra el error del intento anterior.</p></li><li class="nota" data-lineas="32-35"><div class="nota-cabeza"><span class="nota-lineas">L32–35</span><code class="nota-codigo">map</code></div><p>Convierte cada item del carrito en solo <code>eventoId</code> y <code>cantidad</code>.</p></li><li class="nota" data-lineas="36-42"><div class="nota-cabeza"><span class="nota-lineas">L36–42</span><code class="nota-codigo">reservar</code></div><p>Arma el cuerpo y se suscribe: ahora sí sale el POST.</p></li><li class="nota" data-lineas="43-47"><div class="nota-cabeza"><span class="nota-lineas">L43–47</span><code class="nota-codigo">next</code></div><p>Guarda el código, vacía el carrito y apaga el envío.</p></li><li class="nota" data-lineas="48-51"><div class="nota-cabeza"><span class="nota-lineas">L48–51</span><code class="nota-codigo">error</code></div><p>Guarda el mensaje y permite intentar de nuevo. No vacía el carrito.</p></li></ol></div></div>
+              <details class="code-reveal" data-archivo="mis-entradas.ts"><summary><span><span class="code-reveal-title">mis-entradas.ts · archivo completo</span><span class="code-reveal-note">54 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Editar</span><span class="code-file">mis-entradas.ts</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-typescript">import { HttpErrorResponse } from '@angular/common/http';
+import { Component, computed, inject, signal } from '@angular/core';
+import { CurrencyPipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { CarritoStore } from '../../services/carrito-store';
+import { EventosApi } from '../../services/eventos-api';
+import { mensajeDeError } from '../../shared/mensaje-error';
+
+@Component({
+  imports: [CurrencyPipe, RouterLink],
+  selector: 'app-mis-entradas',
+  styleUrl: './mis-entradas.css',
+  templateUrl: './mis-entradas.html',
+})
+export class MisEntradas {
+  protected readonly carrito = inject(CarritoStore);
+  private readonly api = inject(EventosApi);
+
+  nombreCompleto = signal('');
+  correo = signal('');
+  enviando = signal(false);
+  codigoReserva = signal('');
+  errorReserva = signal('');
+
+  formularioCompleto = computed(
+    () =&gt; this.nombreCompleto().trim() !== '' &amp;&amp; this.correo().trim() !== '',
+  );
+
+  reservar(): void {
+    this.enviando.set(true);
+    this.errorReserva.set('');
+    const entradas = this.carrito.entradas().map((item) =&gt; ({
+      eventoId: item.evento.id,
+      cantidad: item.cantidad,
+    }));
+    this.api
+      .reservar({
+        nombreCompleto: this.nombreCompleto().trim(),
+        correo: this.correo().trim(),
+        entradas,
+      })
+      .subscribe({
+        next: (confirmacion) =&gt; {
+          this.codigoReserva.set(confirmacion.codigo);
+          this.carrito.vaciar();
+          this.enviando.set(false);
+        },
+        error: (error: HttpErrorResponse) =&gt; {
+          this.errorReserva.set(mensajeDeError(error));
+          this.enviando.set(false);
+        },
+      });
+  }
+}</code></pre></div></div></details>
+            </article>
+            <h3>14.2 · Vaciar solo después del 201</h3>
+            <article class="archivo"><div class="archivo-ficha"><span class="archivo-accion">Editar</span><span class="archivo-nombre">carrito-store.ts</span><span class="archivo-ruta">tarima-web/src/app/services/</span></div><p class="archivo-intro">Cuando la reserva queda confirmada, las entradas ya no están por reservar. Como <code>items</code> es privada, solo el servicio puede vaciarla.</p><div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h3 class="lectura-titulo">Vaciar el carrito</h3></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 42–45</span></div></div><pre class="line-numbers" data-start="42"><code class="language-typescript">
+  vaciar(): void {
+    this.items.set([]);
+  }</code></pre></div><ol class="notas"><li class="nota" data-lineas="43-45"><div class="nota-cabeza"><span class="nota-lineas">L43–45</span><code class="nota-codigo">vaciar</code></div><p>Reemplaza la lista por una vacía. Las señales derivadas y el contador se recalculan solos.</p></li></ol></div></div><details class="code-reveal" data-archivo="carrito-store.ts"><summary><span><span class="code-reveal-title">carrito-store.ts · archivo completo</span><span class="code-reveal-note">46 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Editar</span><span class="code-file">carrito-store.ts</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-typescript">import { Service, computed, signal } from '@angular/core';
+import { Evento } from '../models/evento';
+import { ItemCarrito } from '../models/item-carrito';
+
+@Service()
+export class CarritoStore {
+  private readonly items = signal&lt;ItemCarrito[]&gt;([]);
+
+  readonly entradas = this.items.asReadonly();
+
+  readonly totalEntradas = computed(() =&gt; {
+    let total = 0;
+    for (const item of this.items()) {
+      total += item.cantidad;
+    }
+    return total;
+  });
+
+  readonly totalAPagar = computed(() =&gt; {
+    let total = 0;
+    for (const item of this.items()) {
+      total += item.cantidad * item.evento.precio;
+    }
+    return total;
+  });
+
+  agregar(evento: Evento): void {
+    this.items.update((items) =&gt; {
+      const yaEsta = items.some((item) =&gt; item.evento.id === evento.id);
+      if (!yaEsta) {
+        return [...items, { evento, cantidad: 1 }];
+      }
+      return items.map((item) =&gt;
+        item.evento.id === evento.id ? { ...item, cantidad: item.cantidad + 1 } : item,
+      );
+    });
+  }
+
+  quitar(id: number): void {
+    this.items.update((items) =&gt; items.filter((item) =&gt; item.evento.id !== id));
+  }
+
+  vaciar(): void {
+    this.items.set([]);
+  }
+}</code></pre></div></div></details></article>
+            <h3>14.3 · Mostrar confirmación, error y formulario</h3>
+            <article class="archivo"><div class="archivo-ficha"><span class="archivo-accion">Editar</span><span class="archivo-nombre">mis-entradas.html</span><span class="archivo-ruta">tarima-web/src/app/pages/mis-entradas/</span></div><p class="archivo-intro">El mensaje de éxito queda fuera del bloque del carrito para seguir visible después de vaciarlo. El error queda junto al botón para permitir corregir e intentar de nuevo.</p><div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h3 class="lectura-titulo">Formulario y estados del envío</h3></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 4–48</span></div></div><pre class="line-numbers" data-start="4"><code class="language-html">  @if (codigoReserva()) {
+    &lt;p class="mensaje mensaje--exito"&gt;
+      ¡Listo! Tu reserva quedó confirmada con el código {{ codigoReserva() }}.
+    &lt;/p&gt;
+  }
+
+  @for (item of carrito.entradas(); track item.evento.id) {
+    &lt;div class="carrito__fila"&gt;…&lt;/div&gt;
+  } @empty {
+    &lt;p class="listado__vacio"&gt;Todavía no tienes entradas.&lt;/p&gt;
+    &lt;a class="boton portada__boton" routerLink="/eventos"&gt;Ir a la cartelera&lt;/a&gt;
+  }
+
+  @if (carrito.totalEntradas() &gt; 0) {
+    &lt;div class="reserva"&gt;
+      &lt;label class="campo"&gt;
+        Nombre completo
+        &lt;input #nombre (input)="nombreCompleto.set(nombre.value)" /&gt;
+      &lt;/label&gt;
+      &lt;label class="campo"&gt;
+        Correo
+        &lt;input #email type="email" (input)="correo.set(email.value)" /&gt;
+      &lt;/label&gt;
+      @if (errorReserva()) {
+        &lt;p class="mensaje mensaje--error"&gt;{{ errorReserva() }}&lt;/p&gt;
+      }
+      &lt;button type="button" class="boton" [disabled]="!formularioCompleto() || enviando()" (click)="reservar()"&gt;
+        {{ enviando() ? 'Reservando…' : 'Reservar' }}
+      &lt;/button&gt;
+    &lt;/div&gt;
+  }</code></pre></div><ol class="notas"><li class="nota" data-lineas="4-8"><div class="nota-cabeza"><span class="nota-lineas">L4–8</span><code class="nota-codigo">codigoReserva</code></div><p>El mensaje verde se muestra solo cuando el backend devolvió el código.</p></li><li class="nota" data-lineas="10-15"><div class="nota-cabeza"><span class="nota-lineas">L10–15</span><code class="nota-codigo">carrito · empty</code></div><p>Muestra las entradas o el estado vacío después de reservar.</p></li><li class="nota" data-lineas="17-27"><div class="nota-cabeza"><span class="nota-lineas">L17–27</span><code class="nota-codigo">referencias de plantilla</code></div><p><code>#nombre</code> y <code>#email</code> guardan lo escrito en signals en cada evento <code>input</code>.</p></li><li class="nota" data-lineas="28-34"><div class="nota-cabeza"><span class="nota-lineas">L28–34</span><code class="nota-codigo">error · disabled · enviando</code></div><p>El error aparece junto al botón; el botón exige campos completos y se bloquea mientras envía.</p></li></ol></div></div>
+              <details class="code-reveal" data-archivo="mis-entradas.html"><summary><span><span class="code-reveal-title">mis-entradas.html · archivo completo</span><span class="code-reveal-note">48 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Editar</span><span class="code-file">mis-entradas.html</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-html">&lt;section class="carrito"&gt;
+  &lt;h2 class="listado__titulo"&gt;Mis entradas&lt;/h2&gt;
+
+  @if (codigoReserva()) {
+    &lt;p class="mensaje mensaje--exito"&gt;
+      ¡Listo! Tu reserva quedó confirmada con el código {{ codigoReserva() }}.
+    &lt;/p&gt;
+  }
+
+  @for (item of carrito.entradas(); track item.evento.id) {
+    &lt;div class="carrito__fila"&gt;
+      &lt;p class="carrito__nombre"&gt;{{ item.evento.nombre }}&lt;/p&gt;
+      &lt;p class="carrito__cantidad"&gt;
+        {{ item.cantidad }} × {{ item.evento.precio | currency: 'COP' : 'symbol-narrow' : '1.0-0' }}
+      &lt;/p&gt;
+      &lt;button type="button" class="boton boton--secundario" (click)="carrito.quitar(item.evento.id)"&gt;
+        Quitar
+      &lt;/button&gt;
+    &lt;/div&gt;
+  } @empty {
+    &lt;p class="listado__vacio"&gt;Todavía no tienes entradas.&lt;/p&gt;
+    &lt;a class="boton portada__boton" routerLink="/eventos"&gt;Ir a la cartelera&lt;/a&gt;
+  }
+
+  @if (carrito.totalEntradas() &gt; 0) {
+    &lt;p class="carrito__total"&gt;
+      Entradas: {{ carrito.totalEntradas() }} · Total a pagar:
+      {{ carrito.totalAPagar() | currency: 'COP' : 'symbol-narrow' : '1.0-0' }}
+    &lt;/p&gt;
+
+    &lt;div class="reserva"&gt;
+      &lt;label class="campo"&gt;
+        Nombre completo
+        &lt;input #nombre (input)="nombreCompleto.set(nombre.value)" /&gt;
+      &lt;/label&gt;
+      &lt;label class="campo"&gt;
+        Correo
+        &lt;input #email type="email" (input)="correo.set(email.value)" /&gt;
+      &lt;/label&gt;
+      @if (errorReserva()) {
+        &lt;p class="mensaje mensaje--error"&gt;{{ errorReserva() }}&lt;/p&gt;
+      }
+      &lt;button type="button" class="boton" [disabled]="!formularioCompleto() || enviando()" (click)="reservar()"&gt;
+        {{ enviando() ? 'Reservando…' : 'Reservar' }}
+      &lt;/button&gt;
+    &lt;/div&gt;
+  }
+&lt;/section&gt;</code></pre></div></div></details>
+            </article>
+            <div class="checkpoint"><span class="component-label">Checkpoint</span><h3>La reserva llegó y tiene comprobante</h3><p>Red muestra <code>POST /api/reservas 201</code>; el cuerpo lleva nombre, correo y entradas; la respuesta trae <code>{"codigo":"TAR-1001"}</code>; la pantalla muestra el código y el contador vuelve a cero.</p></div>
+          </div>
+        </section>
+
+        <section class="section view" id="post-limites" data-accent="1" data-layout="canvas" data-escena="prueba" hidden>
+          <div class="sec-head"><span class="sec-n">POST · límites</span><h2 class="sec-t">Crear no es consultar</h2><p class="sec-s">El método expresa la intención, y repetir una creación sí cambia el sistema.</p></div>
+          <div class="body">
+            <h3>15.1 · Cuándo no usarlo</h3><div class="papel"><p>No uses <code>POST</code> para consultar. <code>POST</code> le dice al servidor “esto cambia algo”, y por eso el navegador no lo repite solo ni lo guarda en caché, y el usuario no lo puede compartir como enlace. Para pedir datos, <code>GET</code>; para crear, <code>POST</code>. Para modificar o borrar existen <code>PUT</code>, <code>PATCH</code> y <code>DELETE</code>, que llegan con el backend propio del Módulo 2.</p></div>
+            <h3>15.2 · Con qué se confunde</h3><div class="table-wrap"><table><thead><tr><th></th><th><code>GET</code></th><th><code>POST</code></th></tr></thead><tbody><tr><th>Para qué</th><td>Consultar</td><td>Crear o procesar</td></tr><tr><th>Datos que envía</th><td>En la dirección (<code>/api/eventos/7</code>)</td><td>En el cuerpo (JSON)</td></tr><tr><th>Código de éxito típico</th><td><code>200</code></td><td><code>201</code></td></tr><tr><th>¿Repetirlo cambia algo?</th><td>No</td><td>Sí: dos <code>POST</code> = dos reservas</td></tr><tr><th>En <code>HttpClient</code></th><td><code>http.get(url)</code></td><td><code>http.post(url, cuerpo)</code></td></tr></tbody></table></div>
+            <p>Donde chocan es en la repetición. Recargar una página que hizo <code>GET</code> es inofensivo; reenviar un <code>POST</code> crea otra reserva. Por eso el botón se deshabilita mientras <code>enviando()</code> es verdadero.</p>
+            <h3>15.3 · Errores frecuentes</h3><div class="cards"><div class="card"><b>Olvidar el <code>subscribe</code></b><p>El botón queda en “Reservando…” y la pestaña Red no muestra nada. El Observable de <code>post</code> es frío, igual que el de <code>get</code>.</p></div><div class="card"><b>Enviar otros nombres</b><p>Si el cuerpo dice <code>nombre</code> en vez de <code>nombreCompleto</code>, el backend responde <code>400</code>. La interfaz <code>Reserva</code> evita el error.</p></div><div class="card"><b>Mandar datos que decide el backend</b><p>Precio y total no viajan desde el navegador: alguien podría modificarlos. La persona decide qué y cuántas; el backend calcula lo demás.</p></div><div class="card"><b>Vaciar antes de la respuesta</b><p><code>vaciar()</code> va dentro de <code>next</code>. Si va después del <code>subscribe</code>, el carrito se borra aunque la reserva falle.</p></div></div>
+            <h3>15.4 · En un sistema real</h3><p>El <code>400</code> de Tarima dice “Ocurrió un error (código 400).”, pero el backend sí explicó el motivo con <code>{ "mensaje": "Cupos insuficientes" }</code>, disponible en <code>error.error</code>. En producción, frontend y backend acuerdan un formato de error; el frontend valida antes de enviar y <strong>el backend vuelve a validar todo</strong>, porque no puede confiar en el navegador.</p>
+            <div class="papel"><span class="component-label">Conexión</span><p>Con <code>GET</code> Tarima pregunta; con <code>POST</code>, cuenta. Los dos devuelven un Observable frío y necesitan estados: el “cargando” de la cartelera es el “enviando” de la reserva. Solo queda que el inicio deje de usar el mock.</p></div>
+            <div class="micro-task"><span class="component-label">Transferencia · en pantalla</span><p class="micro-task-q">En una app de domicilios, el botón “Pedir” envía los productos y la dirección. Un usuario impaciente hace tres clics seguidos y le llegan tres pedidos iguales. ¿Qué método HTTP usa ese botón, por qué se repitió el pedido y qué cambio de Tarima lo habría evitado?</p><details class="micro-reveal"><summary>Comprobar respuesta</summary><p class="micro-answer">Usa <code>POST</code>, porque crea un pedido nuevo con datos del usuario en el cuerpo. Cada <code>POST</code> crea un recurso, así que tres clics son tres pedidos: repetirlo no es inofensivo como con <code>GET</code>. Lo habría evitado lo mismo que tiene <strong>Mis entradas</strong>: un estado <code>enviando</code> que deshabilita el botón desde el primer clic hasta que llega la respuesta.</p></details></div>
+          </div>
+        </section>
+
+        <section class="section view" id="refactor" data-accent="1" data-layout="canvas" data-escena="construccion" hidden>
+          <div class="sec-head"><span class="sec-n">Refactor final</span><h2 class="sec-t">Adiós a los datos de prueba</h2><p class="sec-s">Las páginas muestran; el servicio de API habla con el backend.</p></div>
+          <div class="body">
+            <div class="papel"><p>La regla de la Fase 4 de Huella Amiga, y la de cualquier proyecto con backend, es que <strong>ninguna página ni componente importa los datos de prueba ni <code>HttpClient</code></strong>: los datos llegan por el servicio de API. Es el principio de <strong>responsabilidad única</strong> (la S de SOLID): cada pieza tiene una sola razón para cambiar. Si la URL del backend cambia, cambia <code>EventosApi</code>; si cambia la forma de mostrar los destacados, cambia <code>Inicio</code>. Ninguna de las dos se entera de lo que le pasa a la otra.</p></div>
+            <article class="archivo"><div class="archivo-ficha"><span class="archivo-accion">Editar</span><span class="archivo-nombre">inicio.ts</span><span class="archivo-ruta">tarima-web/src/app/pages/inicio/</span></div><p class="archivo-intro">La lista empieza vacía en una signal y se llena al suscribirse a <code>listar()</code>. Al llegar, conserva los tres primeros eventos con cupos.</p><div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h3 class="lectura-titulo">El servicio reemplaza al mock</h3></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 1–6</span></div></div><pre class="line-numbers"><code class="language-typescript">import { Component, inject, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { Evento } from '../../models/evento';
+import { TarjetaEvento } from '../../components/tarjeta-evento/tarjeta-evento';
+import { CarritoStore } from '../../services/carrito-store';
+import { EventosApi } from '../../services/eventos-api';</code></pre></div><ol class="notas"><li class="nota" data-lineas="1"><div class="nota-cabeza"><span class="nota-lineas">L1</span><code class="nota-codigo">signal</code></div><p>Se suma para la lista de destacados, igual que en la cartelera.</p></li><li class="nota" data-lineas="3,6"><div class="nota-cabeza"><span class="nota-lineas">L3 y L6</span><code class="nota-codigo">Evento · EventosApi</code></div><p>Entran el tipo y el servicio; sale el import de <code>EVENTOS</code>.</p></li></ol></div></div><div class="lectura"><div class="lectura-head"><span class="lectura-num">2</span><h3 class="lectura-titulo">Los destacados llegan del backend</h3></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Líneas 16–24</span></div></div><pre class="line-numbers" data-start="16"><code class="language-typescript">  private readonly api = inject(EventosApi);
+
+  destacados = signal&lt;Evento[]&gt;([]);
+
+  constructor() {
+    this.api.listar().subscribe((eventos) =&gt;
+      this.destacados.set(eventos.filter((evento) =&gt; evento.cuposDisponibles &gt; 0).slice(0, 3)),
+    );
+  }</code></pre></div><ol class="notas"><li class="nota" data-lineas="16,18"><div class="nota-cabeza"><span class="nota-lineas">L16 y L18</span><code class="nota-codigo">api · destacados</code></div><p>El servicio entra por <code>inject</code> y la signal empieza vacía.</p></li><li class="nota" data-lineas="20-24"><div class="nota-cabeza"><span class="nota-lineas">L20–24</span><code class="nota-codigo">constructor · subscribe</code></div><p>Al llegar los eventos, conserva los que tienen cupos y toma los tres primeros.</p></li></ol></div></div><details class="code-reveal" data-archivo="inicio.ts"><summary><span><span class="code-reveal-title">inicio.ts · archivo completo</span><span class="code-reveal-note">25 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Editar</span><span class="code-file">inicio.ts</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-typescript">import { Component, inject, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { Evento } from '../../models/evento';
+import { TarjetaEvento } from '../../components/tarjeta-evento/tarjeta-evento';
+import { CarritoStore } from '../../services/carrito-store';
+import { EventosApi } from '../../services/eventos-api';
+
+@Component({
+  imports: [RouterLink, TarjetaEvento],
+  selector: 'app-inicio',
+  styleUrl: './inicio.css',
+  templateUrl: './inicio.html',
+})
+export class Inicio {
+  protected readonly carrito = inject(CarritoStore);
+  private readonly api = inject(EventosApi);
+
+  destacados = signal&lt;Evento[]&gt;([]);
+
+  constructor() {
+    this.api.listar().subscribe((eventos) =&gt;
+      this.destacados.set(eventos.filter((evento) =&gt; evento.cuposDisponibles &gt; 0).slice(0, 3)),
+    );
+  }
+}</code></pre></div></div></details></article>
+            <article class="archivo"><div class="archivo-ficha"><span class="archivo-accion">Editar</span><span class="archivo-nombre">inicio.html</span><span class="archivo-ruta">tarima-web/src/app/pages/inicio/</span></div><p class="archivo-intro">Como <code>destacados</code> ahora es una signal, se lee con <code>destacados()</code>.</p><div class="lectura"><div class="lectura-head"><span class="lectura-num">1</span><h3 class="lectura-titulo">Abrir la signal en el <code>@for</code></h3></div><div class="lectura-cuerpo"><div class="code-block" data-role="fragment"><div class="code-head"><div><span class="code-context">Línea 9</span></div></div><pre class="line-numbers" data-start="9"><code class="language-html">  @for (evento of destacados(); track evento.id) {</code></pre></div><ol class="notas"><li class="nota" data-lineas="9"><div class="nota-cabeza"><span class="nota-lineas">L9</span><code class="nota-codigo">destacados()</code></div><p><code>@for</code> necesita el arreglo que devuelve la signal, no la signal cerrada.</p></li></ol></div></div><details class="code-reveal" data-archivo="inicio.html"><summary><span><span class="code-reveal-title">inicio.html · archivo completo</span><span class="code-reveal-note">12 líneas · listo para copiar</span></span></summary><div class="code-reveal-body"><div class="code-block"><div class="code-head"><div><span class="code-context">Editar</span><span class="code-file">inicio.html</span></div><button class="copy-btn" type="button">Copiar archivo</button></div><pre class="line-numbers"><code class="language-html">&lt;section class="portada"&gt;
+  &lt;h2 class="portada__titulo"&gt;Lo mejor de la cultura en Bogotá, en un solo lugar&lt;/h2&gt;
+  &lt;p class="portada__texto"&gt;Conciertos, teatro y stand-up. Elige, comparte y reserva.&lt;/p&gt;
+  &lt;a class="boton portada__boton" routerLink="/eventos"&gt;Ver toda la cartelera&lt;/a&gt;
+&lt;/section&gt;
+
+&lt;h2 class="listado__titulo"&gt;Con cupos disponibles&lt;/h2&gt;
+&lt;div class="listado__grilla"&gt;
+  @for (evento of destacados(); track evento.id) {
+    &lt;app-tarjeta-evento [evento]="evento" (entradaAgregada)="carrito.agregar($event)" /&gt;
+  }
+&lt;/div&gt;</code></pre></div></div></details></article>
+            <div class="checkpoint"><span class="component-label">Pruébalo</span><h3>El último mock salió de las páginas</h3><p>En <code>http://localhost:4200/</code> aparecen Noche de Salsa Brava, La Casa de las Voces y Jazz en la Terraza; Red muestra <code>GET /api/eventos 200</code>; buscar <code>eventos.mock</code> en páginas y componentes no da resultados. No borres <code>data/eventos.mock.ts</code>.</p></div>
+            <h3>La misma práctica, en otro negocio</h3><div class="table-wrap"><table><thead><tr><th>Hoy en Tarima</th><th>En Huella Amiga · Fase 4</th></tr></thead><tbody><tr><td><code>EventosApi</code>: <code>listar</code>, <code>obtener</code>, <code>reservar</code></td><td><code>MascotasApi</code>: <code>listar</code>, <code>obtener</code>, <code>enviarSolicitud</code></td></tr><tr><td><code>Reserva</code></td><td><code>SolicitudAdopcion</code></td></tr><tr><td><code>mensajeDeError</code></td><td>La misma función y los mismos cuatro mensajes</td></tr><tr><td>Cartelera y detalle con estados; 404 = “Evento no encontrado”</td><td>Listado y detalle con estados; 404 = “Mascota no encontrada”</td></tr><tr><td>Formulario en <strong>Mis entradas</strong></td><td>Formulario de solicitud en el detalle</td></tr><tr><td>Ninguna página importa <code>eventos.mock</code></td><td>Ninguna página importa <code>mascotas.mock</code></td></tr></tbody></table></div>
+            <div class="mision"><span class="component-label">Nivel de IA permitido: 2 · Copiloto</span><p>La IA puede proponerte el servicio o el formulario; tú lees, explicas y pruebas cada línea con el Detector de Angular viejo, y lo anotas en la entrada 4 de <code>BITACORA-IA.md</code>.</p></div>
+          </div>
+        </section>
+
+        <section class="section view" id="cierre" data-accent="1" data-layout="canvas" data-escena="cierre" hidden>
+          <div class="sec-head"><span class="sec-n">Cierre</span><h2 class="sec-t">Tarima ya conversa con el sistema</h2><p class="sec-s">Los datos sobreviven a la recarga y cada petición cuenta qué está pasando.</p></div>
+          <div class="body">
+            <article class="chat"><div class="chat-head"><span class="chat-canal">WhatsApp · Equipo Tarima</span><span class="chat-contexto">martes 24 de noviembre de 2026</span></div><ol class="chat-mensajes"><li class="chat-msg" data-lado="equipo"><span class="chat-avatar">EQ</span><span class="chat-autor">Equipo <time>9:50 p. m.</time></span><p class="chat-texto">Valentina, ya está: Tarima toma los eventos del sistema. “Cuentería bajo la Luna” aparece solo, sin tocar el código.</p></li><li class="chat-msg" data-lado="equipo"><span class="chat-avatar">EQ</span><span class="chat-autor">Equipo <time>9:51 p. m.</time></span><p class="chat-texto">La reserva llega al sistema y la persona recibe su código (TAR-1001, TAR-1002…). Si algo falla, la página dice qué pasó.</p></li><li class="chat-msg"><span class="chat-avatar">V</span><span class="chat-autor">Valentina <time>9:55 p. m.</time></span><p class="chat-texto">¡Probé con 7 entradas de La Casa de las Voces y me dijo que no se pudo! 😅 ¿Le puede decir que es porque no hay cupos?</p></li><li class="chat-msg" data-lado="equipo"><span class="chat-avatar">EQ</span><span class="chat-autor">Equipo <time>9:57 p. m.</time></span><p class="chat-texto">El sistema sí lo dice; Tarima todavía muestra un mensaje general. Eso, y que cada persona tenga su cuenta, viene con el siguiente módulo.</p></li></ol></article>
+            <ol class="ideas"><li><span>Un <strong>Observable</strong> describe algo que llega después y <strong>no hace nada hasta que alguien se suscribe</strong>. <code>HttpClient</code> devuelve Observables: sin <code>subscribe</code>, no sale ninguna petición.</span></li><li><span>Toda pantalla que depende de algo externo tiene <strong>estados</strong>: cargando, error, vacío y éxito. Cada camino (<code>next</code> y <code>error</code>) apaga la carga, y la persona ve un mensaje que entiende.</span></li><li><span><strong><code>GET</code> pregunta y <code>POST</code> crea:</strong> el <code>POST</code> lleva datos en el cuerpo, el servidor confirma con <code>201</code> y devuelve lo creado. Repetirlo crea otra vez, por eso el botón se bloquea mientras envía.</span></li></ol>
+            <div class="papel"><span class="component-label">La decisión técnica del día</span><p>Las páginas no saben dónde están los datos. Todo lo que habla con el backend vive en <code>EventosApi</code>, con direcciones relativas (<code>/api/...</code>) que pasan por el proxy. Si mañana el backend cambia de dirección, cambia un archivo, y el mismo código funciona en desarrollo y publicado.</p></div>
+            <div class="autoevaluacion"><span class="component-label">¿Ya puedo…?</span><ul><li><label><input type="checkbox"><span><strong>Explicar</strong> qué es un Observable y por qué la petición sale solo al suscribirse: predigo la salida de <code>pedido.mjs</code> y explico por qué la cartelera queda vacía sin <code>subscribe</code>.</span></label></li><li><label><input type="checkbox"><span><strong>Construir</strong> una pantalla con sus estados: apago el backend y la cartelera muestra un mensaje útil en lugar de quedar en blanco o cargando.</span></label></li><li><label><input type="checkbox"><span><strong>Construir</strong> el envío con <code>POST</code>: reservo desde <strong>Mis entradas</strong>, veo el <code>201</code> en Red y el código en pantalla.</span></label></li><li><label><input type="checkbox"><span><strong>Reconocer</strong> los tres conceptos en un negocio distinto a Tarima: el banco, la clínica y la app de domicilios.</span></label></li></ul></div>
+            <div class="micro-task"><span class="component-label">Lo que sigue</span><p class="micro-task-q">Fase 4 de Huella Amiga: entrega final con <code>README.md</code> y <code>BITACORA-IA.md</code>. Después, en el Módulo 2, construyes el backend con Spring Boot.</p><details class="micro-reveal"><summary>Descubrir el puente</summary><p class="micro-answer">Aparecen CORS configurado en el servidor, login con JWT e interceptores para poner el token en cada petición. La pregunta de Valentina se resuelve acordando con el backend el formato de sus errores.</p></details></div>
+          </div>
+        </section>
+
+        <section class="section view" id="glosario" data-accent="1" data-layout="canvas" data-escena="consulta" hidden>
+          <div class="sec-head"><span class="sec-n">Consultar</span><h2 class="sec-t">Glosario de la clase</h2><p class="sec-s">Los términos de hoy en un solo lugar. También lo abres en cualquier escena con el botón de glosario o la tecla G.</p></div>
+          <div class="body"><dl class="glosario">
+            <div class="glos-item" data-termino="api-rest"><dt class="glos-termino">API REST</dt><dd class="glos-tecnica">Forma en que un backend ofrece sus datos por HTTP: cada recurso tiene una dirección y se usa con un método.</dd><dd class="glos-vida">La carta de un restaurante: dice qué puedes pedir y cómo pedirlo.</dd><dd class="glos-donde">Observable · Aplicación · Dónde estamos</dd></div>
+            <div class="glos-item" data-termino="json"><dt class="glos-termino">JSON</dt><dd class="glos-tecnica">Formato de texto para intercambiar datos entre programas, con la misma forma de un objeto de JavaScript.</dd><dd class="glos-vida">Un formulario estándar que cualquier oficina entiende, aunque cada una trabaje distinto por dentro.</dd><dd class="glos-donde">Observable · Aplicación · Dónde estamos</dd></div>
+            <div class="glos-item" data-termino="observable"><dt class="glos-termino">Observable</dt><dd class="glos-tecnica">Objeto de RxJS que representa valores que llegan con el tiempo y solo empieza a producirlos cuando alguien se suscribe.</dd><dd class="glos-vida">Un domicilio armado en la app: la cocina no empieza hasta que tocas “Pedir”.</dd><dd class="glos-donde">Observable · Concepto</dd></div>
+            <div class="glos-item" data-termino="subscribe"><dt class="glos-termino"><code>subscribe</code></dt><dd class="glos-tecnica">Método que arranca un Observable y recibe <code>next</code>, <code>error</code> y <code>complete</code> para cada aviso.</dd><dd class="glos-vida">Tocar “Pedir” y dejar dicho qué hacer cuando llegue el pedido.</dd><dd class="glos-donde">Observable · Ejemplo</dd></div>
+            <div class="glos-item" data-termino="httpclient"><dt class="glos-termino"><code>HttpClient</code></dt><dd class="glos-tecnica">Cliente HTTP de Angular; sus métodos devuelven Observables fríos y convierten JSON en objetos.</dd><dd class="glos-vida">El mensajero de la empresa: lleva y trae, pero solo sale cuando alguien firma la orden.</dd><dd class="glos-donde">Observable · Aplicación · <code>eventos-api.ts</code></dd></div>
+            <div class="glos-item" data-termino="proxy-desarrollo"><dt class="glos-termino">Proxy de desarrollo</dt><dd class="glos-tecnica">Función de <code>ng serve</code> que reenvía <code>/api</code> al backend, para que el navegador lo vea como el mismo origen.</dd><dd class="glos-vida">El portero que recibe el paquete por ti: el repartidor no sube y tú lo recibes igual.</dd><dd class="glos-donde">Observable · Aplicación · Parte 1</dd></div>
+            <div class="glos-item" data-termino="cors"><dt class="glos-termino">CORS</dt><dd class="glos-tecnica">Regla del navegador que bloquea respuestas de otro origen si ese origen no las autoriza con sus cabeceras.</dd><dd class="glos-vida">El conjunto que no deja entrar domicilios de afuera sin autorización en portería.</dd><dd class="glos-donde">Observable · Aplicación y límites</dd></div>
+            <div class="glos-item" data-termino="codigo-estado"><dt class="glos-termino">Código de estado HTTP</dt><dd class="glos-tecnica">Número con que el servidor dice cómo le fue: <code>200</code>, <code>201</code>, <code>400</code>, <code>404</code>, <code>500</code>; <code>0</code> indica que no hubo respuesta.</dd><dd class="glos-vida">El sello de una ventanilla: aprobado, rechazado o “se cayó el sistema”.</dd><dd class="glos-donde">Estados · Concepto</dd></div>
+            <div class="glos-item" data-termino="estados-peticion"><dt class="glos-termino">Estados de una petición</dt><dd class="glos-tecnica">Situaciones de una vista que depende de datos remotos: cargando, error, vacío y éxito.</dd><dd class="glos-vida">El tablero del aeropuerto: programado, embarcando, demorado o cancelado.</dd><dd class="glos-donde">Estados · Concepto</dd></div>
+            <div class="glos-item" data-termino="http-error-response"><dt class="glos-termino"><code>HttpErrorResponse</code></dt><dd class="glos-tecnica">Objeto que entrega <code>HttpClient</code> cuando una petición falla; trae <code>status</code> y <code>error</code>.</dd><dd class="glos-vida">La carta de devolución de un envío, con el motivo marcado.</dd><dd class="glos-donde">Estados · Aplicación · <code>mensaje-error.ts</code></dd></div>
+            <div class="glos-item" data-termino="ng-on-init"><dt class="glos-termino"><code>ngOnInit</code></dt><dd class="glos-tecnica">Método que Angular llama una vez, después de entregarle al componente sus inputs.</dd><dd class="glos-vida">Empezar a atender al cliente cuando ya te entregaron su ficha, no antes.</dd><dd class="glos-donde">Estados · Aplicación · <code>detalle-evento.ts</code></dd></div>
+            <div class="glos-item" data-termino="post"><dt class="glos-termino">POST</dt><dd class="glos-tecnica">Método HTTP para crear algo; los datos viajan en el cuerpo y la respuesta típica es <code>201</code>.</dd><dd class="glos-vida">Radicar una carta: entregas el sobre y te devuelven un número de radicado.</dd><dd class="glos-donde">POST · Concepto</dd></div>
+            <div class="glos-item" data-termino="cuerpo-peticion"><dt class="glos-termino">Cuerpo de la petición</dt><dd class="glos-tecnica">Parte de una petición HTTP que lleva datos, normalmente JSON, anunciada con <code>Content-Type</code>.</dd><dd class="glos-vida">El contenido del sobre; la cabecera dice afuera qué contiene.</dd><dd class="glos-donde">POST · Concepto · Cómo funciona</dd></div>
+            <div class="glos-item" data-termino="contrato"><dt class="glos-termino">Contrato</dt><dd class="glos-tecnica">Acuerdo entre frontend y backend sobre direcciones, nombres de campos y respuestas; en Tarima se escribe como interfaces.</dd><dd class="glos-vida">El formato de factura acordado por dos empresas: si una cambia una casilla, la otra no la encuentra.</dd><dd class="glos-donde">Observable y POST · Aplicación</dd></div>
+          </dl></div>
+        </section>
+
+        <section class="section view" id="documentacion" data-accent="1" data-layout="canvas" data-escena="consulta" hidden>
+          <div class="sec-head"><span class="sec-n">Consultar</span><h2 class="sec-t">Documentación para profundizar</h2><p class="sec-s">Fuentes oficiales y una práctica guiada. Cada enlace dice qué leer o hacer.</p></div>
+          <div class="body"><ul class="docs">
+            <li><div class="doc-meta"><span class="doc-fuente">angular.dev · guía de HTTP</span><span class="doc-tipo">Documentación oficial</span><span class="doc-idioma">Inglés</span></div><a class="doc-titulo" href="https://angular.dev/guide/http/making-requests" target="_blank" rel="noopener">Making HTTP requests</a><p class="doc-que-leer">Lee “Fetching JSON data”, “Mutating server state”, “Handling request failure” y “HTTP Observables”. Busca por qué la petición no sale hasta suscribirse y por qué un error de red tiene <code>status</code> 0.</p></li>
+            <li><div class="doc-meta"><span class="doc-fuente">angular.dev · Angular CLI</span><span class="doc-tipo">Documentación oficial</span><span class="doc-idioma">Inglés</span></div><a class="doc-titulo" href="https://angular.dev/tools/cli/serve" target="_blank" rel="noopener">Proxying to a backend server</a><p class="doc-que-leer">Lee “Proxying to a backend server” y compárala con <code>proxy.conf.json</code> y <code>angular.json</code>. La documentación pone el archivo en <code>src/</code>; Tarima lo pone en la raíz y hace que <code>proxyConfig</code> apunte allí.</p></li>
+            <li><div class="doc-meta"><span class="doc-fuente">MDN Web Docs · Mozilla</span><span class="doc-tipo">Documentación oficial</span><span class="doc-idioma">Inglés</span></div><a class="doc-titulo" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status" target="_blank" rel="noopener">HTTP response status codes</a><p class="doc-que-leer">Busca <code>200</code>, <code>201</code>, <code>400</code>, <code>404</code>, <code>500</code> y <code>502</code>. Escribe con tus palabras qué mensaje mostrarías en cada caso y compáralo con <code>mensajeDeError</code>.</p></li>
+            <li><div class="doc-meta"><span class="doc-fuente">angular.dev · Learn Angular</span><span class="doc-tipo">Práctica interactiva</span><span class="doc-idioma">Inglés</span></div><a class="doc-titulo" href="https://angular.dev/tutorials/learn-angular/19-creating-an-injectable-service" target="_blank" rel="noopener">Creating an injectable service</a><p class="doc-que-leer">Haz este paso y el siguiente, donde se inyecta con <code>inject()</code>, en el editor del navegador. Es la estructura de <code>EventosApi</code>: <code>@Service()</code> en la clase e <code>inject()</code> en quien la usa.</p></li>
+            <li><div class="doc-meta"><span class="doc-fuente">API Challenges · Alan Richardson</span><span class="doc-tipo">Práctica interactiva</span><span class="doc-idioma">Inglés</span></div><a class="doc-titulo" href="https://apichallenges.eviltester.com/practice-sites/jsonplaceholder" target="_blank" rel="noopener">JSONPlaceholder: guía de práctica</a><p class="doc-que-leer">Abre <code>/posts</code> y <code>/posts/1</code> con <code>GET</code>; después prueba <code>POST</code>, <code>PUT</code> y <code>DELETE</code>, y observa sus códigos. Esta API simula las escrituras: no guarda nada.</p></li>
+          </ul><p class="doc-foot">© 2026 Ana Alvarado · Educadora Tech &amp; Desarrolladora Full Stack · Todos los derechos reservados · linkedin.com/in/ana-alvarado-instructora-full-stack</p></div>
+        </section>
+      </div>
+      <nav class="view-controls" id="viewControls" aria-label="Navegación entre secciones"><button class="view-btn" id="prevView" type="button" aria-label="Sección anterior">←</button><span class="view-position" id="viewPosition" aria-live="polite">Portada</span><button class="view-btn" id="nextView" type="button" aria-label="Sección siguiente">→</button></nav>
+    </main>
+  </div>
+  <div class="watermark" aria-hidden="true">© 2026 ANA ALVARADO</div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+  <script src="anaclase-v12.js"></script>
+</body>
+</html>
